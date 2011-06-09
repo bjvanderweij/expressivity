@@ -1,0 +1,155 @@
+\documentclass[a4paper,10pt]{article}
+
+% Fancy maths stuff
+\usepackage{amsmath, amsthm, amssymb}
+
+% Algorithm typesetting
+\usepackage{algorithmic}
+
+\begin{document}
+
+% TITELPAGINA
+
+\begin{titlepage}
+\begin{center}
+
+\vspace{2.5cm}
+
+% [CHANGE] The title of your thesis. If your thesis has a subtitle, then this
+% should appear right below the main title, in a smaller font.
+\begin{Huge}
+Expressive Performance of Polyphonic Piano Music using Hierarchical Structure
+\end{Huge}
+
+\vspace{1.5cm}
+
+% [CHANGE] Your full name. In case of multiple names, you can include their
+% initials as well, e.g. "Jan G.J. van der Wegge".
+Bastiaan J. van der Weij\\
+% [CHANGE] Your student ID, as this has been assigned to you by the UvA
+% administration.
+5922151
+
+\vspace{1.5cm}
+
+% [DO NOT CHANGE]
+Bachelor thesis\\
+% [CHANGE] Whether your Bachelor thesis is 6 ECTS (regular) or 9 ECTS (Honours
+% programme).
+Credits: 15 EC
+
+\vspace{0.5cm}
+
+% [DO NOT CHANGE] The name of the educational programme.
+Bachelor Opleiding Kunstmatige Intelligentie
+
+\vspace{0.25cm}
+
+% [DO NOT CHANGE] The addess of the educational programme.
+University of Amsterdam\\
+Faculty of Science\\
+Science Park 904\\
+1098 XH Amsterdam
+
+\vspace{4cm}
+
+\emph{Supervisor}\\
+% [CHANGE] The name of your supervisor. Include the titles of your supervisor,
+% as well as the initials for *all* of his/her first names.
+Prof. dr. ir. R.J.H. Scha
+
+\vspace{0.25cm}
+
+% [CHANGE] The address of the institute at which your supervisor is working.
+% Be sure to include (1) institute (is appropriate), (2) faculty (if
+% appropriate), (3) organisation name, (4) organisation address (2 lines).
+Institute for Language and Logic\\
+Faculty of Science\\
+University of Amsterdam\\
+Science Park 904\\
+1098 XH  Amsterdam
+
+\vspace{1.5cm}
+
+% [CHANGE] The date at which you will finalize and submit your thesis.
+June 24th, 2010
+
+\end{center}
+
+\end{titlepage}
+
+
+
+\begin{abstract}
+This paper introduces a system for expressively performing transcribed music (scores) using statistical learning from a dataset. The dataset that is used contains performances aligned to the corresponding score. Expression is considered to be the way in which the performance deviates from the score. Expressive actions are predicted from links found between musical structure and expression. Previous expressive actions are also incorporated in the predictions. Musical structure will be automatically extracted from the scores using a set of formal rules that assign a hierarchical grouping structure to the music. To system will be able to deal with polyphonic music by splitting the scores into melody and harmony.
+
+{\bf Keywords:} performance rendering, musical structure, constituent structure, polyphonic piano music
+\end{abstract}
+\section{Introduction}
+
+A music performance involves a performer and an audience. The performer tries his best to perform music to the audience in a way that pleases the audience. In western art music tradition it is conventional that the performer provides his rendition of a musical score: a detailed transcription of the music in musical notation. A performer should be skilled enough to accurately reproduce the music in the score, but what sets a good performer apart from other performers and drives people to pay money to see a musical performance is his ability deviate from the score and interpret it in a way that pleases his audience. In fact, it is generally agreed on that for most western art music, a perfect reproduction of the score sounds very unpleasant. The performer makes the performance sound `natural' and expresses his musical knowledge and perhaps feelings in the performance, the resulting performance is expressive.
+
+It should be clear that performing a musical piece is not a trivial task. Theoretically it would be possible to construct robotic performers with perfect mastery of their instruments as well as perfect ability to reproduce scores. Yet there is still large gap between a perfect score reproduction by robots and a good sounding performance (the perfect reproduction sounds, indeed, robotic). Performance rendering systems attempt to bridge this gap.
+
+Deviations from a score in a performance can be described as the end result of a number of processes, the most important of which is called expression. It is not immediately clear where expression comes for or even what it is. It is not the within the scope of this thesis to elaborate widely on the complex phenomenon of expression. Instead, it will be assumed that expression is strongly linked to musical structure and that a computational model using this structure can to some extend adequately model expression. The quality of 
+the system should be an indication of the correctness of this assumption. 
+
+Early performance rendering systems used rule-based approaches to recognise small local structures that are used as indications to add certain kind of expression. A prominent ongoing rule based system, \textit{Director Musices} uses 30 rules with weighting parameters that take music features as input and produce expressive actions as output. The rules where created with the help of musical experts. \textit{Pop-E} is a more recent rule based system that uses aspects of Lerdahl and Jackendoff's Generative Theory of Tonal Music(GTTM) [Introduce this]. Gerhard Widmer is doing research using a large dataset of performances aligned to scores.
+
+As datasets become more available, machine learning approaches are gaining popularity. However, very few approaches make extensive use of structure. Some machine learning systems like the \textit{Music Interpretation System} make use of some aspects of GTTM and Widmer uses musical \textit{closure} [Narmour, introduce this properly] as a feature in his succesful \textit{YQX} system. This means that only the level of structure defined by closure is used by this system. It seems that higher level structure that would indicate for example repetition of parts plays an important [This argument is important and needs more elaboration] role in expression. 
+
+This thesis introduces machine learning system that makes of local structure as well as higher level structure to generate expressive performances of polyphonic piano music. Section X will introduce Y, section P will elaborate on Q and finally section Z will discuss the results.
+
+\paragraph*{Evaluation.} Performance context, adaptability, creativity. Subjective listening, correlation.
+
+\subsection{Related Work}
+Move part of the introduction here?
+\section{Approach}
+
+\subsection{Score Model}
+\subsubsection{Musical structure.}
+When listening to music, the listener assigns a certain hierarchical structure to the music perceived: Notes make up phrases, phrases make up themes, themes make up parts and parts make up the piece. This structure is usually accentuated in a performance. The most obvious example of this is slowing down at the end of a piece. On a lower level, transitions between themes may be marked by slowing down, changing volume or changing speed. Although structure can be accentuated in a performance, listeners, and trained listeners even more so, will also be able to recognise structure in an expressionless reproduction of the score, or when quietly singing the music in their heads. This suggests that it is possible to extract structure from a merely score. It also seems likely that knowing the structure will help creating an expressive performance.
+
+\paragraph*{Detecting repetition}
+
+Similarity function based on rhythic pattern and melodic pattern.
+
+\paragraph*{Using repetition to improve structural analysis}
+
+Consider the musical sequence $S = \{n_0, n_1, n_2, n_3\}$ is ambiguous and has two possible assignments of constituents: $S_0 = \{n_0\}, S_1 = \{n_1, n_2, n_3\}$ or $S'_0 = \{n_0, n_1\}, S'_1 = \{n_2, n_3\}$. The notion off repetition can help us here. Consider the case that $S'_1$ is a repetition of $S'_0$ but $S_1$ is not a repetition of $S_0$, this tells us that the split $S = \{S'_0, S'_1\}$ is more likely than the split $S = \{S_0, S_1\}$.
+
+\paragraph*{Using repetition to create constituent classes}
+
+Repetition can also be used to make the constituent assignment more interesting. What follows is a method that identifies which consituents are repetitions of which other constituents.
+
+
+
+
+\subsection{Performance Model}
+\subsubsection{Smoothness of expression}
+To avoid sudden changes in expression that sound weird, you would want a model that describes what a sensible sequence of expressive actions is. It may be sensible to train this model on all available data since this model should not describe what expressive actions are appropriate for one specific pianist or composer, it should rather describe what sequences of expressive actions are acceptable in general. To achieve this, a continuous hidden markov model, trained on all performances in the dataset, will be used.
+
+Let $D$ be a collection of compositions. Let a composition, $c$ be a collection of expressive actions, $a$ and let an expressive action be a tuple $(l,t)$ describing the loudness deviation, timing deviation (and/or local tempo?) of the note. The hidden markov model can be described as follows:
+\begin{align*}
+D &= \{c_0, c_1, \cdots, c_n\}\\
+c_i &= \{a_0, a_1, \cdots, a_n\}\\
+a_i &= (l,t)\\
+P(c) &= P(a_1 | a_0) * P(a_2|a_1, a_0) * \cdots * P(a_n|a_{n-1}, a_{n-2}, \cdots, a_0))
+\end{align*}
+
+\subsubsection{Expressive timing} Honing and Desain, Honing and timmers, Honing.
+\subsection{Learning}
+
+
+\section{Method}
+\section{Evaluation and Results}
+\subsection{Subjective Listening}
+\subsection{Correlation}
+\section{Conclusion}
+\section{Future Work}
+
+ \bibliographystyle{plain} % plain, nature, jbact
+ \bibliography{myref} 
+ 
+ 
+\end{document}
