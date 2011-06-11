@@ -1,8 +1,9 @@
-from music21 import converter
-import representation
-import os, re, util
+import music21 as m21
+from representation import *
+from midifile import *
+import os, re, util, analysescore
 
-DB_PATH = "/home/bastiaan/UvA/ExpressivePerformance/CrestMusePEDB/"
+DB_PATH = "/home/bastiaan/UvA/Expressive-Performance_DATA/CrestMusePEDB/"
 VERSIONS = ['PEDBv2.2', 'PEDBv2.3', 'PEDBv2.4.1', 'PEDBv2.5', 'PEDBv3.0']
 
 composers = {'Bach':'bac', 'Bartok':'bar', 'Grieg':'gri', 'Mozart':'moz', \
@@ -99,13 +100,19 @@ def getWorks(composer):
     works.append((getWork(name), getPianist(name), getSoundfont(name)))
   return works
 
-def getPerformance(composer, work, pianist, soundfont):
+def getScoreMidiPath(composer, work, pianist, soundfont):
   path = getPaths(composer, work, pianist, soundfont)
   path = path[0]
   name = path.split("/")[-1]
-  return representation.PianoRoll('{0}/{1}.mid'.format(path, name))
+  return '{0}/score.mid'.format(path)
 
-def getScore(composer, work, pianist, soundfont):
+def getPerformancePath(composer, work, pianist, soundfont):
+  path = getPaths(composer, work, pianist, soundfont)
+  path = path[0]
+  name = path.split("/")[-1]
+  return '{0}/{1}.mid'.format(path, name)
+
+def getScorePath(composer, work, pianist, soundfont):
   path = getPaths(composer, work, pianist, soundfont)
   path = path[0]
   # This is a bit clumsy
@@ -116,11 +123,26 @@ def getScore(composer, work, pianist, soundfont):
       not name.endswith('nodoctype.xml'):
       path += "/{0}".format(name)
       break
-  return converter.parse(path)
+  print path
+  return path
 
-def getDevInstance(composer, work, pianist, soundfont):
+def getDeviationPath(composer, work, pianist, soundfont):
   path = getPaths(composer, work, pianist, soundfont)
   path = path[0]
+  name = path.split("/")[-1]
+  return '{0}/deviation.xml'.format(path)
+
+def getPerformance(composer, work, pianist, soundfont):
+  path = getPerformancePath(composer, work, pianist, soundfont)
+  return NoteList(path)
+
+def getScore(composer, work, pianist, soundfont):
+  path = getScorePath(composer, work, pianist, soundfont)
+  return m21.converter.parse(path)
+
+def getDeviation(composer, work, pianist, soundfont):
+  path = getDeviationPath(composer, work, pianist, soundfont)
+  
 
 if __name__ == "__main__":
   import sequencer
@@ -130,8 +152,60 @@ if __name__ == "__main__":
     work = util.menu('Choose a work and performer', getWorks(getComposers()[comp]), cancel=True)
     if work == -1: continue
     selected = getWorks(getComposers()[comp])[work]
-    getPerformance(getComposers()[comp], selected[0], selected[1], selected[2]).play()
-#    seq.play(getPerformance(getComposers()[comp], selected[0], selected[1], selected[2]))
+    choice = 0
+    while choice != 7:
+      choice = util.menu('What should I load?', ['Expressive performance', 'Score without expression'])
+      if choice == 0:
+        path = getPerformancePath(getComposers()[comp], selected[0], selected[1], selected[2])
+      else:
+        path = getScoreMidiPath(getComposers()[comp], selected[0], selected[1], selected[2])
+
+      print path
+
+      choice = util.menu('Choose action', \
+          ['Play with internal sequencer', 'Play with audacious', 'View score', 'View midi info', 'View score info',\
+          'Export deviation data to CSV', 'Analyse', 'Cancel'])
+      if choice == 0:
+        seq.play(NoteList(path))
+      elif choice == 1:
+        os.system("audacious {0}".format(path))
+      elif choice == 2:
+        os.system("viewmxml {0}".format(getScorePath(getComposers()[comp], selected[0], selected[1], selected[2])))
+        pass
+      elif choice == 3:
+        nlist = NoteList(path)
+        nlist.printinfo()
+      elif choice == 4:
+        score = getScore(getComposers()[comp], selected[0], selected[1], selected[2])
+        parts = 0
+        notes = 0
+        for part in score:
+          bars = 0
+          if not isinstance(part, m21.stream.Part): continue
+          for bar in part:
+            if not isinstance(bar, m21.stream.Measure): continue
+            for note in bar:
+              if not isinstance(note, m21.stream.Voice): continue
+              notes += 1
+            bars += 1
+          print "{0} Bars in part".format(bars)
+          parts += 1
+        print "{0} Parts in piece, total notes: {1}".format(parts, notes)
+      elif choice == 5:
+        os.system("cmx dev2csv {0} > deviation.csv".format(getDeviationPath(getComposers()[comp], selected[0], selected[1], selected[2])))
+        os.system("vim deviation.csv")
+      elif choice == 6:
+        analysescore.analyse(getScore(getComposers()[comp], selected[0], selected[1], selected[2]))
+    
+
+
+    # Difference check (see if parsing doesn't introduce errors)
+    #os.system("python midi2text.py temp.mid > text1.txt")
+    #os.system("python midi2text.py {0} > text2.txt".format(path))
+    #os.system("diff text1.txt text2.txt")
+
+#    os.system("audacious {0}".format(path))
+#    getPerformance(getComposers()[comp], selected[0], selected[1], selected[2]).play()
 
 
 

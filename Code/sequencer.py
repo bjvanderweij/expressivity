@@ -8,7 +8,7 @@ class Sequencer:
 
 
 
-  def play(self, roll):
+  def play(self, notes):
     # Choose an output device
     devices = []
     for i in range(midi.get_count()):
@@ -18,9 +18,9 @@ class Sequencer:
     device = util.menu("Choose an output device", devices)
     out = midi.Output(device)
 
-    # Translate roll into midi events
+    # Translate notes into midi events
     print "Preprocessing"
-    events = roll.toEvents()
+    events = notes.toEvents()
 
     print "Playing"
     lastTime = 0
@@ -30,13 +30,13 @@ class Sequencer:
       # Calculate relative time and convert to seconds
       ticks = e[0] - lastTime
       # This is not right yet
-      seconds = (ticks/float(roll.division)) * float(roll.tempo) * 0.000001
+      seconds = (ticks/float(notes.division)) * float(notes.tempo) * 0.000001
       if e[3] is 'on':
         #out.update_time(e[0]-lastTime)
         time.sleep(seconds)
         lastTime = e[0]
         out.note_on(e[1], e[2], 0)
-      else:
+      elif e[3] is 'off':
         #out.update_time(e[0]-lastTime)
         time.sleep(seconds)
         lastTime = e[0]
@@ -49,7 +49,7 @@ class Sequencer:
 
 if __name__ == '__main__':
   import representation as mr
-  roll = mr.PianoRoll('0848-01.mid')
+  notes = mr.NoteList('../MidiFiles/0848-01.mid')
   seq = Sequencer()
-  seq.play(roll)
+  seq.play(notes)
 #out.write([[[0x9, 50, 80], 0],[[0x9, 53, 80], 500],[[0x8, 53, 0], 1500],[[0x, 50, 0], 2000]])

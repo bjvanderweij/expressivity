@@ -4,58 +4,75 @@ import copy, os, pygame
 
 base_a4 = 440
 names = ['C','Db','D','Eb','E','F','Gb','G','Ab','A','Bb','B']
+class Note:
 
-class PianoRoll:
+  def __init__(self, on, off, pitch, onvelocity, offvelocity=0):
+    self.on = on
+    self.off = off
+    self.pitch = pitch
+    self.onvelocity = onvelocity
+    self.offvelocity = offvelocity
+
+  def abs_pitch(self):
+    return base_a4*pow(2,(self.pitch-57)/12)
+
+  def duration(self):
+    return self.off - self.on
+
+  def name(self):
+    return '{0}{1}'.format(names[self.pitch % 12], self.pitch // 12)
+
+  def setLength(self, length):
+    self.length = length
+
+  def __str__(self):
+    return "Note: %s, on: %s, off: %s, on velocity: %s, off velocity: %s" % (self.name(), self.on, self.off, self.onvelocity, self.offvelocity)
+
+class NoteList:
 
   def __init__(self, midifile=None):
-    # Clean representation
-    self.startnote = None
-    self.length = 0
+    self.notes = []
 
     # Dirty MIDI administration
     self.key_signature = None
     self.time_signature = None
     self.smtp_offset = None
-    self.tempo = None
+    self.tempo = 500000
     self.division = None
     self.sequence_names = []
 
     # If a file is specified, parse it
     if midifile:
-      notebag = MidiToPianoRoll(self)
-      stream =  MidiInFile.MidiInFile(notebag, open(midifile))
+      parser = MidiParser(self)
+      stream =  MidiInFile.MidiInFile(parser, open(midifile))
       stream.read()
-      print len(notebag.notes)
-      self.built(notebag.notes)
 
+  def printinfo(self):
+    print "Number of notes:{0}\nKey signature: {1}\nTime signature: {2}\nSmtp offset: {3}\
+        \nTempo (microseconds per quarter-note): {4}\nTime division: {5}".format(\
+        len(self), self.key_signature, self.time_signature, self.smtp_offset, self.tempo,\
+        self.division)
 
+  # Making this iterable doesn't really add any value yet
   def __iter__(self):
     return self.generateItems()
 
   def __len__(self):
-    return self.length
+    return len(self.notes)
 
   def __contains__(self, note):
-    currentnote = startnote
-    while not currentnote is None:
-      if currentnote is note: return True
-      currentnote = currentnote.next
+    for n in self.notes:
+      if n is note:
+        return True
     return False
 
   def __getitem__(self, i):
-    index = 0
-    currentnote = self.startnote
-    while not currentnote is None:
-      if index == i: return currentnote
-      currentnote = currentnote.next
-      index += 1
-    return None
+    return self.notes[i]
 
   def generateItems(self):
-    currentnote = self.startnote
-    while not currentnote is None:
-      yield currentnote
-      currentnote = currentnote.next
+    for n in self.notes:
+      yield n
+
 
   def insertEvent(self, events, event):
     # Events are primary ordered by time and secundary ordered by pitch
@@ -84,15 +101,15 @@ class PianoRoll:
   def toEvents(self):
     events = []
     for n in self:
-      events = self.insertEvent(events, (n.note_on(), n.note, n.velocity, 'on'))
-      events = self.insertEvent(events, (n.note_off(), n.note, n.velocity, 'off'))
+      events = self.insertEvent(events, (n.on, n.pitch, n.onvelocity, 'on'))
+      events = self.insertEvent(events, (n.off, n.pitch, n.offvelocity, 'off'))
     return events
 
 
   def exportMidi(self, midifile):
     # Do some preprocessing on the notes, converting them to 
     # ordered note on and note off events:
-    print "Preprocessing {0} notes".format(self.length)
+    print "Preprocessing {0} notes".format(len(self))
     events = self.toEvents()
 
     print "Creating file"
@@ -136,207 +153,82 @@ class PianoRoll:
     out.eof()
     out.write()
 
-  # Built a linked list from a list of notes ordered by onset time and pitch
-  def built(self, notes):
-    currentNote = Note(notes[0][1] - notes[0][0], notes[0][2], notes[0][3])
-
-    self.startnote = currentNote
-    self.length = len(notes)
-
-    previous = currentNote
-    previousNoteOff = notes[0][1]
-
-    notes.remove(notes[0])
-
-    for (note_on, note_off, note, velocity) in notes:
-      currentNote = Note(note_off - note_on, note, velocity)
-      currentNote.offset = note_on - previousNoteOff
-      currentNote.previous = previous
-      previous.next = currentNote
-      previous = currentNote
-      previousNoteOff = note_off
-
-
   def __str__(self):
     string = ''
     for n in self:
       string += str(n) + "\n" 
     return string
 
-  def move(self, note, shift):
-    index = self.notes.index(note)
-    if self.notes[index].note_on + shift < 0:
-      shift = math.abs(self.notes[index].note_on + shift)
-    for i in range(index, len(self.notes)):
-      self.notes[i].note_on += shift
-      self.notes[i].note_off += shift
-
-  def insertAfter(note, beforenote):
-    print "Not done yet!"
-    
-  def insertBefore(note, afternote):
-    print "Not done yet!"
-
-  def insertAt(note, time):
-    print "Not done yet!"
-
-  def putAfter(note, beforenote):
-    print "Not done yet!"
-  def putBefore(note, afternote):
-    print "Not done yet!"
-
-  def putAt(note, time):
-    print "Not done yet!"
-
-  def remove(self, note):
+  def insert(self, note):
+    if len(self) == 0:
+      self.notes = [note]
+      return
+    index = 0
     for n in self:
-      if n is note:
-        # If first note:
-        if not n.previous:
-          n.next.previous = None
-          self.startnote = n.next
-        # if last note:
-        elif not n.next:
-          n.previous.next = None
-        else:
-          n.previous.next = n.next
-          n.next.previous = n.previous
-        break
-      n = None
-    self.length -= 1
+      if note.on < n.on:
+        self.notes.insert(index, note)
+        return
+      elif note.on == n.on and note.pitch > n.pitch:
+        self.notes.insert(index, note)
+        return
+      index += 1
 
-  def setLength(self, note, newlength):
-    index = self.notes.index(note)
-    shift = self.notes[index].note_on + newlength - self.notes[index].note_off
-    self.notes[index].note_off += shift
-    for i in range(index+1, len(self.notes)):
-      self.notes[i].note_on += shift
-      self.notes[i].note_off += shift
-
-
-  # Also implements one with start and end TIMES
-  def cut(self, start, end):
-    # This is pretty ugly, isn't it?
-    start.previous = None
-    end.next = None
-    self.startnote = start
-    length = 0
-    for n in self:
-      length += 1
-    self.length = length
-
-  def play(self):
-    self.exportMidi('.temp.mid')
-    os.system("audacious .temp.mid")
-    pass
-
-
-class Note:
-
-  def __init__(self, length, note, velocity):
-    self.offset = 0
-    self.previous = None
-    self.next = None
-    self.velocity = velocity
-    self.length = length
-    self.note = note
+    self.notes.append(note)
   
-  # Return absolute pitch
-  def pitch(self):
-    return base_a4*pow(2,(self.note-57)/12)
+  def ioi(self, note):
+    if note == 0: return 0
+    return self.notes[note].on - self.notes[note-1].on
 
-  def name(self):
-    return '{0}{1}'.format(names[self.note % 12], self.note // 12)
-
-  def setLength(self, length):
-    self.length = length
-
-  # Return note_on in absolute time
-  def note_on(self):
-    if self.previous is None:
-      return self.offset
-    else:
-      return self.offset + self.previous.length + self.previous.note_on() 
-
-  def note_off(self):
-    return self.note_on() + self.length
-
-  def __str__(self):
-    return "Note: %02x, length: %s, offset: %s, velocity: %02X, absolute onset: %s" % (self.note, self.length, self.offset, self.velocity, self.note_on())
+  def duration(self, note):
+    return self.notes[note].duration
 
 
-class MidiToPianoRoll(MidiOutStream.MidiOutStream):
+class MidiParser(MidiOutStream.MidiOutStream):
 
   """
   This class listens to a select few midi events relevant for a simple midifile containing a pianomelody
   """
 
 
-  def __init__(self, roll):
-    self.roll = roll
+  def __init__(self, nlist):
+    self.nlist = nlist
     self.notes_on = []
-    self.notes = []
     pass
 
-  def insert(self, (note_on, note_off, pitch, velocity)):
-    note = (note_on, note_off, pitch, velocity)
-    # Notes are primary ordered by onset time and secundary ordered by pitch
-    # No notes yet? Add at beginning
-    if len(self.notes) == 0:
-      self.notes = [note]
-      return
-    # Insert at the right index
-    # Loop through notes
-    for i in range(len(self.notes)):
-      # If you find an note that happened at the SAME TIME
-      if self.notes[i][0] == note_on:
-        # And its pitch is LOWER
-        if self.notes[i][1] < pitch:
-          # Insert BEFORE
-          self.notes.insert(i, note)
-      # If you find an note that happened AFTER the current note_on
-      elif self.notes[i][0] > note_on:
-        # Insert the note before this note
-        self.notes.insert(i, note)
-        return
-    # Right place not found? Append
-    self.notes += [note]
-
-  
   # Event Listeners
    
   def channel_message(self, message_type, channel, data):
     pass
 
-  def note_on(self, channel=0, note=0x40, velocity=0x40):
-    self.notes_on.append((self.abs_time(), note, velocity))
+  def note_on(self, channel=0, pitch=0x40, onvel=0x40):
+    self.notes_on.append((self.abs_time(), pitch, onvel))
 
-  def note_off(self, channel=0, note=0x40, velocity=0x40):
-    for (note_on, n, velocity) in self.notes_on:
+  def note_off(self, channel=0, pitch=0x40, offvel=0x40):
+    for (on, p, onvel) in self.notes_on:
       # Should check if: note_off is later than note_on, note is even in notes_on
       # note appears only once in notes_on
-      if note == n:
-        self.insert((note_on, self.abs_time(), n, velocity))
-        self.notes_on.remove((note_on, n, velocity))
+      if pitch == p:
+        self.nlist.insert(Note(on, self.abs_time(), pitch, onvel, offvel))
+        self.notes_on.remove((on, pitch, onvel))
         break
 
   def header(self, format=0, nTracks=1, division=96):
-    self.roll.division = division
+    self.nlist.division = division
 
   def sequence_name(self, text):
-    self.roll.sequence_names += [text]
+    self.nlist.sequence_names += [text]
 
   def tempo(self, value):
-    self.roll.tempo = value
+    self.nlist.tempo = value
 
   def smtp_offset(self, hour, minute, second, frame, framePart):
-    self.roll.smtp_offset = (hour, minute, second, frame, framePart)
+    self.nlist.smtp_offset = (hour, minute, second, frame, framePart)
 
   def time_signature(self, nn, dd, cc, bb):
-    self.roll.time_signature = (nn, dd, cc, bb)
+    self.nlist.time_signature = (nn, dd, cc, bb)
 
   def key_signature(self, sf, mi):
-    self.roll.key_signature = (sf, mi)
+    self.nlist.key_signature = (sf, mi)
 
   def sequencer_specific(self, data):pass
   def aftertouch(self, channel=0, note=0x40, velocity=0x40):pass
@@ -365,10 +257,11 @@ class MidiToPianoRoll(MidiOutStream.MidiOutStream):
   def midi_port(self, value):pass
 
 if __name__ == '__main__':
-  roll = PianoRoll('0848-01.mid')
-  roll.play()
-  import simple_rule
-  simple_rule.higherIsFaster(roll, 30.0)
-  roll.play()
-  roll.exportMidi('exp_outp.mid')
+  notes = NoteList('../MidiFiles/0848-01.mid')
+  #import simple_rule
+  #simple_rule.higherIsFaster(notes, 30.0)
+  from sequencer import Sequencer
+  #seq = Sequencer()
+  #seq.play(notes)
+  notes.exportMidi('exp_outp.mid')
 

@@ -9,11 +9,16 @@ class MidiFile:
 
   def __init__(self, midifile=None):
     self.events = []
+    if midifile:
+      parser = ParseMidi(self)
+      stream =  MidiInFile.MidiInFile(parser, open(midifile))
+      stream.read()
+      print("{0} midievents parsed".format(len(self.events)))
+
 
   def export(self, midifile):
     out = MidiOutFile(midifile)
     for event in self.events:
-      print event
       getattr(out, event[0])(*event[1:])
     out.write()
   
