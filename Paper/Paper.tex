@@ -3,8 +3,12 @@
 % Fancy maths stuff
 \usepackage{amsmath, amsthm, amssymb}
 
-% Algorithm typesetting
+% Algorithm typesetting environments
+\usepackage{algorithm}
 \usepackage{algorithmic}
+
+% Trees
+\usepackage{qtree}
 
 \begin{document}
 
@@ -122,7 +126,63 @@ Consider the musical sequence $S = \{n_0, n_1, n_2, n_3\}$ is ambiguous and has 
 
 Repetition can also be used to make the constituent assignment more interesting. What follows is a method that identifies which consituents are repetitions of which other constituents.
 
+\begin{algorithm}
+\begin{algorithmic}
+\FOR{$\texttt{depth} \in \{\texttt{depth}(\texttt{tree}), \cdots, 0\}$}
+  \FOR{$c \in \{c | \texttt{depth}(c, \texttt{tree}) = \texttt{depth}\}$}
+    \FOR{$\texttt{class} \in C$}
+      \IF{$\texttt{similar}(c, \texttt{class})$}
+        \STATE c.class = class
+      \ENDIF
+    \ENDFOR
+    \IF{c.class = null}
+      \STATE C.append(createClass(c))
+      \STATE c.class = createClass(c)
+    \ENDIF
+  \ENDFOR
+\ENDFOR
+\end{algorithmic}
+\caption{Bottom up tree traversal and similarity relations}
+\end{algorithm}
 
+A resulting tree could look like figure \ref{similtree}
+
+\begin{figure}
+\begin{center}
+\Tree 
+[
+.{$M$}
+	[ .{$d$} 
+		[ .{$a$} 
+			[ .{$x$} ]
+			[ .{$y$} ]
+			[ .{$x$} ]
+		]
+		[ .{$a$} 
+			[ .{$x$} ]
+			[ .{$y$} ]
+			[ .{$x$} ]
+		]
+	]	
+	[ .{$e$} 
+		[.{$c$} 
+			[ .{$b$} 
+				[ .{$p$} ]
+				[ .{$q$} ]
+			]
+			[ .{$r$} ]
+		]		
+		[.{$a$} 
+			[ .{$x$} ]
+			[ .{$y$} ]
+			[ .{$x$} ]
+		]
+	]
+]
+\end{center}
+\caption{Example tree with similarities}
+\label{similtree}
+\end{figure}
 
 
 \subsection{Performance Model}

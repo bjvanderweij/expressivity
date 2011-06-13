@@ -38,7 +38,7 @@ class NoteList:
     self.time_signature = None
     self.smtp_offset = None
     self.tempo = 500000
-    self.division = None
+    self.division = 480
     self.sequence_names = []
 
     # If a file is specified, parse it
@@ -154,7 +154,7 @@ class NoteList:
     out.write()
 
   def __str__(self):
-    string = ''
+    string = 'NoteList Object:\n'
     for n in self:
       string += str(n) + "\n" 
     return string
@@ -174,6 +174,9 @@ class NoteList:
       index += 1
 
     self.notes.append(note)
+
+  def microseconds_to_ticks(self, microseconds):
+    return int((microseconds / float(self.tempo)) * self.division)
   
   def ioi(self, note):
     if note == 0: return 0

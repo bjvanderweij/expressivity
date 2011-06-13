@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import music21 as m21
 from representation import *
 from midifile import *
@@ -142,7 +144,12 @@ def getScore(composer, work, pianist, soundfont):
 
 def getDeviation(composer, work, pianist, soundfont):
   path = getDeviationPath(composer, work, pianist, soundfont)
-  
+
+def select():
+  comp = util.menu('Choose a composer', getComposers())
+  work = util.menu('Choose a work and performer', getWorks(getComposers()[comp]), cancel=True)
+  selected = getWorks(getComposers()[comp])[work]
+  return getComposers()[comp], selected[0], selected[1], selected[2]
 
 if __name__ == "__main__":
   import sequencer

@@ -1,3313 +1,549 @@
-format: 0, nTracks: 1, division: 480
-----------------------------------
-
-Start - track #0
-sequence_name: Seq-1
-smtp_offset 96 0 0 0 0
-time_signature: 4 2 24 8
-tempo: 500000
-note_on  - ch:00,  note:47,  vel:3F time:455
-note_off - ch:00,  note:47,  vel:40 time:114
-note_on  - ch:00,  note:45,  vel:3F time:0
-note_on  - ch:00,  note:44,  vel:3F time:113
-note_off - ch:00,  note:45,  vel:40 time:1
-note_off - ch:00,  note:44,  vel:40 time:113
-note_on  - ch:00,  note:45,  vel:3F time:0
-note_off - ch:00,  note:45,  vel:40 time:114
-note_on  - ch:00,  note:48,  vel:3E time:0
-note_on  - ch:00,  note:39,  vel:39 time:0
-note_off - ch:00,  note:48,  vel:40 time:37
-note_on  - ch:00,  note:3C,  vel:31 time:182
-note_on  - ch:00,  note:40,  vel:31 time:0
-note_off - ch:00,  note:3C,  vel:40 time:73
-note_off - ch:00,  note:40,  vel:40 time:0
-note_off - ch:00,  note:39,  vel:40 time:29
-note_on  - ch:00,  note:4A,  vel:3F time:117
-note_on  - ch:00,  note:3C,  vel:31 time:0
-note_on  - ch:00,  note:40,  vel:31 time:0
-note_off - ch:00,  note:3C,  vel:40 time:73
-note_off - ch:00,  note:40,  vel:40 time:0
-note_off - ch:00,  note:4A,  vel:40 time:36
-note_on  - ch:00,  note:48,  vel:3F time:0
-note_off - ch:00,  note:48,  vel:40 time:109
-note_on  - ch:00,  note:47,  vel:3F time:0
-note_on  - ch:00,  note:3C,  vel:31 time:0
-note_on  - ch:00,  note:40,  vel:31 time:0
-note_off - ch:00,  note:3C,  vel:40 time:73
-note_off - ch:00,  note:40,  vel:40 time:0
-note_off - ch:00,  note:47,  vel:40 time:36
-note_on  - ch:00,  note:48,  vel:3F time:1
-note_off - ch:00,  note:48,  vel:40 time:109
-note_on  - ch:00,  note:4C,  vel:3B time:0
-note_on  - ch:00,  note:39,  vel:39 time:5
-note_off - ch:00,  note:4C,  vel:40 time:30
-note_on  - ch:00,  note:3C,  vel:31 time:217
-note_on  - ch:00,  note:40,  vel:31 time:0
-note_off - ch:00,  note:3C,  vel:40 time:84
-note_off - ch:00,  note:40,  vel:40 time:0
-note_off - ch:00,  note:39,  vel:40 time:38
-note_on  - ch:00,  note:4D,  vel:41 time:129
-note_on  - ch:00,  note:3C,  vel:31 time:0
-note_on  - ch:00,  note:40,  vel:31 time:0
-note_off - ch:00,  note:3C,  vel:40 time:72
-note_off - ch:00,  note:40,  vel:40 time:0
-note_off - ch:00,  note:4D,  vel:40 time:36
-note_on  - ch:00,  note:4C,  vel:41 time:0
-note_off - ch:00,  note:4C,  vel:40 time:108
-note_on  - ch:00,  note:4B,  vel:41 time:1
-note_on  - ch:00,  note:3C,  vel:31 time:0
-note_on  - ch:00,  note:40,  vel:31 time:0
-note_off - ch:00,  note:3C,  vel:40 time:72
-note_off - ch:00,  note:40,  vel:40 time:0
-note_off - ch:00,  note:4B,  vel:40 time:36
-note_on  - ch:00,  note:4C,  vel:41 time:0
-note_off - ch:00,  note:4C,  vel:40 time:108
-note_on  - ch:00,  note:53,  vel:47 time:0
-note_on  - ch:00,  note:39,  vel:39 time:2
-note_off - ch:00,  note:53,  vel:40 time:104
-note_on  - ch:00,  note:51,  vel:47 time:0
-note_off - ch:00,  note:51,  vel:40 time:106
-note_on  - ch:00,  note:50,  vel:47 time:0
-note_on  - ch:00,  note:3C,  vel:31 time:0
-note_on  - ch:00,  note:40,  vel:31 time:0
-note_off - ch:00,  note:39,  vel:40 time:1
-note_on  - ch:00,  note:51,  vel:47 time:104
-note_off - ch:00,  note:50,  vel:40 time:1
-note_off - ch:00,  note:40,  vel:40 time:2
-note_off - ch:00,  note:3C,  vel:40 time:0
-note_off - ch:00,  note:51,  vel:40 time:103
-note_on  - ch:00,  note:53,  vel:4E time:0
-note_on  - ch:00,  note:39,  vel:39 time:0
-note_on  - ch:00,  note:51,  vel:4E time:99
-note_off - ch:00,  note:53,  vel:40 time:18
-note_on  - ch:00,  note:50,  vel:53 time:81
-note_off - ch:00,  note:51,  vel:40 time:18
-note_off - ch:00,  note:39,  vel:40 time:19
-note_on  - ch:00,  note:3C,  vel:31 time:0
-note_on  - ch:00,  note:40,  vel:31 time:0
-note_on  - ch:00,  note:51,  vel:5A time:62
-note_off - ch:00,  note:50,  vel:40 time:18
-note_off - ch:00,  note:3C,  vel:40 time:40
-note_off - ch:00,  note:40,  vel:40 time:0
-note_off - ch:00,  note:51,  vel:40 time:128
-note_on  - ch:00,  note:54,  vel:6A time:0
-note_on  - ch:00,  note:39,  vel:39 time:0
-note_on  - ch:00,  note:3C,  vel:31 time:208
-note_on  - ch:00,  note:40,  vel:31 time:0
-note_off - ch:00,  note:39,  vel:40 time:13
-note_off - ch:00,  note:40,  vel:40 time:140
-note_off - ch:00,  note:3C,  vel:40 time:0
-note_on  - ch:00,  note:51,  vel:61 time:70
-note_on  - ch:00,  note:3C,  vel:34 time:0
-note_on  - ch:00,  note:40,  vel:34 time:0
-note_off - ch:00,  note:54,  vel:40 time:12
-note_off - ch:00,  note:40,  vel:40 time:42
-note_off - ch:00,  note:3C,  vel:40 time:0
-note_off - ch:00,  note:51,  vel:40 time:16
-note_on  - ch:00,  note:54,  vel:61 time:154
-note_on  - ch:00,  note:3C,  vel:34 time:0
-note_on  - ch:00,  note:40,  vel:34 time:0
-note_off - ch:00,  note:3C,  vel:40 time:54
-note_off - ch:00,  note:40,  vel:40 time:0
-note_off - ch:00,  note:54,  vel:40 time:16
-note_on  - ch:00,  note:4F,  vel:56 time:70
-note_on  - ch:00,  note:51,  vel:56 time:44
-note_off - ch:00,  note:4F,  vel:40 time:12
-note_on  - ch:00,  note:53,  vel:61 time:30
-note_on  - ch:00,  note:34,  vel:3D time:0
-note_off - ch:00,  note:51,  vel:40 time:15
-note_off - ch:00,  note:53,  vel:40 time:58
-note_off - ch:00,  note:34,  vel:40 time:160
-note_on  - ch:00,  note:4E,  vel:5D time:0
-note_on  - ch:00,  note:51,  vel:52 time:0
-note_on  - ch:00,  note:3B,  vel:37 time:0
-note_on  - ch:00,  note:40,  vel:37 time:0
-note_off - ch:00,  note:3B,  vel:40 time:44
-note_off - ch:00,  note:40,  vel:40 time:0
-note_off - ch:00,  note:4E,  vel:40 time:7
-note_off - ch:00,  note:51,  vel:40 time:0
-note_on  - ch:00,  note:4C,  vel:50 time:182
-note_on  - ch:00,  note:4F,  vel:50 time:0
-note_on  - ch:00,  note:3B,  vel:37 time:0
-note_on  - ch:00,  note:40,  vel:37 time:0
-note_off - ch:00,  note:3B,  vel:40 time:41
-note_off - ch:00,  note:40,  vel:40 time:0
-note_off - ch:00,  note:4C,  vel:40 time:11
-note_off - ch:00,  note:4F,  vel:40 time:0
-note_on  - ch:00,  note:4E,  vel:5D time:164
-note_on  - ch:00,  note:51,  vel:5D time:0
-note_on  - ch:00,  note:3B,  vel:37 time:0
-note_on  - ch:00,  note:40,  vel:37 time:0
-note_off - ch:00,  note:4E,  vel:40 time:51
-note_off - ch:00,  note:51,  vel:40 time:0
-note_off - ch:00,  note:3B,  vel:40 time:59
-note_off - ch:00,  note:40,  vel:40 time:0
-note_on  - ch:00,  note:4F,  vel:56 time:21
-note_on  - ch:00,  note:51,  vel:56 time:45
-note_off - ch:00,  note:4F,  vel:40 time:9
-note_on  - ch:00,  note:53,  vel:6A time:31
-note_on  - ch:00,  note:34,  vel:3D time:0
-note_off - ch:00,  note:51,  vel:40 time:14
-note_off - ch:00,  note:53,  vel:40 time:9
-note_off - ch:00,  note:34,  vel:40 time:199
-note_on  - ch:00,  note:4E,  vel:51 time:0
-note_on  - ch:00,  note:51,  vel:58 time:0
-note_on  - ch:00,  note:3B,  vel:3E time:0
-note_on  - ch:00,  note:40,  vel:3E time:0
-note_off - ch:00,  note:4E,  vel:40 time:33
-note_off - ch:00,  note:51,  vel:40 time:0
-note_off - ch:00,  note:3B,  vel:40 time:4
-note_off - ch:00,  note:40,  vel:40 time:0
-note_on  - ch:00,  note:4C,  vel:51 time:185
-note_on  - ch:00,  note:4F,  vel:58 time:0
-note_on  - ch:00,  note:3B,  vel:3E time:0
-note_on  - ch:00,  note:40,  vel:3E time:0
-note_off - ch:00,  note:4C,  vel:40 time:33
-note_off - ch:00,  note:4F,  vel:40 time:0
-note_off - ch:00,  note:3B,  vel:40 time:4
-note_off - ch:00,  note:40,  vel:40 time:0
-note_on  - ch:00,  note:4E,  vel:56 time:185
-note_on  - ch:00,  note:51,  vel:5D time:0
-note_on  - ch:00,  note:3B,  vel:3E time:0
-note_on  - ch:00,  note:40,  vel:3E time:0
-note_off - ch:00,  note:4E,  vel:40 time:33
-note_off - ch:00,  note:51,  vel:40 time:0
-note_off - ch:00,  note:3B,  vel:40 time:27
-note_off - ch:00,  note:40,  vel:40 time:61
-note_on  - ch:00,  note:4F,  vel:56 time:14
-note_on  - ch:00,  note:51,  vel:56 time:44
-note_off - ch:00,  note:4F,  vel:40 time:12
-note_on  - ch:00,  note:53,  vel:5F time:31
-note_on  - ch:00,  note:34,  vel:3D time:0
-note_off - ch:00,  note:51,  vel:40 time:12
-note_off - ch:00,  note:53,  vel:40 time:15
-note_on  - ch:00,  note:4E,  vel:58 time:191
-note_on  - ch:00,  note:51,  vel:58 time:0
-note_on  - ch:00,  note:3B,  vel:31 time:0
-note_on  - ch:00,  note:40,  vel:31 time:0
-note_off - ch:00,  note:34,  vel:40 time:30
-note_off - ch:00,  note:40,  vel:40 time:11
-note_off - ch:00,  note:3B,  vel:40 time:0
-note_off - ch:00,  note:51,  vel:40 time:0
-note_off - ch:00,  note:4E,  vel:40 time:0
-note_on  - ch:00,  note:4C,  vel:4E time:176
-note_on  - ch:00,  note:4F,  vel:4E time:0
-note_on  - ch:00,  note:2F,  vel:35 time:0
-note_off - ch:00,  note:4C,  vel:40 time:42
-note_off - ch:00,  note:4F,  vel:40 time:0
-note_off - ch:00,  note:2F,  vel:40 time:8
-note_on  - ch:00,  note:4B,  vel:4A time:173
-note_on  - ch:00,  note:4E,  vel:4A time:0
-note_on  - ch:00,  note:3B,  vel:31 time:0
-note_off - ch:00,  note:4B,  vel:40 time:52
-note_off - ch:00,  note:3B,  vel:40 time:0
-note_off - ch:00,  note:4E,  vel:40 time:0
-note_on  - ch:00,  note:4C,  vel:40 time:223
-note_on  - ch:00,  note:34,  vel:33 time:0
-note_on  - ch:00,  note:47,  vel:3B time:503
-note_off - ch:00,  note:4C,  vel:40 time:1
-note_off - ch:00,  note:34,  vel:40 time:0
-note_on  - ch:00,  note:45,  vel:3B time:110
-note_off - ch:00,  note:47,  vel:40 time:18
-note_on  - ch:00,  note:44,  vel:3B time:93
-note_off - ch:00,  note:45,  vel:40 time:18
-note_on  - ch:00,  note:45,  vel:3B time:93
-note_off - ch:00,  note:44,  vel:40 time:18
-note_on  - ch:00,  note:48,  vel:39 time:93
-note_on  - ch:00,  note:39,  vel:31 time:0
-note_off - ch:00,  note:45,  vel:40 time:18
-note_off - ch:00,  note:48,  vel:40 time:28
-note_off - ch:00,  note:39,  vel:40 time:182
-note_on  - ch:00,  note:3C,  vel:31 time:0
-note_on  - ch:00,  note:40,  vel:31 time:0
-note_off - ch:00,  note:3C,  vel:40 time:64
-note_off - ch:00,  note:40,  vel:40 time:0
-note_on  - ch:00,  note:4A,  vel:3B time:164
-note_on  - ch:00,  note:3C,  vel:31 time:0
-note_on  - ch:00,  note:40,  vel:31 time:0
-note_off - ch:00,  note:3C,  vel:40 time:59
-note_off - ch:00,  note:40,  vel:40 time:0
-note_on  - ch:00,  note:48,  vel:3B time:46
-note_off - ch:00,  note:4A,  vel:40 time:27
-note_on  - ch:00,  note:47,  vel:3B time:79
-note_on  - ch:00,  note:3C,  vel:31 time:0
-note_on  - ch:00,  note:40,  vel:31 time:0
-note_off - ch:00,  note:48,  vel:40 time:26
-note_off - ch:00,  note:40,  vel:40 time:33
-note_off - ch:00,  note:3C,  vel:40 time:0
-note_on  - ch:00,  note:48,  vel:3B time:46
-note_off - ch:00,  note:47,  vel:40 time:27
-note_on  - ch:00,  note:4C,  vel:3A time:79
-note_on  - ch:00,  note:39,  vel:31 time:0
-note_off - ch:00,  note:48,  vel:40 time:29
-note_off - ch:00,  note:4C,  vel:40 time:37
-note_on  - ch:00,  note:3C,  vel:31 time:167
-note_on  - ch:00,  note:40,  vel:31 time:0
-note_off - ch:00,  note:39,  vel:40 time:1
-note_off - ch:00,  note:40,  vel:40 time:56
-note_off - ch:00,  note:3C,  vel:40 time:0
-note_on  - ch:00,  note:4D,  vel:3C time:177
-note_on  - ch:00,  note:3C,  vel:31 time:0
-note_on  - ch:00,  note:40,  vel:31 time:0
-note_off - ch:00,  note:3C,  vel:40 time:57
-note_off - ch:00,  note:40,  vel:40 time:0
-note_on  - ch:00,  note:4C,  vel:3C time:60
-note_off - ch:00,  note:4D,  vel:40 time:45
-note_on  - ch:00,  note:4B,  vel:3C time:72
-note_on  - ch:00,  note:3C,  vel:31 time:0
-note_on  - ch:00,  note:40,  vel:31 time:0
-note_off - ch:00,  note:4C,  vel:40 time:45
-note_off - ch:00,  note:40,  vel:40 time:12
-note_off - ch:00,  note:3C,  vel:40 time:0
-note_on  - ch:00,  note:4C,  vel:3C time:60
-note_off - ch:00,  note:4B,  vel:40 time:45
-note_on  - ch:00,  note:53,  vel:3C time:72
-note_on  - ch:00,  note:39,  vel:31 time:0
-note_off - ch:00,  note:4C,  vel:40 time:42
-note_on  - ch:00,  note:51,  vel:3C time:67
-note_off - ch:00,  note:53,  vel:40 time:42
-note_on  - ch:00,  note:50,  vel:3C time:66
-note_on  - ch:00,  note:3C,  vel:31 time:0
-note_on  - ch:00,  note:40,  vel:31 time:0
-note_off - ch:00,  note:39,  vel:40 time:1
-note_off - ch:00,  note:51,  vel:40 time:42
-note_off - ch:00,  note:3C,  vel:40 time:25
-note_off - ch:00,  note:40,  vel:40 time:0
-note_on  - ch:00,  note:51,  vel:3C time:40
-note_off - ch:00,  note:50,  vel:40 time:42
-note_on  - ch:00,  note:53,  vel:3C time:66
-note_on  - ch:00,  note:39,  vel:31 time:0
-note_off - ch:00,  note:51,  vel:40 time:42
-note_on  - ch:00,  note:51,  vel:3C time:66
-note_off - ch:00,  note:53,  vel:40 time:41
-note_off - ch:00,  note:39,  vel:40 time:66
-note_on  - ch:00,  note:50,  vel:3C time:1
-note_on  - ch:00,  note:3C,  vel:31 time:0
-note_on  - ch:00,  note:40,  vel:31 time:0
-note_off - ch:00,  note:51,  vel:40 time:58
-note_off - ch:00,  note:40,  vel:40 time:36
-note_off - ch:00,  note:3C,  vel:40 time:0
-note_on  - ch:00,  note:51,  vel:3C time:55
-note_off - ch:00,  note:50,  vel:40 time:58
-note_off - ch:00,  note:51,  vel:40 time:64
-note_on  - ch:00,  note:39,  vel:31 time:27
-note_on  - ch:00,  note:54,  vel:32 time:18
-note_off - ch:00,  note:39,  vel:40 time:243
-note_on  - ch:00,  note:3C,  vel:31 time:0
-note_on  - ch:00,  note:40,  vel:31 time:0
-note_off - ch:00,  note:3C,  vel:40 time:62
-note_off - ch:00,  note:40,  vel:40 time:0
-note_on  - ch:00,  note:51,  vel:51 time:184
-note_on  - ch:00,  note:3C,  vel:31 time:0
-note_on  - ch:00,  note:40,  vel:31 time:0
-note_off - ch:00,  note:54,  vel:40 time:15
-note_off - ch:00,  note:51,  vel:40 time:35
-note_off - ch:00,  note:3C,  vel:40 time:9
-note_off - ch:00,  note:40,  vel:40 time:0
-note_on  - ch:00,  note:54,  vel:51 time:174
-note_on  - ch:00,  note:3C,  vel:31 time:0
-note_on  - ch:00,  note:40,  vel:31 time:0
-note_off - ch:00,  note:54,  vel:40 time:50
-note_off - ch:00,  note:40,  vel:40 time:9
-note_off - ch:00,  note:3C,  vel:40 time:0
-note_on  - ch:00,  note:4F,  vel:54 time:101
-note_on  - ch:00,  note:51,  vel:54 time:31
-note_off - ch:00,  note:4F,  vel:40 time:27
-note_on  - ch:00,  note:53,  vel:67 time:16
-note_on  - ch:00,  note:34,  vel:31 time:0
-note_off - ch:00,  note:51,  vel:40 time:14
-note_off - ch:00,  note:53,  vel:40 time:27
-note_on  - ch:00,  note:4E,  vel:40 time:176
-note_on  - ch:00,  note:51,  vel:45 time:0
-note_on  - ch:00,  note:3B,  vel:31 time:0
-note_on  - ch:00,  note:40,  vel:31 time:0
-note_off - ch:00,  note:34,  vel:40 time:1
-note_off - ch:00,  note:40,  vel:40 time:53
-note_off - ch:00,  note:3B,  vel:40 time:0
-note_off - ch:00,  note:51,  vel:40 time:14
-note_off - ch:00,  note:4E,  vel:40 time:0
-note_on  - ch:00,  note:4F,  vel:45 time:150
-note_on  - ch:00,  note:3B,  vel:31 time:0
-note_on  - ch:00,  note:40,  vel:31 time:0
-note_on  - ch:00,  note:4C,  vel:40 time:3
-note_off - ch:00,  note:3B,  vel:40 time:53
-note_off - ch:00,  note:40,  vel:40 time:0
-note_off - ch:00,  note:4F,  vel:40 time:14
-note_off - ch:00,  note:4C,  vel:40 time:3
-note_on  - ch:00,  note:4E,  vel:40 time:153
-note_on  - ch:00,  note:51,  vel:45 time:0
-note_on  - ch:00,  note:3B,  vel:31 time:0
-note_on  - ch:00,  note:40,  vel:31 time:0
-note_off - ch:00,  note:3B,  vel:40 time:56
-note_off - ch:00,  note:40,  vel:40 time:0
-note_off - ch:00,  note:4E,  vel:40 time:14
-note_off - ch:00,  note:51,  vel:40 time:0
-note_on  - ch:00,  note:4F,  vel:47 time:96
-note_on  - ch:00,  note:51,  vel:47 time:27
-note_off - ch:00,  note:4F,  vel:40 time:29
-note_on  - ch:00,  note:53,  vel:6A time:4
-note_on  - ch:00,  note:34,  vel:31 time:0
-note_off - ch:00,  note:51,  vel:40 time:22
-note_off - ch:00,  note:53,  vel:40 time:14
-note_on  - ch:00,  note:4E,  vel:3B time:179
-note_on  - ch:00,  note:51,  vel:47 time:0
-note_on  - ch:00,  note:3B,  vel:31 time:0
-note_on  - ch:00,  note:40,  vel:31 time:0
-note_off - ch:00,  note:34,  vel:40 time:1
-note_off - ch:00,  note:40,  vel:40 time:52
-note_off - ch:00,  note:3B,  vel:40 time:0
-note_off - ch:00,  note:51,  vel:40 time:14
-note_off - ch:00,  note:4E,  vel:40 time:0
-note_on  - ch:00,  note:4C,  vel:3B time:149
-note_on  - ch:00,  note:4F,  vel:47 time:0
-note_on  - ch:00,  note:3B,  vel:31 time:0
-note_on  - ch:00,  note:40,  vel:31 time:0
-note_off - ch:00,  note:3B,  vel:40 time:56
-note_off - ch:00,  note:40,  vel:40 time:0
-note_off - ch:00,  note:4C,  vel:40 time:15
-note_off - ch:00,  note:4F,  vel:40 time:0
-note_on  - ch:00,  note:4E,  vel:3B time:157
-note_on  - ch:00,  note:51,  vel:47 time:0
-note_on  - ch:00,  note:3B,  vel:31 time:0
-note_on  - ch:00,  note:40,  vel:31 time:0
-note_off - ch:00,  note:3B,  vel:40 time:56
-note_off - ch:00,  note:40,  vel:40 time:0
-note_off - ch:00,  note:4E,  vel:40 time:15
-note_off - ch:00,  note:51,  vel:40 time:0
-note_on  - ch:00,  note:4F,  vel:4F time:102
-note_on  - ch:00,  note:51,  vel:4F time:27
-note_on  - ch:00,  note:53,  vel:6E time:27
-note_on  - ch:00,  note:34,  vel:29 time:0
-note_off - ch:00,  note:4F,  vel:40 time:2
-note_off - ch:00,  note:51,  vel:40 time:24
-note_off - ch:00,  note:53,  vel:40 time:35
-note_off - ch:00,  note:34,  vel:40 time:21
-note_on  - ch:00,  note:4E,  vel:38 time:114
-note_on  - ch:00,  note:51,  vel:49 time:0
-note_on  - ch:00,  note:3B,  vel:29 time:0
-note_on  - ch:00,  note:40,  vel:29 time:0
-note_off - ch:00,  note:3B,  vel:40 time:48
-note_off - ch:00,  note:40,  vel:40 time:0
-note_off - ch:00,  note:4E,  vel:40 time:19
-note_off - ch:00,  note:51,  vel:40 time:0
-note_on  - ch:00,  note:4C,  vel:31 time:149
-note_on  - ch:00,  note:4F,  vel:49 time:0
-note_on  - ch:00,  note:2F,  vel:29 time:0
-note_off - ch:00,  note:4C,  vel:40 time:71
-note_off - ch:00,  note:4F,  vel:40 time:0
-note_off - ch:00,  note:2F,  vel:40 time:24
-note_on  - ch:00,  note:4B,  vel:31 time:134
-note_on  - ch:00,  note:4E,  vel:49 time:0
-note_on  - ch:00,  note:3B,  vel:29 time:0
-note_off - ch:00,  note:3B,  vel:40 time:62
-note_off - ch:00,  note:4B,  vel:40 time:25
-note_off - ch:00,  note:4E,  vel:40 time:0
-note_on  - ch:00,  note:4C,  vel:3F time:194
-note_on  - ch:00,  note:34,  vel:29 time:0
-note_off - ch:00,  note:4C,  vel:40 time:481
-note_off - ch:00,  note:34,  vel:40 time:0
-note_on  - ch:00,  note:48,  vel:3B time:0
-note_on  - ch:00,  note:4C,  vel:47 time:0
-note_off - ch:00,  note:48,  vel:40 time:39
-note_off - ch:00,  note:4C,  vel:40 time:0
-note_on  - ch:00,  note:4A,  vel:43 time:202
-note_on  - ch:00,  note:4D,  vel:4F time:0
-note_off - ch:00,  note:4A,  vel:40 time:39
-note_off - ch:00,  note:4D,  vel:40 time:0
-note_on  - ch:00,  note:4C,  vel:45 time:197
-note_on  - ch:00,  note:4F,  vel:58 time:0
-note_on  - ch:00,  note:30,  vel:3D time:0
-note_off - ch:00,  note:4C,  vel:40 time:36
-note_off - ch:00,  note:4F,  vel:40 time:0
-note_off - ch:00,  note:30,  vel:40 time:3
-note_on  - ch:00,  note:4C,  vel:45 time:183
-note_on  - ch:00,  note:4F,  vel:58 time:0
-note_on  - ch:00,  note:3C,  vel:3D time:0
-note_off - ch:00,  note:4C,  vel:40 time:40
-note_off - ch:00,  note:4F,  vel:40 time:0
-note_off - ch:00,  note:3C,  vel:40 time:61
-note_on  - ch:00,  note:51,  vel:5D time:141
-note_on  - ch:00,  note:34,  vel:3D time:0
-note_off - ch:00,  note:34,  vel:40 time:40
-note_off - ch:00,  note:51,  vel:40 time:73
-note_on  - ch:00,  note:4F,  vel:57 time:0
-note_off - ch:00,  note:4F,  vel:40 time:113
-note_on  - ch:00,  note:4D,  vel:57 time:0
-note_on  - ch:00,  note:40,  vel:3D time:0
-note_off - ch:00,  note:40,  vel:40 time:94
-note_off - ch:00,  note:4D,  vel:40 time:19
-note_on  - ch:00,  note:4C,  vel:51 time:0
-note_off - ch:00,  note:4C,  vel:40 time:113
-note_on  - ch:00,  note:4A,  vel:43 time:0
-note_on  - ch:00,  note:47,  vel:43 time:0
-note_on  - ch:00,  note:37,  vel:31 time:0
-note_on  - ch:00,  note:43,  vel:3E time:235
-note_off - ch:00,  note:4A,  vel:40 time:26
-note_off - ch:00,  note:47,  vel:40 time:0
-note_off - ch:00,  note:37,  vel:40 time:207
-note_off - ch:00,  note:43,  vel:40 time:1
-note_on  - ch:00,  note:48,  vel:3E time:0
-note_on  - ch:00,  note:4C,  vel:3E time:0
-note_off - ch:00,  note:48,  vel:40 time:31
-note_off - ch:00,  note:4C,  vel:40 time:0
-note_on  - ch:00,  note:4A,  vel:3E time:185
-note_on  - ch:00,  note:4D,  vel:3E time:0
-note_off - ch:00,  note:4A,  vel:40 time:31
-note_off - ch:00,  note:4D,  vel:40 time:0
-note_on  - ch:00,  note:4C,  vel:3E time:186
-note_on  - ch:00,  note:4F,  vel:44 time:0
-note_on  - ch:00,  note:30,  vel:31 time:0
-note_off - ch:00,  note:4C,  vel:40 time:34
-note_off - ch:00,  note:4F,  vel:40 time:0
-note_off - ch:00,  note:30,  vel:40 time:12
-note_on  - ch:00,  note:4C,  vel:3E time:191
-note_on  - ch:00,  note:4F,  vel:44 time:0
-note_on  - ch:00,  note:3C,  vel:31 time:0
-note_off - ch:00,  note:4C,  vel:40 time:34
-note_off - ch:00,  note:4F,  vel:40 time:0
-note_off - ch:00,  note:3C,  vel:40 time:12
-note_on  - ch:00,  note:51,  vel:3C time:190
-note_on  - ch:00,  note:34,  vel:31 time:0
-note_off - ch:00,  note:34,  vel:40 time:46
-note_off - ch:00,  note:51,  vel:40 time:72
-note_on  - ch:00,  note:4F,  vel:3C time:1
-note_off - ch:00,  note:4F,  vel:40 time:118
-note_on  - ch:00,  note:4D,  vel:3C time:0
-note_on  - ch:00,  note:40,  vel:31 time:0
-note_off - ch:00,  note:40,  vel:40 time:46
-note_off - ch:00,  note:4D,  vel:40 time:72
-note_on  - ch:00,  note:4C,  vel:3C time:1
-note_off - ch:00,  note:4C,  vel:40 time:94
-note_on  - ch:00,  note:47,  vel:30 time:24
-note_on  - ch:00,  note:4A,  vel:3C time:0
-note_on  - ch:00,  note:37,  vel:31 time:0
-note_off - ch:00,  note:47,  vel:40 time:466
-note_off - ch:00,  note:37,  vel:40 time:0
-note_off - ch:00,  note:4A,  vel:40 time:0
-note_on  - ch:00,  note:45,  vel:47 time:0
-note_on  - ch:00,  note:48,  vel:47 time:0
-note_off - ch:00,  note:45,  vel:40 time:32
-note_off - ch:00,  note:48,  vel:40 time:0
-note_on  - ch:00,  note:47,  vel:47 time:198
-note_on  - ch:00,  note:4A,  vel:47 time:0
-note_off - ch:00,  note:47,  vel:40 time:32
-note_off - ch:00,  note:4A,  vel:40 time:0
-note_on  - ch:00,  note:48,  vel:47 time:198
-note_on  - ch:00,  note:4C,  vel:47 time:0
-note_on  - ch:00,  note:2D,  vel:45 time:0
-note_off - ch:00,  note:48,  vel:40 time:32
-note_off - ch:00,  note:4C,  vel:40 time:0
-note_off - ch:00,  note:2D,  vel:40 time:29
-note_on  - ch:00,  note:48,  vel:47 time:169
-note_on  - ch:00,  note:4C,  vel:47 time:0
-note_on  - ch:00,  note:39,  vel:45 time:0
-note_off - ch:00,  note:48,  vel:40 time:32
-note_off - ch:00,  note:4C,  vel:40 time:0
-note_off - ch:00,  note:39,  vel:40 time:29
-note_on  - ch:00,  note:4D,  vel:4E time:169
-note_on  - ch:00,  note:30,  vel:45 time:0
-note_off - ch:00,  note:30,  vel:40 time:61
-note_off - ch:00,  note:4D,  vel:40 time:54
-note_on  - ch:00,  note:4C,  vel:47 time:0
-note_off - ch:00,  note:4C,  vel:40 time:115
-note_on  - ch:00,  note:4A,  vel:47 time:0
-note_on  - ch:00,  note:3C,  vel:45 time:0
-note_off - ch:00,  note:3C,  vel:40 time:61
-note_off - ch:00,  note:4A,  vel:40 time:54
-note_on  - ch:00,  note:48,  vel:47 time:0
-note_off - ch:00,  note:48,  vel:40 time:115
-note_on  - ch:00,  note:47,  vel:42 time:1
-note_on  - ch:00,  note:44,  vel:42 time:0
-note_on  - ch:00,  note:34,  vel:3D time:0
-note_on  - ch:00,  note:40,  vel:3F time:225
-note_off - ch:00,  note:44,  vel:40 time:35
-note_off - ch:00,  note:40,  vel:40 time:190
-note_on  - ch:00,  note:45,  vel:3F time:0
-note_on  - ch:00,  note:48,  vel:3F time:0
-note_off - ch:00,  note:34,  vel:40 time:1
-note_off - ch:00,  note:47,  vel:40 time:0
-note_off - ch:00,  note:45,  vel:40 time:34
-note_off - ch:00,  note:48,  vel:40 time:0
-note_on  - ch:00,  note:47,  vel:3F time:191
-note_on  - ch:00,  note:4A,  vel:3F time:0
-note_off - ch:00,  note:47,  vel:40 time:35
-note_off - ch:00,  note:4A,  vel:40 time:0
-note_on  - ch:00,  note:48,  vel:3F time:190
-note_on  - ch:00,  note:4C,  vel:3F time:0
-note_on  - ch:00,  note:2D,  vel:31 time:0
-note_off - ch:00,  note:48,  vel:40 time:36
-note_off - ch:00,  note:4C,  vel:40 time:0
-note_off - ch:00,  note:2D,  vel:40 time:10
-note_on  - ch:00,  note:48,  vel:36 time:184
-note_on  - ch:00,  note:4C,  vel:3E time:0
-note_on  - ch:00,  note:39,  vel:31 time:0
-note_off - ch:00,  note:48,  vel:40 time:36
-note_off - ch:00,  note:4C,  vel:40 time:0
-note_off - ch:00,  note:39,  vel:40 time:10
-note_on  - ch:00,  note:4D,  vel:3F time:184
-note_on  - ch:00,  note:30,  vel:31 time:0
-note_off - ch:00,  note:30,  vel:40 time:47
-note_off - ch:00,  note:4D,  vel:40 time:71
-note_on  - ch:00,  note:4C,  vel:3F time:1
-note_off - ch:00,  note:4C,  vel:40 time:118
-note_on  - ch:00,  note:4A,  vel:3F time:0
-note_on  - ch:00,  note:3C,  vel:31 time:0
-note_off - ch:00,  note:3C,  vel:40 time:52
-note_on  - ch:00,  note:48,  vel:3F time:79
-note_off - ch:00,  note:4A,  vel:40 time:1
-note_off - ch:00,  note:48,  vel:40 time:131
-note_on  - ch:00,  note:44,  vel:37 time:0
-note_on  - ch:00,  note:47,  vel:37 time:0
-note_on  - ch:00,  note:34,  vel:24 time:7
-note_off - ch:00,  note:34,  vel:40 time:473
-note_off - ch:00,  note:44,  vel:40 time:9
-note_off - ch:00,  note:47,  vel:40 time:0
-note_on  - ch:00,  note:47,  vel:3E time:19
-note_on  - ch:00,  note:45,  vel:3E time:106
-note_off - ch:00,  note:47,  vel:40 time:23
-note_off - ch:00,  note:45,  vel:40 time:83
-note_on  - ch:00,  note:44,  vel:3E time:0
-note_off - ch:00,  note:44,  vel:40 time:106
-note_on  - ch:00,  note:45,  vel:3E time:0
-note_off - ch:00,  note:45,  vel:40 time:106
-note_on  - ch:00,  note:48,  vel:38 time:0
-note_on  - ch:00,  note:39,  vel:31 time:0
-note_off - ch:00,  note:48,  vel:40 time:51
-note_on  - ch:00,  note:3C,  vel:31 time:182
-note_on  - ch:00,  note:40,  vel:31 time:0
-note_off - ch:00,  note:3C,  vel:40 time:65
-note_off - ch:00,  note:40,  vel:40 time:0
-note_off - ch:00,  note:39,  vel:40 time:2
-note_on  - ch:00,  note:4A,  vel:3E time:166
-note_on  - ch:00,  note:3C,  vel:31 time:0
-note_on  - ch:00,  note:40,  vel:31 time:0
-note_off - ch:00,  note:3C,  vel:40 time:65
-note_off - ch:00,  note:40,  vel:40 time:0
-note_on  - ch:00,  note:48,  vel:3E time:52
-note_off - ch:00,  note:4A,  vel:40 time:26
-note_off - ch:00,  note:48,  vel:40 time:91
-note_on  - ch:00,  note:47,  vel:3E time:0
-note_on  - ch:00,  note:3C,  vel:31 time:0
-note_on  - ch:00,  note:40,  vel:31 time:0
-note_off - ch:00,  note:3C,  vel:40 time:65
-note_off - ch:00,  note:40,  vel:40 time:0
-note_on  - ch:00,  note:48,  vel:3E time:51
-note_off - ch:00,  note:47,  vel:40 time:1
-note_off - ch:00,  note:48,  vel:40 time:116
-note_on  - ch:00,  note:4C,  vel:38 time:0
-note_on  - ch:00,  note:39,  vel:31 time:0
-note_off - ch:00,  note:4C,  vel:40 time:58
-note_on  - ch:00,  note:3C,  vel:31 time:175
-note_on  - ch:00,  note:40,  vel:31 time:0
-note_off - ch:00,  note:3C,  vel:40 time:65
-note_off - ch:00,  note:40,  vel:40 time:0
-note_off - ch:00,  note:39,  vel:40 time:41
-note_on  - ch:00,  note:4D,  vel:3E time:127
-note_on  - ch:00,  note:3C,  vel:31 time:0
-note_on  - ch:00,  note:40,  vel:31 time:0
-note_off - ch:00,  note:3C,  vel:40 time:61
-note_off - ch:00,  note:40,  vel:40 time:0
-note_off - ch:00,  note:4D,  vel:40 time:49
-note_on  - ch:00,  note:4C,  vel:3E time:0
-note_off - ch:00,  note:4C,  vel:40 time:110
-note_on  - ch:00,  note:4B,  vel:3E time:0
-note_on  - ch:00,  note:3C,  vel:31 time:0
-note_on  - ch:00,  note:40,  vel:31 time:0
-note_off - ch:00,  note:3C,  vel:40 time:61
-note_off - ch:00,  note:40,  vel:40 time:0
-note_on  - ch:00,  note:4C,  vel:3E time:48
-note_off - ch:00,  note:4B,  vel:40 time:1
-note_off - ch:00,  note:4C,  vel:40 time:109
-note_on  - ch:00,  note:53,  vel:54 time:0
-note_on  - ch:00,  note:39,  vel:31 time:0
-note_off - ch:00,  note:53,  vel:40 time:104
-note_on  - ch:00,  note:51,  vel:52 time:0
-note_off - ch:00,  note:51,  vel:40 time:104
-note_on  - ch:00,  note:50,  vel:52 time:0
-note_on  - ch:00,  note:3C,  vel:31 time:0
-note_on  - ch:00,  note:40,  vel:31 time:0
-note_off - ch:00,  note:3C,  vel:40 time:58
-note_off - ch:00,  note:40,  vel:40 time:0
-note_off - ch:00,  note:39,  vel:40 time:18
-note_off - ch:00,  note:50,  vel:40 time:28
-note_on  - ch:00,  note:51,  vel:52 time:0
-note_off - ch:00,  note:51,  vel:40 time:104
-note_on  - ch:00,  note:53,  vel:5C time:0
-note_on  - ch:00,  note:39,  vel:31 time:0
-note_off - ch:00,  note:53,  vel:40 time:97
-note_on  - ch:00,  note:51,  vel:5C time:0
-note_on  - ch:00,  note:50,  vel:5C time:87
-note_off - ch:00,  note:51,  vel:40 time:10
-note_on  - ch:00,  note:3C,  vel:31 time:0
-note_on  - ch:00,  note:40,  vel:31 time:0
-note_off - ch:00,  note:3C,  vel:40 time:51
-note_off - ch:00,  note:40,  vel:40 time:0
-note_off - ch:00,  note:39,  vel:40 time:62
-note_on  - ch:00,  note:51,  vel:5C time:2
-note_off - ch:00,  note:50,  vel:40 time:12
-note_off - ch:00,  note:51,  vel:40 time:129
-note_on  - ch:00,  note:54,  vel:70 time:26
-note_on  - ch:00,  note:35,  vel:38 time:7
-note_on  - ch:00,  note:39,  vel:38 time:232
-note_on  - ch:00,  note:3F,  vel:38 time:0
-note_off - ch:00,  note:35,  vel:40 time:59
-note_off - ch:00,  note:3F,  vel:40 time:158
-note_off - ch:00,  note:39,  vel:40 time:0
-note_off - ch:00,  note:54,  vel:40 time:22
-note_on  - ch:00,  note:51,  vel:64 time:0
-note_on  - ch:00,  note:39,  vel:31 time:0
-note_on  - ch:00,  note:3F,  vel:31 time:0
-note_off - ch:00,  note:39,  vel:40 time:43
-note_off - ch:00,  note:3F,  vel:40 time:0
-note_off - ch:00,  note:51,  vel:40 time:16
-note_on  - ch:00,  note:53,  vel:64 time:166
-note_on  - ch:00,  note:39,  vel:31 time:0
-note_on  - ch:00,  note:3F,  vel:31 time:0
-note_off - ch:00,  note:39,  vel:40 time:43
-note_off - ch:00,  note:3F,  vel:40 time:0
-note_off - ch:00,  note:53,  vel:40 time:16
-note_on  - ch:00,  note:54,  vel:64 time:166
-note_on  - ch:00,  note:34,  vel:3B time:0
-note_off - ch:00,  note:54,  vel:40 time:59
-note_off - ch:00,  note:34,  vel:40 time:45
-note_on  - ch:00,  note:53,  vel:64 time:120
-note_on  - ch:00,  note:39,  vel:31 time:0
-note_on  - ch:00,  note:40,  vel:31 time:0
-note_off - ch:00,  note:53,  vel:40 time:59
-note_off - ch:00,  note:40,  vel:40 time:45
-note_off - ch:00,  note:39,  vel:40 time:0
-note_on  - ch:00,  note:51,  vel:5A time:120
-note_on  - ch:00,  note:32,  vel:3B time:0
-note_off - ch:00,  note:51,  vel:40 time:50
-note_off - ch:00,  note:32,  vel:40 time:54
-note_on  - ch:00,  note:50,  vel:50 time:121
-note_on  - ch:00,  note:35,  vel:31 time:0
-note_on  - ch:00,  note:3B,  vel:31 time:0
-note_off - ch:00,  note:50,  vel:40 time:50
-note_off - ch:00,  note:3B,  vel:40 time:54
-note_off - ch:00,  note:35,  vel:40 time:0
-note_on  - ch:00,  note:51,  vel:4E time:121
-note_on  - ch:00,  note:30,  vel:3B time:0
-note_off - ch:00,  note:51,  vel:40 time:51
-note_off - ch:00,  note:30,  vel:40 time:55
-note_on  - ch:00,  note:4C,  vel:44 time:122
-note_on  - ch:00,  note:34,  vel:31 time:0
-note_on  - ch:00,  note:39,  vel:31 time:0
-note_off - ch:00,  note:4C,  vel:40 time:51
-note_off - ch:00,  note:39,  vel:40 time:55
-note_off - ch:00,  note:34,  vel:40 time:0
-note_on  - ch:00,  note:4D,  vel:44 time:123
-note_on  - ch:00,  note:32,  vel:3B time:0
-note_off - ch:00,  note:4D,  vel:40 time:51
-note_off - ch:00,  note:32,  vel:40 time:55
-note_on  - ch:00,  note:4A,  vel:3C time:123
-note_on  - ch:00,  note:35,  vel:31 time:0
-note_on  - ch:00,  note:3B,  vel:31 time:0
-note_off - ch:00,  note:4A,  vel:40 time:51
-note_off - ch:00,  note:3B,  vel:40 time:55
-note_off - ch:00,  note:35,  vel:40 time:0
-note_on  - ch:00,  note:48,  vel:3F time:122
-note_on  - ch:00,  note:34,  vel:2D time:0
-note_on  - ch:00,  note:39,  vel:39 time:0
-note_off - ch:00,  note:34,  vel:40 time:68
-note_off - ch:00,  note:39,  vel:40 time:0
-note_on  - ch:00,  note:34,  vel:2D time:177
-note_on  - ch:00,  note:39,  vel:39 time:0
-note_off - ch:00,  note:34,  vel:40 time:68
-note_off - ch:00,  note:39,  vel:40 time:0
-note_off - ch:00,  note:48,  vel:40 time:175
-note_on  - ch:00,  note:47,  vel:3B time:1
-note_on  - ch:00,  note:34,  vel:2D time:0
-note_on  - ch:00,  note:38,  vel:39 time:0
-note_off - ch:00,  note:34,  vel:40 time:68
-note_off - ch:00,  note:38,  vel:40 time:0
-note_on  - ch:00,  note:48,  vel:3B time:22
-note_off - ch:00,  note:47,  vel:40 time:23
-note_on  - ch:00,  note:47,  vel:40 time:63
-note_off - ch:00,  note:48,  vel:40 time:14
-note_on  - ch:00,  note:48,  vel:40 time:25
-note_on  - ch:00,  note:34,  vel:2D time:29
-note_on  - ch:00,  note:38,  vel:36 time:0
-note_off - ch:00,  note:47,  vel:40 time:30
-note_on  - ch:00,  note:47,  vel:40 time:12
-note_off - ch:00,  note:48,  vel:40 time:13
-note_off - ch:00,  note:38,  vel:40 time:13
-note_off - ch:00,  note:34,  vel:40 time:0
-note_on  - ch:00,  note:45,  vel:3F time:44
-note_off - ch:00,  note:47,  vel:40 time:14
-note_off - ch:00,  note:45,  vel:40 time:47
-note_on  - ch:00,  note:47,  vel:3F time:4
-note_off - ch:00,  note:47,  vel:40 time:61
-note_on  - ch:00,  note:45,  vel:3F time:6
-note_on  - ch:00,  note:2D,  vel:31 time:0
-note_on  - ch:00,  note:39,  vel:31 time:0
-note_off - ch:00,  note:45,  vel:40 time:421
-note_off - ch:00,  note:39,  vel:40 time:0
-note_off - ch:00,  note:2D,  vel:40 time:13
-note_on  - ch:00,  note:48,  vel:49 time:0
-note_on  - ch:00,  note:4C,  vel:49 time:0
-note_off - ch:00,  note:48,  vel:40 time:32
-note_off - ch:00,  note:4C,  vel:40 time:0
-note_on  - ch:00,  note:4A,  vel:49 time:186
-note_on  - ch:00,  note:4D,  vel:49 time:0
-note_off - ch:00,  note:4A,  vel:40 time:32
-note_off - ch:00,  note:4D,  vel:40 time:0
-note_on  - ch:00,  note:4C,  vel:49 time:185
-note_on  - ch:00,  note:4F,  vel:49 time:0
-note_on  - ch:00,  note:30,  vel:49 time:9
-note_off - ch:00,  note:4C,  vel:40 time:26
-note_off - ch:00,  note:4F,  vel:40 time:0
-note_off - ch:00,  note:30,  vel:40 time:42
-note_on  - ch:00,  note:4C,  vel:49 time:159
-note_on  - ch:00,  note:4F,  vel:49 time:0
-note_on  - ch:00,  note:3C,  vel:49 time:0
-note_off - ch:00,  note:4C,  vel:40 time:35
-note_off - ch:00,  note:4F,  vel:40 time:0
-note_off - ch:00,  note:3C,  vel:40 time:32
-note_on  - ch:00,  note:51,  vel:54 time:167
-note_on  - ch:00,  note:34,  vel:49 time:9
-note_off - ch:00,  note:34,  vel:40 time:66
-note_off - ch:00,  note:51,  vel:40 time:39
-note_on  - ch:00,  note:4F,  vel:54 time:0
-note_off - ch:00,  note:4F,  vel:40 time:114
-note_on  - ch:00,  note:4D,  vel:50 time:1
-note_on  - ch:00,  note:40,  vel:49 time:0
-note_off - ch:00,  note:40,  vel:40 time:66
-note_off - ch:00,  note:4D,  vel:40 time:48
-note_on  - ch:00,  note:4C,  vel:50 time:0
-note_off - ch:00,  note:4C,  vel:40 time:114
-note_on  - ch:00,  note:4A,  vel:3F time:0
-note_on  - ch:00,  note:47,  vel:3F time:0
-note_on  - ch:00,  note:37,  vel:31 time:0
-note_off - ch:00,  note:4A,  vel:40 time:226
-note_off - ch:00,  note:47,  vel:40 time:0
-note_on  - ch:00,  note:43,  vel:3F time:0
-note_on  - ch:00,  note:43,  vel:3F time:0
-note_off - ch:00,  note:37,  vel:40 time:226
-note_off - ch:00,  note:43,  vel:40 time:0
-note_off - ch:00,  note:43,  vel:40 time:0
-note_on  - ch:00,  note:48,  vel:3A time:0
-note_on  - ch:00,  note:4C,  vel:3A time:0
-note_off - ch:00,  note:48,  vel:40 time:41
-note_off - ch:00,  note:4C,  vel:40 time:0
-note_on  - ch:00,  note:4A,  vel:3F time:185
-note_on  - ch:00,  note:4D,  vel:3F time:0
-note_off - ch:00,  note:4A,  vel:40 time:41
-note_off - ch:00,  note:4D,  vel:40 time:0
-note_on  - ch:00,  note:4C,  vel:39 time:185
-note_on  - ch:00,  note:4F,  vel:43 time:0
-note_on  - ch:00,  note:30,  vel:31 time:0
-note_off - ch:00,  note:4C,  vel:40 time:45
-note_off - ch:00,  note:4F,  vel:40 time:0
-note_off - ch:00,  note:30,  vel:40 time:23
-note_on  - ch:00,  note:4C,  vel:39 time:179
-note_on  - ch:00,  note:4F,  vel:43 time:0
-note_on  - ch:00,  note:3C,  vel:35 time:0
-note_off - ch:00,  note:3C,  vel:40 time:41
-note_off - ch:00,  note:4C,  vel:40 time:2
-note_off - ch:00,  note:4F,  vel:40 time:0
-note_on  - ch:00,  note:51,  vel:40 time:194
-note_on  - ch:00,  note:34,  vel:31 time:7
-note_off - ch:00,  note:34,  vel:40 time:66
-note_off - ch:00,  note:51,  vel:40 time:48
-note_on  - ch:00,  note:4F,  vel:3F time:0
-note_off - ch:00,  note:4F,  vel:40 time:121
-note_on  - ch:00,  note:4D,  vel:3F time:0
-note_on  - ch:00,  note:40,  vel:35 time:0
-note_off - ch:00,  note:40,  vel:40 time:42
-note_off - ch:00,  note:4D,  vel:40 time:79
-note_on  - ch:00,  note:4C,  vel:37 time:0
-note_off - ch:00,  note:4C,  vel:40 time:106
-note_on  - ch:00,  note:47,  vel:37 time:15
-note_on  - ch:00,  note:4A,  vel:37 time:0
-note_on  - ch:00,  note:37,  vel:31 time:0
-note_off - ch:00,  note:47,  vel:40 time:489
-note_off - ch:00,  note:37,  vel:40 time:0
-note_off - ch:00,  note:4A,  vel:40 time:0
-note_on  - ch:00,  note:45,  vel:41 time:0
-note_on  - ch:00,  note:48,  vel:41 time:0
-note_off - ch:00,  note:45,  vel:40 time:42
-note_off - ch:00,  note:48,  vel:40 time:0
-note_on  - ch:00,  note:47,  vel:47 time:203
-note_on  - ch:00,  note:4A,  vel:47 time:0
-note_off - ch:00,  note:47,  vel:40 time:37
-note_off - ch:00,  note:4A,  vel:40 time:0
-note_on  - ch:00,  note:48,  vel:43 time:178
-note_on  - ch:00,  note:4C,  vel:4A time:0
-note_on  - ch:00,  note:2D,  vel:3D time:0
-note_off - ch:00,  note:48,  vel:40 time:41
-note_off - ch:00,  note:4C,  vel:40 time:0
-note_off - ch:00,  note:2D,  vel:40 time:37
-note_on  - ch:00,  note:48,  vel:43 time:157
-note_on  - ch:00,  note:4C,  vel:4A time:0
-note_on  - ch:00,  note:39,  vel:3D time:0
-note_off - ch:00,  note:48,  vel:40 time:41
-note_off - ch:00,  note:4C,  vel:40 time:0
-note_off - ch:00,  note:39,  vel:40 time:37
-note_on  - ch:00,  note:4D,  vel:47 time:156
-note_on  - ch:00,  note:30,  vel:3D time:0
-note_off - ch:00,  note:30,  vel:40 time:74
-note_off - ch:00,  note:4D,  vel:40 time:37
-note_on  - ch:00,  note:4C,  vel:47 time:0
-note_off - ch:00,  note:4C,  vel:40 time:111
-note_on  - ch:00,  note:4A,  vel:47 time:0
-note_on  - ch:00,  note:3C,  vel:3D time:0
-note_off - ch:00,  note:3C,  vel:40 time:74
-note_off - ch:00,  note:4A,  vel:40 time:37
-note_on  - ch:00,  note:48,  vel:3E time:1
-note_off - ch:00,  note:48,  vel:40 time:40
-note_on  - ch:00,  note:47,  vel:47 time:71
-note_on  - ch:00,  note:44,  vel:47 time:0
-note_on  - ch:00,  note:34,  vel:31 time:0
-note_off - ch:00,  note:44,  vel:40 time:234
-note_on  - ch:00,  note:40,  vel:47 time:0
-note_off - ch:00,  note:34,  vel:40 time:234
-note_off - ch:00,  note:40,  vel:40 time:0
-note_off - ch:00,  note:47,  vel:40 time:0
-note_on  - ch:00,  note:45,  vel:39 time:0
-note_on  - ch:00,  note:48,  vel:39 time:0
-note_off - ch:00,  note:45,  vel:40 time:33
-note_off - ch:00,  note:48,  vel:40 time:0
-note_on  - ch:00,  note:47,  vel:3B time:190
-note_on  - ch:00,  note:4A,  vel:3B time:0
-note_off - ch:00,  note:47,  vel:40 time:33
-note_off - ch:00,  note:4A,  vel:40 time:0
-note_on  - ch:00,  note:48,  vel:34 time:191
-note_on  - ch:00,  note:4C,  vel:3E time:0
-note_on  - ch:00,  note:2D,  vel:31 time:0
-note_off - ch:00,  note:48,  vel:40 time:36
-note_off - ch:00,  note:4C,  vel:40 time:0
-note_off - ch:00,  note:2D,  vel:40 time:31
-note_on  - ch:00,  note:48,  vel:34 time:178
-note_on  - ch:00,  note:4C,  vel:3E time:0
-note_on  - ch:00,  note:39,  vel:31 time:0
-note_off - ch:00,  note:48,  vel:40 time:36
-note_off - ch:00,  note:4C,  vel:40 time:0
-note_off - ch:00,  note:39,  vel:40 time:31
-note_on  - ch:00,  note:4D,  vel:3F time:178
-note_on  - ch:00,  note:30,  vel:31 time:0
-note_off - ch:00,  note:30,  vel:40 time:67
-note_on  - ch:00,  note:4C,  vel:3F time:55
-note_off - ch:00,  note:4D,  vel:40 time:40
-note_on  - ch:00,  note:4A,  vel:3A time:83
-note_on  - ch:00,  note:3C,  vel:31 time:0
-note_off - ch:00,  note:4C,  vel:40 time:39
-note_off - ch:00,  note:3C,  vel:40 time:28
-note_on  - ch:00,  note:48,  vel:38 time:55
-note_off - ch:00,  note:4A,  vel:40 time:14
-note_off - ch:00,  note:48,  vel:40 time:41
-note_on  - ch:00,  note:44,  vel:30 time:67
-note_on  - ch:00,  note:47,  vel:30 time:0
-note_on  - ch:00,  note:34,  vel:25 time:0
-note_off - ch:00,  note:44,  vel:40 time:487
-note_off - ch:00,  note:34,  vel:40 time:0
-note_off - ch:00,  note:47,  vel:40 time:0
-note_on  - ch:00,  note:47,  vel:3C time:45
-note_off - ch:00,  note:47,  vel:40 time:111
-note_on  - ch:00,  note:45,  vel:3C time:0
-note_off - ch:00,  note:45,  vel:40 time:111
-note_on  - ch:00,  note:44,  vel:3C time:1
-note_off - ch:00,  note:44,  vel:40 time:111
-note_on  - ch:00,  note:45,  vel:3C time:0
-note_off - ch:00,  note:45,  vel:40 time:111
-note_on  - ch:00,  note:48,  vel:3C time:0
-note_on  - ch:00,  note:39,  vel:30 time:0
-note_off - ch:00,  note:48,  vel:40 time:52
-note_off - ch:00,  note:39,  vel:40 time:190
-note_on  - ch:00,  note:3C,  vel:2B time:0
-note_on  - ch:00,  note:40,  vel:2B time:0
-note_off - ch:00,  note:3C,  vel:40 time:53
-note_off - ch:00,  note:40,  vel:40 time:0
-note_on  - ch:00,  note:4A,  vel:3C time:189
-note_on  - ch:00,  note:3C,  vel:2B time:0
-note_on  - ch:00,  note:40,  vel:2B time:0
-note_off - ch:00,  note:3C,  vel:40 time:52
-note_off - ch:00,  note:40,  vel:40 time:0
-note_off - ch:00,  note:4A,  vel:40 time:65
-note_on  - ch:00,  note:48,  vel:3C time:0
-note_off - ch:00,  note:48,  vel:40 time:117
-note_on  - ch:00,  note:47,  vel:3C time:0
-note_on  - ch:00,  note:3C,  vel:2B time:0
-note_on  - ch:00,  note:40,  vel:2B time:0
-note_off - ch:00,  note:3C,  vel:40 time:52
-note_off - ch:00,  note:40,  vel:40 time:0
-note_off - ch:00,  note:47,  vel:40 time:65
-note_on  - ch:00,  note:48,  vel:3C time:1
-note_off - ch:00,  note:48,  vel:40 time:117
-note_on  - ch:00,  note:4C,  vel:37 time:0
-note_on  - ch:00,  note:39,  vel:30 time:0
-note_off - ch:00,  note:4C,  vel:40 time:68
-note_off - ch:00,  note:39,  vel:40 time:166
-note_on  - ch:00,  note:3C,  vel:2B time:0
-note_on  - ch:00,  note:40,  vel:2B time:0
-note_off - ch:00,  note:3C,  vel:40 time:55
-note_off - ch:00,  note:40,  vel:40 time:0
-note_on  - ch:00,  note:4D,  vel:41 time:180
-note_on  - ch:00,  note:3C,  vel:2B time:0
-note_on  - ch:00,  note:40,  vel:2B time:0
-note_off - ch:00,  note:3C,  vel:40 time:49
-note_off - ch:00,  note:40,  vel:40 time:0
-note_on  - ch:00,  note:4C,  vel:41 time:56
-note_off - ch:00,  note:4D,  vel:40 time:17
-note_on  - ch:00,  note:4B,  vel:41 time:87
-note_on  - ch:00,  note:3C,  vel:2B time:0
-note_on  - ch:00,  note:40,  vel:2B time:0
-note_off - ch:00,  note:4C,  vel:40 time:18
-note_off - ch:00,  note:40,  vel:40 time:31
-note_off - ch:00,  note:3C,  vel:40 time:0
-note_on  - ch:00,  note:4C,  vel:41 time:56
-note_off - ch:00,  note:4B,  vel:40 time:17
-note_on  - ch:00,  note:53,  vel:41 time:88
-note_on  - ch:00,  note:39,  vel:30 time:0
-note_off - ch:00,  note:4C,  vel:40 time:19
-note_on  - ch:00,  note:51,  vel:41 time:95
-note_off - ch:00,  note:53,  vel:40 time:19
-note_off - ch:00,  note:39,  vel:40 time:95
-note_on  - ch:00,  note:50,  vel:41 time:0
-note_on  - ch:00,  note:3C,  vel:1D time:0
-note_on  - ch:00,  note:40,  vel:1D time:0
-note_off - ch:00,  note:51,  vel:40 time:19
-note_off - ch:00,  note:40,  vel:40 time:45
-note_off - ch:00,  note:3C,  vel:40 time:0
-note_off - ch:00,  note:50,  vel:40 time:12
-note_on  - ch:00,  note:51,  vel:41 time:38
-note_on  - ch:00,  note:53,  vel:41 time:114
-note_on  - ch:00,  note:39,  vel:30 time:0
-note_off - ch:00,  note:51,  vel:40 time:6
-note_on  - ch:00,  note:51,  vel:41 time:102
-note_off - ch:00,  note:53,  vel:40 time:18
-note_off - ch:00,  note:39,  vel:40 time:89
-note_on  - ch:00,  note:50,  vel:41 time:1
-note_on  - ch:00,  note:3C,  vel:1D time:0
-note_on  - ch:00,  note:40,  vel:1D time:0
-note_off - ch:00,  note:51,  vel:40 time:23
-note_off - ch:00,  note:40,  vel:40 time:57
-note_off - ch:00,  note:3C,  vel:40 time:0
-note_off - ch:00,  note:50,  vel:40 time:22
-note_on  - ch:00,  note:51,  vel:41 time:39
-note_off - ch:00,  note:51,  vel:40 time:117
-note_on  - ch:00,  note:35,  vel:37 time:28
-note_on  - ch:00,  note:54,  vel:5E time:6
-note_on  - ch:00,  note:39,  vel:3A time:234
-note_on  - ch:00,  note:3F,  vel:3A time:0
-note_off - ch:00,  note:35,  vel:40 time:3
-note_off - ch:00,  note:3F,  vel:40 time:240
-note_off - ch:00,  note:39,  vel:40 time:0
-note_on  - ch:00,  note:51,  vel:58 time:0
-note_on  - ch:00,  note:39,  vel:3E time:0
-note_on  - ch:00,  note:3F,  vel:3E time:0
-note_off - ch:00,  note:54,  vel:40 time:9
-note_off - ch:00,  note:3F,  vel:40 time:62
-note_off - ch:00,  note:39,  vel:40 time:0
-note_off - ch:00,  note:51,  vel:40 time:0
-note_on  - ch:00,  note:53,  vel:5A time:172
-note_on  - ch:00,  note:39,  vel:3E time:0
-note_on  - ch:00,  note:3F,  vel:3E time:0
-note_off - ch:00,  note:53,  vel:40 time:55
-note_off - ch:00,  note:3F,  vel:40 time:16
-note_off - ch:00,  note:39,  vel:40 time:0
-note_on  - ch:00,  note:54,  vel:5A time:172
-note_on  - ch:00,  note:34,  vel:31 time:0
-note_off - ch:00,  note:54,  vel:40 time:56
-note_off - ch:00,  note:34,  vel:40 time:35
-note_on  - ch:00,  note:53,  vel:54 time:160
-note_on  - ch:00,  note:39,  vel:2B time:0
-note_on  - ch:00,  note:40,  vel:2B time:0
-note_off - ch:00,  note:53,  vel:40 time:49
-note_off - ch:00,  note:40,  vel:40 time:30
-note_off - ch:00,  note:39,  vel:40 time:0
-note_on  - ch:00,  note:51,  vel:4E time:139
-note_on  - ch:00,  note:32,  vel:31 time:0
-note_off - ch:00,  note:51,  vel:40 time:53
-note_off - ch:00,  note:32,  vel:40 time:32
-note_on  - ch:00,  note:50,  vel:47 time:150
-note_on  - ch:00,  note:35,  vel:2B time:0
-note_on  - ch:00,  note:3B,  vel:2B time:0
-note_off - ch:00,  note:50,  vel:40 time:53
-note_off - ch:00,  note:3B,  vel:40 time:32
-note_off - ch:00,  note:35,  vel:40 time:0
-note_on  - ch:00,  note:51,  vel:47 time:149
-note_on  - ch:00,  note:30,  vel:31 time:0
-note_off - ch:00,  note:51,  vel:40 time:51
-note_off - ch:00,  note:30,  vel:40 time:32
-note_on  - ch:00,  note:4C,  vel:41 time:144
-note_on  - ch:00,  note:34,  vel:2B time:0
-note_on  - ch:00,  note:39,  vel:2B time:0
-note_off - ch:00,  note:4C,  vel:40 time:51
-note_off - ch:00,  note:39,  vel:40 time:32
-note_off - ch:00,  note:34,  vel:40 time:0
-note_on  - ch:00,  note:4D,  vel:3D time:145
-note_on  - ch:00,  note:32,  vel:31 time:0
-note_off - ch:00,  note:4D,  vel:40 time:51
-note_off - ch:00,  note:32,  vel:40 time:32
-note_on  - ch:00,  note:4A,  vel:3D time:144
-note_on  - ch:00,  note:35,  vel:2B time:0
-note_on  - ch:00,  note:3B,  vel:2B time:0
-note_off - ch:00,  note:4A,  vel:40 time:51
-note_off - ch:00,  note:3B,  vel:40 time:32
-note_off - ch:00,  note:35,  vel:40 time:0
-note_on  - ch:00,  note:48,  vel:3D time:144
-note_on  - ch:00,  note:34,  vel:31 time:0
-note_on  - ch:00,  note:39,  vel:31 time:0
-note_off - ch:00,  note:34,  vel:40 time:62
-note_off - ch:00,  note:39,  vel:40 time:0
-note_on  - ch:00,  note:34,  vel:31 time:189
-note_on  - ch:00,  note:39,  vel:31 time:0
-note_off - ch:00,  note:34,  vel:40 time:62
-note_off - ch:00,  note:39,  vel:40 time:0
-note_off - ch:00,  note:48,  vel:40 time:189
-note_on  - ch:00,  note:47,  vel:3E time:0
-note_on  - ch:00,  note:34,  vel:2A time:0
-note_on  - ch:00,  note:38,  vel:2A time:0
-note_off - ch:00,  note:34,  vel:40 time:62
-note_off - ch:00,  note:38,  vel:40 time:0
-note_on  - ch:00,  note:48,  vel:3E time:31
-note_off - ch:00,  note:47,  vel:40 time:23
-note_on  - ch:00,  note:47,  vel:3C time:66
-note_off - ch:00,  note:48,  vel:40 time:14
-note_on  - ch:00,  note:48,  vel:3C time:25
-note_on  - ch:00,  note:34,  vel:2A time:30
-note_on  - ch:00,  note:38,  vel:2A time:0
-note_off - ch:00,  note:47,  vel:40 time:32
-note_on  - ch:00,  note:47,  vel:3C time:11
-note_off - ch:00,  note:48,  vel:40 time:14
-note_off - ch:00,  note:38,  vel:40 time:5
-note_off - ch:00,  note:34,  vel:40 time:0
-note_on  - ch:00,  note:45,  vel:3B time:54
-note_off - ch:00,  note:47,  vel:40 time:14
-note_off - ch:00,  note:45,  vel:40 time:49
-note_on  - ch:00,  note:47,  vel:3B time:3
-note_off - ch:00,  note:47,  vel:40 time:63
-note_on  - ch:00,  note:45,  vel:39 time:6
-note_on  - ch:00,  note:39,  vel:2A time:15
-note_on  - ch:00,  note:2D,  vel:2A time:4
-note_off - ch:00,  note:39,  vel:40 time:618
-note_off - ch:00,  note:2D,  vel:40 time:4
-note_off - ch:00,  note:45,  vel:40 time:29
-note_on  - ch:00,  note:51,  vel:60 time:53
-note_on  - ch:00,  note:45,  vel:5B time:4
-note_off - ch:00,  note:51,  vel:40 time:55
-note_off - ch:00,  note:45,  vel:40 time:4
-note_on  - ch:00,  note:53,  vel:60 time:238
-note_on  - ch:00,  note:47,  vel:57 time:5
-note_off - ch:00,  note:53,  vel:40 time:63
-note_off - ch:00,  note:47,  vel:40 time:5
-note_on  - ch:00,  note:2D,  vel:4C time:164
-note_on  - ch:00,  note:31,  vel:4C time:53
-note_on  - ch:00,  note:34,  vel:4C time:32
-note_on  - ch:00,  note:55,  vel:60 time:25
-note_on  - ch:00,  note:49,  vel:60 time:6
-note_on  - ch:00,  note:39,  vel:54 time:7
-note_off - ch:00,  note:2D,  vel:40 time:89
-note_off - ch:00,  note:31,  vel:40 time:36
-note_off - ch:00,  note:34,  vel:40 time:21
-note_off - ch:00,  note:39,  vel:40 time:48
-note_on  - ch:00,  note:39,  vel:46 time:24
-note_off - ch:00,  note:39,  vel:40 time:70
-note_off - ch:00,  note:55,  vel:40 time:162
-note_on  - ch:00,  note:51,  vel:62 time:0
-note_on  - ch:00,  note:39,  vel:46 time:0
-note_on  - ch:00,  note:45,  vel:58 time:3
-note_off - ch:00,  note:49,  vel:40 time:3
-note_off - ch:00,  note:51,  vel:40 time:37
-note_off - ch:00,  note:45,  vel:40 time:3
-note_off - ch:00,  note:39,  vel:40 time:19
-note_on  - ch:00,  note:53,  vel:62 time:149
-note_on  - ch:00,  note:39,  vel:46 time:0
-note_on  - ch:00,  note:47,  vel:58 time:3
-note_off - ch:00,  note:53,  vel:40 time:40
-note_off - ch:00,  note:47,  vel:40 time:3
-note_off - ch:00,  note:39,  vel:40 time:19
-note_on  - ch:00,  note:2D,  vel:4C time:74
-note_on  - ch:00,  note:31,  vel:4C time:41
-note_on  - ch:00,  note:34,  vel:4C time:19
-note_on  - ch:00,  note:55,  vel:63 time:16
-note_on  - ch:00,  note:49,  vel:5A time:6
-note_on  - ch:00,  note:39,  vel:54 time:7
-note_off - ch:00,  note:2D,  vel:40 time:114
-note_off - ch:00,  note:55,  vel:40 time:12
-note_off - ch:00,  note:49,  vel:40 time:6
-note_off - ch:00,  note:31,  vel:40 time:24
-note_off - ch:00,  note:34,  vel:40 time:20
-note_off - ch:00,  note:39,  vel:40 time:6
-note_on  - ch:00,  note:53,  vel:60 time:28
-note_on  - ch:00,  note:39,  vel:46 time:0
-note_on  - ch:00,  note:47,  vel:5A time:3
-note_off - ch:00,  note:53,  vel:40 time:48
-note_off - ch:00,  note:47,  vel:40 time:3
-note_off - ch:00,  note:39,  vel:40 time:13
-note_on  - ch:00,  note:51,  vel:60 time:157
-note_on  - ch:00,  note:39,  vel:46 time:0
-note_on  - ch:00,  note:45,  vel:5A time:3
-note_off - ch:00,  note:51,  vel:40 time:46
-note_off - ch:00,  note:45,  vel:40 time:3
-note_off - ch:00,  note:39,  vel:40 time:13
-note_on  - ch:00,  note:50,  vel:60 time:148
-note_on  - ch:00,  note:39,  vel:46 time:0
-note_on  - ch:00,  note:44,  vel:5A time:3
-note_off - ch:00,  note:50,  vel:40 time:46
-note_off - ch:00,  note:44,  vel:40 time:3
-note_off - ch:00,  note:39,  vel:40 time:13
-note_on  - ch:00,  note:26,  vel:4C time:90
-note_on  - ch:00,  note:2A,  vel:4C time:28
-note_on  - ch:00,  note:2D,  vel:4C time:11
-note_on  - ch:00,  note:42,  vel:60 time:20
-note_on  - ch:00,  note:4E,  vel:60 time:0
-note_on  - ch:00,  note:32,  vel:54 time:4
-note_off - ch:00,  note:42,  vel:40 time:56
-note_off - ch:00,  note:4E,  vel:40 time:0
-note_off - ch:00,  note:26,  vel:40 time:70
-note_off - ch:00,  note:2A,  vel:40 time:28
-note_off - ch:00,  note:2D,  vel:40 time:11
-note_off - ch:00,  note:32,  vel:40 time:27
-note_on  - ch:00,  note:44,  vel:60 time:19
-note_on  - ch:00,  note:50,  vel:60 time:0
-note_on  - ch:00,  note:32,  vel:46 time:0
-note_off - ch:00,  note:44,  vel:40 time:36
-note_off - ch:00,  note:50,  vel:40 time:0
-note_off - ch:00,  note:32,  vel:40 time:17
-note_on  - ch:00,  note:27,  vel:4C time:95
-note_on  - ch:00,  note:2A,  vel:4C time:24
-note_on  - ch:00,  note:2D,  vel:4C time:28
-note_on  - ch:00,  note:33,  vel:54 time:15
-note_on  - ch:00,  note:45,  vel:60 time:0
-note_on  - ch:00,  note:51,  vel:60 time:0
-note_off - ch:00,  note:45,  vel:40 time:36
-note_off - ch:00,  note:51,  vel:40 time:0
-note_off - ch:00,  note:27,  vel:40 time:87
-note_off - ch:00,  note:2A,  vel:40 time:24
-note_off - ch:00,  note:2D,  vel:40 time:28
-note_off - ch:00,  note:33,  vel:40 time:18
-note_on  - ch:00,  note:47,  vel:60 time:23
-note_on  - ch:00,  note:53,  vel:60 time:0
-note_on  - ch:00,  note:33,  vel:46 time:0
-note_off - ch:00,  note:47,  vel:40 time:36
-note_off - ch:00,  note:53,  vel:40 time:0
-note_off - ch:00,  note:33,  vel:40 time:33
-note_on  - ch:00,  note:28,  vel:4C time:79
-note_on  - ch:00,  note:2C,  vel:4C time:29
-note_on  - ch:00,  note:2F,  vel:4C time:20
-note_on  - ch:00,  note:44,  vel:60 time:20
-note_on  - ch:00,  note:50,  vel:60 time:0
-note_on  - ch:00,  note:34,  vel:54 time:4
-note_off - ch:00,  note:44,  vel:40 time:53
-note_off - ch:00,  note:50,  vel:40 time:0
-note_off - ch:00,  note:28,  vel:40 time:68
-note_off - ch:00,  note:2C,  vel:40 time:30
-note_off - ch:00,  note:2F,  vel:40 time:21
-note_off - ch:00,  note:34,  vel:40 time:33
-note_on  - ch:00,  note:40,  vel:60 time:13
-note_on  - ch:00,  note:4C,  vel:60 time:0
-note_on  - ch:00,  note:34,  vel:46 time:0
-note_off - ch:00,  note:40,  vel:40 time:37
-note_off - ch:00,  note:4C,  vel:40 time:0
-note_off - ch:00,  note:34,  vel:40 time:31
-note_on  - ch:00,  note:45,  vel:5C time:155
-note_on  - ch:00,  note:51,  vel:64 time:0
-note_on  - ch:00,  note:34,  vel:46 time:0
-note_off - ch:00,  note:45,  vel:40 time:40
-note_off - ch:00,  note:51,  vel:40 time:0
-note_off - ch:00,  note:34,  vel:40 time:27
-note_on  - ch:00,  note:47,  vel:5C time:152
-note_on  - ch:00,  note:53,  vel:64 time:0
-note_on  - ch:00,  note:34,  vel:46 time:0
-note_off - ch:00,  note:47,  vel:40 time:46
-note_off - ch:00,  note:53,  vel:40 time:0
-note_off - ch:00,  note:34,  vel:40 time:22
-note_on  - ch:00,  note:2D,  vel:50 time:84
-note_on  - ch:00,  note:31,  vel:50 time:38
-note_on  - ch:00,  note:34,  vel:50 time:28
-note_on  - ch:00,  note:55,  vel:6B time:34
-note_on  - ch:00,  note:49,  vel:6B time:5
-note_on  - ch:00,  note:39,  vel:62 time:3
-note_off - ch:00,  note:2D,  vel:40 time:60
-note_off - ch:00,  note:31,  vel:40 time:34
-note_off - ch:00,  note:34,  vel:40 time:25
-note_off - ch:00,  note:39,  vel:40 time:51
-note_on  - ch:00,  note:39,  vel:49 time:47
-note_off - ch:00,  note:39,  vel:40 time:64
-note_on  - ch:00,  note:45,  vel:60 time:161
-note_on  - ch:00,  note:51,  vel:60 time:0
-note_on  - ch:00,  note:39,  vel:49 time:0
-note_off - ch:00,  note:55,  vel:40 time:1
-note_off - ch:00,  note:49,  vel:40 time:4
-note_off - ch:00,  note:51,  vel:40 time:36
-note_off - ch:00,  note:45,  vel:40 time:0
-note_off - ch:00,  note:39,  vel:40 time:20
-note_on  - ch:00,  note:47,  vel:60 time:155
-note_on  - ch:00,  note:53,  vel:60 time:0
-note_on  - ch:00,  note:39,  vel:49 time:0
-note_off - ch:00,  note:47,  vel:40 time:41
-note_off - ch:00,  note:53,  vel:40 time:0
-note_off - ch:00,  note:39,  vel:40 time:20
-note_on  - ch:00,  note:2D,  vel:50 time:73
-note_on  - ch:00,  note:31,  vel:50 time:29
-note_on  - ch:00,  note:34,  vel:50 time:19
-note_on  - ch:00,  note:49,  vel:66 time:33
-note_on  - ch:00,  note:55,  vel:66 time:0
-note_on  - ch:00,  note:39,  vel:62 time:9
-note_off - ch:00,  note:2D,  vel:40 time:107
-note_off - ch:00,  note:31,  vel:40 time:30
-note_off - ch:00,  note:55,  vel:40 time:11
-note_off - ch:00,  note:49,  vel:40 time:0
-note_off - ch:00,  note:34,  vel:40 time:8
-note_off - ch:00,  note:39,  vel:40 time:39
-note_on  - ch:00,  note:47,  vel:60 time:17
-note_on  - ch:00,  note:53,  vel:60 time:0
-note_on  - ch:00,  note:39,  vel:49 time:0
-note_off - ch:00,  note:47,  vel:40 time:42
-note_off - ch:00,  note:53,  vel:40 time:0
-note_off - ch:00,  note:39,  vel:40 time:14
-note_on  - ch:00,  note:45,  vel:60 time:165
-note_on  - ch:00,  note:51,  vel:60 time:0
-note_on  - ch:00,  note:39,  vel:49 time:0
-note_off - ch:00,  note:45,  vel:40 time:40
-note_off - ch:00,  note:51,  vel:40 time:0
-note_off - ch:00,  note:39,  vel:40 time:13
-note_on  - ch:00,  note:44,  vel:60 time:159
-note_on  - ch:00,  note:50,  vel:60 time:0
-note_on  - ch:00,  note:39,  vel:49 time:0
-note_off - ch:00,  note:44,  vel:40 time:40
-note_off - ch:00,  note:50,  vel:40 time:0
-note_off - ch:00,  note:39,  vel:40 time:13
-note_on  - ch:00,  note:26,  vel:50 time:92
-note_on  - ch:00,  note:2A,  vel:50 time:32
-note_on  - ch:00,  note:2D,  vel:50 time:23
-note_on  - ch:00,  note:32,  vel:5B time:11
-note_on  - ch:00,  note:42,  vel:60 time:0
-note_on  - ch:00,  note:4E,  vel:60 time:0
-note_off - ch:00,  note:42,  vel:40 time:40
-note_off - ch:00,  note:4E,  vel:40 time:0
-note_off - ch:00,  note:26,  vel:40 time:125
-note_off - ch:00,  note:32,  vel:40 time:22
-note_off - ch:00,  note:2A,  vel:40 time:10
-note_on  - ch:00,  note:47,  vel:60 time:15
-note_on  - ch:00,  note:53,  vel:60 time:0
-note_on  - ch:00,  note:32,  vel:49 time:0
-note_off - ch:00,  note:2D,  vel:40 time:8
-note_off - ch:00,  note:47,  vel:40 time:43
-note_off - ch:00,  note:53,  vel:40 time:0
-note_off - ch:00,  note:32,  vel:40 time:6
-note_on  - ch:00,  note:28,  vel:50 time:76
-note_on  - ch:00,  note:2C,  vel:50 time:32
-note_on  - ch:00,  note:2F,  vel:50 time:19
-note_on  - ch:00,  note:34,  vel:5B time:28
-note_on  - ch:00,  note:44,  vel:60 time:0
-note_on  - ch:00,  note:50,  vel:60 time:0
-note_off - ch:00,  note:44,  vel:40 time:33
-note_off - ch:00,  note:50,  vel:40 time:0
-note_off - ch:00,  note:28,  vel:40 time:87
-note_off - ch:00,  note:2C,  vel:40 time:35
-note_off - ch:00,  note:2F,  vel:40 time:21
-note_off - ch:00,  note:34,  vel:40 time:30
-note_on  - ch:00,  note:40,  vel:60 time:27
-note_on  - ch:00,  note:4C,  vel:60 time:0
-note_on  - ch:00,  note:34,  vel:49 time:0
-note_off - ch:00,  note:40,  vel:40 time:38
-note_off - ch:00,  note:4C,  vel:40 time:0
-note_off - ch:00,  note:34,  vel:40 time:38
-note_on  - ch:00,  note:45,  vel:60 time:193
-note_on  - ch:00,  note:51,  vel:60 time:0
-note_on  - ch:00,  note:2D,  vel:4A time:0
-note_off - ch:00,  note:45,  vel:40 time:491
-note_off - ch:00,  note:51,  vel:40 time:0
-note_off - ch:00,  note:2D,  vel:40 time:20
-note_on  - ch:00,  note:45,  vel:60 time:0
-note_on  - ch:00,  note:51,  vel:60 time:0
-note_off - ch:00,  note:45,  vel:40 time:38
-note_off - ch:00,  note:51,  vel:40 time:0
-note_on  - ch:00,  note:47,  vel:60 time:253
-note_on  - ch:00,  note:53,  vel:60 time:0
-note_off - ch:00,  note:47,  vel:40 time:58
-note_off - ch:00,  note:53,  vel:40 time:0
-note_on  - ch:00,  note:2D,  vel:4F time:145
-note_on  - ch:00,  note:31,  vel:4F time:47
-note_on  - ch:00,  note:34,  vel:4F time:35
-note_on  - ch:00,  note:49,  vel:66 time:29
-note_on  - ch:00,  note:55,  vel:66 time:0
-note_on  - ch:00,  note:39,  vel:59 time:6
-note_off - ch:00,  note:2D,  vel:40 time:132
-note_off - ch:00,  note:31,  vel:40 time:34
-note_off - ch:00,  note:34,  vel:40 time:25
-note_off - ch:00,  note:39,  vel:40 time:1
-note_on  - ch:00,  note:39,  vel:48 time:29
-note_off - ch:00,  note:39,  vel:40 time:68
-note_off - ch:00,  note:55,  vel:40 time:141
-note_off - ch:00,  note:49,  vel:40 time:0
-note_on  - ch:00,  note:45,  vel:60 time:18
-note_on  - ch:00,  note:51,  vel:60 time:0
-note_on  - ch:00,  note:39,  vel:48 time:0
-note_off - ch:00,  note:45,  vel:40 time:32
-note_off - ch:00,  note:51,  vel:40 time:0
-note_off - ch:00,  note:39,  vel:40 time:32
-note_on  - ch:00,  note:47,  vel:60 time:149
-note_on  - ch:00,  note:53,  vel:60 time:0
-note_on  - ch:00,  note:39,  vel:48 time:0
-note_off - ch:00,  note:47,  vel:40 time:32
-note_off - ch:00,  note:53,  vel:40 time:0
-note_off - ch:00,  note:39,  vel:40 time:32
-note_on  - ch:00,  note:2D,  vel:4F time:61
-note_on  - ch:00,  note:31,  vel:4F time:41
-note_on  - ch:00,  note:34,  vel:4F time:28
-note_on  - ch:00,  note:55,  vel:60 time:20
-note_on  - ch:00,  note:49,  vel:60 time:3
-note_on  - ch:00,  note:39,  vel:59 time:3
-note_off - ch:00,  note:55,  vel:40 time:45
-note_off - ch:00,  note:49,  vel:40 time:3
-note_off - ch:00,  note:2D,  vel:40 time:69
-note_off - ch:00,  note:31,  vel:40 time:44
-note_off - ch:00,  note:34,  vel:40 time:29
-note_off - ch:00,  note:39,  vel:40 time:1
-note_on  - ch:00,  note:53,  vel:60 time:29
-note_on  - ch:00,  note:39,  vel:48 time:0
-note_on  - ch:00,  note:47,  vel:60 time:3
-note_off - ch:00,  note:53,  vel:40 time:49
-note_off - ch:00,  note:47,  vel:40 time:3
-note_off - ch:00,  note:39,  vel:40 time:7
-note_on  - ch:00,  note:51,  vel:60 time:165
-note_on  - ch:00,  note:39,  vel:48 time:0
-note_on  - ch:00,  note:45,  vel:60 time:2
-note_off - ch:00,  note:51,  vel:40 time:47
-note_off - ch:00,  note:45,  vel:40 time:2
-note_off - ch:00,  note:39,  vel:40 time:7
-note_on  - ch:00,  note:50,  vel:60 time:155
-note_on  - ch:00,  note:39,  vel:48 time:0
-note_on  - ch:00,  note:44,  vel:60 time:2
-note_off - ch:00,  note:50,  vel:40 time:47
-note_off - ch:00,  note:44,  vel:40 time:2
-note_off - ch:00,  note:39,  vel:40 time:7
-note_on  - ch:00,  note:26,  vel:4F time:114
-note_on  - ch:00,  note:2A,  vel:4F time:14
-note_on  - ch:00,  note:2D,  vel:4F time:15
-note_on  - ch:00,  note:42,  vel:60 time:11
-note_on  - ch:00,  note:4E,  vel:60 time:0
-note_on  - ch:00,  note:32,  vel:58 time:11
-note_off - ch:00,  note:42,  vel:40 time:55
-note_off - ch:00,  note:4E,  vel:40 time:0
-note_off - ch:00,  note:26,  vel:40 time:133
-note_off - ch:00,  note:2A,  vel:40 time:15
-note_off - ch:00,  note:32,  vel:40 time:1
-note_on  - ch:00,  note:44,  vel:60 time:14
-note_on  - ch:00,  note:50,  vel:60 time:0
-note_off - ch:00,  note:2D,  vel:40 time:1
-note_on  - ch:00,  note:32,  vel:46 time:4
-note_off - ch:00,  note:50,  vel:40 time:61
-note_off - ch:00,  note:44,  vel:40 time:0
-note_off - ch:00,  note:32,  vel:40 time:13
-note_on  - ch:00,  note:27,  vel:4F time:94
-note_on  - ch:00,  note:2A,  vel:4F time:24
-note_on  - ch:00,  note:2D,  vel:4F time:20
-note_on  - ch:00,  note:45,  vel:60 time:12
-note_on  - ch:00,  note:51,  vel:60 time:0
-note_on  - ch:00,  note:33,  vel:58 time:9
-note_off - ch:00,  note:45,  vel:40 time:52
-note_off - ch:00,  note:51,  vel:40 time:0
-note_off - ch:00,  note:27,  vel:40 time:111
-note_off - ch:00,  note:2A,  vel:40 time:22
-note_off - ch:00,  note:33,  vel:40 time:3
-note_on  - ch:00,  note:47,  vel:60 time:14
-note_on  - ch:00,  note:53,  vel:60 time:0
-note_off - ch:00,  note:2D,  vel:40 time:2
-note_on  - ch:00,  note:33,  vel:46 time:2
-note_off - ch:00,  note:53,  vel:40 time:57
-note_off - ch:00,  note:47,  vel:40 time:0
-note_off - ch:00,  note:33,  vel:40 time:11
-note_on  - ch:00,  note:28,  vel:4F time:97
-note_on  - ch:00,  note:2C,  vel:4F time:23
-note_on  - ch:00,  note:2F,  vel:4F time:10
-note_on  - ch:00,  note:44,  vel:60 time:10
-note_on  - ch:00,  note:50,  vel:60 time:0
-note_on  - ch:00,  note:34,  vel:58 time:6
-note_off - ch:00,  note:44,  vel:40 time:160
-note_off - ch:00,  note:50,  vel:40 time:0
-note_off - ch:00,  note:28,  vel:40 time:37
-note_off - ch:00,  note:34,  vel:40 time:15
-note_off - ch:00,  note:2C,  vel:40 time:11
-note_on  - ch:00,  note:40,  vel:60 time:8
-note_on  - ch:00,  note:4C,  vel:60 time:0
-note_on  - ch:00,  note:34,  vel:46 time:0
-note_off - ch:00,  note:2F,  vel:40 time:4
-note_off - ch:00,  note:34,  vel:40 time:52
-note_off - ch:00,  note:4C,  vel:40 time:12
-note_off - ch:00,  note:40,  vel:40 time:0
-note_on  - ch:00,  note:45,  vel:60 time:170
-note_on  - ch:00,  note:51,  vel:60 time:0
-note_on  - ch:00,  note:34,  vel:46 time:0
-note_off - ch:00,  note:45,  vel:40 time:35
-note_off - ch:00,  note:51,  vel:40 time:0
-note_off - ch:00,  note:34,  vel:40 time:18
-note_on  - ch:00,  note:47,  vel:60 time:174
-note_on  - ch:00,  note:53,  vel:60 time:0
-note_on  - ch:00,  note:34,  vel:46 time:0
-note_off - ch:00,  note:47,  vel:40 time:35
-note_off - ch:00,  note:53,  vel:40 time:0
-note_off - ch:00,  note:34,  vel:40 time:18
-note_on  - ch:00,  note:2D,  vel:4F time:145
-note_on  - ch:00,  note:31,  vel:4F time:7
-note_on  - ch:00,  note:34,  vel:4F time:17
-note_on  - ch:00,  note:49,  vel:60 time:6
-note_on  - ch:00,  note:55,  vel:60 time:0
-note_on  - ch:00,  note:39,  vel:58 time:6
-note_off - ch:00,  note:2D,  vel:40 time:193
-note_off - ch:00,  note:31,  vel:40 time:7
-note_off - ch:00,  note:39,  vel:40 time:8
-note_off - ch:00,  note:34,  vel:40 time:10
-note_on  - ch:00,  note:39,  vel:47 time:4
-note_off - ch:00,  note:39,  vel:40 time:52
-note_off - ch:00,  note:55,  vel:40 time:177
-note_off - ch:00,  note:49,  vel:40 time:0
-note_on  - ch:00,  note:45,  vel:60 time:0
-note_on  - ch:00,  note:51,  vel:60 time:0
-note_on  - ch:00,  note:39,  vel:47 time:0
-note_off - ch:00,  note:45,  vel:40 time:42
-note_off - ch:00,  note:51,  vel:40 time:0
-note_off - ch:00,  note:39,  vel:40 time:8
-note_on  - ch:00,  note:47,  vel:60 time:173
-note_on  - ch:00,  note:53,  vel:60 time:0
-note_on  - ch:00,  note:39,  vel:47 time:0
-note_off - ch:00,  note:47,  vel:40 time:42
-note_off - ch:00,  note:53,  vel:40 time:0
-note_off - ch:00,  note:39,  vel:40 time:8
-note_on  - ch:00,  note:2D,  vel:4F time:126
-note_on  - ch:00,  note:31,  vel:4F time:19
-note_on  - ch:00,  note:34,  vel:4F time:7
-note_on  - ch:00,  note:49,  vel:60 time:20
-note_on  - ch:00,  note:55,  vel:60 time:0
-note_on  - ch:00,  note:39,  vel:58 time:7
-note_off - ch:00,  note:49,  vel:40 time:165
-note_off - ch:00,  note:55,  vel:40 time:0
-note_off - ch:00,  note:2D,  vel:40 time:19
-note_off - ch:00,  note:31,  vel:40 time:21
-note_off - ch:00,  note:34,  vel:40 time:7
-note_off - ch:00,  note:39,  vel:40 time:7
-note_on  - ch:00,  note:47,  vel:60 time:14
-note_on  - ch:00,  note:53,  vel:60 time:0
-note_on  - ch:00,  note:39,  vel:47 time:0
-note_off - ch:00,  note:47,  vel:40 time:45
-note_off - ch:00,  note:53,  vel:40 time:0
-note_off - ch:00,  note:39,  vel:40 time:10
-note_on  - ch:00,  note:45,  vel:60 time:185
-note_on  - ch:00,  note:51,  vel:60 time:0
-note_on  - ch:00,  note:39,  vel:47 time:0
-note_off - ch:00,  note:45,  vel:40 time:40
-note_off - ch:00,  note:51,  vel:40 time:0
-note_off - ch:00,  note:39,  vel:40 time:9
-note_on  - ch:00,  note:44,  vel:60 time:165
-note_on  - ch:00,  note:50,  vel:60 time:0
-note_on  - ch:00,  note:39,  vel:47 time:0
-note_off - ch:00,  note:44,  vel:40 time:40
-note_off - ch:00,  note:50,  vel:40 time:0
-note_off - ch:00,  note:39,  vel:40 time:9
-note_on  - ch:00,  note:26,  vel:47 time:120
-note_on  - ch:00,  note:2A,  vel:47 time:17
-note_on  - ch:00,  note:2D,  vel:47 time:18
-note_on  - ch:00,  note:42,  vel:60 time:10
-note_on  - ch:00,  note:4E,  vel:60 time:0
-note_on  - ch:00,  note:32,  vel:51 time:5
-note_off - ch:00,  note:42,  vel:40 time:40
-note_off - ch:00,  note:4E,  vel:40 time:0
-note_off - ch:00,  note:26,  vel:40 time:128
-note_off - ch:00,  note:2A,  vel:40 time:18
-note_off - ch:00,  note:32,  vel:40 time:8
-note_off - ch:00,  note:2D,  vel:40 time:10
-note_on  - ch:00,  note:47,  vel:60 time:9
-note_on  - ch:00,  note:53,  vel:60 time:0
-note_on  - ch:00,  note:32,  vel:40 time:0
-note_off - ch:00,  note:47,  vel:40 time:45
-note_off - ch:00,  note:53,  vel:40 time:0
-note_off - ch:00,  note:32,  vel:40 time:20
-note_on  - ch:00,  note:28,  vel:47 time:104
-note_on  - ch:00,  note:2C,  vel:47 time:26
-note_on  - ch:00,  note:2F,  vel:47 time:16
-note_on  - ch:00,  note:44,  vel:60 time:7
-note_on  - ch:00,  note:50,  vel:60 time:0
-note_on  - ch:00,  note:34,  vel:51 time:7
-note_off - ch:00,  note:44,  vel:40 time:44
-note_off - ch:00,  note:50,  vel:40 time:0
-note_off - ch:00,  note:28,  vel:40 time:141
-note_off - ch:00,  note:2C,  vel:40 time:29
-note_off - ch:00,  note:34,  vel:40 time:4
-note_off - ch:00,  note:2F,  vel:40 time:14
-note_on  - ch:00,  note:40,  vel:5B time:7
-note_on  - ch:00,  note:4C,  vel:5B time:0
-note_on  - ch:00,  note:34,  vel:40 time:0
-note_off - ch:00,  note:40,  vel:40 time:60
-note_off - ch:00,  note:4C,  vel:40 time:0
-note_off - ch:00,  note:34,  vel:40 time:27
-note_on  - ch:00,  note:45,  vel:54 time:206
-note_on  - ch:00,  note:51,  vel:54 time:0
-note_on  - ch:00,  note:2D,  vel:45 time:0
-note_on  - ch:00,  note:55,  vel:45 time:694
-note_off - ch:00,  note:45,  vel:40 time:1
-note_off - ch:00,  note:51,  vel:40 time:0
-note_off - ch:00,  note:2D,  vel:40 time:0
-note_off - ch:00,  note:55,  vel:40 time:126
-note_on  - ch:00,  note:56,  vel:45 time:1
-note_off - ch:00,  note:56,  vel:40 time:127
-note_on  - ch:00,  note:55,  vel:45 time:0
-note_off - ch:00,  note:55,  vel:40 time:127
-note_on  - ch:00,  note:53,  vel:45 time:0
-note_off - ch:00,  note:53,  vel:40 time:127
-note_on  - ch:00,  note:51,  vel:45 time:0
-note_on  - ch:00,  note:36,  vel:32 time:0
-note_off - ch:00,  note:36,  vel:40 time:82
-note_off - ch:00,  note:51,  vel:40 time:27
-note_on  - ch:00,  note:53,  vel:45 time:0
-note_off - ch:00,  note:53,  vel:40 time:109
-note_on  - ch:00,  note:51,  vel:45 time:0
-note_on  - ch:00,  note:39,  vel:28 time:0
-note_on  - ch:00,  note:3D,  vel:28 time:0
-note_off - ch:00,  note:39,  vel:40 time:44
-note_off - ch:00,  note:3D,  vel:40 time:0
-note_off - ch:00,  note:51,  vel:40 time:65
-note_on  - ch:00,  note:50,  vel:45 time:0
-note_on  - ch:00,  note:4E,  vel:45 time:108
-note_on  - ch:00,  note:39,  vel:28 time:0
-note_on  - ch:00,  note:3D,  vel:28 time:0
-note_off - ch:00,  note:50,  vel:40 time:1
-note_off - ch:00,  note:3D,  vel:40 time:45
-note_off - ch:00,  note:39,  vel:40 time:0
-note_off - ch:00,  note:4E,  vel:40 time:69
-note_on  - ch:00,  note:51,  vel:45 time:0
-note_off - ch:00,  note:51,  vel:40 time:115
-note_on  - ch:00,  note:50,  vel:45 time:0
-note_on  - ch:00,  note:39,  vel:28 time:0
-note_on  - ch:00,  note:3D,  vel:28 time:0
-note_off - ch:00,  note:39,  vel:40 time:46
-note_off - ch:00,  note:3D,  vel:40 time:0
-note_off - ch:00,  note:50,  vel:40 time:69
-note_on  - ch:00,  note:4E,  vel:45 time:0
-note_on  - ch:00,  note:4D,  vel:3F time:114
-note_on  - ch:00,  note:38,  vel:32 time:0
-note_off - ch:00,  note:4E,  vel:40 time:1
-note_off - ch:00,  note:38,  vel:40 time:86
-note_off - ch:00,  note:4D,  vel:40 time:29
-note_on  - ch:00,  note:4E,  vel:45 time:0
-note_off - ch:00,  note:4E,  vel:40 time:116
-note_on  - ch:00,  note:50,  vel:45 time:0
-note_on  - ch:00,  note:3B,  vel:28 time:0
-note_on  - ch:00,  note:3D,  vel:28 time:0
-note_off - ch:00,  note:3B,  vel:40 time:49
-note_off - ch:00,  note:3D,  vel:40 time:0
-note_off - ch:00,  note:50,  vel:40 time:67
-note_on  - ch:00,  note:4D,  vel:3F time:0
-note_on  - ch:00,  note:49,  vel:3F time:115
-note_on  - ch:00,  note:3B,  vel:28 time:0
-note_on  - ch:00,  note:3D,  vel:28 time:0
-note_off - ch:00,  note:4D,  vel:40 time:1
-note_off - ch:00,  note:3D,  vel:40 time:48
-note_off - ch:00,  note:3B,  vel:40 time:0
-note_on  - ch:00,  note:4B,  vel:3A time:66
-note_off - ch:00,  note:49,  vel:40 time:93
-note_off - ch:00,  note:4B,  vel:40 time:21
-note_on  - ch:00,  note:4D,  vel:3E time:0
-note_on  - ch:00,  note:3B,  vel:28 time:0
-note_on  - ch:00,  note:3D,  vel:28 time:0
-note_off - ch:00,  note:3B,  vel:40 time:49
-note_off - ch:00,  note:3D,  vel:40 time:0
-note_off - ch:00,  note:4D,  vel:40 time:65
-note_on  - ch:00,  note:49,  vel:3D time:1
-note_off - ch:00,  note:49,  vel:40 time:114
-note_on  - ch:00,  note:4E,  vel:45 time:0
-note_on  - ch:00,  note:36,  vel:32 time:0
-note_off - ch:00,  note:36,  vel:40 time:82
-note_off - ch:00,  note:4E,  vel:40 time:27
-note_on  - ch:00,  note:4D,  vel:3F time:0
-note_on  - ch:00,  note:4E,  vel:45 time:108
-note_on  - ch:00,  note:39,  vel:28 time:0
-note_on  - ch:00,  note:3D,  vel:28 time:0
-note_off - ch:00,  note:4D,  vel:40 time:1
-note_off - ch:00,  note:3D,  vel:40 time:82
-note_off - ch:00,  note:39,  vel:40 time:0
-note_off - ch:00,  note:4E,  vel:40 time:26
-note_on  - ch:00,  note:50,  vel:45 time:0
-note_on  - ch:00,  note:51,  vel:45 time:108
-note_on  - ch:00,  note:39,  vel:28 time:0
-note_on  - ch:00,  note:3D,  vel:28 time:0
-note_off - ch:00,  note:50,  vel:40 time:1
-note_off - ch:00,  note:3D,  vel:40 time:81
-note_off - ch:00,  note:39,  vel:40 time:0
-note_off - ch:00,  note:51,  vel:40 time:25
-note_on  - ch:00,  note:50,  vel:45 time:0
-note_off - ch:00,  note:50,  vel:40 time:107
-note_on  - ch:00,  note:51,  vel:45 time:1
-note_on  - ch:00,  note:39,  vel:28 time:0
-note_on  - ch:00,  note:3D,  vel:28 time:0
-note_off - ch:00,  note:39,  vel:40 time:82
-note_off - ch:00,  note:3D,  vel:40 time:0
-note_off - ch:00,  note:51,  vel:40 time:25
-note_on  - ch:00,  note:53,  vel:45 time:0
-note_off - ch:00,  note:53,  vel:40 time:107
-note_on  - ch:00,  note:55,  vel:45 time:0
-note_on  - ch:00,  note:35,  vel:3A time:0
-note_off - ch:00,  note:55,  vel:40 time:110
-note_on  - ch:00,  note:54,  vel:45 time:0
-note_off - ch:00,  note:35,  vel:40 time:61
-note_on  - ch:00,  note:55,  vel:45 time:48
-note_on  - ch:00,  note:38,  vel:31 time:0
-note_on  - ch:00,  note:3D,  vel:31 time:0
-note_off - ch:00,  note:54,  vel:40 time:1
-note_off - ch:00,  note:3D,  vel:40 time:69
-note_off - ch:00,  note:38,  vel:40 time:0
-note_off - ch:00,  note:55,  vel:40 time:40
-note_on  - ch:00,  note:54,  vel:45 time:0
-note_on  - ch:00,  note:55,  vel:45 time:109
-note_on  - ch:00,  note:38,  vel:31 time:0
-note_on  - ch:00,  note:3D,  vel:31 time:0
-note_off - ch:00,  note:54,  vel:40 time:1
-note_off - ch:00,  note:3D,  vel:40 time:69
-note_off - ch:00,  note:38,  vel:40 time:0
-note_off - ch:00,  note:55,  vel:40 time:40
-note_on  - ch:00,  note:56,  vel:45 time:0
-note_off - ch:00,  note:56,  vel:40 time:110
-note_on  - ch:00,  note:55,  vel:45 time:0
-note_on  - ch:00,  note:38,  vel:31 time:0
-note_on  - ch:00,  note:3D,  vel:31 time:0
-note_off - ch:00,  note:38,  vel:40 time:70
-note_off - ch:00,  note:3D,  vel:40 time:0
-note_on  - ch:00,  note:53,  vel:45 time:39
-note_off - ch:00,  note:55,  vel:40 time:1
-note_off - ch:00,  note:53,  vel:40 time:109
-note_on  - ch:00,  note:51,  vel:45 time:0
-note_on  - ch:00,  note:36,  vel:47 time:0
-note_off - ch:00,  note:36,  vel:40 time:45
-note_off - ch:00,  note:51,  vel:40 time:68
-note_on  - ch:00,  note:53,  vel:45 time:0
-note_off - ch:00,  note:53,  vel:40 time:113
-note_on  - ch:00,  note:51,  vel:45 time:1
-note_on  - ch:00,  note:39,  vel:31 time:0
-note_on  - ch:00,  note:3D,  vel:31 time:0
-note_off - ch:00,  note:39,  vel:40 time:73
-note_off - ch:00,  note:3D,  vel:40 time:0
-note_off - ch:00,  note:51,  vel:40 time:40
-note_on  - ch:00,  note:50,  vel:45 time:0
-note_off - ch:00,  note:50,  vel:40 time:113
-note_on  - ch:00,  note:4E,  vel:45 time:1
-note_on  - ch:00,  note:39,  vel:31 time:0
-note_on  - ch:00,  note:3D,  vel:31 time:0
-note_off - ch:00,  note:39,  vel:40 time:73
-note_off - ch:00,  note:3D,  vel:40 time:0
-note_off - ch:00,  note:4E,  vel:40 time:40
-note_on  - ch:00,  note:51,  vel:45 time:0
-note_off - ch:00,  note:51,  vel:40 time:113
-note_on  - ch:00,  note:50,  vel:45 time:0
-note_on  - ch:00,  note:39,  vel:31 time:0
-note_on  - ch:00,  note:3D,  vel:31 time:0
-note_off - ch:00,  note:39,  vel:40 time:73
-note_off - ch:00,  note:3D,  vel:40 time:0
-note_off - ch:00,  note:50,  vel:40 time:40
-note_on  - ch:00,  note:4E,  vel:45 time:1
-note_off - ch:00,  note:4E,  vel:40 time:113
-note_on  - ch:00,  note:4C,  vel:45 time:0
-note_on  - ch:00,  note:38,  vel:41 time:0
-note_off - ch:00,  note:38,  vel:40 time:68
-note_off - ch:00,  note:4C,  vel:40 time:43
-note_on  - ch:00,  note:4E,  vel:45 time:1
-note_off - ch:00,  note:4E,  vel:40 time:111
-note_on  - ch:00,  note:50,  vel:45 time:0
-note_on  - ch:00,  note:3D,  vel:31 time:0
-note_on  - ch:00,  note:40,  vel:31 time:0
-note_off - ch:00,  note:3D,  vel:40 time:69
-note_off - ch:00,  note:40,  vel:40 time:0
-note_off - ch:00,  note:50,  vel:40 time:42
-note_on  - ch:00,  note:4C,  vel:45 time:0
-note_off - ch:00,  note:4C,  vel:40 time:111
-note_on  - ch:00,  note:49,  vel:40 time:0
-note_on  - ch:00,  note:3D,  vel:31 time:0
-note_on  - ch:00,  note:40,  vel:31 time:0
-note_off - ch:00,  note:3D,  vel:40 time:69
-note_off - ch:00,  note:40,  vel:40 time:0
-note_off - ch:00,  note:49,  vel:40 time:42
-note_on  - ch:00,  note:4B,  vel:40 time:0
-note_off - ch:00,  note:4B,  vel:40 time:111
-note_on  - ch:00,  note:4C,  vel:45 time:1
-note_on  - ch:00,  note:3D,  vel:31 time:0
-note_on  - ch:00,  note:40,  vel:31 time:0
-note_off - ch:00,  note:3D,  vel:40 time:69
-note_off - ch:00,  note:40,  vel:40 time:0
-note_off - ch:00,  note:4C,  vel:40 time:42
-note_on  - ch:00,  note:49,  vel:40 time:0
-note_off - ch:00,  note:49,  vel:40 time:111
-note_on  - ch:00,  note:4B,  vel:40 time:0
-note_on  - ch:00,  note:38,  vel:43 time:0
-note_off - ch:00,  note:38,  vel:40 time:78
-note_off - ch:00,  note:4B,  vel:40 time:32
-note_on  - ch:00,  note:4C,  vel:45 time:0
-note_on  - ch:00,  note:4E,  vel:45 time:109
-note_on  - ch:00,  note:3F,  vel:36 time:0
-note_on  - ch:00,  note:42,  vel:36 time:0
-note_off - ch:00,  note:4C,  vel:40 time:1
-note_off - ch:00,  note:42,  vel:40 time:67
-note_off - ch:00,  note:3F,  vel:40 time:0
-note_off - ch:00,  note:4E,  vel:40 time:42
-note_on  - ch:00,  note:4B,  vel:3E time:0
-note_off - ch:00,  note:4B,  vel:40 time:110
-note_on  - ch:00,  note:48,  vel:3E time:0
-note_on  - ch:00,  note:3F,  vel:36 time:0
-note_on  - ch:00,  note:42,  vel:36 time:0
-note_off - ch:00,  note:3F,  vel:40 time:74
-note_off - ch:00,  note:42,  vel:40 time:0
-note_off - ch:00,  note:48,  vel:40 time:45
-note_on  - ch:00,  note:49,  vel:3E time:0
-note_on  - ch:00,  note:4B,  vel:3E time:115
-note_on  - ch:00,  note:3F,  vel:36 time:3
-note_on  - ch:00,  note:42,  vel:36 time:0
-note_off - ch:00,  note:49,  vel:40 time:1
-note_off - ch:00,  note:42,  vel:40 time:93
-note_off - ch:00,  note:3F,  vel:40 time:0
-note_on  - ch:00,  note:48,  vel:3E time:25
-note_off - ch:00,  note:4B,  vel:40 time:28
-note_off - ch:00,  note:48,  vel:40 time:123
-note_on  - ch:00,  note:49,  vel:3A time:32
-note_on  - ch:00,  note:3D,  vel:30 time:0
-note_on  - ch:00,  note:40,  vel:30 time:0
-note_off - ch:00,  note:49,  vel:40 time:514
-note_off - ch:00,  note:40,  vel:40 time:0
-note_off - ch:00,  note:3D,  vel:40 time:0
-note_on  - ch:00,  note:55,  vel:39 time:1
-note_on  - ch:00,  note:56,  vel:39 time:128
-note_off - ch:00,  note:55,  vel:40 time:1
-note_off - ch:00,  note:56,  vel:40 time:128
-note_on  - ch:00,  note:55,  vel:39 time:0
-note_on  - ch:00,  note:53,  vel:39 time:128
-note_off - ch:00,  note:55,  vel:40 time:1
-note_off - ch:00,  note:53,  vel:40 time:128
-note_on  - ch:00,  note:51,  vel:39 time:0
-note_on  - ch:00,  note:36,  vel:3D time:0
-note_off - ch:00,  note:36,  vel:40 time:68
-note_off - ch:00,  note:51,  vel:40 time:48
-note_on  - ch:00,  note:53,  vel:39 time:0
-note_on  - ch:00,  note:51,  vel:39 time:115
-note_on  - ch:00,  note:39,  vel:31 time:0
-note_on  - ch:00,  note:3D,  vel:31 time:0
-note_off - ch:00,  note:53,  vel:40 time:1
-note_off - ch:00,  note:3D,  vel:40 time:80
-note_off - ch:00,  note:39,  vel:40 time:0
-note_off - ch:00,  note:51,  vel:40 time:35
-note_on  - ch:00,  note:50,  vel:39 time:0
-note_on  - ch:00,  note:4E,  vel:39 time:115
-note_on  - ch:00,  note:39,  vel:31 time:0
-note_on  - ch:00,  note:3D,  vel:31 time:0
-note_off - ch:00,  note:50,  vel:40 time:1
-note_off - ch:00,  note:3D,  vel:40 time:80
-note_off - ch:00,  note:39,  vel:40 time:0
-note_off - ch:00,  note:4E,  vel:40 time:35
-note_on  - ch:00,  note:51,  vel:39 time:0
-note_on  - ch:00,  note:50,  vel:39 time:115
-note_on  - ch:00,  note:39,  vel:31 time:0
-note_on  - ch:00,  note:3D,  vel:31 time:0
-note_off - ch:00,  note:51,  vel:40 time:1
-note_off - ch:00,  note:3D,  vel:40 time:80
-note_off - ch:00,  note:39,  vel:40 time:0
-note_off - ch:00,  note:50,  vel:40 time:35
-note_on  - ch:00,  note:4E,  vel:39 time:0
-note_on  - ch:00,  note:4D,  vel:39 time:115
-note_on  - ch:00,  note:38,  vel:3D time:0
-note_off - ch:00,  note:4E,  vel:40 time:1
-note_off - ch:00,  note:38,  vel:40 time:67
-note_off - ch:00,  note:4D,  vel:40 time:47
-note_on  - ch:00,  note:4E,  vel:39 time:1
-note_off - ch:00,  note:4E,  vel:40 time:115
-note_on  - ch:00,  note:50,  vel:39 time:0
-note_on  - ch:00,  note:3B,  vel:31 time:0
-note_on  - ch:00,  note:3D,  vel:31 time:0
-note_off - ch:00,  note:3B,  vel:40 time:81
-note_off - ch:00,  note:3D,  vel:40 time:0
-note_off - ch:00,  note:50,  vel:40 time:34
-note_on  - ch:00,  note:4D,  vel:39 time:1
-note_off - ch:00,  note:4D,  vel:40 time:115
-note_on  - ch:00,  note:49,  vel:39 time:0
-note_on  - ch:00,  note:3B,  vel:31 time:0
-note_on  - ch:00,  note:3D,  vel:31 time:0
-note_off - ch:00,  note:3B,  vel:40 time:81
-note_off - ch:00,  note:3D,  vel:40 time:0
-note_on  - ch:00,  note:4B,  vel:35 time:34
-note_off - ch:00,  note:49,  vel:40 time:97
-note_off - ch:00,  note:4B,  vel:40 time:18
-note_on  - ch:00,  note:4D,  vel:39 time:1
-note_on  - ch:00,  note:3B,  vel:31 time:0
-note_on  - ch:00,  note:3D,  vel:31 time:0
-note_off - ch:00,  note:3B,  vel:40 time:81
-note_off - ch:00,  note:3D,  vel:40 time:0
-note_off - ch:00,  note:4D,  vel:40 time:34
-note_on  - ch:00,  note:49,  vel:39 time:0
-note_off - ch:00,  note:49,  vel:40 time:115
-note_on  - ch:00,  note:4E,  vel:39 time:1
-note_on  - ch:00,  note:36,  vel:3D time:0
-note_off - ch:00,  note:36,  vel:40 time:63
-note_on  - ch:00,  note:4D,  vel:39 time:42
-note_off - ch:00,  note:4E,  vel:40 time:1
-note_off - ch:00,  note:4D,  vel:40 time:105
-note_on  - ch:00,  note:4E,  vel:39 time:0
-note_on  - ch:00,  note:39,  vel:31 time:0
-note_on  - ch:00,  note:3D,  vel:31 time:0
-note_off - ch:00,  note:39,  vel:40 time:74
-note_off - ch:00,  note:3D,  vel:40 time:0
-note_off - ch:00,  note:4E,  vel:40 time:32
-note_on  - ch:00,  note:50,  vel:39 time:0
-note_on  - ch:00,  note:51,  vel:3D time:105
-note_on  - ch:00,  note:39,  vel:31 time:0
-note_on  - ch:00,  note:3D,  vel:31 time:0
-note_off - ch:00,  note:50,  vel:40 time:1
-note_off - ch:00,  note:3D,  vel:40 time:81
-note_off - ch:00,  note:39,  vel:40 time:0
-note_off - ch:00,  note:51,  vel:40 time:34
-note_on  - ch:00,  note:50,  vel:3D time:1
-note_off - ch:00,  note:50,  vel:40 time:116
-note_on  - ch:00,  note:51,  vel:41 time:0
-note_on  - ch:00,  note:39,  vel:31 time:0
-note_on  - ch:00,  note:3D,  vel:31 time:0
-note_off - ch:00,  note:39,  vel:40 time:71
-note_off - ch:00,  note:3D,  vel:40 time:0
-note_off - ch:00,  note:51,  vel:40 time:31
-note_on  - ch:00,  note:53,  vel:43 time:0
-note_on  - ch:00,  note:55,  vel:42 time:101
-note_on  - ch:00,  note:35,  vel:3D time:0
-note_off - ch:00,  note:53,  vel:40 time:1
-note_off - ch:00,  note:35,  vel:40 time:66
-note_off - ch:00,  note:55,  vel:40 time:46
-note_on  - ch:00,  note:54,  vel:42 time:0
-note_off - ch:00,  note:54,  vel:40 time:113
-note_on  - ch:00,  note:55,  vel:42 time:0
-note_on  - ch:00,  note:38,  vel:31 time:0
-note_on  - ch:00,  note:3D,  vel:31 time:0
-note_off - ch:00,  note:38,  vel:40 time:84
-note_off - ch:00,  note:3D,  vel:40 time:0
-note_off - ch:00,  note:55,  vel:40 time:35
-note_on  - ch:00,  note:54,  vel:42 time:0
-note_off - ch:00,  note:54,  vel:40 time:119
-note_on  - ch:00,  note:55,  vel:42 time:0
-note_on  - ch:00,  note:38,  vel:31 time:0
-note_on  - ch:00,  note:3D,  vel:31 time:0
-note_off - ch:00,  note:38,  vel:40 time:84
-note_off - ch:00,  note:3D,  vel:40 time:0
-note_off - ch:00,  note:55,  vel:40 time:35
-note_on  - ch:00,  note:56,  vel:42 time:0
-note_off - ch:00,  note:56,  vel:40 time:119
-note_on  - ch:00,  note:55,  vel:42 time:1
-note_on  - ch:00,  note:38,  vel:31 time:0
-note_on  - ch:00,  note:3D,  vel:31 time:0
-note_off - ch:00,  note:38,  vel:40 time:84
-note_off - ch:00,  note:3D,  vel:40 time:0
-note_off - ch:00,  note:55,  vel:40 time:35
-note_on  - ch:00,  note:53,  vel:42 time:0
-note_off - ch:00,  note:53,  vel:40 time:119
-note_on  - ch:00,  note:51,  vel:42 time:0
-note_on  - ch:00,  note:36,  vel:3D time:0
-note_off - ch:00,  note:36,  vel:40 time:70
-note_off - ch:00,  note:51,  vel:40 time:41
-note_on  - ch:00,  note:53,  vel:42 time:0
-note_off - ch:00,  note:53,  vel:40 time:111
-note_on  - ch:00,  note:51,  vel:42 time:0
-note_on  - ch:00,  note:39,  vel:31 time:0
-note_on  - ch:00,  note:3D,  vel:31 time:0
-note_off - ch:00,  note:39,  vel:40 time:78
-note_off - ch:00,  note:3D,  vel:40 time:0
-note_off - ch:00,  note:51,  vel:40 time:33
-note_on  - ch:00,  note:50,  vel:42 time:0
-note_off - ch:00,  note:50,  vel:40 time:111
-note_on  - ch:00,  note:4E,  vel:42 time:0
-note_on  - ch:00,  note:39,  vel:31 time:0
-note_on  - ch:00,  note:3D,  vel:31 time:0
-note_off - ch:00,  note:39,  vel:40 time:76
-note_off - ch:00,  note:3D,  vel:40 time:0
-note_on  - ch:00,  note:51,  vel:42 time:34
-note_off - ch:00,  note:4E,  vel:40 time:1
-note_off - ch:00,  note:51,  vel:40 time:110
-note_on  - ch:00,  note:50,  vel:42 time:0
-note_on  - ch:00,  note:39,  vel:31 time:0
-note_on  - ch:00,  note:3D,  vel:31 time:0
-note_off - ch:00,  note:39,  vel:40 time:76
-note_off - ch:00,  note:3D,  vel:40 time:0
-note_off - ch:00,  note:50,  vel:40 time:35
-note_on  - ch:00,  note:4E,  vel:42 time:0
-note_off - ch:00,  note:4E,  vel:40 time:111
-note_on  - ch:00,  note:4C,  vel:42 time:0
-note_on  - ch:00,  note:38,  vel:3D time:0
-note_off - ch:00,  note:38,  vel:40 time:75
-note_off - ch:00,  note:4C,  vel:40 time:43
-note_on  - ch:00,  note:4E,  vel:42 time:0
-note_off - ch:00,  note:4E,  vel:40 time:118
-note_on  - ch:00,  note:50,  vel:42 time:0
-note_on  - ch:00,  note:3D,  vel:37 time:0
-note_on  - ch:00,  note:40,  vel:37 time:0
-note_off - ch:00,  note:3D,  vel:40 time:76
-note_off - ch:00,  note:40,  vel:40 time:0
-note_off - ch:00,  note:50,  vel:40 time:42
-note_on  - ch:00,  note:4C,  vel:42 time:0
-note_off - ch:00,  note:4C,  vel:40 time:118
-note_on  - ch:00,  note:49,  vel:42 time:0
-note_on  - ch:00,  note:3D,  vel:37 time:0
-note_on  - ch:00,  note:40,  vel:37 time:0
-note_off - ch:00,  note:3D,  vel:40 time:76
-note_off - ch:00,  note:40,  vel:40 time:0
-note_off - ch:00,  note:49,  vel:40 time:42
-note_on  - ch:00,  note:4B,  vel:42 time:0
-note_off - ch:00,  note:4B,  vel:40 time:118
-note_on  - ch:00,  note:4C,  vel:42 time:0
-note_on  - ch:00,  note:3D,  vel:37 time:0
-note_on  - ch:00,  note:40,  vel:37 time:0
-note_off - ch:00,  note:3D,  vel:40 time:76
-note_off - ch:00,  note:40,  vel:40 time:0
-note_off - ch:00,  note:4C,  vel:40 time:42
-note_on  - ch:00,  note:49,  vel:42 time:1
-note_off - ch:00,  note:49,  vel:40 time:118
-note_on  - ch:00,  note:4B,  vel:42 time:0
-note_on  - ch:00,  note:38,  vel:3D time:0
-note_off - ch:00,  note:38,  vel:40 time:66
-note_on  - ch:00,  note:4C,  vel:42 time:38
-note_off - ch:00,  note:4B,  vel:40 time:1
-note_off - ch:00,  note:4C,  vel:40 time:104
-note_on  - ch:00,  note:4E,  vel:42 time:0
-note_on  - ch:00,  note:3F,  vel:37 time:0
-note_on  - ch:00,  note:42,  vel:37 time:0
-note_off - ch:00,  note:3F,  vel:40 time:69
-note_off - ch:00,  note:42,  vel:40 time:0
-note_off - ch:00,  note:4E,  vel:40 time:39
-note_on  - ch:00,  note:4B,  vel:42 time:0
-note_off - ch:00,  note:4B,  vel:40 time:108
-note_on  - ch:00,  note:48,  vel:42 time:0
-note_on  - ch:00,  note:3F,  vel:37 time:0
-note_on  - ch:00,  note:42,  vel:37 time:0
-note_off - ch:00,  note:3F,  vel:40 time:73
-note_off - ch:00,  note:42,  vel:40 time:0
-note_off - ch:00,  note:48,  vel:40 time:41
-note_on  - ch:00,  note:49,  vel:42 time:0
-note_on  - ch:00,  note:4B,  vel:3E time:113
-note_on  - ch:00,  note:3F,  vel:37 time:0
-note_on  - ch:00,  note:42,  vel:37 time:0
-note_off - ch:00,  note:49,  vel:40 time:1
-note_off - ch:00,  note:42,  vel:40 time:76
-note_off - ch:00,  note:3F,  vel:40 time:0
-note_on  - ch:00,  note:48,  vel:3E time:31
-note_off - ch:00,  note:4B,  vel:40 time:11
-note_off - ch:00,  note:48,  vel:40 time:108
-note_on  - ch:00,  note:49,  vel:39 time:12
-note_on  - ch:00,  note:3D,  vel:31 time:0
-note_on  - ch:00,  note:40,  vel:31 time:0
-note_off - ch:00,  note:49,  vel:40 time:527
-note_off - ch:00,  note:40,  vel:40 time:0
-note_off - ch:00,  note:3D,  vel:40 time:0
-note_on  - ch:00,  note:4C,  vel:5D time:0
-note_off - ch:00,  note:4C,  vel:40 time:112
-note_on  - ch:00,  note:4A,  vel:5D time:0
-note_off - ch:00,  note:4A,  vel:40 time:112
-note_on  - ch:00,  note:49,  vel:5D time:1
-note_off - ch:00,  note:49,  vel:40 time:112
-note_on  - ch:00,  note:47,  vel:5D time:0
-note_off - ch:00,  note:47,  vel:40 time:112
-note_on  - ch:00,  note:45,  vel:59 time:0
-note_on  - ch:00,  note:39,  vel:49 time:4
-note_off - ch:00,  note:39,  vel:40 time:79
-note_off - ch:00,  note:45,  vel:40 time:27
-note_on  - ch:00,  note:47,  vel:59 time:0
-note_off - ch:00,  note:47,  vel:40 time:110
-note_on  - ch:00,  note:49,  vel:59 time:0
-note_on  - ch:00,  note:3D,  vel:38 time:0
-note_on  - ch:00,  note:40,  vel:38 time:0
-note_off - ch:00,  note:3D,  vel:40 time:84
-note_off - ch:00,  note:40,  vel:40 time:0
-note_off - ch:00,  note:49,  vel:40 time:26
-note_on  - ch:00,  note:4A,  vel:59 time:0
-note_off - ch:00,  note:4A,  vel:40 time:110
-note_on  - ch:00,  note:4C,  vel:59 time:0
-note_on  - ch:00,  note:3D,  vel:38 time:0
-note_on  - ch:00,  note:40,  vel:38 time:0
-note_off - ch:00,  note:3D,  vel:40 time:84
-note_off - ch:00,  note:40,  vel:40 time:0
-note_off - ch:00,  note:4C,  vel:40 time:26
-note_on  - ch:00,  note:4E,  vel:59 time:0
-note_off - ch:00,  note:4E,  vel:40 time:110
-note_on  - ch:00,  note:50,  vel:5B time:0
-note_on  - ch:00,  note:3D,  vel:38 time:0
-note_on  - ch:00,  note:40,  vel:38 time:0
-note_off - ch:00,  note:3D,  vel:40 time:84
-note_off - ch:00,  note:40,  vel:40 time:0
-note_off - ch:00,  note:50,  vel:40 time:26
-note_on  - ch:00,  note:51,  vel:5B time:0
-note_off - ch:00,  note:51,  vel:40 time:80
-note_on  - ch:00,  note:51,  vel:5E time:29
-note_on  - ch:00,  note:3B,  vel:3F time:5
-note_off - ch:00,  note:3B,  vel:40 time:72
-note_on  - ch:00,  note:50,  vel:5D time:35
-note_off - ch:00,  note:51,  vel:40 time:89
-note_off - ch:00,  note:50,  vel:40 time:22
-note_on  - ch:00,  note:4E,  vel:5D time:0
-note_on  - ch:00,  note:3E,  vel:38 time:0
-note_on  - ch:00,  note:40,  vel:38 time:0
-note_off - ch:00,  note:3E,  vel:40 time:85
-note_off - ch:00,  note:40,  vel:40 time:0
-note_off - ch:00,  note:4E,  vel:40 time:26
-note_on  - ch:00,  note:4C,  vel:5D time:0
-note_off - ch:00,  note:4C,  vel:40 time:111
-note_on  - ch:00,  note:4C,  vel:5D time:0
-note_on  - ch:00,  note:38,  vel:3F time:0
-note_off - ch:00,  note:38,  vel:40 time:72
-note_off - ch:00,  note:4C,  vel:40 time:39
-note_on  - ch:00,  note:4A,  vel:5D time:0
-note_off - ch:00,  note:4A,  vel:40 time:111
-note_on  - ch:00,  note:49,  vel:59 time:1
-note_on  - ch:00,  note:3E,  vel:38 time:0
-note_on  - ch:00,  note:40,  vel:38 time:0
-note_off - ch:00,  note:3E,  vel:40 time:85
-note_off - ch:00,  note:40,  vel:40 time:0
-note_off - ch:00,  note:49,  vel:40 time:26
-note_on  - ch:00,  note:47,  vel:59 time:0
-note_off - ch:00,  note:47,  vel:40 time:111
-note_on  - ch:00,  note:45,  vel:52 time:0
-note_on  - ch:00,  note:39,  vel:3F time:0
-note_off - ch:00,  note:39,  vel:40 time:70
-note_on  - ch:00,  note:47,  vel:52 time:38
-note_off - ch:00,  note:45,  vel:40 time:1
-note_off - ch:00,  note:47,  vel:40 time:108
-note_on  - ch:00,  note:49,  vel:58 time:0
-note_on  - ch:00,  note:3D,  vel:3D time:0
-note_on  - ch:00,  note:40,  vel:3D time:0
-note_off - ch:00,  note:3D,  vel:40 time:83
-note_off - ch:00,  note:40,  vel:40 time:0
-note_on  - ch:00,  note:4A,  vel:58 time:25
-note_off - ch:00,  note:49,  vel:40 time:1
-note_off - ch:00,  note:4A,  vel:40 time:108
-note_on  - ch:00,  note:4C,  vel:58 time:0
-note_on  - ch:00,  note:3D,  vel:3D time:0
-note_on  - ch:00,  note:40,  vel:3D time:0
-note_off - ch:00,  note:3D,  vel:40 time:83
-note_off - ch:00,  note:40,  vel:40 time:0
-note_off - ch:00,  note:4C,  vel:40 time:26
-note_on  - ch:00,  note:4E,  vel:58 time:0
-note_on  - ch:00,  note:50,  vel:5D time:108
-note_on  - ch:00,  note:3D,  vel:3D time:0
-note_on  - ch:00,  note:40,  vel:3D time:0
-note_off - ch:00,  note:4E,  vel:40 time:1
-note_off - ch:00,  note:40,  vel:40 time:82
-note_off - ch:00,  note:3D,  vel:40 time:0
-note_off - ch:00,  note:50,  vel:40 time:26
-note_on  - ch:00,  note:51,  vel:5D time:0
-note_on  - ch:00,  note:52,  vel:62 time:108
-note_on  - ch:00,  note:34,  vel:45 time:0
-note_off - ch:00,  note:51,  vel:40 time:1
-note_off - ch:00,  note:34,  vel:40 time:237
-note_off - ch:00,  note:52,  vel:40 time:0
-note_on  - ch:00,  note:53,  vel:5C time:0
-note_on  - ch:00,  note:38,  vel:3D time:0
-note_on  - ch:00,  note:3E,  vel:3D time:0
-note_off - ch:00,  note:53,  vel:40 time:75
-note_off - ch:00,  note:3E,  vel:40 time:4
-note_off - ch:00,  note:38,  vel:40 time:0
-note_on  - ch:00,  note:4C,  vel:5D time:158
-note_on  - ch:00,  note:38,  vel:3D time:0
-note_on  - ch:00,  note:3E,  vel:3D time:0
-note_off - ch:00,  note:38,  vel:40 time:67
-note_off - ch:00,  note:3E,  vel:40 time:0
-note_off - ch:00,  note:4C,  vel:40 time:34
-note_on  - ch:00,  note:4A,  vel:5D time:1
-note_off - ch:00,  note:4A,  vel:40 time:101
-note_on  - ch:00,  note:49,  vel:5D time:0
-note_on  - ch:00,  note:38,  vel:3D time:0
-note_on  - ch:00,  note:3E,  vel:3D time:0
-note_off - ch:00,  note:38,  vel:40 time:67
-note_off - ch:00,  note:3E,  vel:40 time:0
-note_off - ch:00,  note:49,  vel:40 time:34
-note_on  - ch:00,  note:47,  vel:5D time:0
-note_off - ch:00,  note:47,  vel:40 time:101
-note_on  - ch:00,  note:45,  vel:5D time:0
-note_on  - ch:00,  note:39,  vel:49 time:0
-note_off - ch:00,  note:39,  vel:40 time:75
-note_off - ch:00,  note:45,  vel:40 time:42
-note_on  - ch:00,  note:47,  vel:5D time:0
-note_off - ch:00,  note:47,  vel:40 time:117
-note_on  - ch:00,  note:49,  vel:5D time:0
-note_on  - ch:00,  note:3D,  vel:39 time:0
-note_on  - ch:00,  note:40,  vel:39 time:0
-note_off - ch:00,  note:3D,  vel:40 time:96
-note_off - ch:00,  note:40,  vel:40 time:0
-note_off - ch:00,  note:49,  vel:40 time:21
-note_on  - ch:00,  note:4A,  vel:5D time:1
-note_off - ch:00,  note:4A,  vel:40 time:117
-note_on  - ch:00,  note:4C,  vel:5D time:0
-note_on  - ch:00,  note:3D,  vel:39 time:0
-note_on  - ch:00,  note:40,  vel:39 time:0
-note_off - ch:00,  note:3D,  vel:40 time:96
-note_off - ch:00,  note:40,  vel:40 time:0
-note_off - ch:00,  note:4C,  vel:40 time:21
-note_on  - ch:00,  note:4E,  vel:5D time:0
-note_off - ch:00,  note:4E,  vel:40 time:117
-note_on  - ch:00,  note:50,  vel:5D time:0
-note_on  - ch:00,  note:3D,  vel:39 time:0
-note_on  - ch:00,  note:40,  vel:39 time:0
-note_off - ch:00,  note:3D,  vel:40 time:96
-note_off - ch:00,  note:40,  vel:40 time:0
-note_off - ch:00,  note:50,  vel:40 time:21
-note_on  - ch:00,  note:51,  vel:5D time:0
-note_off - ch:00,  note:51,  vel:40 time:93
-note_on  - ch:00,  note:51,  vel:62 time:24
-note_on  - ch:00,  note:3B,  vel:41 time:0
-note_off - ch:00,  note:3B,  vel:40 time:71
-note_on  - ch:00,  note:50,  vel:5D time:38
-note_off - ch:00,  note:51,  vel:40 time:30
-note_off - ch:00,  note:50,  vel:40 time:79
-note_on  - ch:00,  note:4E,  vel:5D time:0
-note_on  - ch:00,  note:3E,  vel:39 time:0
-note_on  - ch:00,  note:40,  vel:39 time:0
-note_off - ch:00,  note:3E,  vel:40 time:89
-note_off - ch:00,  note:40,  vel:40 time:0
-note_on  - ch:00,  note:4C,  vel:5D time:19
-note_off - ch:00,  note:4E,  vel:40 time:1
-note_off - ch:00,  note:4C,  vel:40 time:108
-note_on  - ch:00,  note:4C,  vel:5D time:0
-note_on  - ch:00,  note:38,  vel:41 time:0
-note_off - ch:00,  note:38,  vel:40 time:75
-note_off - ch:00,  note:4C,  vel:40 time:39
-note_on  - ch:00,  note:4A,  vel:5D time:1
-note_off - ch:00,  note:4A,  vel:40 time:114
-note_on  - ch:00,  note:49,  vel:5D time:0
-note_on  - ch:00,  note:3E,  vel:39 time:0
-note_on  - ch:00,  note:40,  vel:39 time:0
-note_off - ch:00,  note:3E,  vel:40 time:94
-note_off - ch:00,  note:40,  vel:40 time:0
-note_off - ch:00,  note:49,  vel:40 time:20
-note_on  - ch:00,  note:47,  vel:5D time:0
-note_off - ch:00,  note:47,  vel:40 time:114
-note_on  - ch:00,  note:49,  vel:58 time:0
-note_on  - ch:00,  note:39,  vel:42 time:0
-note_off - ch:00,  note:39,  vel:40 time:72
-note_off - ch:00,  note:49,  vel:40 time:39
-note_on  - ch:00,  note:4C,  vel:53 time:1
-note_off - ch:00,  note:4C,  vel:40 time:111
-note_on  - ch:00,  note:45,  vel:4D time:0
-note_on  - ch:00,  note:36,  vel:42 time:0
-note_off - ch:00,  note:36,  vel:40 time:72
-note_off - ch:00,  note:45,  vel:40 time:39
-note_on  - ch:00,  note:49,  vel:49 time:0
-note_off - ch:00,  note:49,  vel:40 time:111
-note_on  - ch:00,  note:47,  vel:43 time:1
-note_on  - ch:00,  note:32,  vel:42 time:0
-note_off - ch:00,  note:32,  vel:40 time:72
-note_off - ch:00,  note:47,  vel:40 time:39
-note_on  - ch:00,  note:4A,  vel:42 time:0
-note_off - ch:00,  note:4A,  vel:40 time:111
-note_on  - ch:00,  note:44,  vel:40 time:0
-note_on  - ch:00,  note:34,  vel:42 time:0
-note_off - ch:00,  note:34,  vel:40 time:72
-note_off - ch:00,  note:44,  vel:40 time:39
-note_on  - ch:00,  note:47,  vel:3D time:1
-note_off - ch:00,  note:47,  vel:40 time:111
-note_on  - ch:00,  note:45,  vel:3E time:0
-note_on  - ch:00,  note:2D,  vel:3E time:0
-note_off - ch:00,  note:2D,  vel:40 time:58
-note_off - ch:00,  note:45,  vel:40 time:68
-note_on  - ch:00,  note:39,  vel:3E time:168
-note_off - ch:00,  note:39,  vel:40 time:333
-note_on  - ch:00,  note:55,  vel:3C time:171
-note_off - ch:00,  note:55,  vel:40 time:140
-note_on  - ch:00,  note:56,  vel:3C time:0
-note_off - ch:00,  note:56,  vel:40 time:140
-note_on  - ch:00,  note:55,  vel:3C time:0
-note_on  - ch:00,  note:53,  vel:3C time:139
-note_off - ch:00,  note:55,  vel:40 time:1
-note_off - ch:00,  note:53,  vel:40 time:139
-note_on  - ch:00,  note:51,  vel:3C time:0
-note_on  - ch:00,  note:36,  vel:31 time:0
-note_on  - ch:00,  note:53,  vel:3C time:122
-note_off - ch:00,  note:51,  vel:40 time:1
-note_off - ch:00,  note:53,  vel:40 time:122
-note_on  - ch:00,  note:51,  vel:3C time:0
-note_on  - ch:00,  note:39,  vel:31 time:0
-note_on  - ch:00,  note:3D,  vel:31 time:0
-note_off - ch:00,  note:36,  vel:40 time:1
-note_off - ch:00,  note:3D,  vel:40 time:78
-note_off - ch:00,  note:39,  vel:40 time:0
-note_off - ch:00,  note:51,  vel:40 time:44
-note_on  - ch:00,  note:50,  vel:3C time:0
-note_off - ch:00,  note:50,  vel:40 time:123
-note_on  - ch:00,  note:4E,  vel:3C time:0
-note_on  - ch:00,  note:39,  vel:31 time:0
-note_on  - ch:00,  note:3D,  vel:31 time:0
-note_off - ch:00,  note:39,  vel:40 time:79
-note_off - ch:00,  note:3D,  vel:40 time:0
-note_off - ch:00,  note:4E,  vel:40 time:44
-note_on  - ch:00,  note:51,  vel:3C time:0
-note_off - ch:00,  note:51,  vel:40 time:123
-note_on  - ch:00,  note:50,  vel:3C time:0
-note_on  - ch:00,  note:39,  vel:31 time:0
-note_on  - ch:00,  note:3D,  vel:31 time:0
-note_off - ch:00,  note:39,  vel:40 time:79
-note_off - ch:00,  note:3D,  vel:40 time:0
-note_on  - ch:00,  note:4E,  vel:3C time:43
-note_off - ch:00,  note:50,  vel:40 time:1
-note_off - ch:00,  note:4E,  vel:40 time:122
-note_on  - ch:00,  note:4D,  vel:3C time:0
-note_on  - ch:00,  note:38,  vel:31 time:0
-note_off - ch:00,  note:38,  vel:40 time:63
-note_off - ch:00,  note:4D,  vel:40 time:53
-note_on  - ch:00,  note:4E,  vel:3C time:0
-note_off - ch:00,  note:4E,  vel:40 time:116
-note_on  - ch:00,  note:50,  vel:3C time:0
-note_on  - ch:00,  note:3B,  vel:31 time:0
-note_on  - ch:00,  note:3D,  vel:31 time:0
-note_off - ch:00,  note:3B,  vel:40 time:74
-note_off - ch:00,  note:3D,  vel:40 time:0
-note_on  - ch:00,  note:4D,  vel:3C time:41
-note_off - ch:00,  note:50,  vel:40 time:1
-note_off - ch:00,  note:4D,  vel:40 time:115
-note_on  - ch:00,  note:49,  vel:3C time:0
-note_on  - ch:00,  note:3B,  vel:31 time:0
-note_on  - ch:00,  note:3D,  vel:31 time:0
-note_off - ch:00,  note:3B,  vel:40 time:74
-note_off - ch:00,  note:3D,  vel:40 time:0
-note_on  - ch:00,  note:4B,  vel:39 time:42
-note_off - ch:00,  note:49,  vel:40 time:69
-note_on  - ch:00,  note:4D,  vel:3C time:46
-note_on  - ch:00,  note:3B,  vel:31 time:0
-note_on  - ch:00,  note:3D,  vel:31 time:0
-note_off - ch:00,  note:4B,  vel:40 time:1
-note_off - ch:00,  note:3D,  vel:40 time:73
-note_off - ch:00,  note:3B,  vel:40 time:0
-note_off - ch:00,  note:4D,  vel:40 time:42
-note_on  - ch:00,  note:49,  vel:3C time:0
-note_off - ch:00,  note:49,  vel:40 time:116
-note_on  - ch:00,  note:4E,  vel:3C time:0
-note_on  - ch:00,  note:36,  vel:31 time:0
-note_off - ch:00,  note:36,  vel:40 time:61
-note_off - ch:00,  note:4E,  vel:40 time:51
-note_on  - ch:00,  note:4D,  vel:3C time:0
-note_off - ch:00,  note:4D,  vel:40 time:112
-note_on  - ch:00,  note:4E,  vel:3C time:0
-note_on  - ch:00,  note:39,  vel:31 time:0
-note_on  - ch:00,  note:3D,  vel:31 time:0
-note_off - ch:00,  note:39,  vel:40 time:72
-note_off - ch:00,  note:3D,  vel:40 time:0
-note_off - ch:00,  note:4E,  vel:40 time:40
-note_on  - ch:00,  note:50,  vel:3C time:0
-note_off - ch:00,  note:50,  vel:40 time:112
-note_on  - ch:00,  note:51,  vel:3C time:0
-note_on  - ch:00,  note:39,  vel:31 time:0
-note_on  - ch:00,  note:3D,  vel:31 time:0
-note_off - ch:00,  note:39,  vel:40 time:72
-note_off - ch:00,  note:3D,  vel:40 time:0
-note_on  - ch:00,  note:50,  vel:3C time:39
-note_off - ch:00,  note:51,  vel:40 time:1
-note_off - ch:00,  note:50,  vel:40 time:111
-note_on  - ch:00,  note:51,  vel:3C time:0
-note_on  - ch:00,  note:39,  vel:31 time:0
-note_on  - ch:00,  note:3D,  vel:31 time:0
-note_off - ch:00,  note:39,  vel:40 time:72
-note_off - ch:00,  note:3D,  vel:40 time:0
-note_off - ch:00,  note:51,  vel:40 time:40
-note_on  - ch:00,  note:53,  vel:3C time:0
-note_off - ch:00,  note:53,  vel:40 time:112
-note_on  - ch:00,  note:55,  vel:3C time:0
-note_on  - ch:00,  note:31,  vel:31 time:0
-note_off - ch:00,  note:31,  vel:40 time:108
-note_off - ch:00,  note:55,  vel:40 time:6
-note_on  - ch:00,  note:54,  vel:3C time:1
-note_off - ch:00,  note:54,  vel:40 time:114
-note_on  - ch:00,  note:55,  vel:46 time:0
-note_on  - ch:00,  note:38,  vel:31 time:0
-note_on  - ch:00,  note:3D,  vel:31 time:0
-note_off - ch:00,  note:38,  vel:40 time:64
-note_off - ch:00,  note:3D,  vel:40 time:0
-note_off - ch:00,  note:55,  vel:40 time:50
-note_on  - ch:00,  note:54,  vel:46 time:0
-note_off - ch:00,  note:54,  vel:40 time:114
-note_on  - ch:00,  note:55,  vel:4A time:0
-note_on  - ch:00,  note:37,  vel:31 time:0
-note_on  - ch:00,  note:3D,  vel:31 time:0
-note_off - ch:00,  note:37,  vel:40 time:64
-note_off - ch:00,  note:3D,  vel:40 time:0
-note_off - ch:00,  note:55,  vel:40 time:50
-note_on  - ch:00,  note:54,  vel:4A time:1
-note_off - ch:00,  note:54,  vel:40 time:114
-note_on  - ch:00,  note:55,  vel:4A time:0
-note_on  - ch:00,  note:36,  vel:31 time:0
-note_on  - ch:00,  note:3D,  vel:31 time:0
-note_off - ch:00,  note:36,  vel:40 time:64
-note_off - ch:00,  note:3D,  vel:40 time:0
-note_off - ch:00,  note:55,  vel:40 time:50
-note_on  - ch:00,  note:52,  vel:4A time:0
-note_off - ch:00,  note:52,  vel:40 time:114
-note_on  - ch:00,  note:56,  vel:4A time:0
-note_on  - ch:00,  note:2F,  vel:31 time:0
-note_off - ch:00,  note:2F,  vel:40 time:107
-note_off - ch:00,  note:56,  vel:40 time:7
-note_on  - ch:00,  note:55,  vel:4A time:0
-note_off - ch:00,  note:55,  vel:40 time:114
-note_on  - ch:00,  note:56,  vel:4A time:0
-note_on  - ch:00,  note:36,  vel:31 time:0
-note_on  - ch:00,  note:3B,  vel:31 time:0
-note_off - ch:00,  note:36,  vel:40 time:55
-note_off - ch:00,  note:3B,  vel:40 time:0
-note_off - ch:00,  note:56,  vel:40 time:59
-note_on  - ch:00,  note:55,  vel:4A time:0
-note_off - ch:00,  note:55,  vel:40 time:114
-note_on  - ch:00,  note:56,  vel:4A time:0
-note_on  - ch:00,  note:36,  vel:31 time:0
-note_on  - ch:00,  note:3B,  vel:31 time:0
-note_off - ch:00,  note:36,  vel:40 time:55
-note_off - ch:00,  note:3B,  vel:40 time:0
-note_off - ch:00,  note:56,  vel:40 time:59
-note_on  - ch:00,  note:55,  vel:4A time:0
-note_on  - ch:00,  note:56,  vel:4A time:113
-note_on  - ch:00,  note:36,  vel:31 time:0
-note_on  - ch:00,  note:3B,  vel:31 time:0
-note_off - ch:00,  note:55,  vel:40 time:1
-note_off - ch:00,  note:3B,  vel:40 time:54
-note_off - ch:00,  note:36,  vel:40 time:0
-note_off - ch:00,  note:56,  vel:40 time:59
-note_on  - ch:00,  note:55,  vel:4A time:0
-note_off - ch:00,  note:55,  vel:40 time:114
-note_on  - ch:00,  note:56,  vel:4A time:0
-note_on  - ch:00,  note:2F,  vel:31 time:0
-note_off - ch:00,  note:2F,  vel:40 time:104
-note_off - ch:00,  note:56,  vel:40 time:6
-note_on  - ch:00,  note:55,  vel:4A time:0
-note_off - ch:00,  note:55,  vel:40 time:110
-note_on  - ch:00,  note:53,  vel:4A time:0
-note_on  - ch:00,  note:38,  vel:31 time:0
-note_on  - ch:00,  note:3B,  vel:31 time:0
-note_off - ch:00,  note:38,  vel:40 time:53
-note_off - ch:00,  note:3B,  vel:40 time:0
-note_off - ch:00,  note:53,  vel:40 time:57
-note_on  - ch:00,  note:51,  vel:4A time:1
-note_off - ch:00,  note:51,  vel:40 time:110
-note_on  - ch:00,  note:50,  vel:4A time:0
-note_on  - ch:00,  note:38,  vel:31 time:0
-note_on  - ch:00,  note:3B,  vel:31 time:0
-note_off - ch:00,  note:38,  vel:40 time:56
-note_off - ch:00,  note:3B,  vel:40 time:0
-note_off - ch:00,  note:50,  vel:40 time:59
-note_on  - ch:00,  note:51,  vel:4A time:0
-note_off - ch:00,  note:51,  vel:40 time:115
-note_on  - ch:00,  note:53,  vel:4A time:1
-note_on  - ch:00,  note:38,  vel:31 time:0
-note_on  - ch:00,  note:3B,  vel:31 time:0
-note_off - ch:00,  note:38,  vel:40 time:56
-note_off - ch:00,  note:3B,  vel:40 time:0
-note_off - ch:00,  note:53,  vel:40 time:59
-note_on  - ch:00,  note:50,  vel:4A time:0
-note_off - ch:00,  note:50,  vel:40 time:115
-note_on  - ch:00,  note:51,  vel:4A time:0
-note_on  - ch:00,  note:31,  vel:3F time:5
-note_off - ch:00,  note:31,  vel:40 time:81
-note_off - ch:00,  note:51,  vel:40 time:32
-note_on  - ch:00,  note:53,  vel:4A time:1
-note_off - ch:00,  note:53,  vel:40 time:118
-note_on  - ch:00,  note:55,  vel:4A time:0
-note_on  - ch:00,  note:36,  vel:31 time:0
-note_on  - ch:00,  note:39,  vel:31 time:0
-note_off - ch:00,  note:36,  vel:40 time:85
-note_off - ch:00,  note:39,  vel:40 time:0
-note_off - ch:00,  note:55,  vel:40 time:33
-note_on  - ch:00,  note:4E,  vel:4A time:0
-note_off - ch:00,  note:4E,  vel:40 time:118
-note_on  - ch:00,  note:4D,  vel:4A time:0
-note_on  - ch:00,  note:31,  vel:3F time:5
-note_off - ch:00,  note:31,  vel:40 time:84
-note_off - ch:00,  note:4D,  vel:40 time:34
-note_on  - ch:00,  note:4E,  vel:4A time:1
-note_off - ch:00,  note:4E,  vel:40 time:123
-note_on  - ch:00,  note:50,  vel:4A time:0
-note_on  - ch:00,  note:38,  vel:31 time:0
-note_on  - ch:00,  note:3B,  vel:31 time:0
-note_off - ch:00,  note:38,  vel:40 time:102
-note_off - ch:00,  note:3B,  vel:40 time:0
-note_off - ch:00,  note:50,  vel:40 time:40
-note_on  - ch:00,  note:4D,  vel:44 time:0
-note_off - ch:00,  note:4D,  vel:40 time:142
-note_on  - ch:00,  note:4E,  vel:40 time:0
-note_on  - ch:00,  note:36,  vel:31 time:0
-note_on  - ch:00,  note:39,  vel:23 time:0
-note_off - ch:00,  note:4E,  vel:40 time:514
-note_off - ch:00,  note:39,  vel:40 time:0
-note_off - ch:00,  note:36,  vel:40 time:0
-note_on  - ch:00,  note:4C,  vel:5B time:0
-note_on  - ch:00,  note:4A,  vel:5B time:100
-note_off - ch:00,  note:4C,  vel:40 time:1
-note_off - ch:00,  note:4A,  vel:40 time:100
-note_on  - ch:00,  note:49,  vel:5B time:0
-note_off - ch:00,  note:49,  vel:40 time:101
-note_on  - ch:00,  note:47,  vel:57 time:0
-note_off - ch:00,  note:47,  vel:40 time:101
-note_on  - ch:00,  note:45,  vel:53 time:0
-note_on  - ch:00,  note:39,  vel:4C time:0
-note_off - ch:00,  note:45,  vel:40 time:115
-note_on  - ch:00,  note:47,  vel:56 time:0
-note_off - ch:00,  note:39,  vel:40 time:5
-note_off - ch:00,  note:47,  vel:40 time:110
-note_on  - ch:00,  note:49,  vel:5B time:0
-note_on  - ch:00,  note:3D,  vel:31 time:0
-note_on  - ch:00,  note:40,  vel:31 time:0
-note_off - ch:00,  note:3D,  vel:40 time:70
-note_off - ch:00,  note:40,  vel:40 time:0
-note_off - ch:00,  note:49,  vel:40 time:45
-note_on  - ch:00,  note:4A,  vel:5B time:1
-note_off - ch:00,  note:4A,  vel:40 time:115
-note_on  - ch:00,  note:4C,  vel:5B time:0
-note_on  - ch:00,  note:3D,  vel:31 time:0
-note_on  - ch:00,  note:40,  vel:31 time:0
-note_off - ch:00,  note:3D,  vel:40 time:71
-note_off - ch:00,  note:40,  vel:40 time:0
-note_off - ch:00,  note:4C,  vel:40 time:47
-note_on  - ch:00,  note:4E,  vel:5B time:0
-note_off - ch:00,  note:4E,  vel:40 time:118
-note_on  - ch:00,  note:50,  vel:5D time:0
-note_on  - ch:00,  note:3D,  vel:31 time:0
-note_on  - ch:00,  note:40,  vel:31 time:0
-note_off - ch:00,  note:3D,  vel:40 time:71
-note_off - ch:00,  note:40,  vel:40 time:0
-note_off - ch:00,  note:50,  vel:40 time:47
-note_on  - ch:00,  note:51,  vel:5D time:1
-note_off - ch:00,  note:51,  vel:40 time:93
-note_on  - ch:00,  note:51,  vel:5D time:25
-note_on  - ch:00,  note:3B,  vel:4C time:0
-note_on  - ch:00,  note:50,  vel:5B time:109
-note_off - ch:00,  note:3B,  vel:40 time:5
-note_off - ch:00,  note:51,  vel:40 time:84
-note_off - ch:00,  note:50,  vel:40 time:21
-note_on  - ch:00,  note:4E,  vel:5B time:0
-note_on  - ch:00,  note:3E,  vel:31 time:0
-note_on  - ch:00,  note:40,  vel:31 time:0
-note_off - ch:00,  note:3E,  vel:40 time:66
-note_off - ch:00,  note:40,  vel:40 time:0
-note_on  - ch:00,  note:4C,  vel:5B time:43
-note_off - ch:00,  note:4E,  vel:40 time:1
-note_off - ch:00,  note:4C,  vel:40 time:109
-note_on  - ch:00,  note:4C,  vel:5B time:0
-note_on  - ch:00,  note:38,  vel:4C time:0
-note_off - ch:00,  note:4C,  vel:40 time:112
-note_on  - ch:00,  note:4A,  vel:5B time:0
-note_off - ch:00,  note:38,  vel:40 time:5
-note_off - ch:00,  note:4A,  vel:40 time:107
-note_on  - ch:00,  note:49,  vel:57 time:0
-note_on  - ch:00,  note:3E,  vel:31 time:0
-note_on  - ch:00,  note:40,  vel:31 time:0
-note_off - ch:00,  note:3E,  vel:40 time:68
-note_off - ch:00,  note:40,  vel:40 time:0
-note_off - ch:00,  note:49,  vel:40 time:44
-note_on  - ch:00,  note:47,  vel:54 time:1
-note_off - ch:00,  note:47,  vel:40 time:112
-note_on  - ch:00,  note:45,  vel:51 time:0
-note_on  - ch:00,  note:39,  vel:4C time:0
-note_off - ch:00,  note:45,  vel:40 time:110
-note_on  - ch:00,  note:47,  vel:55 time:0
-note_off - ch:00,  note:39,  vel:40 time:5
-note_off - ch:00,  note:47,  vel:40 time:105
-note_on  - ch:00,  note:49,  vel:56 time:1
-note_on  - ch:00,  note:3D,  vel:31 time:0
-note_on  - ch:00,  note:40,  vel:31 time:0
-note_off - ch:00,  note:3D,  vel:40 time:67
-note_off - ch:00,  note:40,  vel:40 time:0
-note_off - ch:00,  note:49,  vel:40 time:43
-note_on  - ch:00,  note:4A,  vel:58 time:0
-note_off - ch:00,  note:4A,  vel:40 time:110
-note_on  - ch:00,  note:4C,  vel:5B time:0
-note_on  - ch:00,  note:3D,  vel:31 time:0
-note_on  - ch:00,  note:40,  vel:31 time:0
-note_off - ch:00,  note:3D,  vel:40 time:70
-note_off - ch:00,  note:40,  vel:40 time:0
-note_off - ch:00,  note:4C,  vel:40 time:45
-note_on  - ch:00,  note:4E,  vel:5B time:1
-note_off - ch:00,  note:4E,  vel:40 time:115
-note_on  - ch:00,  note:50,  vel:5B time:0
-note_on  - ch:00,  note:3D,  vel:31 time:0
-note_on  - ch:00,  note:40,  vel:31 time:0
-note_off - ch:00,  note:3D,  vel:40 time:70
-note_off - ch:00,  note:40,  vel:40 time:0
-note_off - ch:00,  note:50,  vel:40 time:45
-note_on  - ch:00,  note:51,  vel:5B time:0
-note_off - ch:00,  note:51,  vel:40 time:115
-note_on  - ch:00,  note:52,  vel:61 time:1
-note_on  - ch:00,  note:34,  vel:3B time:0
-note_off - ch:00,  note:52,  vel:40 time:242
-note_off - ch:00,  note:34,  vel:40 time:0
-note_on  - ch:00,  note:53,  vel:5B time:0
-note_on  - ch:00,  note:38,  vel:31 time:0
-note_on  - ch:00,  note:3E,  vel:31 time:0
-note_off - ch:00,  note:38,  vel:40 time:71
-note_off - ch:00,  note:3E,  vel:40 time:0
-note_off - ch:00,  note:53,  vel:40 time:13
-note_on  - ch:00,  note:4C,  vel:5B time:158
-note_on  - ch:00,  note:38,  vel:31 time:0
-note_on  - ch:00,  note:3E,  vel:31 time:0
-note_off - ch:00,  note:38,  vel:40 time:64
-note_off - ch:00,  note:3E,  vel:40 time:0
-note_off - ch:00,  note:4C,  vel:40 time:45
-note_on  - ch:00,  note:4A,  vel:5B time:1
-note_off - ch:00,  note:4A,  vel:40 time:109
-note_on  - ch:00,  note:49,  vel:5B time:0
-note_on  - ch:00,  note:38,  vel:31 time:0
-note_on  - ch:00,  note:3E,  vel:31 time:0
-note_off - ch:00,  note:38,  vel:40 time:64
-note_off - ch:00,  note:3E,  vel:40 time:0
-note_off - ch:00,  note:49,  vel:40 time:45
-note_on  - ch:00,  note:47,  vel:5B time:0
-note_off - ch:00,  note:47,  vel:40 time:109
-note_on  - ch:00,  note:45,  vel:5B time:1
-note_on  - ch:00,  note:39,  vel:53 time:0
-note_off - ch:00,  note:45,  vel:40 time:113
-note_on  - ch:00,  note:47,  vel:5B time:0
-note_off - ch:00,  note:39,  vel:40 time:2
-note_off - ch:00,  note:47,  vel:40 time:111
-note_on  - ch:00,  note:49,  vel:5B time:0
-note_on  - ch:00,  note:3D,  vel:31 time:0
-note_on  - ch:00,  note:40,  vel:31 time:0
-note_off - ch:00,  note:3D,  vel:40 time:75
-note_off - ch:00,  note:40,  vel:40 time:0
-note_off - ch:00,  note:49,  vel:40 time:38
-note_on  - ch:00,  note:4A,  vel:5B time:1
-note_off - ch:00,  note:4A,  vel:40 time:113
-note_on  - ch:00,  note:4C,  vel:5B time:0
-note_on  - ch:00,  note:3D,  vel:31 time:0
-note_on  - ch:00,  note:40,  vel:31 time:0
-note_off - ch:00,  note:3D,  vel:40 time:75
-note_off - ch:00,  note:40,  vel:40 time:0
-note_off - ch:00,  note:4C,  vel:40 time:38
-note_on  - ch:00,  note:4E,  vel:5B time:0
-note_off - ch:00,  note:4E,  vel:40 time:113
-note_on  - ch:00,  note:50,  vel:5B time:1
-note_on  - ch:00,  note:3D,  vel:31 time:0
-note_on  - ch:00,  note:40,  vel:31 time:0
-note_off - ch:00,  note:3D,  vel:40 time:75
-note_off - ch:00,  note:40,  vel:40 time:0
-note_off - ch:00,  note:50,  vel:40 time:38
-note_on  - ch:00,  note:51,  vel:5B time:0
-note_off - ch:00,  note:51,  vel:40 time:113
-note_on  - ch:00,  note:51,  vel:5B time:0
-note_on  - ch:00,  note:3B,  vel:47 time:0
-note_off - ch:00,  note:51,  vel:40 time:110
-note_on  - ch:00,  note:50,  vel:5B time:0
-note_off - ch:00,  note:3B,  vel:40 time:1
-note_off - ch:00,  note:50,  vel:40 time:109
-note_on  - ch:00,  note:4E,  vel:5B time:1
-note_on  - ch:00,  note:3E,  vel:31 time:0
-note_on  - ch:00,  note:40,  vel:31 time:0
-note_off - ch:00,  note:3E,  vel:40 time:73
-note_off - ch:00,  note:40,  vel:40 time:0
-note_off - ch:00,  note:4E,  vel:40 time:37
-note_on  - ch:00,  note:4C,  vel:5B time:0
-note_off - ch:00,  note:4C,  vel:40 time:110
-note_on  - ch:00,  note:4C,  vel:5B time:0
-note_on  - ch:00,  note:38,  vel:47 time:0
-note_off - ch:00,  note:4C,  vel:40 time:110
-note_off - ch:00,  note:38,  vel:40 time:1
-note_on  - ch:00,  note:4A,  vel:5B time:0
-note_off - ch:00,  note:4A,  vel:40 time:110
-note_on  - ch:00,  note:49,  vel:5B time:0
-note_on  - ch:00,  note:3E,  vel:31 time:0
-note_on  - ch:00,  note:40,  vel:31 time:0
-note_off - ch:00,  note:3E,  vel:40 time:73
-note_off - ch:00,  note:40,  vel:40 time:0
-note_off - ch:00,  note:49,  vel:40 time:37
-note_on  - ch:00,  note:47,  vel:5B time:0
-note_off - ch:00,  note:47,  vel:40 time:110
-note_on  - ch:00,  note:49,  vel:5B time:0
-note_on  - ch:00,  note:39,  vel:41 time:0
-note_off - ch:00,  note:39,  vel:40 time:46
-note_off - ch:00,  note:49,  vel:40 time:78
-note_on  - ch:00,  note:4C,  vel:58 time:0
-note_off - ch:00,  note:4C,  vel:40 time:124
-note_on  - ch:00,  note:45,  vel:55 time:0
-note_on  - ch:00,  note:36,  vel:41 time:0
-note_off - ch:00,  note:36,  vel:40 time:46
-note_off - ch:00,  note:45,  vel:40 time:78
-note_on  - ch:00,  note:49,  vel:50 time:0
-note_on  - ch:00,  note:47,  vel:4D time:123
-note_on  - ch:00,  note:32,  vel:41 time:0
-note_off - ch:00,  note:49,  vel:40 time:1
-note_off - ch:00,  note:32,  vel:40 time:45
-note_off - ch:00,  note:47,  vel:40 time:78
-note_on  - ch:00,  note:4A,  vel:47 time:0
-note_off - ch:00,  note:4A,  vel:40 time:124
-note_on  - ch:00,  note:44,  vel:42 time:0
-note_on  - ch:00,  note:34,  vel:41 time:0
-note_off - ch:00,  note:34,  vel:40 time:46
-note_off - ch:00,  note:44,  vel:40 time:78
-note_on  - ch:00,  note:47,  vel:42 time:0
-note_on  - ch:00,  note:45,  vel:3F time:123
-note_on  - ch:00,  note:2D,  vel:3A time:0
-note_off - ch:00,  note:47,  vel:40 time:1
-note_off - ch:00,  note:2D,  vel:40 time:97
-note_on  - ch:00,  note:39,  vel:35 time:340
-note_off - ch:00,  note:39,  vel:40 time:427
-note_off - ch:00,  note:45,  vel:40 time:11
-note_on  - ch:00,  note:55,  vel:3D time:1
-note_off - ch:00,  note:55,  vel:40 time:142
-note_on  - ch:00,  note:56,  vel:3D time:0
-note_off - ch:00,  note:56,  vel:40 time:142
-note_on  - ch:00,  note:55,  vel:3D time:1
-note_off - ch:00,  note:55,  vel:40 time:142
-note_on  - ch:00,  note:53,  vel:3D time:0
-note_off - ch:00,  note:53,  vel:40 time:142
-note_on  - ch:00,  note:51,  vel:3D time:1
-note_on  - ch:00,  note:36,  vel:3A time:0
-note_off - ch:00,  note:36,  vel:40 time:69
-note_on  - ch:00,  note:53,  vel:3D time:53
-note_off - ch:00,  note:51,  vel:40 time:1
-note_off - ch:00,  note:53,  vel:40 time:122
-note_on  - ch:00,  note:51,  vel:3D time:0
-note_on  - ch:00,  note:39,  vel:31 time:0
-note_on  - ch:00,  note:3D,  vel:31 time:0
-note_off - ch:00,  note:39,  vel:40 time:60
-note_off - ch:00,  note:3D,  vel:40 time:0
-note_on  - ch:00,  note:50,  vel:3D time:62
-note_off - ch:00,  note:51,  vel:40 time:1
-note_off - ch:00,  note:50,  vel:40 time:122
-note_on  - ch:00,  note:4E,  vel:3D time:0
-note_on  - ch:00,  note:39,  vel:31 time:0
-note_on  - ch:00,  note:3D,  vel:31 time:0
-note_off - ch:00,  note:39,  vel:40 time:60
-note_off - ch:00,  note:3D,  vel:40 time:0
-note_on  - ch:00,  note:51,  vel:3D time:62
-note_off - ch:00,  note:4E,  vel:40 time:1
-note_off - ch:00,  note:51,  vel:40 time:122
-note_on  - ch:00,  note:50,  vel:3D time:0
-note_on  - ch:00,  note:39,  vel:31 time:0
-note_on  - ch:00,  note:3D,  vel:31 time:0
-note_off - ch:00,  note:39,  vel:40 time:60
-note_off - ch:00,  note:3D,  vel:40 time:0
-note_off - ch:00,  note:50,  vel:40 time:63
-note_on  - ch:00,  note:4E,  vel:3D time:0
-note_on  - ch:00,  note:4D,  vel:3D time:122
-note_on  - ch:00,  note:38,  vel:3A time:0
-note_off - ch:00,  note:4E,  vel:40 time:1
-note_off - ch:00,  note:38,  vel:40 time:62
-note_off - ch:00,  note:4D,  vel:40 time:49
-note_on  - ch:00,  note:4E,  vel:3D time:0
-note_off - ch:00,  note:4E,  vel:40 time:112
-note_on  - ch:00,  note:50,  vel:3D time:0
-note_on  - ch:00,  note:3B,  vel:31 time:0
-note_on  - ch:00,  note:3D,  vel:31 time:0
-note_off - ch:00,  note:3B,  vel:40 time:55
-note_off - ch:00,  note:3D,  vel:40 time:0
-note_off - ch:00,  note:50,  vel:40 time:57
-note_on  - ch:00,  note:4D,  vel:3D time:1
-note_off - ch:00,  note:4D,  vel:40 time:112
-note_on  - ch:00,  note:49,  vel:3D time:0
-note_on  - ch:00,  note:3B,  vel:31 time:0
-note_on  - ch:00,  note:3D,  vel:31 time:0
-note_off - ch:00,  note:3B,  vel:40 time:55
-note_off - ch:00,  note:3D,  vel:40 time:0
-note_on  - ch:00,  note:4B,  vel:3D time:57
-note_off - ch:00,  note:49,  vel:40 time:67
-note_off - ch:00,  note:4B,  vel:40 time:45
-note_on  - ch:00,  note:4D,  vel:3D time:0
-note_on  - ch:00,  note:3B,  vel:31 time:0
-note_on  - ch:00,  note:3D,  vel:31 time:0
-note_off - ch:00,  note:3B,  vel:40 time:55
-note_off - ch:00,  note:3D,  vel:40 time:0
-note_off - ch:00,  note:4D,  vel:40 time:57
-note_on  - ch:00,  note:49,  vel:3D time:0
-note_off - ch:00,  note:49,  vel:40 time:112
-note_on  - ch:00,  note:4E,  vel:3D time:1
-note_on  - ch:00,  note:36,  vel:3A time:0
-note_off - ch:00,  note:36,  vel:40 time:64
-note_on  - ch:00,  note:4D,  vel:3D time:48
-note_off - ch:00,  note:4E,  vel:40 time:1
-note_off - ch:00,  note:4D,  vel:40 time:112
-note_on  - ch:00,  note:4E,  vel:3D time:0
-note_on  - ch:00,  note:39,  vel:31 time:0
-note_on  - ch:00,  note:3D,  vel:31 time:0
-note_off - ch:00,  note:39,  vel:40 time:55
-note_off - ch:00,  note:3D,  vel:40 time:0
-note_off - ch:00,  note:4E,  vel:40 time:58
-note_on  - ch:00,  note:50,  vel:3D time:0
-note_on  - ch:00,  note:51,  vel:3D time:112
-note_on  - ch:00,  note:39,  vel:31 time:0
-note_on  - ch:00,  note:3D,  vel:31 time:0
-note_off - ch:00,  note:50,  vel:40 time:1
-note_off - ch:00,  note:3D,  vel:40 time:57
-note_off - ch:00,  note:39,  vel:40 time:0
-note_off - ch:00,  note:51,  vel:40 time:61
-note_on  - ch:00,  note:50,  vel:3D time:0
-note_off - ch:00,  note:50,  vel:40 time:119
-note_on  - ch:00,  note:51,  vel:3D time:0
-note_on  - ch:00,  note:39,  vel:31 time:0
-note_on  - ch:00,  note:3D,  vel:31 time:0
-note_off - ch:00,  note:39,  vel:40 time:58
-note_off - ch:00,  note:3D,  vel:40 time:0
-note_off - ch:00,  note:51,  vel:40 time:61
-note_on  - ch:00,  note:53,  vel:3D time:0
-note_off - ch:00,  note:53,  vel:40 time:119
-note_on  - ch:00,  note:55,  vel:3D time:0
-note_on  - ch:00,  note:31,  vel:40 time:0
-note_off - ch:00,  note:31,  vel:40 time:89
-note_on  - ch:00,  note:54,  vel:3D time:30
-note_off - ch:00,  note:55,  vel:40 time:1
-note_off - ch:00,  note:54,  vel:40 time:119
-note_on  - ch:00,  note:55,  vel:3D time:0
-note_on  - ch:00,  note:38,  vel:38 time:0
-note_on  - ch:00,  note:3D,  vel:38 time:0
-note_off - ch:00,  note:38,  vel:40 time:65
-note_off - ch:00,  note:3D,  vel:40 time:0
-note_off - ch:00,  note:55,  vel:40 time:55
-note_on  - ch:00,  note:54,  vel:3D time:0
-note_off - ch:00,  note:54,  vel:40 time:120
-note_on  - ch:00,  note:55,  vel:3D time:0
-note_on  - ch:00,  note:37,  vel:38 time:0
-note_on  - ch:00,  note:3D,  vel:38 time:0
-note_off - ch:00,  note:37,  vel:40 time:61
-note_off - ch:00,  note:3D,  vel:40 time:0
-note_on  - ch:00,  note:54,  vel:3D time:51
-note_off - ch:00,  note:55,  vel:40 time:1
-note_off - ch:00,  note:54,  vel:40 time:112
-note_on  - ch:00,  note:55,  vel:3D time:0
-note_on  - ch:00,  note:36,  vel:38 time:0
-note_on  - ch:00,  note:3D,  vel:38 time:0
-note_off - ch:00,  note:36,  vel:40 time:61
-note_off - ch:00,  note:3D,  vel:40 time:0
-note_off - ch:00,  note:55,  vel:40 time:52
-note_on  - ch:00,  note:52,  vel:3D time:0
-note_on  - ch:00,  note:56,  vel:3D time:112
-note_on  - ch:00,  note:2F,  vel:40 time:0
-note_off - ch:00,  note:52,  vel:40 time:1
-note_off - ch:00,  note:2F,  vel:40 time:95
-note_off - ch:00,  note:56,  vel:40 time:20
-note_on  - ch:00,  note:55,  vel:3D time:1
-note_off - ch:00,  note:55,  vel:40 time:116
-note_on  - ch:00,  note:56,  vel:3D time:0
-note_on  - ch:00,  note:36,  vel:36 time:0
-note_on  - ch:00,  note:3B,  vel:36 time:0
-note_off - ch:00,  note:36,  vel:40 time:43
-note_off - ch:00,  note:3B,  vel:40 time:0
-note_off - ch:00,  note:56,  vel:40 time:73
-note_on  - ch:00,  note:55,  vel:3D time:1
-note_off - ch:00,  note:55,  vel:40 time:116
-note_on  - ch:00,  note:56,  vel:3D time:0
-note_on  - ch:00,  note:36,  vel:36 time:0
-note_on  - ch:00,  note:3B,  vel:36 time:0
-note_off - ch:00,  note:36,  vel:40 time:43
-note_off - ch:00,  note:3B,  vel:40 time:0
-note_off - ch:00,  note:56,  vel:40 time:73
-note_on  - ch:00,  note:55,  vel:3D time:1
-note_off - ch:00,  note:55,  vel:40 time:116
-note_on  - ch:00,  note:56,  vel:3D time:0
-note_on  - ch:00,  note:36,  vel:36 time:0
-note_on  - ch:00,  note:3B,  vel:36 time:0
-note_off - ch:00,  note:36,  vel:40 time:43
-note_off - ch:00,  note:3B,  vel:40 time:0
-note_off - ch:00,  note:56,  vel:40 time:73
-note_on  - ch:00,  note:55,  vel:3D time:1
-note_off - ch:00,  note:55,  vel:40 time:116
-note_on  - ch:00,  note:56,  vel:3D time:0
-note_on  - ch:00,  note:2F,  vel:40 time:0
-note_off - ch:00,  note:2F,  vel:40 time:93
-note_off - ch:00,  note:56,  vel:40 time:20
-note_on  - ch:00,  note:55,  vel:3D time:1
-note_off - ch:00,  note:55,  vel:40 time:113
-note_on  - ch:00,  note:53,  vel:3D time:0
-note_on  - ch:00,  note:38,  vel:36 time:0
-note_on  - ch:00,  note:3B,  vel:36 time:0
-note_off - ch:00,  note:38,  vel:40 time:42
-note_off - ch:00,  note:3B,  vel:40 time:0
-note_off - ch:00,  note:53,  vel:40 time:71
-note_on  - ch:00,  note:51,  vel:3D time:0
-note_off - ch:00,  note:51,  vel:40 time:113
-note_on  - ch:00,  note:50,  vel:3D time:0
-note_on  - ch:00,  note:38,  vel:36 time:0
-note_on  - ch:00,  note:3B,  vel:36 time:0
-note_off - ch:00,  note:38,  vel:40 time:42
-note_off - ch:00,  note:3B,  vel:40 time:0
-note_off - ch:00,  note:50,  vel:40 time:71
-note_on  - ch:00,  note:51,  vel:3D time:0
-note_off - ch:00,  note:51,  vel:40 time:113
-note_on  - ch:00,  note:53,  vel:3D time:0
-note_on  - ch:00,  note:38,  vel:36 time:0
-note_on  - ch:00,  note:3B,  vel:36 time:0
-note_off - ch:00,  note:38,  vel:40 time:42
-note_off - ch:00,  note:3B,  vel:40 time:0
-note_off - ch:00,  note:53,  vel:40 time:71
-note_on  - ch:00,  note:50,  vel:3D time:0
-note_off - ch:00,  note:50,  vel:40 time:113
-note_on  - ch:00,  note:51,  vel:3D time:1
-note_on  - ch:00,  note:31,  vel:38 time:0
-note_off - ch:00,  note:31,  vel:40 time:63
-note_off - ch:00,  note:51,  vel:40 time:56
-note_on  - ch:00,  note:53,  vel:3D time:0
-note_off - ch:00,  note:53,  vel:40 time:119
-note_on  - ch:00,  note:55,  vel:3D time:0
-note_on  - ch:00,  note:36,  vel:38 time:0
-note_on  - ch:00,  note:39,  vel:38 time:0
-note_off - ch:00,  note:36,  vel:40 time:73
-note_off - ch:00,  note:39,  vel:40 time:0
-note_off - ch:00,  note:55,  vel:40 time:46
-note_on  - ch:00,  note:4E,  vel:3D time:0
-note_off - ch:00,  note:4E,  vel:40 time:119
-note_on  - ch:00,  note:4D,  vel:3D time:1
-note_on  - ch:00,  note:31,  vel:38 time:0
-note_off - ch:00,  note:31,  vel:40 time:72
-note_off - ch:00,  note:4D,  vel:40 time:65
-note_on  - ch:00,  note:4E,  vel:3D time:0
-note_off - ch:00,  note:4E,  vel:40 time:137
-note_on  - ch:00,  note:50,  vel:3D time:0
-note_on  - ch:00,  note:38,  vel:38 time:0
-note_on  - ch:00,  note:3B,  vel:38 time:0
-note_off - ch:00,  note:38,  vel:40 time:84
-note_off - ch:00,  note:3B,  vel:40 time:0
-note_off - ch:00,  note:50,  vel:40 time:53
-note_on  - ch:00,  note:4D,  vel:3D time:1
-note_off - ch:00,  note:4D,  vel:40 time:137
-note_on  - ch:00,  note:4E,  vel:3D time:0
-note_on  - ch:00,  note:36,  vel:38 time:0
-note_on  - ch:00,  note:39,  vel:38 time:0
-note_off - ch:00,  note:4E,  vel:40 time:588
-note_off - ch:00,  note:39,  vel:40 time:94
-note_off - ch:00,  note:36,  vel:40 time:0
-note_on  - ch:00,  note:45,  vel:64 time:0
-note_on  - ch:00,  note:51,  vel:64 time:0
-note_off - ch:00,  note:45,  vel:40 time:64
-note_off - ch:00,  note:51,  vel:40 time:0
-note_on  - ch:00,  note:47,  vel:64 time:257
-note_on  - ch:00,  note:53,  vel:64 time:0
-note_off - ch:00,  note:47,  vel:40 time:64
-note_off - ch:00,  note:53,  vel:40 time:0
-note_on  - ch:00,  note:2D,  vel:48 time:195
-note_on  - ch:00,  note:31,  vel:48 time:30
-note_on  - ch:00,  note:34,  vel:48 time:13
-note_on  - ch:00,  note:49,  vel:64 time:19
-note_on  - ch:00,  note:55,  vel:64 time:0
-note_on  - ch:00,  note:39,  vel:59 time:15
-note_off - ch:00,  note:2D,  vel:40 time:173
-note_off - ch:00,  note:31,  vel:40 time:22
-note_off - ch:00,  note:34,  vel:40 time:9
-note_off - ch:00,  note:39,  vel:40 time:8
-note_on  - ch:00,  note:39,  vel:46 time:5
-note_off - ch:00,  note:39,  vel:40 time:69
-note_on  - ch:00,  note:45,  vel:64 time:164
-note_on  - ch:00,  note:51,  vel:64 time:0
-note_on  - ch:00,  note:39,  vel:46 time:0
-note_off - ch:00,  note:55,  vel:40 time:1
-note_off - ch:00,  note:49,  vel:40 time:0
-note_off - ch:00,  note:51,  vel:40 time:40
-note_off - ch:00,  note:45,  vel:40 time:0
-note_off - ch:00,  note:39,  vel:40 time:24
-note_on  - ch:00,  note:47,  vel:64 time:154
-note_on  - ch:00,  note:53,  vel:64 time:0
-note_on  - ch:00,  note:39,  vel:46 time:0
-note_off - ch:00,  note:47,  vel:40 time:41
-note_off - ch:00,  note:53,  vel:40 time:0
-note_off - ch:00,  note:39,  vel:40 time:24
-note_on  - ch:00,  note:2D,  vel:48 time:107
-note_on  - ch:00,  note:31,  vel:48 time:12
-note_on  - ch:00,  note:34,  vel:48 time:28
-note_on  - ch:00,  note:49,  vel:64 time:8
-note_on  - ch:00,  note:55,  vel:64 time:0
-note_on  - ch:00,  note:39,  vel:59 time:9
-note_off - ch:00,  note:2D,  vel:40 time:169
-note_off - ch:00,  note:49,  vel:40 time:4
-note_off - ch:00,  note:55,  vel:40 time:6
-note_off - ch:00,  note:31,  vel:40 time:3
-note_off - ch:00,  note:34,  vel:40 time:29
-note_off - ch:00,  note:39,  vel:40 time:1
-note_on  - ch:00,  note:47,  vel:64 time:7
-note_on  - ch:00,  note:53,  vel:64 time:0
-note_on  - ch:00,  note:39,  vel:46 time:0
-note_off - ch:00,  note:47,  vel:40 time:44
-note_off - ch:00,  note:53,  vel:40 time:0
-note_off - ch:00,  note:39,  vel:40 time:15
-note_on  - ch:00,  note:45,  vel:64 time:169
-note_on  - ch:00,  note:51,  vel:64 time:0
-note_on  - ch:00,  note:39,  vel:46 time:0
-note_off - ch:00,  note:45,  vel:40 time:40
-note_off - ch:00,  note:51,  vel:40 time:0
-note_off - ch:00,  note:39,  vel:40 time:14
-note_on  - ch:00,  note:44,  vel:64 time:155
-note_on  - ch:00,  note:50,  vel:64 time:0
-note_on  - ch:00,  note:39,  vel:46 time:0
-note_off - ch:00,  note:44,  vel:40 time:40
-note_off - ch:00,  note:50,  vel:40 time:0
-note_off - ch:00,  note:39,  vel:40 time:14
-note_on  - ch:00,  note:26,  vel:48 time:103
-note_on  - ch:00,  note:2A,  vel:48 time:12
-note_on  - ch:00,  note:2D,  vel:48 time:26
-note_on  - ch:00,  note:42,  vel:64 time:14
-note_on  - ch:00,  note:4E,  vel:64 time:0
-note_on  - ch:00,  note:32,  vel:59 time:5
-note_off - ch:00,  note:42,  vel:40 time:37
-note_off - ch:00,  note:4E,  vel:40 time:0
-note_off - ch:00,  note:26,  vel:40 time:121
-note_off - ch:00,  note:2A,  vel:40 time:12
-note_off - ch:00,  note:32,  vel:40 time:24
-note_off - ch:00,  note:2D,  vel:40 time:3
-note_on  - ch:00,  note:44,  vel:64 time:15
-note_on  - ch:00,  note:50,  vel:64 time:0
-note_on  - ch:00,  note:32,  vel:46 time:0
-note_off - ch:00,  note:44,  vel:40 time:42
-note_off - ch:00,  note:50,  vel:40 time:0
-note_off - ch:00,  note:32,  vel:40 time:19
-note_on  - ch:00,  note:27,  vel:48 time:99
-note_on  - ch:00,  note:2A,  vel:48 time:21
-note_on  - ch:00,  note:2D,  vel:48 time:19
-note_on  - ch:00,  note:45,  vel:64 time:17
-note_on  - ch:00,  note:51,  vel:64 time:0
-note_on  - ch:00,  note:33,  vel:59 time:5
-note_off - ch:00,  note:45,  vel:40 time:37
-note_off - ch:00,  note:51,  vel:40 time:0
-note_off - ch:00,  note:27,  vel:40 time:117
-note_off - ch:00,  note:2A,  vel:40 time:21
-note_off - ch:00,  note:2D,  vel:40 time:18
-note_off - ch:00,  note:33,  vel:40 time:0
-note_on  - ch:00,  note:47,  vel:64 time:17
-note_on  - ch:00,  note:53,  vel:64 time:0
-note_on  - ch:00,  note:33,  vel:46 time:0
-note_off - ch:00,  note:47,  vel:40 time:42
-note_off - ch:00,  note:53,  vel:40 time:0
-note_off - ch:00,  note:33,  vel:40 time:26
-note_on  - ch:00,  note:28,  vel:48 time:91
-note_on  - ch:00,  note:2C,  vel:48 time:24
-note_on  - ch:00,  note:2F,  vel:48 time:24
-note_on  - ch:00,  note:44,  vel:64 time:8
-note_on  - ch:00,  note:50,  vel:64 time:0
-note_on  - ch:00,  note:34,  vel:59 time:9
-note_off - ch:00,  note:28,  vel:40 time:159
-note_off - ch:00,  note:44,  vel:40 time:5
-note_off - ch:00,  note:50,  vel:40 time:0
-note_off - ch:00,  note:2C,  vel:40 time:20
-note_off - ch:00,  note:2F,  vel:40 time:26
-note_off - ch:00,  note:34,  vel:40 time:8
-note_on  - ch:00,  note:40,  vel:64 time:0
-note_on  - ch:00,  note:4C,  vel:64 time:0
-note_on  - ch:00,  note:34,  vel:46 time:0
-note_off - ch:00,  note:40,  vel:40 time:39
-note_off - ch:00,  note:4C,  vel:40 time:0
-note_off - ch:00,  note:34,  vel:40 time:18
-note_on  - ch:00,  note:45,  vel:64 time:171
-note_on  - ch:00,  note:51,  vel:64 time:0
-note_on  - ch:00,  note:34,  vel:46 time:0
-note_off - ch:00,  note:45,  vel:40 time:38
-note_off - ch:00,  note:51,  vel:40 time:0
-note_off - ch:00,  note:34,  vel:40 time:17
-note_on  - ch:00,  note:47,  vel:64 time:164
-note_on  - ch:00,  note:53,  vel:64 time:0
-note_on  - ch:00,  note:34,  vel:46 time:0
-note_off - ch:00,  note:47,  vel:40 time:38
-note_off - ch:00,  note:53,  vel:40 time:0
-note_off - ch:00,  note:34,  vel:40 time:17
-note_on  - ch:00,  note:2D,  vel:48 time:97
-note_on  - ch:00,  note:31,  vel:48 time:26
-note_on  - ch:00,  note:34,  vel:48 time:13
-note_on  - ch:00,  note:49,  vel:64 time:36
-note_on  - ch:00,  note:55,  vel:64 time:0
-note_on  - ch:00,  note:39,  vel:5C time:1
-note_off - ch:00,  note:2D,  vel:40 time:140
-note_off - ch:00,  note:31,  vel:40 time:25
-note_off - ch:00,  note:34,  vel:40 time:13
-note_off - ch:00,  note:39,  vel:40 time:4
-note_on  - ch:00,  note:39,  vel:44 time:24
-note_off - ch:00,  note:39,  vel:40 time:58
-note_on  - ch:00,  note:39,  vel:44 time:157
-note_off - ch:00,  note:55,  vel:40 time:8
-note_off - ch:00,  note:49,  vel:40 time:0
-note_on  - ch:00,  note:45,  vel:64 time:2
-note_on  - ch:00,  note:51,  vel:64 time:0
-note_off - ch:00,  note:45,  vel:40 time:33
-note_off - ch:00,  note:51,  vel:40 time:0
-note_off - ch:00,  note:39,  vel:40 time:15
-note_on  - ch:00,  note:39,  vel:44 time:157
-note_on  - ch:00,  note:47,  vel:64 time:10
-note_on  - ch:00,  note:53,  vel:64 time:0
-note_off - ch:00,  note:47,  vel:40 time:33
-note_off - ch:00,  note:53,  vel:40 time:0
-note_off - ch:00,  note:39,  vel:40 time:15
-note_on  - ch:00,  note:2D,  vel:48 time:84
-note_on  - ch:00,  note:31,  vel:48 time:29
-note_on  - ch:00,  note:34,  vel:48 time:19
-note_on  - ch:00,  note:39,  vel:5C time:25
-note_on  - ch:00,  note:49,  vel:64 time:10
-note_on  - ch:00,  note:55,  vel:64 time:0
-note_off - ch:00,  note:2D,  vel:40 time:131
-note_off - ch:00,  note:49,  vel:40 time:23
-note_off - ch:00,  note:55,  vel:40 time:0
-note_off - ch:00,  note:31,  vel:40 time:6
-note_off - ch:00,  note:34,  vel:40 time:19
-note_off - ch:00,  note:39,  vel:40 time:10
-note_on  - ch:00,  note:47,  vel:64 time:16
-note_on  - ch:00,  note:53,  vel:64 time:0
-note_on  - ch:00,  note:39,  vel:44 time:0
-note_off - ch:00,  note:47,  vel:40 time:33
-note_off - ch:00,  note:53,  vel:40 time:0
-note_off - ch:00,  note:39,  vel:40 time:17
-note_on  - ch:00,  note:45,  vel:64 time:165
-note_on  - ch:00,  note:51,  vel:64 time:0
-note_on  - ch:00,  note:39,  vel:44 time:0
-note_off - ch:00,  note:45,  vel:40 time:33
-note_off - ch:00,  note:51,  vel:40 time:0
-note_off - ch:00,  note:39,  vel:40 time:17
-note_on  - ch:00,  note:44,  vel:64 time:165
-note_on  - ch:00,  note:50,  vel:64 time:0
-note_on  - ch:00,  note:39,  vel:44 time:0
-note_off - ch:00,  note:44,  vel:40 time:33
-note_off - ch:00,  note:50,  vel:40 time:0
-note_off - ch:00,  note:39,  vel:40 time:17
-note_on  - ch:00,  note:26,  vel:46 time:103
-note_on  - ch:00,  note:2A,  vel:46 time:20
-note_on  - ch:00,  note:2D,  vel:46 time:18
-note_on  - ch:00,  note:32,  vel:5C time:24
-note_on  - ch:00,  note:42,  vel:5B time:0
-note_on  - ch:00,  note:4E,  vel:64 time:0
-note_off - ch:00,  note:42,  vel:40 time:34
-note_off - ch:00,  note:4E,  vel:40 time:0
-note_off - ch:00,  note:26,  vel:40 time:141
-note_off - ch:00,  note:2A,  vel:40 time:21
-note_off - ch:00,  note:2D,  vel:40 time:18
-note_off - ch:00,  note:32,  vel:40 time:6
-note_on  - ch:00,  note:47,  vel:5B time:0
-note_on  - ch:00,  note:53,  vel:64 time:0
-note_on  - ch:00,  note:32,  vel:44 time:0
-note_off - ch:00,  note:47,  vel:40 time:34
-note_off - ch:00,  note:53,  vel:40 time:0
-note_off - ch:00,  note:32,  vel:40 time:54
-note_on  - ch:00,  note:28,  vel:41 time:67
-note_on  - ch:00,  note:2C,  vel:41 time:21
-note_on  - ch:00,  note:2F,  vel:41 time:24
-note_on  - ch:00,  note:34,  vel:5C time:21
-note_on  - ch:00,  note:44,  vel:5B time:0
-note_on  - ch:00,  note:50,  vel:64 time:0
-note_off - ch:00,  note:44,  vel:40 time:34
-note_off - ch:00,  note:50,  vel:40 time:0
-note_off - ch:00,  note:28,  vel:40 time:139
-note_off - ch:00,  note:2C,  vel:40 time:21
-note_off - ch:00,  note:2F,  vel:40 time:24
-note_off - ch:00,  note:34,  vel:40 time:2
-note_on  - ch:00,  note:40,  vel:5B time:0
-note_on  - ch:00,  note:4C,  vel:64 time:0
-note_on  - ch:00,  note:34,  vel:44 time:0
-note_off - ch:00,  note:40,  vel:40 time:34
-note_off - ch:00,  note:4C,  vel:40 time:0
-note_off - ch:00,  note:34,  vel:40 time:54
-note_on  - ch:00,  note:45,  vel:64 time:132
-note_on  - ch:00,  note:51,  vel:64 time:0
-note_on  - ch:00,  note:2D,  vel:44 time:0
-note_off - ch:00,  note:45,  vel:40 time:419
-note_off - ch:00,  note:51,  vel:40 time:0
-note_off - ch:00,  note:2D,  vel:40 time:26
-note_on  - ch:00,  note:45,  vel:58 time:1
-note_on  - ch:00,  note:51,  vel:63 time:0
-note_off - ch:00,  note:45,  vel:40 time:32
-note_off - ch:00,  note:51,  vel:40 time:0
-note_on  - ch:00,  note:47,  vel:5B time:190
-note_on  - ch:00,  note:53,  vel:63 time:0
-note_off - ch:00,  note:47,  vel:40 time:32
-note_off - ch:00,  note:53,  vel:40 time:0
-note_on  - ch:00,  note:2D,  vel:43 time:90
-note_on  - ch:00,  note:31,  vel:43 time:42
-note_on  - ch:00,  note:34,  vel:43 time:30
-note_on  - ch:00,  note:39,  vel:59 time:29
-note_on  - ch:00,  note:49,  vel:63 time:0
-note_on  - ch:00,  note:55,  vel:63 time:0
-note_off - ch:00,  note:2D,  vel:40 time:128
-note_off - ch:00,  note:31,  vel:40 time:40
-note_off - ch:00,  note:34,  vel:40 time:29
-note_off - ch:00,  note:39,  vel:40 time:15
-note_on  - ch:00,  note:39,  vel:42 time:0
-note_off - ch:00,  note:39,  vel:40 time:60
-note_off - ch:00,  note:49,  vel:40 time:152
-note_off - ch:00,  note:55,  vel:40 time:0
-note_on  - ch:00,  note:45,  vel:58 time:0
-note_on  - ch:00,  note:51,  vel:63 time:0
-note_on  - ch:00,  note:39,  vel:42 time:0
-note_off - ch:00,  note:45,  vel:40 time:34
-note_off - ch:00,  note:51,  vel:40 time:0
-note_off - ch:00,  note:39,  vel:40 time:26
-note_on  - ch:00,  note:47,  vel:5B time:152
-note_on  - ch:00,  note:53,  vel:63 time:0
-note_on  - ch:00,  note:39,  vel:42 time:0
-note_off - ch:00,  note:47,  vel:40 time:34
-note_off - ch:00,  note:53,  vel:40 time:0
-note_off - ch:00,  note:39,  vel:40 time:26
-note_on  - ch:00,  note:2D,  vel:43 time:87
-note_on  - ch:00,  note:31,  vel:43 time:14
-note_on  - ch:00,  note:34,  vel:43 time:32
-note_on  - ch:00,  note:39,  vel:59 time:19
-note_on  - ch:00,  note:49,  vel:5B time:0
-note_on  - ch:00,  note:55,  vel:63 time:0
-note_off - ch:00,  note:49,  vel:40 time:133
-note_off - ch:00,  note:55,  vel:40 time:0
-note_off - ch:00,  note:2D,  vel:40 time:27
-note_off - ch:00,  note:31,  vel:40 time:14
-note_off - ch:00,  note:34,  vel:40 time:32
-note_off - ch:00,  note:39,  vel:40 time:7
-note_on  - ch:00,  note:47,  vel:5B time:0
-note_on  - ch:00,  note:53,  vel:63 time:0
-note_on  - ch:00,  note:39,  vel:42 time:0
-note_off - ch:00,  note:47,  vel:40 time:35
-note_off - ch:00,  note:53,  vel:40 time:0
-note_off - ch:00,  note:39,  vel:40 time:37
-note_on  - ch:00,  note:45,  vel:5B time:141
-note_on  - ch:00,  note:51,  vel:63 time:0
-note_on  - ch:00,  note:39,  vel:42 time:0
-note_off - ch:00,  note:45,  vel:40 time:35
-note_off - ch:00,  note:51,  vel:40 time:0
-note_off - ch:00,  note:39,  vel:40 time:37
-note_on  - ch:00,  note:44,  vel:5B time:141
-note_on  - ch:00,  note:50,  vel:63 time:0
-note_on  - ch:00,  note:39,  vel:42 time:0
-note_off - ch:00,  note:44,  vel:40 time:35
-note_off - ch:00,  note:50,  vel:40 time:0
-note_off - ch:00,  note:39,  vel:40 time:37
-note_on  - ch:00,  note:26,  vel:47 time:87
-note_on  - ch:00,  note:2A,  vel:47 time:21
-note_on  - ch:00,  note:2D,  vel:47 time:16
-note_on  - ch:00,  note:32,  vel:59 time:17
-note_on  - ch:00,  note:42,  vel:5B time:0
-note_on  - ch:00,  note:4E,  vel:63 time:0
-note_off - ch:00,  note:42,  vel:40 time:34
-note_off - ch:00,  note:4E,  vel:40 time:0
-note_off - ch:00,  note:26,  vel:40 time:106
-note_off - ch:00,  note:2A,  vel:40 time:20
-note_off - ch:00,  note:2D,  vel:40 time:16
-note_off - ch:00,  note:32,  vel:40 time:35
-note_on  - ch:00,  note:44,  vel:5B time:0
-note_on  - ch:00,  note:50,  vel:63 time:0
-note_on  - ch:00,  note:32,  vel:42 time:0
-note_off - ch:00,  note:44,  vel:40 time:34
-note_off - ch:00,  note:50,  vel:40 time:0
-note_off - ch:00,  note:32,  vel:40 time:24
-note_on  - ch:00,  note:27,  vel:47 time:106
-note_on  - ch:00,  note:2A,  vel:47 time:17
-note_on  - ch:00,  note:2D,  vel:47 time:15
-note_on  - ch:00,  note:33,  vel:59 time:15
-note_on  - ch:00,  note:45,  vel:5B time:0
-note_on  - ch:00,  note:51,  vel:63 time:0
-note_off - ch:00,  note:45,  vel:40 time:34
-note_off - ch:00,  note:51,  vel:40 time:0
-note_off - ch:00,  note:27,  vel:40 time:112
-note_off - ch:00,  note:2A,  vel:40 time:17
-note_off - ch:00,  note:2D,  vel:40 time:15
-note_off - ch:00,  note:33,  vel:40 time:33
-note_on  - ch:00,  note:47,  vel:5B time:0
-note_on  - ch:00,  note:53,  vel:63 time:0
-note_on  - ch:00,  note:33,  vel:42 time:0
-note_off - ch:00,  note:47,  vel:40 time:34
-note_off - ch:00,  note:53,  vel:40 time:0
-note_off - ch:00,  note:33,  vel:40 time:24
-note_on  - ch:00,  note:28,  vel:47 time:99
-note_on  - ch:00,  note:2C,  vel:47 time:23
-note_on  - ch:00,  note:2F,  vel:47 time:7
-note_on  - ch:00,  note:34,  vel:59 time:24
-note_on  - ch:00,  note:44,  vel:5B time:0
-note_on  - ch:00,  note:50,  vel:63 time:0
-note_off - ch:00,  note:44,  vel:40 time:32
-note_off - ch:00,  note:50,  vel:40 time:0
-note_off - ch:00,  note:28,  vel:40 time:115
-note_off - ch:00,  note:2C,  vel:40 time:25
-note_off - ch:00,  note:2F,  vel:40 time:7
-note_off - ch:00,  note:34,  vel:40 time:45
-note_on  - ch:00,  note:40,  vel:5B time:0
-note_on  - ch:00,  note:4C,  vel:63 time:0
-note_on  - ch:00,  note:34,  vel:42 time:0
-note_off - ch:00,  note:40,  vel:40 time:32
-note_off - ch:00,  note:4C,  vel:40 time:0
-note_off - ch:00,  note:34,  vel:40 time:30
-note_on  - ch:00,  note:45,  vel:5B time:162
-note_on  - ch:00,  note:51,  vel:63 time:0
-note_on  - ch:00,  note:34,  vel:42 time:0
-note_off - ch:00,  note:45,  vel:40 time:32
-note_off - ch:00,  note:51,  vel:40 time:0
-note_off - ch:00,  note:34,  vel:40 time:30
-note_on  - ch:00,  note:47,  vel:5B time:161
-note_on  - ch:00,  note:53,  vel:63 time:0
-note_on  - ch:00,  note:34,  vel:42 time:0
-note_off - ch:00,  note:47,  vel:40 time:32
-note_off - ch:00,  note:53,  vel:40 time:0
-note_off - ch:00,  note:34,  vel:40 time:30
-note_on  - ch:00,  note:2D,  vel:43 time:106
-note_on  - ch:00,  note:31,  vel:43 time:20
-note_on  - ch:00,  note:34,  vel:43 time:10
-note_on  - ch:00,  note:39,  vel:5B time:26
-note_on  - ch:00,  note:49,  vel:63 time:0
-note_on  - ch:00,  note:55,  vel:63 time:0
-note_off - ch:00,  note:2D,  vel:40 time:161
-note_off - ch:00,  note:31,  vel:40 time:19
-note_off - ch:00,  note:34,  vel:40 time:10
-note_off - ch:00,  note:39,  vel:40 time:28
-note_on  - ch:00,  note:39,  vel:44 time:0
-note_off - ch:00,  note:39,  vel:40 time:58
-note_off - ch:00,  note:49,  vel:40 time:159
-note_off - ch:00,  note:55,  vel:40 time:0
-note_on  - ch:00,  note:45,  vel:5A time:1
-note_on  - ch:00,  note:51,  vel:63 time:0
-note_on  - ch:00,  note:39,  vel:44 time:0
-note_off - ch:00,  note:45,  vel:40 time:39
-note_off - ch:00,  note:51,  vel:40 time:0
-note_off - ch:00,  note:39,  vel:40 time:19
-note_on  - ch:00,  note:47,  vel:5D time:159
-note_on  - ch:00,  note:53,  vel:63 time:0
-note_on  - ch:00,  note:39,  vel:44 time:0
-note_off - ch:00,  note:47,  vel:40 time:39
-note_off - ch:00,  note:53,  vel:40 time:0
-note_off - ch:00,  note:39,  vel:40 time:19
-note_on  - ch:00,  note:2D,  vel:46 time:94
-note_on  - ch:00,  note:31,  vel:46 time:20
-note_on  - ch:00,  note:34,  vel:46 time:19
-note_on  - ch:00,  note:39,  vel:5B time:27
-note_on  - ch:00,  note:49,  vel:5D time:0
-note_on  - ch:00,  note:55,  vel:63 time:0
-note_off - ch:00,  note:2D,  vel:40 time:171
-note_off - ch:00,  note:31,  vel:40 time:21
-note_off - ch:00,  note:49,  vel:40 time:10
-note_off - ch:00,  note:55,  vel:40 time:0
-note_off - ch:00,  note:34,  vel:40 time:10
-note_off - ch:00,  note:39,  vel:40 time:16
-note_on  - ch:00,  note:47,  vel:5D time:0
-note_on  - ch:00,  note:53,  vel:63 time:0
-note_on  - ch:00,  note:39,  vel:44 time:0
-note_off - ch:00,  note:47,  vel:40 time:41
-note_off - ch:00,  note:53,  vel:40 time:0
-note_off - ch:00,  note:39,  vel:40 time:18
-note_on  - ch:00,  note:45,  vel:5D time:169
-note_on  - ch:00,  note:51,  vel:63 time:0
-note_on  - ch:00,  note:39,  vel:44 time:0
-note_off - ch:00,  note:45,  vel:40 time:38
-note_off - ch:00,  note:51,  vel:40 time:0
-note_off - ch:00,  note:39,  vel:40 time:17
-note_on  - ch:00,  note:44,  vel:5D time:156
-note_on  - ch:00,  note:50,  vel:63 time:0
-note_on  - ch:00,  note:39,  vel:44 time:0
-note_off - ch:00,  note:44,  vel:40 time:38
-note_off - ch:00,  note:50,  vel:40 time:0
-note_off - ch:00,  note:39,  vel:40 time:17
-note_on  - ch:00,  note:26,  vel:46 time:106
-note_on  - ch:00,  note:2A,  vel:46 time:14
-note_on  - ch:00,  note:2D,  vel:46 time:16
-note_on  - ch:00,  note:32,  vel:5D time:20
-note_on  - ch:00,  note:42,  vel:5D time:0
-note_on  - ch:00,  note:4E,  vel:63 time:0
-note_off - ch:00,  note:42,  vel:40 time:41
-note_off - ch:00,  note:4E,  vel:40 time:0
-note_off - ch:00,  note:26,  vel:40 time:141
-note_off - ch:00,  note:2A,  vel:40 time:14
-note_off - ch:00,  note:32,  vel:40 time:11
-note_off - ch:00,  note:2D,  vel:40 time:7
-note_on  - ch:00,  note:47,  vel:5D time:11
-note_on  - ch:00,  note:53,  vel:63 time:0
-note_on  - ch:00,  note:32,  vel:44 time:0
-note_off - ch:00,  note:47,  vel:40 time:41
-note_off - ch:00,  note:53,  vel:40 time:0
-note_off - ch:00,  note:32,  vel:40 time:35
-note_on  - ch:00,  note:28,  vel:46 time:89
-note_on  - ch:00,  note:2C,  vel:46 time:15
-note_on  - ch:00,  note:2F,  vel:46 time:19
-note_on  - ch:00,  note:34,  vel:5B time:25
-note_on  - ch:00,  note:44,  vel:5D time:0
-note_on  - ch:00,  note:50,  vel:63 time:0
-note_off - ch:00,  note:44,  vel:40 time:42
-note_off - ch:00,  note:50,  vel:40 time:0
-note_off - ch:00,  note:28,  vel:40 time:141
-note_off - ch:00,  note:2C,  vel:40 time:16
-note_off - ch:00,  note:34,  vel:40 time:16
-note_off - ch:00,  note:2F,  vel:40 time:4
-note_on  - ch:00,  note:40,  vel:5D time:16
-note_on  - ch:00,  note:4C,  vel:63 time:0
-note_on  - ch:00,  note:34,  vel:44 time:0
-note_off - ch:00,  note:40,  vel:40 time:54
-note_off - ch:00,  note:4C,  vel:40 time:0
-note_off - ch:00,  note:34,  vel:40 time:47
-note_on  - ch:00,  note:45,  vel:5D time:196
-note_on  - ch:00,  note:51,  vel:63 time:0
-note_on  - ch:00,  note:2D,  vel:46 time:10
-note_off - ch:00,  note:2D,  vel:40 time:747
-note_off - ch:00,  note:45,  vel:40 time:15
-note_off - ch:00,  note:51,  vel:40 time:0
-End of track
-
-End of file
+Note: C5, on: 766, off: 3814, on velocity: 49, off velocity: 64
+Note: E5, on: 1291, off: 3890, on velocity: 79, off velocity: 64
+Note: G5, on: 1756, off: 2221, on velocity: 79, off velocity: 64
+Note: C6, on: 2221, off: 2686, on velocity: 65, off velocity: 64
+Note: E6, on: 2656, off: 2829, on velocity: 58, off velocity: 64
+Note: G5, on: 3120, off: 3350, on velocity: 54, off velocity: 64
+Note: C6, on: 3630, off: 3946, on velocity: 48, off velocity: 64
+Note: E6, on: 4095, off: 4560, on velocity: 48, off velocity: 64
+Note: C5, on: 4545, off: 7351, on velocity: 73, off velocity: 64
+Note: E5, on: 5024, off: 7427, on velocity: 56, off velocity: 64
+Note: G5, on: 5444, off: 5909, on velocity: 48, off velocity: 64
+Note: C6, on: 5924, off: 6389, on velocity: 48, off velocity: 64
+Note: E6, on: 6359, off: 6582, on velocity: 48, off velocity: 64
+Note: G5, on: 6824, off: 7014, on velocity: 48, off velocity: 64
+Note: C6, on: 7333, off: 7506, on velocity: 48, off velocity: 64
+Note: E6, on: 7738, off: 8203, on velocity: 52, off velocity: 64
+Note: C5, on: 8189, off: 10863, on velocity: 54, off velocity: 64
+Note: D5, on: 8713, off: 11191, on velocity: 75, off velocity: 64
+Note: A5, on: 9163, off: 9628, on velocity: 62, off velocity: 64
+Note: D6, on: 9657, off: 10023, on velocity: 58, off velocity: 64
+Note: F6, on: 10062, off: 10275, on velocity: 54, off velocity: 64
+Note: A5, on: 10557, off: 10768, on velocity: 47, off velocity: 64
+Note: D6, on: 11037, off: 11364, on velocity: 44, off velocity: 64
+Note: F6, on: 11516, off: 11981, on velocity: 37, off velocity: 64
+Note: C5, on: 11921, off: 14677, on velocity: 51, off velocity: 64
+Note: D5, on: 12386, off: 14627, on velocity: 72, off velocity: 64
+Note: A5, on: 12851, off: 13316, on velocity: 73, off velocity: 64
+Note: D6, on: 13316, off: 13781, on velocity: 68, off velocity: 64
+Note: F6, on: 13780, off: 14029, on velocity: 40, off velocity: 64
+Note: A5, on: 14245, off: 14490, on velocity: 38, off velocity: 64
+Note: D6, on: 14710, off: 14953, on velocity: 37, off velocity: 64
+Note: F6, on: 15175, off: 15340, on velocity: 42, off velocity: 64
+Note: B4, on: 15595, off: 18644, on velocity: 50, off velocity: 64
+Note: D5, on: 16104, off: 18947, on velocity: 50, off velocity: 64
+Note: G5, on: 16569, off: 17034, on velocity: 50, off velocity: 64
+Note: D6, on: 17034, off: 17321, on velocity: 50, off velocity: 64
+Note: F6, on: 17499, off: 17693, on velocity: 55, off velocity: 64
+Note: G5, on: 17963, off: 18259, on velocity: 55, off velocity: 64
+Note: D6, on: 18428, off: 18691, on velocity: 55, off velocity: 64
+Note: F6, on: 18893, off: 19182, on velocity: 54, off velocity: 64
+Note: B4, on: 19344, off: 22875, on velocity: 51, off velocity: 64
+Note: D5, on: 19837, off: 22928, on velocity: 48, off velocity: 64
+Note: G5, on: 20258, off: 20723, on velocity: 47, off velocity: 64
+Note: D6, on: 20738, off: 21004, on velocity: 43, off velocity: 64
+Note: F6, on: 21207, off: 21455, on velocity: 66, off velocity: 64
+Note: G5, on: 21668, off: 21957, on velocity: 40, off velocity: 64
+Note: D6, on: 22117, off: 22595, on velocity: 40, off velocity: 64
+Note: F6, on: 22582, off: 22851, on velocity: 37, off velocity: 64
+Note: C5, on: 23076, off: 26607, on velocity: 68, off velocity: 64
+Note: E5, on: 23571, off: 26662, on velocity: 68, off velocity: 64
+Note: G5, on: 24035, off: 24500, on velocity: 68, off velocity: 64
+Note: C6, on: 24500, off: 24756, on velocity: 61, off velocity: 64
+Note: E6, on: 24950, off: 25143, on velocity: 39, off velocity: 64
+Note: G5, on: 25435, off: 25655, on velocity: 34, off velocity: 64
+Note: C6, on: 25910, off: 26245, on velocity: 34, off velocity: 64
+Note: E6, on: 26374, off: 26796, on velocity: 34, off velocity: 64
+Note: C5, on: 26794, off: 30325, on velocity: 70, off velocity: 64
+Note: E5, on: 27274, off: 30365, on velocity: 55, off velocity: 64
+Note: G5, on: 27724, off: 28189, on velocity: 34, off velocity: 64
+Note: C6, on: 28188, off: 28450, on velocity: 34, off velocity: 64
+Note: E6, on: 28672, off: 28901, on velocity: 61, off velocity: 64
+Note: G5, on: 29128, off: 29443, on velocity: 34, off velocity: 64
+Note: C6, on: 29583, off: 30014, on velocity: 29, off velocity: 64
+Note: E6, on: 30048, off: 30513, on velocity: 34, off velocity: 64
+Note: C5, on: 30453, off: 34023, on velocity: 66, off velocity: 64
+Note: E5, on: 30938, off: 34062, on velocity: 77, off velocity: 64
+Note: A5, on: 31408, off: 31878, on velocity: 86, off velocity: 64
+Note: E6, on: 31878, off: 32348, on velocity: 85, off velocity: 64
+Note: A6, on: 32362, off: 32480, on velocity: 76, off velocity: 64
+Note: A5, on: 32812, off: 32930, on velocity: 46, off velocity: 64
+Note: E6, on: 33302, off: 33772, on velocity: 72, off velocity: 64
+Note: A6, on: 33757, off: 34227, on velocity: 59, off velocity: 64
+Note: C5, on: 34145, off: 37645, on velocity: 65, off velocity: 64
+Note: E5, on: 34625, off: 37688, on velocity: 71, off velocity: 64
+Note: A5, on: 35074, off: 35535, on velocity: 54, off velocity: 64
+Note: E6, on: 35534, off: 35995, on velocity: 39, off velocity: 64
+Note: A6, on: 35985, off: 36089, on velocity: 54, off velocity: 64
+Note: A5, on: 36445, off: 36561, on velocity: 56, off velocity: 64
+Note: E6, on: 36916, off: 37377, on velocity: 56, off velocity: 64
+Note: A6, on: 37377, off: 37838, on velocity: 57, off velocity: 64
+Note: C5, on: 37837, off: 41337, on velocity: 58, off velocity: 64
+Note: D5, on: 38298, off: 41361, on velocity: 58, off velocity: 64
+Note: Gb5, on: 38758, off: 39219, on velocity: 58, off velocity: 64
+Note: A5, on: 39219, off: 39680, on velocity: 58, off velocity: 64
+Note: D6, on: 39679, off: 39910, on velocity: 58, off velocity: 64
+Note: Gb5, on: 40140, off: 40371, on velocity: 58, off velocity: 64
+Note: A5, on: 40601, off: 40832, on velocity: 58, off velocity: 64
+Note: D6, on: 41061, off: 41292, on velocity: 43, off velocity: 64
+Note: C5, on: 41493, off: 44993, on velocity: 58, off velocity: 64
+Note: D5, on: 41982, off: 45045, on velocity: 58, off velocity: 64
+Note: Gb5, on: 42443, off: 42904, on velocity: 58, off velocity: 64
+Note: A5, on: 42903, off: 43364, on velocity: 48, off velocity: 64
+Note: D6, on: 43364, off: 43595, on velocity: 58, off velocity: 64
+Note: Gb5, on: 43799, off: 44030, on velocity: 58, off velocity: 64
+Note: A5, on: 44270, off: 44501, on velocity: 58, off velocity: 64
+Note: D6, on: 44720, off: 45181, on velocity: 58, off velocity: 64
+Note: B4, on: 45107, off: 48644, on velocity: 58, off velocity: 64
+Note: D5, on: 45598, off: 48693, on velocity: 74, off velocity: 64
+Note: G5, on: 46094, off: 46560, on velocity: 83, off velocity: 64
+Note: D6, on: 46529, off: 46762, on velocity: 83, off velocity: 64
+Note: G6, on: 47039, off: 47272, on velocity: 73, off velocity: 64
+Note: G5, on: 47445, off: 47678, on velocity: 58, off velocity: 64
+Note: D6, on: 47940, off: 48173, on velocity: 58, off velocity: 64
+Note: G6, on: 48391, off: 48624, on velocity: 58, off velocity: 64
+Note: B4, on: 48856, off: 52393, on velocity: 58, off velocity: 64
+Note: D5, on: 49322, off: 52417, on velocity: 65, off velocity: 64
+Note: G5, on: 49787, off: 50253, on velocity: 80, off velocity: 64
+Note: D6, on: 50252, off: 50718, on velocity: 82, off velocity: 64
+Note: G6, on: 50673, off: 50906, on velocity: 82, off velocity: 64
+Note: G5, on: 51124, off: 51357, on velocity: 58, off velocity: 64
+Note: D6, on: 51604, off: 51837, on velocity: 58, off velocity: 64
+Note: G6, on: 52069, off: 52302, on velocity: 58, off velocity: 64
+Note: B4, on: 52503, off: 56113, on velocity: 58, off velocity: 64
+Note: C5, on: 52978, off: 56138, on velocity: 58, off velocity: 64
+Note: E5, on: 53453, off: 53905, on velocity: 63, off velocity: 64
+Note: G5, on: 53928, off: 54403, on velocity: 72, off velocity: 64
+Note: C6, on: 54403, off: 54641, on velocity: 58, off velocity: 64
+Note: E5, on: 54908, off: 55134, on velocity: 39, off velocity: 64
+Note: G5, on: 55413, off: 55651, on velocity: 39, off velocity: 64
+Note: C6, on: 55828, off: 56303, on velocity: 43, off velocity: 64
+Note: B4, on: 56289, off: 59899, on velocity: 50, off velocity: 64
+Note: C5, on: 56779, off: 59939, on velocity: 58, off velocity: 64
+Note: E5, on: 57254, off: 57706, on velocity: 58, off velocity: 64
+Note: G5, on: 57729, off: 58204, on velocity: 58, off velocity: 64
+Note: C6, on: 58204, off: 58442, on velocity: 58, off velocity: 64
+Note: E5, on: 58679, off: 58905, on velocity: 58, off velocity: 64
+Note: G5, on: 59154, off: 59392, on velocity: 58, off velocity: 64
+Note: C6, on: 59585, off: 59823, on velocity: 58, off velocity: 64
+Note: A4, on: 60051, off: 63588, on velocity: 75, off velocity: 64
+Note: C5, on: 60516, off: 63611, on velocity: 84, off velocity: 64
+Note: E5, on: 60982, off: 61425, on velocity: 86, off velocity: 64
+Note: G5, on: 61447, off: 61913, on velocity: 84, off velocity: 64
+Note: C6, on: 61913, off: 62146, on velocity: 71, off velocity: 64
+Note: E5, on: 62378, off: 62600, on velocity: 56, off velocity: 64
+Note: G5, on: 62888, off: 63121, on velocity: 56, off velocity: 64
+Note: C6, on: 63309, off: 63542, on velocity: 56, off velocity: 64
+Note: A4, on: 63785, off: 67322, on velocity: 55, off velocity: 64
+Note: C5, on: 64284, off: 67379, on velocity: 78, off velocity: 64
+Note: E5, on: 64761, off: 65204, on velocity: 81, off velocity: 64
+Note: G5, on: 65170, off: 65636, on velocity: 81, off velocity: 64
+Note: C6, on: 65636, off: 65869, on velocity: 78, off velocity: 64
+Note: E5, on: 66101, off: 66323, on velocity: 54, off velocity: 64
+Note: G5, on: 66567, off: 66800, on velocity: 53, off velocity: 64
+Note: C6, on: 67032, off: 67265, on velocity: 53, off velocity: 64
+Note: D4, on: 67502, off: 71075, on velocity: 75, off velocity: 64
+Note: A4, on: 68017, off: 71144, on velocity: 76, off velocity: 64
+Note: D5, on: 68421, off: 68868, on velocity: 78, off velocity: 64
+Note: Gb5, on: 68980, off: 69450, on velocity: 78, off velocity: 64
+Note: C6, on: 69406, off: 69641, on velocity: 71, off velocity: 64
+Note: D5, on: 69865, off: 70089, on velocity: 52, off velocity: 64
+Note: Gb5, on: 70335, off: 70570, on velocity: 52, off velocity: 64
+Note: C6, on: 70794, off: 71029, on velocity: 52, off velocity: 64
+Note: D4, on: 71253, off: 74826, on velocity: 69, off velocity: 64
+Note: A4, on: 71790, off: 74917, on velocity: 80, off velocity: 64
+Note: D5, on: 72205, off: 72652, on velocity: 79, off velocity: 64
+Note: Gb5, on: 72653, off: 72888, on velocity: 75, off velocity: 64
+Note: C6, on: 73123, off: 73358, on velocity: 72, off velocity: 64
+Note: D5, on: 73616, off: 73840, on velocity: 51, off velocity: 64
+Note: Gb5, on: 74086, off: 74321, on velocity: 51, off velocity: 64
+Note: C6, on: 74545, off: 74780, on velocity: 51, off velocity: 64
+Note: G4, on: 75043, off: 78653, on velocity: 67, off velocity: 64
+Note: B4, on: 75518, off: 78678, on velocity: 38, off velocity: 64
+Note: D5, on: 75994, off: 76446, on velocity: 38, off velocity: 64
+Note: G5, on: 76524, off: 76762, on velocity: 38, off velocity: 64
+Note: B5, on: 76910, off: 77148, on velocity: 38, off velocity: 64
+Note: D5, on: 77408, off: 77634, on velocity: 49, off velocity: 64
+Note: G5, on: 77894, off: 78132, on velocity: 48, off velocity: 64
+Note: B5, on: 78381, off: 78619, on velocity: 32, off velocity: 64
+Note: G4, on: 78837, off: 82447, on velocity: 46, off velocity: 64
+Note: B4, on: 79375, off: 82535, on velocity: 37, off velocity: 64
+Note: D5, on: 79828, off: 80280, on velocity: 37, off velocity: 64
+Note: G5, on: 80292, off: 80530, on velocity: 46, off velocity: 64
+Note: B5, on: 80722, off: 80960, on velocity: 36, off velocity: 64
+Note: D5, on: 81153, off: 81379, on velocity: 46, off velocity: 64
+Note: G5, on: 81650, off: 81888, on velocity: 46, off velocity: 64
+Note: B5, on: 82137, off: 82375, on velocity: 46, off velocity: 64
+Note: G4, on: 82621, off: 86231, on velocity: 46, off velocity: 64
+Note: Bb4, on: 83097, off: 86257, on velocity: 46, off velocity: 64
+Note: E5, on: 83605, off: 84057, on velocity: 46, off velocity: 64
+Note: G5, on: 84047, off: 84285, on velocity: 46, off velocity: 64
+Note: Db6, on: 84555, off: 84793, on velocity: 46, off velocity: 64
+Note: E5, on: 84975, off: 85201, on velocity: 46, off velocity: 64
+Note: G5, on: 85483, off: 85721, on velocity: 43, off velocity: 64
+Note: Db6, on: 85936, off: 86174, on velocity: 41, off velocity: 64
+Note: G4, on: 86433, off: 90043, on velocity: 41, off velocity: 64
+Note: Bb4, on: 86908, off: 90068, on velocity: 41, off velocity: 64
+Note: E5, on: 87384, off: 87836, on velocity: 41, off velocity: 64
+Note: G5, on: 87859, off: 88097, on velocity: 41, off velocity: 64
+Note: Db6, on: 88278, off: 88516, on velocity: 40, off velocity: 64
+Note: E5, on: 88787, off: 89013, on velocity: 40, off velocity: 64
+Note: G5, on: 89273, off: 89511, on velocity: 40, off velocity: 64
+Note: Db6, on: 89715, off: 89953, on velocity: 38, off velocity: 64
+Note: F4, on: 90156, off: 93766, on velocity: 38, off velocity: 64
+Note: A4, on: 90620, off: 93780, on velocity: 36, off velocity: 64
+Note: D5, on: 91118, off: 91570, on velocity: 35, off velocity: 64
+Note: A5, on: 91604, off: 91842, on velocity: 34, off velocity: 64
+Note: D6, on: 92068, off: 92306, on velocity: 33, off velocity: 64
+Note: D5, on: 92510, off: 92736, on velocity: 32, off velocity: 64
+Note: A5, on: 92996, off: 93234, on velocity: 32, off velocity: 64
+Note: D6, on: 93493, off: 93731, on velocity: 32, off velocity: 64
+Note: F4, on: 93991, off: 97601, on velocity: 32, off velocity: 64
+Note: A4, on: 94443, off: 97603, on velocity: 32, off velocity: 64
+Note: D5, on: 94930, off: 95382, on velocity: 32, off velocity: 64
+Note: A5, on: 95383, off: 95621, on velocity: 32, off velocity: 64
+Note: D6, on: 95869, off: 96107, on velocity: 32, off velocity: 64
+Note: D5, on: 96333, off: 96559, on velocity: 32, off velocity: 64
+Note: A5, on: 96863, off: 97101, on velocity: 32, off velocity: 64
+Note: D6, on: 97361, off: 97599, on velocity: 32, off velocity: 64
+Note: F4, on: 97763, off: 101373, on velocity: 32, off velocity: 64
+Note: Ab4, on: 98260, off: 101420, on velocity: 32, off velocity: 64
+Note: D5, on: 98646, off: 99098, on velocity: 32, off velocity: 64
+Note: F5, on: 99177, off: 99415, on velocity: 32, off velocity: 64
+Note: B5, on: 99674, off: 99912, on velocity: 32, off velocity: 64
+Note: D5, on: 100183, off: 100409, on velocity: 32, off velocity: 64
+Note: F5, on: 100636, off: 100874, on velocity: 32, off velocity: 64
+Note: B5, on: 101133, off: 101371, on velocity: 32, off velocity: 64
+Note: F4, on: 101552, off: 105162, on velocity: 32, off velocity: 64
+Note: Ab4, on: 102083, off: 105243, on velocity: 32, off velocity: 64
+Note: D5, on: 102458, off: 102910, on velocity: 32, off velocity: 64
+Note: F5, on: 102978, off: 103216, on velocity: 32, off velocity: 64
+Note: B5, on: 103453, off: 103691, on velocity: 32, off velocity: 64
+Note: D5, on: 103928, off: 104154, on velocity: 32, off velocity: 64
+Note: F5, on: 104436, off: 104674, on velocity: 32, off velocity: 64
+Note: B5, on: 104900, off: 105138, on velocity: 32, off velocity: 64
+Note: E4, on: 105369, off: 108979, on velocity: 45, off velocity: 64
+Note: G4, on: 105884, off: 109044, on velocity: 45, off velocity: 64
+Note: C5, on: 106370, off: 106822, on velocity: 45, off velocity: 64
+Note: G5, on: 106867, off: 107105, on velocity: 44, off velocity: 64
+Note: C6, on: 107331, off: 107569, on velocity: 37, off velocity: 64
+Note: C5, on: 107851, off: 108077, on velocity: 32, off velocity: 64
+Note: G5, on: 108348, off: 108586, on velocity: 32, off velocity: 64
+Note: C6, on: 108801, off: 109039, on velocity: 32, off velocity: 64
+Note: E4, on: 109287, off: 112897, on velocity: 44, off velocity: 64
+Note: G4, on: 109718, off: 112878, on velocity: 44, off velocity: 64
+Note: C5, on: 110227, off: 110679, on velocity: 44, off velocity: 64
+Note: G5, on: 110713, off: 110951, on velocity: 38, off velocity: 64
+Note: C6, on: 111132, off: 111370, on velocity: 32, off velocity: 64
+Note: C5, on: 111630, off: 111856, on velocity: 32, off velocity: 64
+Note: G5, on: 112105, off: 112343, on velocity: 32, off velocity: 64
+Note: C6, on: 112558, off: 112796, on velocity: 32, off velocity: 64
+Note: E4, on: 113029, off: 116713, on velocity: 45, off velocity: 64
+Note: F4, on: 113547, off: 116771, on velocity: 50, off velocity: 64
+Note: A4, on: 113943, off: 114404, on velocity: 48, off velocity: 64
+Note: C5, on: 114483, off: 114714, on velocity: 46, off velocity: 64
+Note: F5, on: 114957, off: 115200, on velocity: 40, off velocity: 64
+Note: A4, on: 115442, off: 115673, on velocity: 27, off velocity: 64
+Note: C5, on: 115971, off: 116202, on velocity: 27, off velocity: 64
+Note: F5, on: 116423, off: 116666, on velocity: 27, off velocity: 64
+Note: E4, on: 116907, off: 120591, on velocity: 51, off velocity: 64
+Note: F4, on: 117437, off: 120661, on velocity: 52, off velocity: 64
+Note: A4, on: 117877, off: 118338, on velocity: 52, off velocity: 64
+Note: C5, on: 118362, off: 118593, on velocity: 49, off velocity: 64
+Note: F5, on: 118792, off: 119035, on velocity: 46, off velocity: 64
+Note: A4, on: 119304, off: 119535, on velocity: 30, off velocity: 64
+Note: C5, on: 119780, off: 120011, on velocity: 30, off velocity: 64
+Note: F5, on: 120292, off: 120535, on velocity: 30, off velocity: 64
+Note: D4, on: 120749, off: 124433, on velocity: 49, off velocity: 64
+Note: F4, on: 121252, off: 124476, on velocity: 50, off velocity: 64
+Note: A4, on: 121710, off: 122171, on velocity: 50, off velocity: 64
+Note: C5, on: 122167, off: 122398, on velocity: 46, off velocity: 64
+Note: F5, on: 122661, off: 122904, on velocity: 43, off velocity: 64
+Note: A4, on: 123192, off: 123423, on velocity: 30, off velocity: 64
+Note: C5, on: 123695, off: 123926, on velocity: 30, off velocity: 64
+Note: F5, on: 124170, off: 124413, on velocity: 30, off velocity: 64
+Note: D4, on: 124609, off: 128293, on velocity: 55, off velocity: 64
+Note: F4, on: 125076, off: 128300, on velocity: 55, off velocity: 64
+Note: A4, on: 125588, off: 126049, on velocity: 48, off velocity: 64
+Note: C5, on: 126018, off: 126249, on velocity: 41, off velocity: 64
+Note: F5, on: 126549, off: 126792, on velocity: 32, off velocity: 64
+Note: A4, on: 126969, off: 127200, on velocity: 32, off velocity: 64
+Note: C5, on: 127472, off: 127703, on velocity: 32, off velocity: 64
+Note: F5, on: 127985, off: 128228, on velocity: 32, off velocity: 64
+Note: G3, on: 128442, off: 132126, on velocity: 32, off velocity: 64
+Note: D4, on: 128982, off: 132206, on velocity: 45, off velocity: 64
+Note: G4, on: 129467, off: 129928, on velocity: 51, off velocity: 64
+Note: B4, on: 129951, off: 130182, on velocity: 52, off velocity: 64
+Note: F5, on: 130436, off: 130679, on velocity: 41, off velocity: 64
+Note: G4, on: 130921, off: 131152, on velocity: 32, off velocity: 64
+Note: B4, on: 131351, off: 131582, on velocity: 32, off velocity: 64
+Note: F5, on: 131872, off: 132115, on velocity: 32, off velocity: 64
+Note: G3, on: 132320, off: 136004, on velocity: 32, off velocity: 64
+Note: D4, on: 132842, off: 136066, on velocity: 32, off velocity: 64
+Note: G4, on: 133327, off: 133788, on velocity: 52, off velocity: 64
+Note: B4, on: 133830, off: 134061, on velocity: 51, off velocity: 64
+Note: F5, on: 134287, off: 134530, on velocity: 45, off velocity: 64
+Note: G4, on: 134744, off: 134975, on velocity: 32, off velocity: 64
+Note: B4, on: 135248, off: 135479, on velocity: 32, off velocity: 64
+Note: F5, on: 135796, off: 136039, on velocity: 32, off velocity: 64
+Note: C4, on: 136254, off: 139938, on velocity: 42, off velocity: 64
+Note: E4, on: 136739, off: 139963, on velocity: 50, off velocity: 64
+Note: G4, on: 137278, off: 137739, on velocity: 52, off velocity: 64
+Note: C5, on: 137699, off: 137930, on velocity: 52, off velocity: 64
+Note: E5, on: 138193, off: 138424, on velocity: 52, off velocity: 64
+Note: G4, on: 138696, off: 138927, on velocity: 32, off velocity: 64
+Note: C5, on: 139217, off: 139448, on velocity: 32, off velocity: 64
+Note: E5, on: 139739, off: 139970, on velocity: 32, off velocity: 64
+Note: C4, on: 140123, off: 143807, on velocity: 32, off velocity: 64
+Note: E4, on: 140654, off: 143878, on velocity: 32, off velocity: 64
+Note: G4, on: 141102, off: 141563, on velocity: 32, off velocity: 64
+Note: C5, on: 141669, off: 141900, on velocity: 32, off velocity: 64
+Note: E5, on: 142099, off: 142330, on velocity: 32, off velocity: 64
+Note: G4, on: 142584, off: 142815, on velocity: 32, off velocity: 64
+Note: C5, on: 143114, off: 143345, on velocity: 35, off velocity: 64
+Note: E5, on: 143636, off: 143867, on velocity: 35, off velocity: 64
+Note: C4, on: 144096, off: 147891, on velocity: 50, off velocity: 64
+Note: G4, on: 144687, off: 148008, on velocity: 53, off velocity: 64
+Note: Bb4, on: 145223, off: 145698, on velocity: 54, off velocity: 64
+Note: C5, on: 145677, off: 145915, on velocity: 51, off velocity: 64
+Note: E5, on: 146139, off: 146377, on velocity: 48, off velocity: 64
+Note: Bb4, on: 146639, off: 146877, on velocity: 34, off velocity: 64
+Note: C5, on: 147138, off: 147376, on velocity: 34, off velocity: 64
+Note: E5, on: 147610, off: 147848, on velocity: 30, off velocity: 64
+Note: C4, on: 148137, off: 151932, on velocity: 48, off velocity: 64
+Note: G4, on: 148636, off: 151957, on velocity: 59, off velocity: 64
+Note: Bb4, on: 149218, off: 149693, on velocity: 60, off velocity: 64
+Note: C5, on: 149653, off: 149891, on velocity: 60, off velocity: 64
+Note: E5, on: 150134, off: 150372, on velocity: 58, off velocity: 64
+Note: Bb4, on: 150634, off: 150872, on velocity: 30, off velocity: 64
+Note: C5, on: 151105, off: 151343, on velocity: 35, off velocity: 64
+Note: E5, on: 151632, off: 151870, on velocity: 40, off velocity: 64
+Note: F3, on: 152064, off: 155822, on velocity: 32, off velocity: 64
+Note: F4, on: 152647, off: 155935, on velocity: 60, off velocity: 64
+Note: A4, on: 153097, off: 153567, on velocity: 53, off velocity: 64
+Note: C5, on: 153592, off: 153827, on velocity: 48, off velocity: 64
+Note: E5, on: 154086, off: 154321, on velocity: 43, off velocity: 64
+Note: A4, on: 154526, off: 154761, on velocity: 43, off velocity: 64
+Note: C5, on: 155075, off: 155310, on velocity: 43, off velocity: 64
+Note: E5, on: 155542, off: 155777, on velocity: 43, off velocity: 64
+Note: F3, on: 155992, off: 159750, on velocity: 63, off velocity: 64
+Note: F4, on: 156520, off: 159808, on velocity: 43, off velocity: 64
+Note: A4, on: 157031, off: 157501, on velocity: 44, off velocity: 64
+Note: C5, on: 157461, off: 157696, on velocity: 44, off velocity: 64
+Note: E5, on: 157945, off: 158180, on velocity: 44, off velocity: 64
+Note: A4, on: 158472, off: 158707, on velocity: 45, off velocity: 64
+Note: C5, on: 158957, off: 159192, on velocity: 46, off velocity: 64
+Note: E5, on: 159417, off: 159652, on velocity: 47, off velocity: 64
+Note: Gb3, on: 159891, off: 163575, on velocity: 48, off velocity: 64
+Note: C4, on: 160458, off: 163682, on velocity: 50, off velocity: 64
+Note: A4, on: 160916, off: 161377, on velocity: 52, off velocity: 64
+Note: C5, on: 161355, off: 161586, on velocity: 52, off velocity: 64
+Note: Eb5, on: 161840, off: 162071, on velocity: 54, off velocity: 64
+Note: A4, on: 162288, off: 162519, on velocity: 55, off velocity: 64
+Note: C5, on: 162846, off: 163077, on velocity: 70, off velocity: 64
+Note: Eb5, on: 163312, off: 163543, on velocity: 60, off velocity: 64
+Note: Gb3, on: 163776, off: 167460, on velocity: 76, off velocity: 64
+Note: C4, on: 164282, off: 167506, on velocity: 80, off velocity: 64
+Note: A4, on: 164812, off: 165273, on velocity: 57, off velocity: 64
+Note: C5, on: 165233, off: 165464, on velocity: 70, off velocity: 64
+Note: Eb5, on: 165718, off: 166050, on velocity: 55, off velocity: 64
+Note: A4, on: 166203, off: 166453, on velocity: 53, off velocity: 64
+Note: C5, on: 166660, off: 166952, on velocity: 48, off velocity: 64
+Note: Eb5, on: 167099, off: 167330, on velocity: 48, off velocity: 64
+Note: Ab3, on: 167572, off: 171256, on velocity: 71, off velocity: 64
+Note: F4, on: 168158, off: 171382, on velocity: 64, off velocity: 64
+Note: B4, on: 168652, off: 169113, on velocity: 58, off velocity: 64
+Note: C5, on: 169109, off: 169340, on velocity: 69, off velocity: 64
+Note: D5, on: 169530, off: 169761, on velocity: 69, off velocity: 64
+Note: B4, on: 169996, off: 170227, on velocity: 51, off velocity: 64
+Note: C5, on: 170554, off: 170785, on velocity: 58, off velocity: 64
+Note: D5, on: 170957, off: 171188, on velocity: 64, off velocity: 64
+Note: Ab3, on: 171421, off: 175105, on velocity: 69, off velocity: 64
+Note: F4, on: 171942, off: 175166, on velocity: 68, off velocity: 64
+Note: B4, on: 172382, off: 172843, on velocity: 66, off velocity: 64
+Note: C5, on: 172894, off: 173125, on velocity: 62, off velocity: 64
+Note: D5, on: 173360, off: 173591, on velocity: 60, off velocity: 64
+Note: B4, on: 173863, off: 174094, on velocity: 48, off velocity: 64
+Note: C5, on: 174302, off: 174533, on velocity: 54, off velocity: 64
+Note: D5, on: 174806, off: 175037, on velocity: 58, off velocity: 64
+Note: G3, on: 175248, off: 178932, on velocity: 83, off velocity: 64
+Note: F4, on: 175769, off: 178993, on velocity: 58, off velocity: 64
+Note: G4, on: 176208, off: 176669, on velocity: 58, off velocity: 64
+Note: B4, on: 176675, off: 177075, on velocity: 58, off velocity: 64
+Note: D5, on: 177169, off: 177497, on velocity: 58, off velocity: 64
+Note: G4, on: 177580, off: 178054, on velocity: 58, off velocity: 64
+Note: B4, on: 178175, off: 178611, on velocity: 58, off velocity: 64
+Note: D5, on: 178623, off: 178854, on velocity: 58, off velocity: 64
+Note: G3, on: 179099, off: 182783, on velocity: 73, off velocity: 64
+Note: F4, on: 179629, off: 182853, on velocity: 73, off velocity: 64
+Note: G4, on: 180151, off: 180612, on velocity: 58, off velocity: 64
+Note: B4, on: 180562, off: 180793, on velocity: 58, off velocity: 64
+Note: D5, on: 181011, off: 181242, on velocity: 58, off velocity: 64
+Note: G4, on: 181477, off: 181708, on velocity: 58, off velocity: 64
+Note: B4, on: 182017, off: 182248, on velocity: 58, off velocity: 64
+Note: D5, on: 182492, off: 182723, on velocity: 58, off velocity: 64
+Note: G3, on: 182961, off: 186645, on velocity: 58, off velocity: 64
+Note: E4, on: 183410, off: 186634, on velocity: 58, off velocity: 64
+Note: G4, on: 183940, off: 184401, on velocity: 58, off velocity: 64
+Note: C5, on: 184388, off: 184619, on velocity: 58, off velocity: 64
+Note: E5, on: 184864, off: 185095, on velocity: 77, off velocity: 64
+Note: G4, on: 185358, off: 185589, on velocity: 75, off velocity: 64
+Note: C5, on: 185824, off: 186055, on velocity: 71, off velocity: 64
+Note: E5, on: 186300, off: 186531, on velocity: 64, off velocity: 64
+Note: G3, on: 186794, off: 190478, on velocity: 83, off velocity: 64
+Note: E4, on: 187398, off: 190622, on velocity: 81, off velocity: 64
+Note: G4, on: 187864, off: 188325, on velocity: 84, off velocity: 64
+Note: C5, on: 188248, off: 188595, on velocity: 88, off velocity: 64
+Note: E5, on: 188761, off: 189108, on velocity: 88, off velocity: 64
+Note: G4, on: 189273, off: 189620, on velocity: 80, off velocity: 64
+Note: C5, on: 189758, off: 190105, on velocity: 80, off velocity: 64
+Note: E5, on: 190279, off: 190626, on velocity: 79, off velocity: 64
+Note: G3, on: 190782, off: 194466, on velocity: 87, off velocity: 64
+Note: D4, on: 191212, off: 194436, on velocity: 102, off velocity: 64
+Note: G4, on: 191660, off: 192121, on velocity: 98, off velocity: 64
+Note: C5, on: 192209, off: 192556, on velocity: 101, off velocity: 64
+Note: F5, on: 192621, off: 192986, on velocity: 93, off velocity: 64
+Note: G4, on: 193170, off: 193517, on velocity: 78, off velocity: 64
+Note: C5, on: 193636, off: 193983, on velocity: 93, off velocity: 64
+Note: F5, on: 194121, off: 194486, on velocity: 91, off velocity: 64
+Note: G3, on: 194606, off: 198290, on velocity: 87, off velocity: 64
+Note: D4, on: 195091, off: 198315, on velocity: 87, off velocity: 64
+Note: G4, on: 195575, off: 196036, on velocity: 91, off velocity: 64
+Note: C5, on: 196106, off: 196453, on velocity: 86, off velocity: 64
+Note: F5, on: 196545, off: 196910, on velocity: 86, off velocity: 64
+Note: G4, on: 196957, off: 197304, on velocity: 86, off velocity: 64
+Note: C5, on: 197414, off: 197761, on velocity: 93, off velocity: 64
+Note: F5, on: 197932, off: 198685, on velocity: 96, off velocity: 64
+Note: G3, on: 198365, off: 202049, on velocity: 78, off velocity: 64
+Note: D4, on: 198877, off: 202101, on velocity: 78, off velocity: 64
+Note: G4, on: 199371, off: 199832, on velocity: 77, off velocity: 64
+Note: B4, on: 199820, off: 200167, on velocity: 77, off velocity: 64
+Note: F5, on: 200268, off: 200633, on velocity: 77, off velocity: 64
+Note: G4, on: 200780, off: 201127, on velocity: 75, off velocity: 64
+Note: B4, on: 201311, off: 201658, on velocity: 70, off velocity: 64
+Note: F5, on: 201814, off: 202179, on velocity: 64, off velocity: 64
+Note: G3, on: 202198, off: 205882, on velocity: 57, off velocity: 64
+Note: D4, on: 202719, off: 205943, on velocity: 62, off velocity: 64
+Note: G4, on: 203177, off: 203638, on velocity: 64, off velocity: 64
+Note: B4, on: 203607, off: 203954, on velocity: 78, off velocity: 64
+Note: F5, on: 204146, off: 204511, on velocity: 81, off velocity: 64
+Note: G4, on: 204604, off: 204951, on velocity: 85, off velocity: 64
+Note: B4, on: 205143, off: 205490, on velocity: 85, off velocity: 64
+Note: F5, on: 205591, off: 205956, on velocity: 85, off velocity: 64
+Note: G3, on: 206092, off: 209776, on velocity: 109, off velocity: 64
+Note: Eb4, on: 206522, off: 209746, on velocity: 108, off velocity: 64
+Note: A4, on: 207007, off: 207468, on velocity: 104, off velocity: 64
+Note: C5, on: 207464, off: 207811, on velocity: 82, off velocity: 64
+Note: Gb5, on: 207949, off: 208314, on velocity: 82, off velocity: 64
+Note: A4, on: 208443, off: 208790, on velocity: 84, off velocity: 64
+Note: C5, on: 208964, off: 209311, on velocity: 85, off velocity: 64
+Note: Gb5, on: 209431, off: 209796, on velocity: 86, off velocity: 64
+Note: G3, on: 209879, off: 213563, on velocity: 86, off velocity: 64
+Note: Eb4, on: 210391, off: 213615, on velocity: 109, off velocity: 64
+Note: A4, on: 210849, off: 211310, on velocity: 86, off velocity: 64
+Note: C5, on: 211297, off: 211644, on velocity: 86, off velocity: 64
+Note: Gb5, on: 211791, off: 212156, on velocity: 86, off velocity: 64
+Note: A4, on: 212303, off: 212650, on velocity: 82, off velocity: 64
+Note: C5, on: 212705, off: 213052, on velocity: 82, off velocity: 64
+Note: Gb5, on: 213245, off: 213610, on velocity: 82, off velocity: 64
+Note: G3, on: 213702, off: 217386, on velocity: 86, off velocity: 64
+Note: E4, on: 214160, off: 217384, on velocity: 107, off velocity: 64
+Note: G4, on: 214645, off: 215106, on velocity: 86, off velocity: 64
+Note: C5, on: 215157, off: 215504, on velocity: 86, off velocity: 64
+Note: G5, on: 215596, off: 215961, on velocity: 86, off velocity: 64
+Note: G4, on: 216072, off: 216419, on velocity: 86, off velocity: 64
+Note: C5, on: 216547, off: 216894, on velocity: 86, off velocity: 64
+Note: G5, on: 217014, off: 217379, on velocity: 86, off velocity: 64
+Note: G3, on: 217444, off: 221128, on velocity: 86, off velocity: 64
+Note: E4, on: 217983, off: 221207, on velocity: 104, off velocity: 64
+Note: G4, on: 218468, off: 218929, on velocity: 86, off velocity: 64
+Note: C5, on: 218907, off: 219254, on velocity: 86, off velocity: 64
+Note: G5, on: 219401, off: 219766, on velocity: 86, off velocity: 64
+Note: G4, on: 219922, off: 220269, on velocity: 86, off velocity: 64
+Note: C5, on: 220407, off: 220754, on velocity: 86, off velocity: 64
+Note: G5, on: 220892, off: 221257, on velocity: 86, off velocity: 64
+Note: G3, on: 221331, off: 225015, on velocity: 86, off velocity: 64
+Note: D4, on: 221853, off: 225077, on velocity: 86, off velocity: 64
+Note: G4, on: 222301, off: 222762, on velocity: 86, off velocity: 64
+Note: C5, on: 222731, off: 223245, on velocity: 86, off velocity: 64
+Note: F5, on: 223243, off: 223608, on velocity: 86, off velocity: 64
+Note: G4, on: 223847, off: 224194, on velocity: 80, off velocity: 64
+Note: C5, on: 224267, off: 224614, on velocity: 86, off velocity: 64
+Note: F5, on: 224807, off: 225172, on velocity: 86, off velocity: 64
+Note: G3, on: 225247, off: 228931, on velocity: 79, off velocity: 64
+Note: D4, on: 225778, off: 229002, on velocity: 82, off velocity: 64
+Note: G4, on: 226244, off: 226705, on velocity: 75, off velocity: 64
+Note: C5, on: 226702, off: 226933, on velocity: 83, off velocity: 64
+Note: F5, on: 227196, off: 227561, on velocity: 75, off velocity: 64
+Note: G4, on: 227690, off: 228037, on velocity: 73, off velocity: 64
+Note: C5, on: 228193, off: 228540, on velocity: 71, off velocity: 64
+Note: F5, on: 228696, off: 229061, on velocity: 65, off velocity: 64
+Note: G3, on: 229181, off: 232865, on velocity: 70, off velocity: 64
+Note: D4, on: 229666, off: 232890, on velocity: 70, off velocity: 64
+Note: G4, on: 230151, off: 230612, on velocity: 68, off velocity: 64
+Note: B4, on: 230608, off: 230839, on velocity: 66, off velocity: 64
+Note: F5, on: 231084, off: 231327, on velocity: 53, off velocity: 64
+Note: G4, on: 231560, off: 231791, on velocity: 53, off velocity: 64
+Note: B4, on: 232090, off: 232321, on velocity: 49, off velocity: 64
+Note: F5, on: 232557, off: 232800, on velocity: 47, off velocity: 64
+Note: G3, on: 233023, off: 236707, on velocity: 35, off velocity: 64
+Note: D4, on: 233572, off: 236796, on velocity: 47, off velocity: 64
+Note: G4, on: 234066, off: 234527, on velocity: 42, off velocity: 64
+Note: B4, on: 234514, off: 234745, on velocity: 40, off velocity: 64
+Note: F5, on: 234981, off: 235224, on velocity: 38, off velocity: 64
+Note: G4, on: 235465, off: 235696, on velocity: 35, off velocity: 64
+Note: B4, on: 235969, off: 236200, on velocity: 35, off velocity: 64
+Note: F5, on: 236472, off: 236715, on velocity: 37, off velocity: 64
+Note: C3, on: 236973, off: 240657, on velocity: 39, off velocity: 64
+Note: C4, on: 237531, off: 240755, on velocity: 41, off velocity: 64
+Note: G4, on: 238034, off: 238495, on velocity: 46, off velocity: 64
+Note: Bb4, on: 238583, off: 238814, on velocity: 48, off velocity: 64
+Note: E5, on: 238976, off: 239207, on velocity: 48, off velocity: 64
+Note: G4, on: 239488, off: 239719, on velocity: 49, off velocity: 64
+Note: Bb4, on: 239982, off: 240213, on velocity: 46, off velocity: 64
+Note: E5, on: 240449, off: 240680, on velocity: 46, off velocity: 64
+Note: C3, on: 240934, off: 244618, on velocity: 46, off velocity: 64
+Note: C4, on: 241492, off: 244716, on velocity: 45, off velocity: 64
+Note: G4, on: 242030, off: 242491, on velocity: 45, off velocity: 64
+Note: Bb4, on: 242434, off: 242665, on velocity: 45, off velocity: 64
+Note: E5, on: 243001, off: 243232, on velocity: 46, off velocity: 64
+Note: G4, on: 243440, off: 243671, on velocity: 46, off velocity: 64
+Note: Bb4, on: 243998, off: 244229, on velocity: 46, off velocity: 64
+Note: E5, on: 244556, off: 244787, on velocity: 46, off velocity: 64
+Note: C3, on: 245105, off: 253376, on velocity: 55, off velocity: 64
+Note: C4, on: 245736, off: 252920, on velocity: 64, off velocity: 64
+Note: F4, on: 246204, off: 246762, on velocity: 46, off velocity: 64
+Note: A4, on: 246763, off: 247216, on velocity: 51, off velocity: 64
+Note: C5, on: 247249, off: 247728, on velocity: 58, off velocity: 64
+Note: F5, on: 247725, off: 248229, on velocity: 55, off velocity: 64
+Note: C5, on: 248230, off: 248581, on velocity: 54, off velocity: 64
+Note: A4, on: 248752, off: 249231, on velocity: 53, off velocity: 64
+Note: C5, on: 249192, off: 249671, on velocity: 53, off velocity: 64
+Note: A4, on: 249705, off: 250184, on velocity: 53, off velocity: 64
+Note: F4, on: 250182, off: 250930, on velocity: 48, off velocity: 64
+Note: A4, on: 250741, off: 251486, on velocity: 46, off velocity: 64
+Note: F4, on: 251227, off: 251890, on velocity: 42, off velocity: 64
+Note: D4, on: 251759, off: 252345, on velocity: 36, off velocity: 64
+Note: F4, on: 252281, off: 252760, on velocity: 32, off velocity: 64
+Note: D4, on: 252795, off: 253507, on velocity: 31, off velocity: 64
+Note: C3, on: 253502, off: 263179, on velocity: 19, off velocity: 64
+Note: B3, on: 254303, off: 263375, on velocity: 26, off velocity: 64
+Note: G5, on: 255068, off: 255602, on velocity: 44, off velocity: 64
+Note: B5, on: 255623, off: 256209, on velocity: 50, off velocity: 64
+Note: D6, on: 256168, off: 256663, on velocity: 56, off velocity: 64
+Note: F6, on: 256658, off: 257219, on velocity: 55, off velocity: 64
+Note: D6, on: 257167, off: 257750, on velocity: 41, off velocity: 64
+Note: B5, on: 257703, off: 258339, on velocity: 41, off velocity: 64
+Note: D6, on: 258266, off: 258902, on velocity: 41, off velocity: 64
+Note: B5, on: 258802, off: 259438, on velocity: 41, off velocity: 64
+Note: G5, on: 259366, off: 260002, on velocity: 43, off velocity: 64
+Note: B5, on: 259956, off: 260624, on velocity: 44, off velocity: 64
+Note: D5, on: 260556, off: 261282, on velocity: 42, off velocity: 64
+Note: F5, on: 261294, off: 262052, on velocity: 34, off velocity: 64
+Note: E5, on: 262068, off: 263077, on velocity: 28, off velocity: 64
+Note: D5, on: 262970, off: 264330, on velocity: 27, off velocity: 64
+Note: E5, on: 264324, off: 270972, on velocity: 30, off velocity: 64
+Note: G5, on: 264393, off: 270990, on velocity: 16, off velocity: 64
+Note: C4, on: 264393, off: 270973, on velocity: 16, off velocity: 64
+Note: C3, on: 264393, off: 271009, on velocity: 16, off velocity: 64
+Note: C6, on: 264419, off: 270955, on velocity: 16, off velocity: 64
