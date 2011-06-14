@@ -23,6 +23,15 @@ soundfonts = {'Bosendorfer PIANO / GIGA':'b', 'GPO-Concert-Steinway-ver2.sf2':'g
 #    'Claudio Arrau':'Arrau', 'Rafal Brechacz':'Brechacz', 'Jorge Bolet':'Bolet', 'Stanislav Bunin':'Bunin',\
 #    'Halina Czerny-Stefanska':'Stefanska', 'Dang Thai Son':'Son', 'Samson Francois':'Francois', 'Eva Poblocka':'Poblocka'}
 
+# Wrappers
+def getScoreMidiPath1(t):  return getScoreMidiPath(t[0], t[1], t[2], t[3])
+def getPerformancePath1(t):  return getPerformancePath(t[0], t[1], t[2], t[3])
+def getScorePath1(t):  return getScorePath(t[0], t[1], t[2], t[3])
+def getDeviationPath1(t):  return getDeviationPath(t[0], t[1], t[2], t[3])
+def getPerformance1(t):  return getPerformance(t[0], t[1], t[2], t[3])
+def getScore1(t):  return getScore(t[0], t[1], t[2], t[3])
+def getDeviation1(t):  return getDeviation(t[0], t[1], t[2], t[3])
+
 def getAllDirectories():
   for dir in db_dirs:
     for d in os.listdir(dir):

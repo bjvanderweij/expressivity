@@ -26,6 +26,9 @@ class Note:
     self.length = length
 
   def __str__(self):
+    return self.name()
+
+  def info(self):
     return "Note: %s, on: %s, off: %s, on velocity: %s, off velocity: %s" % (self.name(), self.on, self.off, self.onvelocity, self.offvelocity)
 
 class NoteList:
@@ -46,6 +49,21 @@ class NoteList:
       parser = MidiParser(self)
       stream =  MidiInFile.MidiInFile(parser, open(midifile))
       stream.read()
+
+  def splice(self, begin, end):
+    new = NoteList()
+    new.key_signature = self.key_signature
+    new.time_signature= self.time_signature
+    new.smtp_offset   = self.smtp_offset
+    new.tempo         = self.tempo
+    new.division      = self.division
+    new.sequence_names= self.sequence_names
+    new.notes = self[begin:end]
+    return new
+
+
+  def simplelist(self):
+    return [n.pitch for n in self]
 
   def printinfo(self):
     print "Number of notes:{0}\nKey signature: {1}\nTime signature: {2}\nSmtp offset: {3}\
@@ -177,6 +195,21 @@ class NoteList:
 
   def microseconds_to_ticks(self, microseconds):
     return int((microseconds / float(self.tempo)) * self.division)
+  
+  def milliseconds_to_ticks(self, microseconds):
+    return int((0.001 * microseconds / float(self.tempo)) * self.division)
+  
+  def seconds_to_ticks(self, microseconds):
+    return int((0.000001 * microseconds / float(self.tempo)) * self.division)
+  
+  def ticks_to_microseconds(self, ticks):
+    return (ticks / float(self.division)) * float(self.tempo)
+
+  def ticks_to_milliseconds(self, ticks):
+    return (ticks / float(self.division)) * float(self.tempo) / 1000.0
+  
+  def ticks_to_seconds(self, ticks):
+    return (ticks / float(self.division)) * float(self.tempo) / 1000000.0
   
   def ioi(self, note):
     if note == 0: return 0

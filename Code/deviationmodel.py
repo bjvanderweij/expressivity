@@ -6,7 +6,8 @@
 # Hash an encoding string for note and measure store performance features in dictionary
 
 import music21 as m21
-import re, database,os
+import re, os
+import database as db
 from representation import *
 from BeautifulSoup import *
 
@@ -178,7 +179,7 @@ def generate_performance(score, deviations):
               query = "P1,{0},{1},{2},{3}".format(measure.number, str(voice.id), str(n.pitch), notes + i)
               if query in deviations.note_deviations: break 
             if not query in deviations.note_deviations:
-              #print "Note in score not found in deviations"
+              print "Note in score not found in deviations"
               #print query
               #on = performance_time + get_expressive_time(beat_lengths, measure_time)
               #off = on + get_expressive_duration(beat_lengths, measure_time, n.duration.quarterLength)
@@ -219,14 +220,54 @@ def generate_performance(score, deviations):
 
 
 if __name__ == '__main__':
-  selection = database.select()
-  devpath = database.getDeviationPath(selection[0], selection[1], selection[2], selection[3])
+  limit = 10
+  selection = db.select()
+  #score = NoteList(db.getScoreMidiPath1(selection)).splice(0, 10)
+  score = m21.converter.parse(db.getScorePath1(selection))
+  score.partsToVoices()
+  a = []
+  counter = 0
+  for x in score:
+    if not isinstance(x, m21.stream.Part):
+      continue
+    for y in x:
+      if not isinstance(y, m21.stream.Measure):
+        continue
+      for z in y:
+        if not isinstance(z, m21.stream.Voice):
+          continue
+        for note in z:
+          if counter >= limit:
+            break
+          if isinstance(note, m21.note.Note):
+            a.append(note.midi)
+            counter += 1
+
+  performance = NoteList(db.getPerformancePath1(selection)).splice(0, limit)
+  #a = score.simplelist()
+
+  b = performance.simplelist()
+  print a
+  print b
+  import minimumeditdistance as med
+  alignment = med.match(a,b)
+  first = performance.ticks_to_milliseconds(performance[0].on)
+  for key in alignment:
+    print "Score\t\t: {0}".format(score.ticks_to_milliseconds(score[key].on))
+    print "Performance\t: {0}".format(performance.ticks_to_milliseconds(performance[alignment[key]].on) - first)
+
+
+
+def test():
+  devpath = db.getDeviationPath1(selection)
+
   print "Extracting deviations"
   deviations = note_deviations(devpath)
   print "Loading score"
-  score = database.getScore(selection[0], selection[1], selection[2], selection[3])
+  score = db.getScore1(selection)
+  score.flat.stripTies() 
 
-  n = NoteList(database.getScoreMidiPath(selection[0], selection[1], selection[2], selection[3]))
+  n = NoteList(db.getScoreMidiPath1(selection))
   print "Generating performance"
   nlist = generate_performance(score, deviations)
   output = open('temp.txt', 'w')
