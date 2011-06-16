@@ -13,6 +13,8 @@ def recursive_score(obj, level):
   string = ''
   for tab in range(0,level):
     string += '\t'
+#  if isinstance(obj, m21.note.Note):
+#    print obj.measureNumber
   print '{0}{1} [duration:{2}]'.format(string, str(obj), str(obj.duration)) 
   if hasattr(obj,'__iter__'):
     for x in obj:

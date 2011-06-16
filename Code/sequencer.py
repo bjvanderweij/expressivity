@@ -30,7 +30,7 @@ class Sequencer:
       # Calculate relative time and convert to seconds
       ticks = e[0] - lastTime
       # This is not right yet
-      seconds = (ticks/float(notes.division)) * float(notes.tempo) * 0.000001
+      seconds = notes.ticks_to_seconds(ticks)
       if e[3] is 'on':
         #out.update_time(e[0]-lastTime)
         time.sleep(seconds)

@@ -219,7 +219,25 @@ def generate_performance(score, deviations):
   return output
 
 
+
+def test():
+  devpath = db.sampleDeviationPath()
+
+  print "Extracting deviations"
+  deviations = note_deviations(devpath)
+  print "Loading score"
+  score = db.sampleScore()
+  score.flat.stripTies() 
+
+  print "Generating performance"
+  nlist = generate_performance(score, deviations)
+  output = open('temp.txt', 'w')
+  import sequencer as seq
+  sequencer = seq.Sequencer()
+  sequencer.play(nlist)
+
 if __name__ == '__main__':
+  test()
   limit = 10
   selection = db.select()
   #score = NoteList(db.getScoreMidiPath1(selection)).splice(0, 10)
@@ -256,25 +274,4 @@ if __name__ == '__main__':
     print "Score\t\t: {0}".format(score.ticks_to_milliseconds(score[key].on))
     print "Performance\t: {0}".format(performance.ticks_to_milliseconds(performance[alignment[key]].on) - first)
 
-
-
-def test():
-  devpath = db.getDeviationPath1(selection)
-
-  print "Extracting deviations"
-  deviations = note_deviations(devpath)
-  print "Loading score"
-  score = db.getScore1(selection)
-  score.flat.stripTies() 
-
-  n = NoteList(db.getScoreMidiPath1(selection))
-  print "Generating performance"
-  nlist = generate_performance(score, deviations)
-  output = open('temp.txt', 'w')
-  for n in nlist:
-    output.write(str(n) + '\n')
-  output.close()
-  import sequencer as seq
-  sequencer = seq.Sequencer()
-  sequencer.play(nlist)
 

@@ -1,8 +1,13 @@
-import midifile
-from midi import *
-mf = midifile.MidiFile()
-parser = midifile.ParseMidi(mf)
-stream = MidiInFile.MidiInFile(parser, open('0848-01.mid'))
-stream.read()
-mf.export('dupe.mid')
+import database as db
+from alignment import *
+from representation import *
+from sequencer import *
+from score import *
+
+selection = db.select()
+alignment = Alignment(db.getScorePath1(selection), db.getDeviation1(selection))
+seq = Sequencer()
+seq.play(alignment.expressiveMelody())
+#s = Score(alignment.score, alignment)
+
 

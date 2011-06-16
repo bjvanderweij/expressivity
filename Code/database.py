@@ -2,7 +2,9 @@
 
 import music21 as m21
 from representation import *
+from deviations import *
 from midifile import *
+from score import *
 import os, re, util, analysescore
 
 DB_PATH = "/home/bastiaan/UvA/Expressive-Performance_DATA/CrestMusePEDB/"
@@ -145,18 +147,35 @@ def getDeviationPath(composer, work, pianist, soundfont):
 
 def getPerformance(composer, work, pianist, soundfont):
   path = getPerformancePath(composer, work, pianist, soundfont)
+  os.system('cp {0} ./lastused/performance.mid'.format(path))
   return NoteList(path)
 
 def getScore(composer, work, pianist, soundfont):
   path = getScorePath(composer, work, pianist, soundfont)
+  os.system('cp {0} ./lastused/score.xml'.format(path))
+  # For convenience, also copy the performance
+  path2 = getPerformancePath(composer, work, pianist, soundfont)
+  os.system('cp {0} ./lastused/performance.mid'.format(path2))
   return m21.converter.parse(path)
 
 def getDeviation(composer, work, pianist, soundfont):
   path = getDeviationPath(composer, work, pianist, soundfont)
+  targetpath = getScorePath(composer, work, pianist, soundfont)
+  os.system('cp {0} ./lastused/deviation.xml'.format(path))
+  return Deviations(path, targetpath)
+
+
+def sampleScorePath(): return "./samples/score.xml"
+def sampleScore(): return m21.converter.parse("./samples/score.xml")
+def sampleDeviationPath(): return "./samples/deviation.xml"
+def sampleDeviation(): return Deviations("./samples/deviation.xml")
 
 def select():
-  comp = util.menu('Choose a composer', getComposers())
-  work = util.menu('Choose a work and performer', getWorks(getComposers()[comp]), cancel=True)
+  work = -1
+  while(work == -1):
+    comp = util.menu('Choose a composer', getComposers())
+    work = util.menu('Choose a work and performer', getWorks(getComposers()[comp]), cancel=True)
+
   selected = getWorks(getComposers()[comp])[work]
   return getComposers()[comp], selected[0], selected[1], selected[2]
 
@@ -169,7 +188,7 @@ if __name__ == "__main__":
     if work == -1: continue
     selected = getWorks(getComposers()[comp])[work]
     choice = 0
-    while choice != 7:
+    while choice != 8:
       choice = util.menu('What should I load?', ['Expressive performance', 'Score without expression'])
       if choice == 0:
         path = getPerformancePath(getComposers()[comp], selected[0], selected[1], selected[2])
@@ -180,7 +199,7 @@ if __name__ == "__main__":
 
       choice = util.menu('Choose action', \
           ['Play with internal sequencer', 'Play with audacious', 'View score', 'View midi info', 'View score info',\
-          'Export deviation data to CSV', 'Analyse', 'Cancel'])
+          'Export deviation data to CSV', 'Analyse', 'Extract melody','Cancel'])
       if choice == 0:
         seq.play(NoteList(path))
       elif choice == 1:
@@ -212,6 +231,20 @@ if __name__ == "__main__":
         os.system("vim deviation.csv")
       elif choice == 6:
         analysescore.analyse(getScore(getComposers()[comp], selected[0], selected[1], selected[2]))
+      elif choice == 7:
+        score = Score(getScore(getComposers()[comp], selected[0], selected[1], selected[2]))
+        melody = score.melody()
+        mxml = melody.musicxml
+        f = open('output/melody.xml', 'w')
+        f.write(mxml)
+        f.close()
+        mf = melody.midiFile
+        mf.open('output/melody.mid', 'wb')
+        mf.write()
+        mf.close()
+        notes = NoteList('output/melody.mid')
+        seq.play(notes)
+
     
 
 
