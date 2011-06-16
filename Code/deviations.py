@@ -128,6 +128,8 @@ class Deviations:
 
     multiplier = beat - int(beat)
     beat_lengths.append(0)
+    if int(beat) >= len(beat_lengths):
+      print "{0} {1}".format(beat, beat_lengths)
     return sum([beat_lengths[i] for i in range(0, int(beat))]) + \
         multiplier * beat_lengths[int(beat)]
 

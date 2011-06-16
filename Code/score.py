@@ -16,6 +16,8 @@ class Score:
     m1 = self.part1[measure]
     m2 = self.part2[measure]
 
+
+
   def note_ids(self):
     count = 0
     max = 10
@@ -39,12 +41,17 @@ class Score:
   def melody(self):
     notes = []
     melody = m21.stream.Score()
+    partFound = False
     for x in self.score:
+      # Only add the first part to the melody
+      if partFound:
+        break
       if not isinstance(x,m21.stream.Part):
         melody.append(x)
       else:
         part = m21.stream.Part()
         melody.append(part)
+        partFound = True
         for y in x:
           if not isinstance(y, m21.stream.Measure):
             part.append(y)
@@ -60,6 +67,7 @@ class Score:
                   continue
                 else:
                   voice = m21.stream.Voice()
+                  voice.id = 1
                   measure.append(voice)
                   for note in z:
                     if not isinstance(note,m21.chord.Chord):

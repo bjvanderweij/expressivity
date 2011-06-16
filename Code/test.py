@@ -7,7 +7,7 @@ from score import *
 selection = db.select()
 alignment = Alignment(db.getScorePath1(selection), db.getDeviation1(selection))
 seq = Sequencer()
-seq.play(alignment.expressiveMelody())
+seq.play(alignment.melodyPerformance())
 #s = Score(alignment.score, alignment)
 
 
