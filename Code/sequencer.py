@@ -9,6 +9,7 @@ class Sequencer:
 
 
   def play(self, notes):
+    notes.printinfo()
     # Choose an output device
     devices = []
     for i in range(midi.get_count()):

@@ -75,12 +75,15 @@ class Alignment:
 
   def performance(self, score, melody=None):
     print "Creating performance"
-    performancetime = self.deviations.init_silence * 1000000.0
+    # I am not sure about the units in which init silence is expressed
+    begintime = self.deviations.init_silence * 1000000.0
+    #performancetime = self.deviations.init_silence * self.deviations.getBeatDuration()
     performance = NoteList()
+    lastmelodynote = None
     count = 0
     for part in score:
       measureduration = 0.0
-      performancetime = 0.0
+      performancetime = begintime
       if not isinstance(part,m21.stream.Part): continue
       for measure in part:
         if not isinstance(measure,m21.stream.Measure): continue
@@ -119,6 +122,7 @@ class Alignment:
                   # Find the first melody note following this note(in this measure)    
                   # This should actually look for the NEAREST melody note because...
                   # IF THERE ARE NO MELODY NOTES OFTER THIS NOTE THIS CODE WILL FAIL
+                  # This is now somewhat fixed, if no melodynote is found, the last melodynote is used
                   baroffset = 0
                   while not melodynote or not isinstance(melodynote, m21.note.Note):
                     index = part.index(measure) + baroffset
@@ -132,8 +136,7 @@ class Alignment:
                       except IndexError:
                         pass
                     else: 
-                      print "Situation"
-                      break
+                      melodynote = lastmelodynote
                   if measure.number < 4:
                     print "{0} {1} {2}".format(note, melodynote, note.offset)
                   deviation = self.alignment[melodynote.id, str(melodynote.pitch)]
@@ -142,6 +145,7 @@ class Alignment:
                   deviation = (0, 0, deviation[2], deviation[3])
                 else:
                   deviation = self.alignment[melodynote.id, str(melodynote.pitch)]
+                lastmelodynote = melodynote
               else:
                 deviation = self.alignment[note.id, str(n.pitch)]
               if not deviation: continue
@@ -149,11 +153,13 @@ class Alignment:
                   
               onvel = deviation[2] * self.deviations.basedynamics
               offvel = 0
-
               on_ms = performancetime + self.deviations.getExpressiveTime(measure.number, note.offset)
               off_ms = on_ms + self.deviations.getExpressiveDuration(measure.number, note.offset, n.duration.quarterLength)
-              on_ms += deviation[0] * self.deviations.getBeatDuration(measure.number, int(note.offset))
-              off_ms += deviation[1] * self.deviations.getBeatDuration(measure.number, int(note.offset))
+              beatduration = self.deviations.getBeatDuration(measure.number, int(note.offset))
+              if not beatduration:
+                beatduration = 1.0
+              on_ms += deviation[0] * beatduration
+              off_ms += deviation[1] * beatduration
               #off_ms += deviation[1] * self.deviations.getBeatDuration(measure.number, int(note.offset + n.duration.quarterLenghth))
 
               on = performance.microseconds_to_ticks(on_ms)

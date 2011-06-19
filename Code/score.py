@@ -1,4 +1,5 @@
 import music21 as m21
+import tools
 
 class Score:
 
@@ -15,7 +16,9 @@ class Score:
   def notesOn(self,measure,beat):
     m1 = self.part1[measure]
     m2 = self.part2[measure]
-
+  
+  def getNoteList():
+    return tools.parseScore(self.score)
 
 
   def note_ids(self):

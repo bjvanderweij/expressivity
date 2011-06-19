@@ -6,12 +6,14 @@ base_a4 = 440
 names = ['C','Db','D','Eb','E','F','Gb','G','Ab','A','Bb','B']
 class Note:
 
-  def __init__(self, on, off, pitch, onvelocity, offvelocity=0):
+  def __init__(self, on, off, pitch, onvelocity, offvelocity=0, annotation=None):
     self.on = on
     self.off = off
     self.pitch = pitch
     self.onvelocity = onvelocity
     self.offvelocity = offvelocity
+    # Notes can be marked with a tuple (part, measure, voice, note) that allows mappings between notelists and scores or alignments 
+    self.annotation = annotation
 
   def abs_pitch(self):
     return base_a4*pow(2,(self.pitch-57)/12)
@@ -26,7 +28,7 @@ class Note:
     self.length = length
 
   def __str__(self):
-    return self.name()
+    return self.info()
 
   def info(self):
     return "Note: %s, on: %s, off: %s, on velocity: %s, off velocity: %s" % (self.name(), self.on, self.off, self.onvelocity, self.offvelocity)
@@ -38,7 +40,7 @@ class NoteList:
 
     # Dirty MIDI administration
     self.key_signature = None
-    self.time_signature = None
+    self.time_signature = (4, 4, 24, 8)
     self.smtp_offset = None
     self.tempo = 500000
     self.division = 480
@@ -60,7 +62,6 @@ class NoteList:
     new.sequence_names= self.sequence_names
     new.notes = self[begin:end]
     return new
-
 
   def simplelist(self):
     return [n.pitch for n in self]
@@ -192,6 +193,9 @@ class NoteList:
       index += 1
 
     self.notes.append(note)
+
+  def quarternotes_to_ticks(self, quarternotes):
+    return self.microseconds_to_ticks(quarternotes * self.tempo)
 
   def microseconds_to_ticks(self, microseconds):
     return int((microseconds / float(self.tempo)) * self.division)

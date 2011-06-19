@@ -110,7 +110,13 @@ class EventDispatcher:
             stream.aftertouch(channel, note, velocity)
         
         elif (CONTINUOUS_CONTROLLER & 0xF0) == hi_nible:
-            controller, value = data
+            try:
+              controller, value = data
+            except ValueError:
+              print "Midiparser: Something seems off: {0} {1} {2}".format(hi_nible, channel, data)
+              return
+
+
             # A lot of the cc's are defined, so we trigger those directly
             if self.dispatch_continuos_controllers:
                 self.continuous_controllers(channel, controller, value)
