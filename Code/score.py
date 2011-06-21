@@ -20,27 +20,7 @@ class Score:
   def getNoteList():
     return tools.parseScore(self.score)
 
-
-  def note_ids(self):
-    count = 0
-    max = 10
-    for part in self.score:
-      if not isinstance(part, m21.stream.Part):
-        continue
-      for measure in part:
-        if not isinstance(measure, m21.stream.Measure):
-          continue
-        for voice in measure:
-          if not isinstance(voice, m21.stream.Voice):
-            continue
-          for note in voice:
-            if count > max:
-              break
-            if isinstance(note, m21.note.Note):
-              print '{0} {1}'.format(str(note), note.id)
-              count += 1
-
-  #Highest note at any moment
+  #Highest note in part one at any moment
   def melody(self):
     notes = []
     melody = m21.stream.Score()

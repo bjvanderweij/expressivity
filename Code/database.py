@@ -5,6 +5,7 @@ from representation import *
 from deviations import *
 from midifile import *
 from score import *
+from alignment import *
 import os, re, util, analysescore
 
 DB_PATH = "/home/bastiaan/UvA/Expressive-Performance_DATA/CrestMusePEDB/"
@@ -195,11 +196,12 @@ if __name__ == "__main__":
       else:
         path = getScoreMidiPath(getComposers()[comp], selected[0], selected[1], selected[2])
 
+      selection = (getComposers()[comp], selected[0], selected[1], selected[2])
       print path
 
       choice = util.menu('Choose action', \
           ['Play with internal sequencer', 'Play with audacious', 'View score', 'View midi info', 'View score info',\
-          'Export deviation data to CSV', 'Analyse', 'Extract melody','Cancel'])
+          'Export deviation data to CSV', 'Performance', 'Extract melody','Cancel'])
       if choice == 0:
         seq.play(NoteList(path))
       elif choice == 1:
@@ -230,7 +232,8 @@ if __name__ == "__main__":
         os.system("cmx dev2csv {0} > deviation.csv".format(getDeviationPath(getComposers()[comp], selected[0], selected[1], selected[2])))
         os.system("vim deviation.csv")
       elif choice == 6:
-        analysescore.analyse(getScore(getComposers()[comp], selected[0], selected[1], selected[2]))
+        alignment = Alignment(getScorePath1(selection), getDeviation1(selection))
+        seq.play(alignment.performance())
       elif choice == 7:
         score = Score(getScore(getComposers()[comp], selected[0], selected[1], selected[2]))
         melody = score.melody()

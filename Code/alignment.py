@@ -64,17 +64,13 @@ class Alignment:
   def expressiveMelody(self):
     return self.performance(self.melody())
 
-  def performance(self):
-    return self.performance(self.score)
-
-  def melodyPerformance(self, melody):
-    return self.performance(self.score)
-
   def melodyPerformance(self):
     return self.performance(self.score, self.melody())
 
-  def performance(self, score, melody=None):
+  def performance(self, score=None, melody=None):
     print "Creating performance"
+    if not score:
+      score = self.score
     # I am not sure about the units in which init silence is expressed
     begintime = self.deviations.init_silence * 1000000.0
     #performancetime = self.deviations.init_silence * self.deviations.getBeatDuration()
@@ -113,7 +109,9 @@ class Alignment:
               if melody:
                 melodynote = None
                 try:
-                  melodynote = melody[1][part.index(measure)].getElementById(1).getElementsByOffset(note.offset)[0]
+                  melodyvoice = melody[1][part.index(measure)].getElementById(1)
+                  if melodyvoice:
+                    melodynote = melodyvoice.getElementsByOffset(note.offset)[0]
                   if measure.number < 4:
                     print "{0} {1} {2}".format(note, melodynote, note.offset)
                 except IndexError:
@@ -132,7 +130,9 @@ class Alignment:
                         continue
                       barduration = melody[1][index].barDuration.quarterLength
                       try:
-                        melodynote = melody[1][index].getElementById(1).getElementsByOffset(0, barduration)[0]
+                        melodyvoice = melody[1][index].getElementById(1)
+                        if melodyvoice:
+                          melodynote = melodyvoice.getElementsByOffset(0, barduration)[0]
                       except IndexError:
                         pass
                     else: 
@@ -171,25 +171,6 @@ class Alignment:
 
   def getDeviations(self,note):
     return self.alignment[note.id, str(note.pitch)]
-
-  def note_ids(self):
-    count = 0
-    max = 20
-    for part in self.score:
-      if not isinstance(part, m21.stream.Part):
-        continue
-      for measure in part:
-        if not isinstance(measure, m21.stream.Measure):
-          continue
-        for voice in measure:
-          if not isinstance(voice, m21.stream.Voice):
-            continue
-          for note in voice:
-            if count > max:
-              break
-            if isinstance(note, m21.note.Note):
-              count += 1
-              print '{0} {1}'.format(str(note), note.id)
 
   def align(self, score, deviations):
     output = NoteList()
