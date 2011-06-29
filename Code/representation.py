@@ -194,6 +194,9 @@ class NoteList:
 
     self.notes.append(note)
 
+  def remove(self, item):
+    self.notes.remove(item)
+
   def quarternotes_to_ticks(self, quarternotes):
     return self.microseconds_to_ticks(quarternotes * self.tempo)
 
@@ -206,6 +209,9 @@ class NoteList:
   def seconds_to_ticks(self, microseconds):
     return int((0.000001 * microseconds / float(self.tempo)) * self.division)
   
+  def ticks_to_quarternotes(self, ticks):
+    return self.ticks_to_microseconds(ticks) / self.tempo
+
   def ticks_to_microseconds(self, ticks):
     return (ticks / float(self.division)) * float(self.tempo)
 

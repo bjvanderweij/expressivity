@@ -5,7 +5,12 @@ import os, pickle
 
 class Deviations:
 
-  def __init__(self, deviation, target):
+  def __init__(self, deviation=None, target=None):
+    if not deviation or not target:
+      self.bpm = 120
+      self.target = target
+      self.init_silence = 0
+      return
     targetname = os.path.split(target)[1].split('.')[0]
     if targetname in os.listdir('deviations'):
       print "Stored deviations found, remove deviations/{0} to create new ones".format(targetname)
@@ -33,16 +38,21 @@ class Deviations:
     f = open(location, 'wb')
     pickle.dump(self.data, f)
 
+  # Parse a deviation file into a measurelength, tempo_deviations and note_deviations dict
+  # It also reads the base tempo and should read the base dynamics
   def parse(self, deviation, targetpath):
     print "Reading deviations file"
     f = open(deviation)
     devfile = f.read()
+    # We need to look up some information in the score file as this information is lost
+    # in translation when the score is parsed with music21
     soup = BeautifulStoneSoup(devfile)
     print "Reading target score"
     f = open(targetpath)
     targetfile = f.read()
     target = BeautifulStoneSoup(targetfile)
 
+    # For speed: put all measure tags in a dictionary
     print "Constructing measures dictionary"
     measures = {}
     for measure in target.findAll('measure'):
@@ -67,9 +77,12 @@ class Deviations:
       # Instead of continuing, add gracenotes to stream here?
       if note.grace: continue
       number = 0
+      # Count the number of notes in the measure and skip rests, grace notes and tied notes
       for n in notes[0:int(m.group(3))-1]:
         if n.rest: continue
         if n.grace: continue
+        if n.tie and n.tie['type'] != 'start':
+          continue
         if n.voice.contents[0] == voice:
           number += 1
 
@@ -82,6 +95,8 @@ class Deviations:
       pitch = '{0}{1}{2}'.format(note.pitch.step.contents[0], alteration, note.pitch.octave.contents[0])
 
       key = "{0},{1},{2},{3},{4}".format(m.group(1), m.group(2), voice, pitch, number)
+      if m.group(2) == '18':
+        print key
       if tag.name == 'miss-note': 
         value = 'miss'
       else:
@@ -127,7 +142,10 @@ class Deviations:
   def getExpressiveTime(self, measure, beat):
     beat_lengths = []
     for b in range(self.measure_lengths[measure]):
-      beat_lengths.append(self.getBeatDuration(measure, b))
+      if not self.getBeatDuration(measure,b):
+        beat_lengths.append(self.getBeatDuration())
+      else:
+        beat_lengths.append(self.getBeatDuration(measure, b))
 
     multiplier = beat - int(beat)
     beat_lengths.append(0)
@@ -155,7 +173,6 @@ class Deviations:
       if not beatduration:
         beatduration = 1
       beat_lengths.append(beatduration)
-
     relevant_beats = beat_lengths[int(begin):int(begin+duration+1)]
     if int(begin) != begin:
       rest = int(begin) + 1.0 - begin

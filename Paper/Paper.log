@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.5.30)  20 JUN 2011 16:54
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.5.30)  22 JUN 2011 23:12
 entering extended mode
  %&-line parsing enabled.
 **Paper.tex
@@ -304,17 +304,23 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 131.
 
 (/usr/share/texmf-texlive/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
-) [3] (./Paper.bbl)
-[4] (./Paper.aux)
+) [3]
+
+LaTeX Warning: Citation `markwin' on page 4 undefined on input line 217.
+
+(./Paper.bbl) [4] (./Paper.aux)
+
+LaTeX Warning: There were undefined references.
+
 
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
  ) 
 Here is how much of TeX's memory you used:
- 2332 strings out of 495006
- 27210 string characters out of 1181410
+ 2333 strings out of 495006
+ 27219 string characters out of 1181410
  103136 words of memory out of 3000000
- 5503 multiletter control sequences out of 15000+50000
+ 5504 multiletter control sequences out of 15000+50000
  8613 words of font info for 34 fonts, out of 3000000 for 9000
  68 hyphenation exceptions out of 8191
  27i,9n,24p,931b,607s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -330,7 +336,7 @@ fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1
 /public/amsfonts/cm/cmsy7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsf
 onts/cm/cmti10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmt
 t10.pfb>
-Output written on Paper.pdf (5 pages, 177387 bytes).
+Output written on Paper.pdf (5 pages, 176884 bytes).
 PDF statistics:
  70 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
