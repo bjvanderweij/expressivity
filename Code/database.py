@@ -137,7 +137,6 @@ def getScorePath(composer, work, pianist, soundfont):
       not name.endswith('nodoctype.xml'):
       path += "/{0}".format(name)
       break
-  print path
   return path
 
 def getDeviationPath(composer, work, pianist, soundfont):

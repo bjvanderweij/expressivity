@@ -9,16 +9,26 @@ def analyse(score):
 def toText(score):
   recursive_score(score, 0)
 
-def recursive_score(obj, level):
+def toFile(score, f):
+  out = open(f, 'w')
+  recursive_score(score, 0, out)
+  out.close()
+
+def recursive_score(obj, level, out=None):
   string = ''
   for tab in range(0,level):
     string += '\t'
 #  if isinstance(obj, m21.note.Note):
 #    print obj.measureNumber
-  print '{0}{1} [duration:{2}]'.format(string, str(obj), str(obj.duration)) 
+
+  line = '{0}{1} {2} [duration:{3}]'.format(string, str(obj), obj.offset, str(obj.duration.quarterLength)) 
+  if out:
+    out.write(line + '\n')
+  else:
+    print line
   if hasattr(obj,'__iter__'):
     for x in obj:
-      recursive_score(x, level + 1)
+      recursive_score(x, level + 1, out)
 
 if __name__ == "__main__":
   toText(m21.converter.parse(sys.argv[1]))

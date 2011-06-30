@@ -1,22 +1,111 @@
 import tools, structure, math
 
-def expression(alignment):
+# Least squares fit
+def linear_fit(X, Y):
+  n = len(X)
+  if len(X) != len(Y):
+    print "linear fit: WARNING: lengths of data don't match: {0} and {1}".format(len(X), len(Y))
+  sum_x=0.0
+  sum_y=0.0
+  sum_xx=0.0
+  sum_xy=0.0
+  for x,y in zip(X,Y):
+    sum_x=sum_x+x
+    sum_y=sum_y+y
+    xx=pow(x,2)
+    sum_xx=sum_xx+xx
+    xy=x*y
+    sum_xy=sum_xy+xy
+
+  #Calculating the coefficients
+  a=(-sum_x*sum_xy+sum_xx*sum_y)/float(n*sum_xx-sum_x*sum_x)
+  b=(-sum_x*sum_y+n*sum_xy)/float(n*sum_xx-sum_x*sum_x)
+  return a, b
+
+  #print "The required straight line is Y=%sX+(%s)"%(b,a)
+
+
+
+def articulation(notes, i):
+  return structure.duration(notes, i)
+
+
+def vanDerWeijExpression(alignment, segments):
+  performance = alignment.expressiveMelody()
+  # The two above should be guaranteed to be of equal length.
+  # However, better be safe than sorry
+  if len(performance) != sum([len(x) for x in segments]):
+    print 'This shouldn\'t happen: melodyscore and performance lengths don\'t match: {0} and {1}'.format(len(sum([len(x) for x in segments])), len(performance))
+  else:
+    print "This is good, performance length and score length match"
+  
+  expression = []
+  i = 0
+  index = 0
+  for segment in segments:
+    length = float(len(segment))
+    # Segments can't have a length of 1, the features don't work then
+    if length <=1:
+      print "WARNING: Don't know how to deal with atomic constituent, skipping, solve this!"
+      continue
+    average_articulation = 0
+    tempos = []
+    for note in segment:
+      pointer = note.annotation
+      scorepart = alignment.melody()[pointer[0]]
+      scoremeasure = scorepart[pointer[1]]
+      scorevoice = scoremeasure[pointer[2]]
+      scorenote = scorevoice[pointer[3]]
+      measure = scoremeasure.number
+      
+      tempo = alignment.deviations.tempo_deviations[measure, int(scorenote.offset)]
+      if not tempo in tempos:
+        tempos.append(tempo)
+
+      # Find out if the next note is a rest, if so use the ratio between expressive duration and duration
+      useScoreDuration = False
+      # Last note of this
+      if pointer[3] + 1 == len(scorevoice):
+        if pointer[1] + 1 == len(scorepart):
+          useScoreDuration = True
+        elif scorepart[pointer[1]+1].getElementById(scorevoice.id).notes[0].isRest:
+          measure = scorepart[pointer[1]+1]
+          useScoreDuration = True
+      elif scorevoice[pointer[3]+1].isRest:
+        useScoreDuration = True
+
+      ioi = 1
+      if useScoreDuration:
+        ioi = alignment.deviations.getExpressiveDuration(scoremeasure.number, scorenote.offset, scorenote.duration.quarterLength)
+      else: ioi = structure.ioi(performance, index)
+
+      average_articulation += 1/length * structure.duration(performance, index) / ioi 
+      index += 1
+
+    note_onsets = [n.on for n in segment]
+
+    # Calculate performance parameters/features
+    average_ioi_ratio = sum([1/length * articulation(segment, j) for j in range(int(length))] )
+    (start_loudness, loudness_direction) = linear_fit(note_onsets, [x.onvelocity for x in segment])
+    average_tempo = tempo / length
+    (start_tempo, tempo_direction) = linear_fit(range(len(tempos)), tempos)
+    average_loudness = sum([1/length * x.onvelocity for x in segment])
+
+    expression.append((average_ioi_ratio, average_loudness, average_articulation, start_tempo, start_loudness, tempo_direction, loudness_direction))
+    i += 1
+
+  return expression
+
+def expressionWidmer(alignment):
   performance = alignment.expressiveMelody()
   melodyscore = alignment.melody()
   score = tools.parseScore(melodyscore)
-  # Tied notes end up as zero length notes here, clean this mess up
-  print 'SCORE LENGTH: {0}'.format(len(score))
-  remove = []
-  for i in range(len(score)):
-    if structure.duration(score, i) == 0:
-      remove.append(score[i])
-  for n in remove:
-    score.remove(n)
-  print 'SCORE LENGTH: {0}'.format(len(score))
   # The two above should be guaranteed to be of equal length.
   # However, better be safe than sorry
   if len(performance) != len(score):
-    print 'This shouldn\'t happen: melodyscore and performance lengths don\'t match: {0} and {1}'.format(len(performance), len(score))
+    print 'This shouldn\'t happen: melodyscore and performance lengths don\'t match: {0} and {1}'.format(len(score), len(performance))
+  else:
+    print "This is good, performance length and score length match"
   
   # Mean loudness
   mean_l = 0.0
@@ -24,7 +113,6 @@ def expression(alignment):
     mean_l += note.onvelocity
 
   mean_l = mean_l / float(len(performance))
-  print "Average loudness: {0}".format(mean_l)
 
   expression = []
   lasttempo = float(alignment.deviations.bpm)
@@ -39,6 +127,9 @@ def expression(alignment):
     #articulation = math.log(structure.silence(performance, i) / float(structure.silence(score, i))) 
     articulation = 0
 
+    if(structure.duration(performance, i) < 1):
+      print "Invalid performance note :( skipping"
+      continue
     duration_ratio = math.log(structure.duration(performance, i) / float(structure.duration(score, i)))
 
     # To be implemented: second order ioi loudness and articulation

@@ -17,11 +17,25 @@ def duration_ratio(notes, i):
   if i == 0: return 1
   return math.log((notes[i].off - notes[i].on) / float(notes[i-1].off - notes[i-1].on))
 
-def vanderWeijFeatures(melodyscore):
+def vanDerWeijFeatures(melodyscore, segments):
+  # This is radically different, we only look at features at constituent level
   melody = tools.parseScore(melodyscore)
-  onset_tree = structure.second_order_tree(structure.onset, melody, 0.1)
-  pitch_tree = structure.second_order_tree(structure.pitch, melody, 0.1)
-  features = [[0] for i in range(len(melody))]
+
+  features = []
+  index = 0
+  for i in range(len(segments)):
+    length = len(segments[i]) 
+    # Calculate averages:
+    # What if the segment is len 1?
+    abs_interval = sum([1/float(length - 1 ) * \
+      structure.absolute_delta(segments[i], structure.pitch, x) for x in range(1, length)])
+    duration = sum([1/float(length) * \
+      structure.duration(segments[i], x) for x in range(length)])
+    pitch = sum([1/float(length) * \
+      structure.pitch(segments[i], x) for x in range(length)])
+    pitch_direction = (segments[i][length-1].pitch - segments[i][0].pitch ) / float(length)
+    features.append((pitch, duration, abs_interval, pitch_direction))
+
   return features
     
 
@@ -61,7 +75,6 @@ def widmerFeatures(melodyscore):
   for i in range(len(melody)):
     features[i].append(pitch_interval(melody, i))
     features[i].append(duration_ratio(melody, i))
-    print features[i]
   print features[10]
   return features
 

@@ -3,7 +3,7 @@ from BeautifulSoup import *
 from deviations import *
 from score import *
 import music21 as m21
-import pickle
+import pickle, copy
 
 class Alignment:
 
@@ -16,18 +16,20 @@ class Alignment:
       self.score = m21.converter.parse(scorepath)
     else:
       self.score = scorepath
-    # This doesn't actually remove ties, but it does fix the duration of tied notes
-    self.score = self.score.stripTies()
-    # Remove all tied notes except the start notes
-    self.removeTies()
+    s = Score(self.score)
+    m = s.melody()
+    self.m = self.removeTies(m)
+    self.score = self.removeTies(self.score)
     self.alignment = None
     self.align()
 
-    #  self.storeAlignment()
     print "Done"
 
-  def removeTies(self):
-    for part in self.score:
+  def removeTies(self, score):
+    # This doesn't actually remove ties, but it does fix the duration of tied notes
+    score = score.stripTies()
+    # Now remove every note that is not the start of a tie
+    for part in score:
       if not isinstance(part, m21.stream.Part):
         continue
       for measure in part:
@@ -43,6 +45,7 @@ class Alignment:
                   voice.remove(note)
                 else:
                   note.tie = None
+    return score
 
 
   def storeAlignment(self):
@@ -64,10 +67,7 @@ class Alignment:
     return self.deviations.getBeatDuration(measure, beat)
 
   def melody(self):
-    print self.score.id
-    print self.score, self.score[0]
-    s = Score(self.score)
-    return s.melody()
+    return self.m
 
   def expressiveMelody(self):
     return self.performance(self.melody())
@@ -85,18 +85,17 @@ class Alignment:
     performance = NoteList()
     lastmelodynote = None
     count = 0
-    for part in score:
+    lastdeviation = (0, 0, 1, 1)
+    for part in score.parts:
       measureduration = 0.0
       performancetime = begintime
-      if not isinstance(part,m21.stream.Part): continue
       for measure in part:
         if not isinstance(measure,m21.stream.Measure): continue
-        if melody: print "Bar {0} done".format(measure.number)
+        #if melody: print "Bar {0} done".format(measure.number)
         performancetime += measureduration
         measureduration = self.deviations.getExpressiveTime(measure.number, self.deviations.measure_lengths[measure.number])
-        for voice in measure:
-          if not isinstance(voice,m21.stream.Voice): continue
-          for note in voice:
+        for voice in measure.voices:
+          for note in voice.notes:
             queue = {}
             #if hasattr(note,'tie') and note.tie is not None and note.tie.type is not 'start':
             #  continue
@@ -147,8 +146,8 @@ class Alignment:
                         pass
                     else: 
                       melodynote = lastmelodynote
-                  if measure.number < 4:
-                    print "{0} {1} {2}".format(note, melodynote, note.offset)
+                  #if measure.number < 4:
+                  #  print "{0} {1} {2}".format(note, melodynote, note.offset)
                   if not (melodynote.id, str(melodynote.pitch)) in self.alignment:
                     print '{0} {1}'.format(measure.number, melodynote.offset)
                     deviation = None
@@ -161,13 +160,20 @@ class Alignment:
                 lastmelodynote = melodynote
               else:
                 if not (note.id, str(n.pitch)) in self.alignment:
-                  print '{0} {1}'.format(measure.number, note.offset)
+                  # This is a note that was not found in the deviations
+                  #print '{0} {1}'.format(measure.number, note.offset)
                   deviation = None
-                deviation = self.alignment[note.id, str(n.pitch)]
+                else:
+                  deviation = self.alignment[note.id, str(n.pitch)]
               if not deviation: 
-                continue
-
-                  
+                deviation = lastdeviation
+              lastdeviation = deviation
+              #if note.offset == 6.25:
+              #  print measure.duration
+              #if note.offset > measure.duration.quarterLength:
+              #  print "Note offset larger than measurelength, setting to last beat"
+              #  note.offset = measure.duration.quarterLength
+                 
               onvel = deviation[2] * self.deviations.basedynamics
               offvel = 0
               on_ms = performancetime + self.deviations.getExpressiveTime(measure.number, note.offset)
@@ -192,51 +198,74 @@ class Alignment:
 
   def align(self):
     deviations = self.deviations
-    score = self.score
-    print "{0} {1}".format(len(score.flat.notes), len(score.flat.stripTies().notes))
+    score = copy.deepcopy(self.score)
+    #score = self.score
     bpm = deviations.bpm
     alignment = {}
-    for part in score:
-      if not isinstance(part,m21.stream.Part): continue
-      for measure in part:
-        if not isinstance(measure,m21.stream.Measure): continue
-        for voice in measure:
-          if not isinstance(voice,m21.stream.Voice): continue
-          notes = 0
-          for note in voice:
-            queue = {}
-            if note.isRest:
-              continue
-            #if hasattr(note,'tie') and note.tie is not None and note.tie.type is not 'start':
-            #  if isinstance(note, m21.chord.Chord):
-            #    notes += len(note.pitches) - 1
-            #  notes += 1
-            #  continue
-            elif isinstance(note,m21.note.Note):
-#              if not note.id in 
-              queue[str(note.pitch)] = note
-            elif isinstance(note,m21.chord.Chord):
-              for pitch in note.pitches:
-                current = m21.note.Note()
-                current.pitch = pitch
-                current.duration = note.duration
-                queue[str(pitch)] = current
-            else: continue
-            for n in queue.values():
-              for i in range(len(queue)):
-                query = "P1,{0},{1},{2},{3}".format(measure.number, str(voice.id), str(n.pitch), notes + i)
-                if query in deviations.note_deviations: break 
-              # This situation is usually caused by fucking TIED NOTES, it can mess up indexing
-              if not query in deviations.note_deviations:
-                print "Query: {0} not found in deviations".format(query)
-                n_dev = None
-              else:
-                n_dev = deviations.note_deviations[query]
-              if n_dev == 'miss':
-                n_dev = None
+    # Assume two part music
+    p1 = score.parts[0]
+    p2 = score.parts[1]
+    p1measures = []
+    p2measures = []
+    for m in p1:
+      if isinstance(m, m21.stream.Measure):
+        p1measures.append(m)
+    for m in p2:
+      if isinstance(m, m21.stream.Measure):
+        p2measures.append(m)
+    for p1measure,p2measure in zip(p1measures, p2measures):
+      mergedvoices = []
+      if p1measure.number != p2measure.number:
+        print "This shouldn't happen!"
+      voices = [v for v in p1measure.voices] + [v for v in p2measure.voices]
+      for voice in voices:
+        if voice.id in [v.id for v in mergedvoices]:
+          index = 0
+          for i in range(len(mergedvoices)):
+            if mergedvoices[i].id == voice.id: index = i
+          for note in voice.notes:
+            mergedvoices[index].insert(note)
+        else:
+          mergedvoices.append(voice)
 
-              alignment[(note.id, str(n.pitch))] = n_dev
-            notes += len(queue.keys())
+      for voice in mergedvoices:
+        notes = 0
+        for note in voice.notes:
+          #if int(voice.id) == 1 and int(p1measure.number) == 3:
+          #  print "{0} {1}".format(note.pitch, note.offset)
+          queue = {}
+          if note.isRest:
+            continue
+          #if hasattr(note,'tie') and note.tie is not None and note.tie.type is not 'start':
+          #  if isinstance(note, m21.chord.Chord):
+          #    notes += len(note.pitches) - 1
+          #  notes += 1
+          #  continue
+          elif isinstance(note,m21.note.Note):
+#              if not note.id in 
+            queue[str(note.pitch)] = note
+          elif isinstance(note,m21.chord.Chord):
+            for pitch in note.pitches:
+              current = m21.note.Note()
+              current.pitch = pitch
+              current.duration = note.duration
+              queue[str(pitch)] = current
+          else: continue
+          for n in queue.values():
+            for i in range(len(queue)):
+              query = "P1,{0},{1},{2},{3}".format(p1measure.number, str(voice.id), str(n.pitch), notes + i)
+              if query in deviations.note_deviations: break 
+            # This situation is usually caused by fucking TIED NOTES, it can mess up indexing
+            if not query in deviations.note_deviations:
+              print "Query: {0} not found in deviations".format(query)
+              n_dev = None
+            else:
+              n_dev = deviations.note_deviations[query]
+            if n_dev == 'miss':
+              n_dev = None
+
+            alignment[(note.id, str(n.pitch))] = n_dev
+          notes += len(queue.keys())
     self.alignment = alignment
 
 def run():

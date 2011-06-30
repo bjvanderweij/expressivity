@@ -95,8 +95,8 @@ class Deviations:
       pitch = '{0}{1}{2}'.format(note.pitch.step.contents[0], alteration, note.pitch.octave.contents[0])
 
       key = "{0},{1},{2},{3},{4}".format(m.group(1), m.group(2), voice, pitch, number)
-      if m.group(2) == '18':
-        print key
+      #if m.group(2) == '3':
+      #  print key
       if tag.name == 'miss-note': 
         value = 'miss'
       else:
@@ -130,34 +130,63 @@ class Deviations:
         'init-silence':float(soup.deviation['init-silence']),'target':soup.deviation['target'],\
         'basedynamics':100.0}
 
+#  def getBeatDuration(self, measure=None, beat=None):
+#    if not measure and not beat:
+#      return 60000000 / self.bpm
+#    if not (int(measure), int(beat)) in self.tempo_deviations:
+#      print "No tempo deviation found for measure {0}, beat {1}".format(measure, beat)
+#      return None
+#    return 60000000 / (self.bpm * self.tempo_deviations[(int(measure), int(beat))])
+#
+#  # beat expressed in quarternotes
+#  def getExpressiveTime(self, measure, beat):
+#    beat_lengths = []
+#    for b in range(int(beat)+1):
+#      if not self.getBeatDuration(measure,b):
+#        beat_lengths.append(self.getBeatDuration())
+#      else:
+#        beat_lengths.append(self.getBeatDuration(measure, b))
+#
+#    multiplier = beat - int(beat)
+#    beat_lengths.append(0)
+#    if int(beat) >= len(beat_lengths):
+#      print "measure: {0} beat:{1} bl:{2}".format(measure, beat, beat_lengths)
+#    return sum([beat_lengths[i] for i in range(0, int(beat))]) + \
+#        multiplier * beat_lengths[int(beat)]
+
+  # Custom beat lengths list
+  def getExpressiveTime1(self, beat_lengths, beat):
+    multiplier = beat - int(beat)
+    beat_lengths.append(0)
+    return sum([beat_lengths[i] for i in range(0, int(beat))]) + \
+        multiplier * beat_lengths[int(beat)]
+
   def getBeatDuration(self, measure=None, beat=None):
     if not measure and not beat:
-      return 60000000 / self.bpm
+      return 60000000 / float(self.bpm)
     if not (int(measure), int(beat)) in self.tempo_deviations:
-      print "No tempo deviation found for measure {0}, beat {1}".format(measure, beat)
+      #print "No tempo deviation found for measure {0}, beat {1}".format(measure, beat)
       return None
     return 60000000 / (self.bpm * self.tempo_deviations[(int(measure), int(beat))])
 
   # beat expressed in quarternotes
   def getExpressiveTime(self, measure, beat):
     beat_lengths = []
-    for b in range(self.measure_lengths[measure]):
-      if not self.getBeatDuration(measure,b):
-        beat_lengths.append(self.getBeatDuration())
-      else:
-        beat_lengths.append(self.getBeatDuration(measure, b))
+    if beat > self.measure_lengths[measure]:
+      print "WARNING: beat {0} exceeds measure length {1}, assuming last tempo deviation".format(beat, self.measure_lengths[measure])
+    
+    lastduration = self.getBeatDuration()
+    for b in range(int(beat)+1):
+      duration = self.getBeatDuration(measure, b)
+      if not duration:
+        duration = lastduration
+      beat_lengths.append(duration)
+      lastduration = duration
 
     multiplier = beat - int(beat)
     beat_lengths.append(0)
     if int(beat) >= len(beat_lengths):
       print "measure: {0} beat:{1} bl:{2}".format(measure, beat, beat_lengths)
-    return sum([beat_lengths[i] for i in range(0, int(beat))]) + \
-        multiplier * beat_lengths[int(beat)]
-
-  # Custom beat lengths list
-  def getExpressiveTime1(self, beat_lengths, beat):
-    multiplier = beat - int(beat)
-    beat_lengths.append(0)
     return sum([beat_lengths[i] for i in range(0, int(beat))]) + \
         multiplier * beat_lengths[int(beat)]
 
@@ -168,11 +197,13 @@ class Deviations:
   #Complex
   def getExpressiveDuration(self, measure, begin, duration):
     beat_lengths = []
-    for b in range(self.measure_lengths[measure]):
-      beatduration = self.getBeatDuration(measure, b)
-      if not beatduration:
-        beatduration = 1
-      beat_lengths.append(beatduration)
+    while len(beat_lengths) < duration + begin:
+      for b in range(self.measure_lengths[measure]):
+        beatduration = self.getBeatDuration(measure, b)
+        if not beatduration:
+          beatduration = 1
+        beat_lengths.append(beatduration)
+      measure += 1
     relevant_beats = beat_lengths[int(begin):int(begin+duration+1)]
     if int(begin) != begin:
       rest = int(begin) + 1.0 - begin
