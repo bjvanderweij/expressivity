@@ -10,16 +10,20 @@ class Deviations:
       self.bpm = 120
       self.target = target
       self.init_silence = 0
+      self.tempo_deviations = {}
+      self.note_deviations = {}
+      self.measure_lengths = {}
       return
-    targetname = os.path.split(target)[1].split('.')[0]
-    if targetname in os.listdir('deviations'):
+    dir = target.split('/')[-2]
+    name = target.split('/')[-1].split('.')[0]
+    targetname = '{0}/{1}'.format(dir, name)
+    if os.path.exists('deviations/{0}'.format(targetname)):
       print "Stored deviations found, remove deviations/{0} to create new ones".format(targetname)
       f = open('deviations/{0}'.format(targetname), 'rb')
       self.data = pickle.load(f)
-      print "Loaded"
     else:
       self.data = self.parse(deviation, target)
-      self.store(targetname)
+      self.store(dir, name)
     self.bpm = self.data['tempo']
     self.tempo_deviations = self.data['tempo_deviations']
     self.note_deviations = self.data['note_deviations']
@@ -32,8 +36,10 @@ class Deviations:
     # When should be extracted from soup, default=100
     self.basedynamics = self.data['basedynamics']
 
-  def store(self, name):
-    location = 'deviations/{0}'.format(name)
+  def store(self, dir, name):
+    if not os.path.exists('deviations/{0}'.format(dir)):
+      os.mkdir('deviations/{0}'.format(dir))
+    location = 'deviations/{0}/{1}'.format(dir, name)
     print "Storing deviations in: {0} for future reference".format(location)
     f = open(location, 'wb')
     pickle.dump(self.data, f)
@@ -122,7 +128,9 @@ class Deviations:
       for beat in beats:
         if beat.find('tempo-deviation'):
           measurelength += 1
-          tempo_deviations[(int(float(tag['number'])), int(float(beat['beat']))-1)] = float(beat.find('tempo-deviation').contents[0])
+          key = (int(float(tag['number'])), int(float(beat['beat']))-1)
+          value = float(beat.find('tempo-deviation').contents[0])
+          tempo_deviations[key] = value
       measure_lengths[int(tag['number'])] = measurelength
 
     return {'tempo':tempo, 'tempo_deviations':tempo_deviations,\
@@ -161,13 +169,18 @@ class Deviations:
     return sum([beat_lengths[i] for i in range(0, int(beat))]) + \
         multiplier * beat_lengths[int(beat)]
 
-  def getBeatDuration(self, measure=None, beat=None):
+  def getBeatDuration(self, measure=None, startbeat=None):
+    incremental_measure = measure
+    beat = startbeat
     if not measure and not beat:
       return 60000000 / float(self.bpm)
-    if not (int(measure), int(beat)) in self.tempo_deviations:
-      #print "No tempo deviation found for measure {0}, beat {1}".format(measure, beat)
-      return None
-    return 60000000 / (self.bpm * self.tempo_deviations[(int(measure), int(beat))])
+    while not (int(incremental_measure), int(beat)) in self.tempo_deviations:
+      beat -= self.measure_lengths[incremental_measure]
+      incremental_measure += 1
+      if not incremental_measure in self.measure_lengths or beat < 0:
+        print "No tempo deviation found for measure {0}, beat {1}".format(measure, startbeat)
+        return None
+    return 60000000 / (self.bpm * self.tempo_deviations[(int(incremental_measure), int(beat))])
 
   # beat expressed in quarternotes
   def getExpressiveTime(self, measure, beat):

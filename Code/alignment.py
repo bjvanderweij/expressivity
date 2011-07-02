@@ -7,7 +7,7 @@ import pickle, copy
 
 class Alignment:
 
-  def __init__(self, scorepath, deviations):
+  def __init__(self, scorepath, deviations, noAlign=False):
     print "Creating alignment"
     # Storing this object is not possible, score id's change and Scores are not pickleable :(
     self.deviations = deviations
@@ -20,14 +20,15 @@ class Alignment:
     m = s.melody()
     self.m = self.removeTies(m)
     self.score = self.removeTies(self.score)
-    self.alignment = None
-    self.align()
+    if not noAlign:
+      self.alignment = None
+      self.align()
 
     print "Done"
 
   def removeTies(self, score):
     # This doesn't actually remove ties, but it does fix the duration of tied notes
-    score = score.stripTies()
+    score.stripTies(inPlace=True)
     # Now remove every note that is not the start of a tie
     for part in score:
       if not isinstance(part, m21.stream.Part):
@@ -93,7 +94,7 @@ class Alignment:
         if not isinstance(measure,m21.stream.Measure): continue
         #if melody: print "Bar {0} done".format(measure.number)
         performancetime += measureduration
-        measureduration = self.deviations.getExpressiveTime(measure.number, self.deviations.measure_lengths[measure.number])
+        measureduration = self.deviations.getExpressiveTime(measure.number, measure.barDuration.quarterLength)
         for voice in measure.voices:
           for note in voice.notes:
             queue = {}
@@ -117,12 +118,13 @@ class Alignment:
               # If this isn't the case, use the tempo curve for expression and some measure of dynamics(nearest melody note?)
               if melody:
                 melodynote = None
+                # 
                 try:
                   melodyvoice = melody[1][part.index(measure)].getElementById(1)
                   if melodyvoice:
                     melodynote = melodyvoice.getElementsByOffset(note.offset)[0]
-                  if measure.number < 4:
-                    print "{0} {1} {2}".format(note, melodynote, note.offset)
+                    if not isinstance(melodynote, m21.note.Note):
+                      melodynote = None
                 except IndexError:
                   pass
                 if not melodynote or not isinstance(melodynote, m21.note.Note):
@@ -156,6 +158,8 @@ class Alignment:
                   # Attack and release should be zero in this case
                   deviation = (0, 0, deviation[2], deviation[3])
                 else:
+                  if not (melodynote.id, str(melodynote.pitch)) in self.alignment:
+                    print '{0} {1}'.format(measure.number, melodynote.offset)
                   deviation = self.alignment[melodynote.id, str(melodynote.pitch)]
                 lastmelodynote = melodynote
               else:
@@ -198,8 +202,8 @@ class Alignment:
 
   def align(self):
     deviations = self.deviations
-    score = copy.deepcopy(self.score)
-    #score = self.score
+    #score = copy.deepcopy(self.score)
+    score = self.score
     bpm = deviations.bpm
     alignment = {}
     # Assume two part music

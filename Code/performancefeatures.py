@@ -26,12 +26,16 @@ def linear_fit(X, Y):
 
 
 
-def articulation(notes, i):
-  return structure.duration(notes, i)
-
 
 def vanDerWeijExpression(alignment, segments):
   performance = alignment.expressiveMelody()
+  scorenotes = []
+  average_loudness = 0
+  for s in segments:
+    for n in s:
+      scorenotes.append(n)
+      average_loudness += n.onvelocity
+  average_loudness /= float(len(scorenotes))
   # The two above should be guaranteed to be of equal length.
   # However, better be safe than sorry
   if len(performance) != sum([len(x) for x in segments]):
@@ -40,16 +44,13 @@ def vanDerWeijExpression(alignment, segments):
     print "This is good, performance length and score length match"
   
   expression = []
+  # Counter for position in notelists performance and scorenotes
   i = 0
-  index = 0
   for segment in segments:
     length = float(len(segment))
-    # Segments can't have a length of 1, the features don't work then
-    if length <=1:
-      print "WARNING: Don't know how to deal with atomic constituent, skipping, solve this!"
-      continue
-    average_articulation = 0
-    tempos = []
+    average_articulation = 0.0
+    average_ioi_ratio = 0.0
+    loudnesses = []
     for note in segment:
       pointer = note.annotation
       scorepart = alignment.melody()[pointer[0]]
@@ -58,16 +59,19 @@ def vanDerWeijExpression(alignment, segments):
       scorenote = scorevoice[pointer[3]]
       measure = scoremeasure.number
       
-      tempo = alignment.deviations.tempo_deviations[measure, int(scorenote.offset)]
-      if not tempo in tempos:
-        tempos.append(tempo)
 
       # Find out if the next note is a rest, if so use the ratio between expressive duration and duration
       useScoreDuration = False
-      # Last note of this
+      # Last note of this measure?
       if pointer[3] + 1 == len(scorevoice):
-        if pointer[1] + 1 == len(scorepart):
+        # Last measure?
+        if pointer[1] + 1 >= len(scorepart):
           useScoreDuration = True
+        # Don't know what to do if the voice in the next measure contains no notes
+        elif len(scorepart[pointer[1]+1].getElementById(scorevoice.id).notes) == 0:
+          measure = scorepart[pointer[1]+1]
+          useScoreDuration = True
+        # First note of this voice in the next measure is a rest?
         elif scorepart[pointer[1]+1].getElementById(scorevoice.id).notes[0].isRest:
           measure = scorepart[pointer[1]+1]
           useScoreDuration = True
@@ -75,24 +79,50 @@ def vanDerWeijExpression(alignment, segments):
         useScoreDuration = True
 
       ioi = 1
-      if useScoreDuration:
-        ioi = alignment.deviations.getExpressiveDuration(scoremeasure.number, scorenote.offset, scorenote.duration.quarterLength)
-      else: ioi = structure.ioi(performance, index)
+      if useScoreDuration or i+1 == len(performance):
+        ioi = performance.microseconds_to_ticks(alignment.deviations.getExpressiveDuration(scoremeasure.number, scorenote.offset, scorenote.duration.quarterLength))
+      else: 
+        ioi = structure.ioi(performance, i+1)
+        # Ugly hack to ix something
+        if ioi == 0:
+          ioi = performance.microseconds_to_ticks(\
+              alignment.deviations.getExpressiveDuration(scoremeasure.number, scorenote.offset, scorenote.duration.quarterLength))
 
-      average_articulation += 1/length * structure.duration(performance, index) / ioi 
-      index += 1
+      #print "Performance ioi: {0}, score + tempo ioi: {1}, performance duration: {2}, measure{3}, offset {4}".format(ioi,\
+      #    performance.microseconds_to_ticks(alignment.deviations.getExpressiveDuration(scoremeasure.number, scorenote.offset,\
+      #    scorenote.duration.quarterLength)), structure.duration(performance, i), scoremeasure.number, scorenote.offset)
 
-    note_onsets = [n.on for n in segment]
+      average_ioi_ratio += math.log(structure.ioi(performance, i) / float(structure.ioi(scorenotes, i)))
+      average_articulation += structure.duration(performance, i) / float(ioi)
+      loudnesses.append(performance[i].onvelocity)
+      i += 1
+
+    tempos = []
+    r = range(segment[0].annotation[1], segment[int(length)-1].annotation[1]+1)
+    for m in r:
+      pointer = note.annotation
+      scoremeasure = alignment.melody()[pointer[0]][pointer[1]]
+      measure = scoremeasure.number
+      #print scoremeasure.duration.quarterLength
+      for b in range(int(scoremeasure.barDuration.quarterLength)):
+        tempos.append(alignment.deviations.tempo_deviations[scoremeasure.number, b])
+
 
     # Calculate performance parameters/features
-    average_ioi_ratio = sum([1/length * articulation(segment, j) for j in range(int(length))] )
-    (start_loudness, loudness_direction) = linear_fit(note_onsets, [x.onvelocity for x in segment])
-    average_tempo = tempo / length
-    (start_tempo, tempo_direction) = linear_fit(range(len(tempos)), tempos)
-    average_loudness = sum([1/length * x.onvelocity for x in segment])
+    average_ioi_ratio /= length
+    average_articulation /= length
+    average_tempo = sum(tempos) / float(len(tempos))
+    #average_relative_loudness = math.log((sum(loudnesses) / length) / average_loudness)
+    average_relative_loudness = (sum(loudnesses) / length) / float(average_loudness)
+    if len(segment) == 1:
+      (start_loudness, loudness_direction) = (average_loudness, 0)
+      (start_tempo, tempo_direction) = (tempos[0], 0)
+    else:
+      note_onsets = [n.on for n in segment]
+      (start_loudness, loudness_direction) = linear_fit(note_onsets, loudnesses)
+      (start_tempo, tempo_direction) = linear_fit(range(len(tempos)), tempos)
 
-    expression.append((average_ioi_ratio, average_loudness, average_articulation, start_tempo, start_loudness, tempo_direction, loudness_direction))
-    i += 1
+    expression.append((average_ioi_ratio, average_relative_loudness, average_articulation, average_tempo, start_tempo, start_loudness, tempo_direction, loudness_direction))
 
   return expression
 

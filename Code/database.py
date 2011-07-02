@@ -6,7 +6,7 @@ from deviations import *
 from midifile import *
 from score import *
 from alignment import *
-import os, re, util, analysescore
+import os, re, util, analysescore, pickle
 
 DB_PATH = "../../Expressive-Performance_DATA/CrestMusePEDB/"
 VERSIONS = ['PEDBv2.2', 'PEDBv2.3', 'PEDBv2.4.1', 'PEDBv2.5', 'PEDBv3.0']
@@ -151,12 +151,26 @@ def getPerformance(composer, work, pianist, soundfont):
   return NoteList(path)
 
 def getScore(composer, work, pianist, soundfont):
+  #scorepath = 'scoredata/{0}-{1}-{2}-{3}'.format(composer,work,pianist,soundfont)
   path = getScorePath(composer, work, pianist, soundfont)
   os.system('cp {0} ./lastused/score.xml'.format(path))
   # For convenience, also copy the performance
   path2 = getPerformancePath(composer, work, pianist, soundfont)
   os.system('cp {0} ./lastused/performance.mid'.format(path2))
-  return m21.converter.parse(path)
+  #if os.path.exists(scorepath):
+  #  print "Stored score object found, unpickling, remove {0} to load the score from xml".format(scorepath)
+  #  scorefile = open(scorepath, 'rb')
+  #  score = m21.stream.Score()
+  #  freezer = m21.converter.StreamFreezer(score)
+  #  freezer.openPickle(scorepath)
+  #else:
+  score = m21.converter.parse(path)
+  #  print "Pickling score object"
+  #  scorefile = open(scorepath, 'wb')
+  #  score.setupPickleScaffold()
+  #  freezer = m21.converter.StreamFreezer(score)
+  #  freezer.writePickle(scorepath)
+  return score
 
 def getDeviation(composer, work, pianist, soundfont):
   path = getDeviationPath(composer, work, pianist, soundfont)
