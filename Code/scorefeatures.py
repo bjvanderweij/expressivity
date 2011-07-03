@@ -27,13 +27,13 @@ def vanDerWeijFeatures(melodyscore, segments):
     length = len(segments[i]) 
     # Calculate averages:
     # What if the segment is len 1?
-    abs_interval = sum([1/float(length - 1 ) * \
-      structure.absolute_delta(segments[i], structure.pitch, x) for x in range(1, length)])
-    duration = sum([1/float(length) * \
-      structure.duration(segments[i], x) for x in range(length)])
-    pitch = sum([1/float(length) * \
-      structure.pitch(segments[i], x) for x in range(length)])
+    abs_interval = 1/float(length) * sum([structure.absolute_delta(segments[i], structure.pitch, x) for x in range(1, length)])
+    duration = 1/float(length) * sum([structure.duration(segments[i], x) for x in range(length)])
+    pitch = 1/float(length) * sum([structure.pitch(segments[i], x) for x in range(length)])
     pitch_direction = (segments[i][length-1].pitch - segments[i][0].pitch ) / float(length)
+    # Average of deltafunctions?
+    # Average of second order deltafunctions?
+    # Average of log relatives?
     features.append((pitch, duration, abs_interval, pitch_direction))
 
   return features

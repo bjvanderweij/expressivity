@@ -6,8 +6,50 @@ import structure
 from score import *
 from representation import *
 from hmm import *
+from sequencer import *
 import database as db
-import alignment
+import alignment, math
+import perform
+
+
+def discretize_features(features):
+  # Select subset
+  avg_dur = features[1]
+  avg_pitch = features[2]
+  pitch_direction = features[3]
+  # Discretise
+  print avg_dur
+  avg_dur = int(math.log(avg_dur) * 20)
+  avg_pitch = int(avg_pitch / 4.0)
+  if pitch_direction > 0: pitch_direction = 1
+  if pitch_direction < 0: pitch_direction = -1
+  else: pitch_direction = 0
+  return (avg_dur, avg_pitch, pitch_direction)
+  
+
+def discretize_expression(parameters):
+  # Select subset
+  avg_rel_l = parameters[1]
+  avg_artic = parameters[2]
+  avg_tempo = parameters[3]
+  # Discretise
+  # Perhaps it is better to take this logarithm into performancefeatures
+  avg_rel_l = int(math.log(avg_rel_l) * 20)
+  avg_artic = int(avg_artic * 20)
+  avg_tempo = int(math.log(avg_tempo) * 20)
+  return (avg_rel_l, avg_artic, avg_tempo)
+
+def undiscretize(state):
+  # Select subset
+  avg_rel_l = state[0]
+  avg_artic = state[1]
+  avg_tempo = state[2]
+  # Discretise
+  # Perhaps it is better to take this logarithm into performancefeatures
+  avg_rel_l = math.exp(avg_rel_l / 20.0)
+  avg_artic = avg_artic / 20.0
+  avg_tempo = math.exp(avg_tempo / 20.0)
+  return (avg_rel_l, avg_artic, avg_tempo)
 
 
 def trainHMM(features_set, expression_set):
@@ -18,74 +60,37 @@ def trainHMM(features_set, expression_set):
     obs = []
     states = []
     # Select the subset of features that will be used and discretise
-    for feature in features:
-      # Select subset
-      # Discretise
-      if feature[3] > 0: f[3] = 1
-      if feature[3] < 0: f[3] = -1
-      else: f[3] = 0
-      obs.append(((f[1], f[2], f[3])
-    for parameters in expression:
-      # Select subset
-      avg_rel_l = p[1]
-      avg_artic = p[2]
-      avg_tempo = p[3]
-      # Discretise
-      states.append((avg_rel_l, avg_artic, avg_tempo))
+    for f in features:
+      obs.append(discretize_features(f))
+    for p in expression:
+      states.append(discretize_expression(p))
     hmm.learn(obs, states)
   return hmm
 
-def print_dptable(V):
-  print "    ",
-  for i in range(len(V)): print "%7s" % ("%d" % i),
-  print
-
-  for y in V[0].keys():
-      print "%.5s: " % y,
-      for t in range(len(V)):
-          print "%.7s" % ("%f" % V[t][y]),
-      print
-
-# Source: Wikipedia article on viterbi algorithm
-def viterbi(obs, hmm):
-  V = [{}]
-  path = {}
-
-  # Initialize base cases (t == 0)
-  for y in hmm.states:
-      V[0][y] = hmm.start_probability(y) * hmm.emission_probability(y, obs[0])
-      path[y] = [y]
-
-  # Run Viterbi for t > 0
-  for t in range(1,len(obs)):
-      V.append({})
-      newpath = {}
-
-      for y in hmm.states:
-          (prob, state) = max([(V[t-1][y0] * hmm.transition_probability(y0, y) *\
-              hmm.emission_probability(y, obs[t]), y0) for y0 in hmm.states])
-          V[t][y] = prob
-          newpath[y] = path[state] + [y]
-
-      # Don't need to remember the old paths
-      path = newpath
-
-  print_dptable(V)
-  (prob, state) = max([(V[len(obs) - 1][y], y) for y in states])
-  return (prob, path[state])
-
 def render(score, hmm):
+  print "Loading score"
   melodyscore = Score(score).melody()
   melody = tools.parseScore(melodyscore)
   # Segmentate the the score
+  print "Analysing score"
   onset = structure.groupings(structure.list_to_tree(structure.first_order_tree(structure.onset, melody, 0.1)), 1)
   # Extract scorefeatures
-  observations = sf.vanDerWeijFeatures(melodyscore, onset) 
+  features = sf.vanDerWeijFeatures(melodyscore, onset) 
+  # Discretize
+  observations = []
+  for f in features:
+    observations.append(discretize_features(f))
   # Find the best expressive explanation for these features
-  expression = viterbi(observations, hmm)[1]
+  print "Finding best fitting expression"
+  states = hmm.viterbi(observations)[1]
+  expression = []
+  for state in states:
+    expression.append(undiscretize(state))
 
+
+  print "Generating performance"
   seq = Sequencer()
-  seq.play(perform.vanDerWeijPerformSimple(a.score, melodyscore, onset, expression, bpm=a.deviations.bpm, converter=melody))
+  seq.play(perform.vanDerWeijPerformSimple(score, melodyscore, onset, expression, bpm=120, converter=melody))
   
 def test():
   score = db.getScore1(db.select())

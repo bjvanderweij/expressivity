@@ -2,7 +2,11 @@ from alignment import *
 from score import *
 from music21 import *
 from trees import *
+import math
 
+
+def test(notes, i):
+  return notes[i]
 
 def onset(notes, i):
   return notes[i].on
@@ -53,7 +57,7 @@ def bare_delta(notes, feature, i, tolerance=1):
 def absolute_delta(notes, feature, i, tolerance=1):
   return abs(bare_delta(notes, feature, i, tolerance))
 
-def relative_delta(notes, feature, i, depth=4, tolerance=1):
+def relative_delta(notes, feature, i, depth=2, tolerance=1):
   avg_delta = 0
   for x in range(1, depth+1):
     if i-x <= 0: break
@@ -64,8 +68,12 @@ def relative_delta(notes, feature, i, depth=4, tolerance=1):
     avg_delta /= float(i-1)
   else: 
     avg_delta /= float(depth)
-  if avg_delta == 0: return 0
-  return abs(float(absolute_delta(notes, feature, i, tolerance)) - avg_delta)
+  if avg_delta == 0: avg_delta=0.1
+  delta = absolute_delta(notes, feature, i)
+  # Log zero 
+  if delta == 0:
+    delta = 0.1
+  return abs(math.log(delta / avg_delta))
 
 def relative_deltalist(feature, notes):
     return [relative_delta(notes, feature, i) for i in range(1, len(notes))]
@@ -97,8 +105,8 @@ def deltarule(notes, deltas, splittolerance=0):
 def second_order_deltarule(notes, deltas, splittolerance=0, rec=0):
   #if rec > 5: return
   if len(notes) <= 2:
-    if len(deltas) == 1 and deltas[0] > 0:
-      return [notes[0], notes[1]]
+    #if len(deltas) == 1 and deltas[0] > 0:
+    #  return [notes[0], notes[1]]
     return notes
   max_delta = max(deltas)
   if max_delta == 0:
@@ -108,12 +116,15 @@ def second_order_deltarule(notes, deltas, splittolerance=0, rec=0):
   lastdeltasplit = 0 
 #  print [n for n in notes]
 #  print deltas
+      #analyses.append(second_order_deltarule(notes[lastsplit:i+1], deltas[lastdeltasplit:i], splittolerance, rec+1))
+      #lastsplit = i+1
+      #lastdeltasplit = i+1
   for i in range(len(deltas)):
     if deltas[i] >= max_delta - splittolerance and deltas[i] <= max_delta + splittolerance:
       analyses.append(second_order_deltarule(notes[lastsplit:i+1], deltas[lastdeltasplit:i], splittolerance, rec+1))
       lastsplit = i+1
       lastdeltasplit = i+1
-#      print "lennotes: {2} lendeltas: {3}, split {0}, deltasplit {1}".format(lastsplit, lastdeltasplit, len(notes), len(deltas))
+      #print "lennotes: {2} lendeltas: {3}, split {0}, deltasplit {1}".format(lastsplit, lastdeltasplit, len(notes), len(deltas))
   if lastsplit < len(notes):
     analyses.append(second_order_deltarule(notes[lastsplit:len(notes)], deltas[lastdeltasplit:len(deltas)], splittolerance, rec+1))
   return analyses
@@ -242,19 +253,30 @@ def first_order_tree(feature, notes, tolerance=0):
   delta = absolute_deltalist(feature, notes)
   return deltarule(notes, delta, tolerance)
 
-def second_order_tree(feature, notes, tolerance=0):
-  delta = absolute_deltalist(feature, notes)
+def second_order_tree(feature, notes, tolerance=0, deltalist_function=absolute_deltalist):
+  delta = deltalist_function(feature, notes)
   sodelta = normalize(second_order_deltalist(delta))
-  return second_order_deltarule(notes, sodelta, tolerance)
+  print sodelta
+  # Prepend a zero to the second order deltalist so we don't have to throw
+  # away deltas when splitting (full story is a long story)
+  return second_order_deltarule(notes, [0] + sodelta, tolerance)
 
 if __name__ == '__main__':
+  import sys
+  if len(sys.argv) > 1:
+    l = [int(x) for x in sys.argv[1:]]
+    print relative_deltalist(test, l)
+    print second_order_tree(test, l, 0.0, deltalist_function=relative_deltalist)
+    print second_order_tree(test, l, 0.0)
+    sys.exit(0)
+
   import database as db
   import tools
   w = db.select()
   score = Score(db.getScore1(w))
   melodyscore = score.melody()
   melody = tools.parseScore(melodyscore)
-  trees = [second_order_tree(onset, melody, 0.0), second_order_tree(pitch, melody, 0.0), first_order_tree(onset, melody, 0.0), first_order_tree(pitch, melody)]
+  trees = [second_order_tree(onset, melody, 0.5), second_order_tree(pitch, melody, 0.0, ), first_order_tree(onset, melody, 0.0), first_order_tree(pitch, melody)]
 
   for tree in trees:
     print "Tree"

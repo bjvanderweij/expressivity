@@ -29,7 +29,7 @@ def vanDerWeijPerformSimple(score, melody, segments, expression_vectors, average
 
  
   for segment, expression in zip(segments, expression_vectors):
-    average_tempo = expression[3]
+    average_tempo = expression[2]
     for note in segment:
       pointer = note.annotation
       scorepart = melody[pointer[0]]
@@ -54,9 +54,8 @@ def vanDerWeijPerformSimple(score, melody, segments, expression_vectors, average
 
 
   for segment, expression in zip(segments, expression_vectors):
-    average_tempo = expression[3]
-    average_relative_loudness = expression[1]
-    articulation = expression[2]
+    average_relative_loudness = expression[0]
+    articulation = expression[1]
     for note in segment:
       pointer = note.annotation
       scorepart = melody[pointer[0]]

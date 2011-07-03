@@ -83,7 +83,7 @@ def vanDerWeijExpression(alignment, segments):
         ioi = performance.microseconds_to_ticks(alignment.deviations.getExpressiveDuration(scoremeasure.number, scorenote.offset, scorenote.duration.quarterLength))
       else: 
         ioi = structure.ioi(performance, i+1)
-        # Ugly hack to ix something
+        # Ugly hack to fix something
         if ioi == 0:
           ioi = performance.microseconds_to_ticks(\
               alignment.deviations.getExpressiveDuration(scoremeasure.number, scorenote.offset, scorenote.duration.quarterLength))
@@ -92,7 +92,9 @@ def vanDerWeijExpression(alignment, segments):
       #    performance.microseconds_to_ticks(alignment.deviations.getExpressiveDuration(scoremeasure.number, scorenote.offset,\
       #    scorenote.duration.quarterLength)), structure.duration(performance, i), scoremeasure.number, scorenote.offset)
 
-      average_ioi_ratio += math.log(structure.ioi(performance, i) / float(structure.ioi(scorenotes, i)))
+      # Results in zero division error in Mozart: 28 (not needed anyway so let's kick it out)
+      #average_ioi_ratio += math.log(structure.ioi(performance, i) / float(structure.ioi(scorenotes, i)))
+      average_ioi_ratio += 0
       average_articulation += structure.duration(performance, i) / float(ioi)
       loudnesses.append(performance[i].onvelocity)
       i += 1
