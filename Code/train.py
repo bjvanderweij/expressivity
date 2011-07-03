@@ -22,6 +22,9 @@ def trainset(composers=None, pianist=None):
 def train(trainset):
   expression = {}
   features = {}
+  const = 0
+  Max = 0
+  Min = None
   print ">>>Loading scores and deviations, this will take hours and may eat all you memory"
   for query in trainset:
     print ">>>Loading: {0}".format(query)
@@ -29,11 +32,21 @@ def train(trainset):
     deviations = db.getDeviation1(query)
     alignment = Alignment(score, deviations)
     melody = alignment.melody()
-    segments = structure.groupings(structure.list_to_tree(structure.first_order_tree(structure.onset, tools.parseScore(melody), 0)), 1)
+    segments = structure.reasonableSegmentation(tools.parseScore(melody))
+    const += len(segments)
+    lengths = sum([len(s) for s in segments])
+    m = max([len(s) for s in segments])
+    mi = min([len(s) for s in segments])
+    if m > Max:
+      Max = m
+    if not Min:
+      Min = mi
+    if mi < Min:
+      Min = mi
     expression[query] = performancefeatures.vanDerWeijExpression(alignment, segments)
     features[query] = scorefeatures.vanDerWeijFeatures(melody, segments)
 
-
+  print "Done, {0} segments found with an average length of: {1} (min: {2} max: {3})".format(const, lengths / float(const), Min, Max)
   tools.saveFeatures(features, expression)
 #  tools.saveCSV(features, expression)
 

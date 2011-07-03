@@ -231,6 +231,7 @@ def get_level(tree, level, currentlevel):
     return result
   return None
 
+
 def groupings(tree, level):
   nodes = get_level(tree, level, 0)
   groups = []
@@ -249,17 +250,34 @@ def bestgrouping(melody, tree):
     if  avg_group < len(melody) / 4.0:
       return groups
 
+
 def first_order_tree(feature, notes, tolerance=0):
   delta = absolute_deltalist(feature, notes)
   return deltarule(notes, delta, tolerance)
 
 def second_order_tree(feature, notes, tolerance=0, deltalist_function=absolute_deltalist):
   delta = deltalist_function(feature, notes)
-  sodelta = normalize(second_order_deltalist(delta))
-  print sodelta
+  if delta == []: return notes
+  sodelta = second_order_deltalist(delta)
+  if sodelta == []: return notes
+  s0delta = normalize(sodelta)
   # Prepend a zero to the second order deltalist so we don't have to throw
   # away deltas when splitting (full story is a long story)
   return second_order_deltarule(notes, [0] + sodelta, tolerance)
+
+# Wrapper for more awkwardly named functions above
+def segmentation(tree, level):
+  return groupings(list_to_tree(tree), level)
+
+def subsegmentation(segments, treefunction, feature, level, tolerance=0):
+  newsegmentation = []
+  for segment in segments:
+    newsegmentation += segmentation(treefunction(feature, segment, tolerance), level)
+  return newsegmentation
+    
+def reasonableSegmentation(notes):
+  # First get level one segments from a first order onset tree then subdivide the segments using a second order pitch tree on level 1
+  return subsegmentation(segmentation(first_order_tree(onset, notes), 1), second_order_tree, pitch, 1)
 
 if __name__ == '__main__':
   import sys
@@ -294,11 +312,12 @@ if __name__ == '__main__':
     print '------------------'
     if len(groups)/float(len(melody)) == 1: break
 
-  print "Choose level"
-  level = int(raw_input(""))
   print "Choose tree"
   tree = int(raw_input(''))
-  groups = groupings(list_to_tree(trees[tree]), level)
+  print "Choose level"
+  level = int(raw_input(""))
+  groups = segmentation(trees[tree], level)
+  groups = subsegmentation(groups, second_order_tree, pitch, 1)
   structured_notes = []
   loud = False
   for group in groups:
@@ -312,6 +331,8 @@ if __name__ == '__main__':
       else:
         leaf.onvelocity = 50
       structured_notes.append(leaf)
+
+
 
   namelist = []
   for group in groups:

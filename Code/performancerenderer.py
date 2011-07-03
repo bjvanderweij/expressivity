@@ -13,14 +13,16 @@ import perform
 
 
 def discretize_features(features):
+  # old values: 4.0 and 20
+  division = 8.0
+  multiplication = 10
   # Select subset
   avg_dur = features[1]
   avg_pitch = features[2]
   pitch_direction = features[3]
   # Discretise
-  print avg_dur
-  avg_dur = int(math.log(avg_dur) * 20)
-  avg_pitch = int(avg_pitch / 4.0)
+  avg_dur = int(math.log(avg_dur) * multiplication)
+  avg_pitch = int(avg_pitch / division)
   if pitch_direction > 0: pitch_direction = 1
   if pitch_direction < 0: pitch_direction = -1
   else: pitch_direction = 0
@@ -28,15 +30,17 @@ def discretize_features(features):
   
 
 def discretize_expression(parameters):
+  # old value: 20
+  multiplication = 10
   # Select subset
   avg_rel_l = parameters[1]
   avg_artic = parameters[2]
   avg_tempo = parameters[3]
   # Discretise
   # Perhaps it is better to take this logarithm into performancefeatures
-  avg_rel_l = int(math.log(avg_rel_l) * 20)
-  avg_artic = int(avg_artic * 20)
-  avg_tempo = int(math.log(avg_tempo) * 20)
+  avg_rel_l = int(math.log(avg_rel_l) * multiplication)
+  avg_artic = int(avg_artic * multiplication)
+  avg_tempo = int(math.log(avg_tempo) * multiplication)
   return (avg_rel_l, avg_artic, avg_tempo)
 
 def undiscretize(state):
@@ -52,8 +56,8 @@ def undiscretize(state):
   return (avg_rel_l, avg_artic, avg_tempo)
 
 
-def trainHMM(features_set, expression_set):
-  hmm = HMM()
+def trainHMM(features_set, expression_set, order=2):
+  hmm = HMM(order)
   for work in features_set.keys():
     features = features_set[work]
     expression = expression_set[work]
@@ -95,7 +99,7 @@ def render(score, hmm):
 def test():
   score = db.getScore1(db.select())
   (f, e) = tools.chooseFeatures()
-  hmm = trainHMM(f, e)
+  hmm = trainHMM(f, e, 1)
   render(score, hmm)
 
 if __name__ == '__main__':

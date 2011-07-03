@@ -68,6 +68,9 @@ def vanDerWeijExpression(alignment, segments):
         if pointer[1] + 1 >= len(scorepart):
           useScoreDuration = True
         # Don't know what to do if the voice in the next measure contains no notes
+        elif scorepart[pointer[1]+1].getElementById(scorevoice.id) == None:
+          measure = scorepart[pointer[1]+1]
+          useScoreDuration = True
         elif len(scorepart[pointer[1]+1].getElementById(scorevoice.id).notes) == 0:
           measure = scorepart[pointer[1]+1]
           useScoreDuration = True
@@ -106,8 +109,13 @@ def vanDerWeijExpression(alignment, segments):
       scoremeasure = alignment.melody()[pointer[0]][pointer[1]]
       measure = scoremeasure.number
       #print scoremeasure.duration.quarterLength
+      lasttempo = 1.0
       for b in range(int(scoremeasure.barDuration.quarterLength)):
-        tempos.append(alignment.deviations.tempo_deviations[scoremeasure.number, b])
+        if (scoremeasure.number, b) in alignment.deviations.tempo_deviations:
+          lasttempo = alignment.deviations.tempo_deviations[scoremeasure.number, b]
+          tempos.append(lasttempo)
+        else:
+          tempos.append(lasttempo)
 
 
     # Calculate performance parameters/features

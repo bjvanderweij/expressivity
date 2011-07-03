@@ -53,6 +53,7 @@ class HMM:
     return self.coincedences[observation, state] / float(self.observations[observation])
 
   def transition_probability(self, lessergram, state):
+    if self.order == 1: return 1.0
     if not tuple(list(lessergram) + [state]) in self.ngrams: return 0.0
     return self.ngrams[tuple(list(lessergram) + [state])] /  float(lessergrams[tuple(lessergram)])
 
@@ -83,6 +84,7 @@ class HMM:
       newpath = {}
 
       for y in self.states:
+        #print [self.transition_probability(y0, y) for y0 in self.states]
         (prob, state) = max([(V[t-1][y0] * self.transition_probability(y0, y) *\
           self.emission_probability(y, obs[t]), y0) for y0 in self.states])
         V[t][y] = prob
@@ -94,4 +96,24 @@ class HMM:
     self.print_dptable(V)
     (prob, state) = max([(V[len(obs) - 1][y], y) for y in self.states])
     return (prob, path[state])
+
+# HMM class that assumes independence of every paramater of a state
+class HMM_indep(HMM):
+
+  
+  def joint_probability(self, observation, state):
+    if not (observation, state) in self.coincedences: return 0.0
+    return self.coincedences[observation, state] / float(self.coincedence_count)
+
+  def start_probability(self, state):
+    if not state in self.starts: return 0.0
+    return self.starts[state] / float(self.start_count)
+
+  def emission_probability(self, state, observation):
+    if not (observation, state) in self.coincedences: return 0.0
+    return self.coincedences[observation, state] / float(self.observations[observation])
+
+  def transition_probability(self, lessergram, state):
+    if not tuple(list(lessergram) + [state]) in self.ngrams: return 0.0
+    return self.ngrams[tuple(list(lessergram) + [state])] /  float(lessergrams[tuple(lessergram)])
 
