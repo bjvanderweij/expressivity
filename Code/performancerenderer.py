@@ -12,10 +12,8 @@ import alignment, math
 import perform
 
 
-def discretize_features(features):
-  # old values: 4.0 and 20
-  division = 8.0
-  multiplication = 10
+def discretize_features(features, multiplication=10, division=5.0):
+  division = float(division)
   # Select subset
   avg_dur = features[1]
   avg_pitch = features[2]
@@ -29,9 +27,7 @@ def discretize_features(features):
   return (avg_dur, avg_pitch, pitch_direction)
   
 
-def discretize_expression(parameters):
-  # old value: 20
-  multiplication = 10
+def discretize_expression(parameters, multiplication=10):
   # Select subset
   avg_rel_l = parameters[1]
   avg_artic = parameters[2]
@@ -43,21 +39,21 @@ def discretize_expression(parameters):
   avg_tempo = int(math.log(avg_tempo) * multiplication)
   return (avg_rel_l, avg_artic, avg_tempo)
 
-def undiscretize(state):
+def undiscretize(state, multiplication=10):
+  multiplication = float(multiplication)
   # Select subset
   avg_rel_l = state[0]
   avg_artic = state[1]
   avg_tempo = state[2]
   # Discretise
   # Perhaps it is better to take this logarithm into performancefeatures
-  avg_rel_l = math.exp(avg_rel_l / 20.0)
-  avg_artic = avg_artic / 20.0
-  avg_tempo = math.exp(avg_tempo / 20.0)
+  avg_rel_l = math.exp(avg_rel_l / multiplication)
+  avg_artic = avg_artic / multiplication
+  avg_tempo = math.exp(avg_tempo / multiplication)
   return (avg_rel_l, avg_artic, avg_tempo)
 
 
-def trainHMM(features_set, expression_set, order=2):
-  hmm = HMM(order)
+def trainHMM(hmm, features_set, expression_set, multiplication=10):
   for work in features_set.keys():
     features = features_set[work]
     expression = expression_set[work]
@@ -65,42 +61,57 @@ def trainHMM(features_set, expression_set, order=2):
     states = []
     # Select the subset of features that will be used and discretise
     for f in features:
-      obs.append(discretize_features(f))
+      obs.append(discretize_features(f, multiplication))
+    lastexp = start
     for p in expression:
-      states.append(discretize_expression(p))
+      #  Multiplication for expression and features doesn't neccesarily need to be the same!
+      exp = discretize_expression(p, multiplication) 
+      states.append(exp)
+      lastexp = exp
     hmm.learn(obs, states)
-  return hmm
 
-def render(score, hmm):
+def render(score, hmm, multiplication=10):
   print "Loading score"
   melodyscore = Score(score).melody()
   melody = tools.parseScore(melodyscore)
   # Segmentate the the score
   print "Analysing score"
-  onset = structure.groupings(structure.list_to_tree(structure.first_order_tree(structure.onset, melody, 0.1)), 1)
+  onset = structure.reasonableSegmentation(melody)
+  #onset = structure.groupings(structure.list_to_tree(structure.first_order_tree(structure.onset, melody, 0.1)), 1)
+  namelist = []
+  for group in onset:
+    namelist.append([leaf.name() for leaf in group])
+  print namelist
   # Extract scorefeatures
   features = sf.vanDerWeijFeatures(melodyscore, onset) 
   # Discretize
   observations = []
   for f in features:
-    observations.append(discretize_features(f))
+    observations.append(discretize_features(f, multiplication))
   # Find the best expressive explanation for these features
   print "Finding best fitting expression"
   states = hmm.viterbi(observations)[1]
   expression = []
   for state in states:
-    expression.append(undiscretize(state))
+    expression.append(undiscretize(state, multiplication))
 
-
+  print "Done, resulting expression: {0}".format(expression)
   print "Generating performance"
+  performance = perform.vanDerWeijPerformSimple(score, melodyscore, onset, expression, bpm=120, converter=melody)
   seq = Sequencer()
-  seq.play(perform.vanDerWeijPerformSimple(score, melodyscore, onset, expression, bpm=120, converter=melody))
+  seq.play(performance)
   
 def test():
+  multiplication = 10 
   score = db.getScore1(db.select())
   (f, e) = tools.chooseFeatures()
-  hmm = trainHMM(f, e, 1)
-  render(score, hmm)
+  hmm = HMM_indep(2)
+  #hmm = HMM(2)
+
+  trainHMM(hmm, f, e, multiplication)
+  hmm.storeInfo('hmm2.txt')
+  #print(hmm)
+  render(score, hmm, multiplication)
 
 if __name__ == '__main__':
   test()

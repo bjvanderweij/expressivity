@@ -19,7 +19,7 @@ def widmerPerform(score, expression, average_loudness=80, tempo=80):
     time = on
   return performance
 
-def vanDerWeijPerformSimple(score, melody, segments, expression_vectors, average_loudness=100, bpm=120, converter=NoteList()):
+def vanDerWeijPerformSimple(score, melody, segments, expression_vectors, average_loudness=60, bpm=120, converter=NoteList()):
 # converter is used to convert milliseconds to ticks and back
   deviations = Deviations()
   deviations.bpm = bpm

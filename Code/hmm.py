@@ -27,7 +27,8 @@ class HMM:
       self.coincedences[observation, state] = self.coincedences.get((observation, state), 0) + 1
       self.coincedence_count += 1
       self.observations[observation] = self.observations.get(observation, 0) + 1
-      self.states.append(state)
+      if not state in self.states:
+        self.states.append(state)
     for i in range(len(states)-self.order):
       ngram = []
       lessergram = []
@@ -52,10 +53,12 @@ class HMM:
     if not (observation, state) in self.coincedences: return 0.0
     return self.coincedences[observation, state] / float(self.observations[observation])
 
-  def transition_probability(self, lessergram, state):
+  def transition_probability(self, lessergram, state, verbose=False):
+    if verbose:
+      print '{0}, {1}, {2}, {3}'.format(tuple(list(lessergram) + [state]), self.ngrams.get(tuple(list(lessergram) + [state]), 0), tuple(lessergram), self.lessergrams.get(tuple(lessergram), 0))
     if self.order == 1: return 1.0
     if not tuple(list(lessergram) + [state]) in self.ngrams: return 0.0
-    return self.ngrams[tuple(list(lessergram) + [state])] /  float(lessergrams[tuple(lessergram)])
+    return self.ngrams[tuple(list(lessergram) + [state])] /  float(self.lessergrams[tuple(lessergram)])
 
   def print_dptable(self, V):
     print "    ",
@@ -85,8 +88,10 @@ class HMM:
 
       for y in self.states:
         #print [self.transition_probability(y0, y) for y0 in self.states]
-        (prob, state) = max([(V[t-1][y0] * self.transition_probability(y0, y) *\
+        (prob, state) = max([(V[t-1][y0] * self.transition_probability([y], y0) *\
           self.emission_probability(y, obs[t]), y0) for y0 in self.states])
+        #if prob > 0:
+          #print self.transition_probability([y], state, True)
         V[t][y] = prob
         newpath[y] = path[state] + [y]
 
@@ -97,23 +102,74 @@ class HMM:
     (prob, state) = max([(V[len(obs) - 1][y], y) for y in self.states])
     return (prob, path[state])
 
+  def storeInfo(self, f):
+    out = open(f, 'w')
+    out.write('NGRAMS:')
+    for ngram in self.ngrams:
+      out.write(str(ngram)+'\n')
+    out.write('COINCEDENCES:\n')
+    for coincedence in self.coincedences:
+      out.write(str(coincedence)+'\n')
+    out.close()
+
+
 # HMM class that assumes independence of every paramater of a state
 class HMM_indep(HMM):
 
   
+  def learn(self, observations, states):
+    for param in states[0]:
+      self.starts[param] = self.starts.get(param, 0) + 1
+    self.start_count += 1 
+    for observation, state in zip(observations, states):
+      for i in range(len(state)):
+        self.coincedences[i, observation, state[i]] = self.coincedences.get((i, observation, state[i]), 0) + 1
+      self.observations[observation] = self.observations.get((i, observation), 0) + 1
+      if not state in self.states:
+        self.states.append(state)
+    for i in range(len(states)-self.order):
+      for j in range(len(states[i])):
+        ngram = []
+        lessergram = []
+        for offset in range(self.order):
+          ngram.append(states[i+offset][j])
+        for offset in range(self.order-1):
+          lessergram.append(states[i+offset][j])
+        self.ngram_count += 1
+        # Add the index of this parameter to the ngram
+        self.ngrams[tuple([j] + ngram)] = self.ngrams.get(tuple([j] + ngram), 0) + 1
+        self.lessergram_count += 1
+        self.lessergrams[tuple([j] + lessergram)] = self.lessergrams.get(tuple([j] + lessergram), 0) + 1
+
+  def __str__(self):
+    return 'States:\n{0}\nNgrams:\n{1}\nLessergrams:\n{2}'.format(self.states, self.ngrams, self.lessergrams)
+
   def joint_probability(self, observation, state):
     if not (observation, state) in self.coincedences: return 0.0
     return self.coincedences[observation, state] / float(self.coincedence_count)
 
   def start_probability(self, state):
-    if not state in self.starts: return 0.0
-    return self.starts[state] / float(self.start_count)
+    p = 1.0
+    for param in state:
+      p *= self.starts.get(param, 0) / float(self.start_count)
+    return p
 
   def emission_probability(self, state, observation):
-    if not (observation, state) in self.coincedences: return 0.0
-    return self.coincedences[observation, state] / float(self.observations[observation])
+    p = 1.0
+    for i in range(len(state)):
+      p *= self.coincedences.get((i, observation, state[i]), 0.0) / float(self.observations.get(observation, 1))
+    return p
 
-  def transition_probability(self, lessergram, state):
-    if not tuple(list(lessergram) + [state]) in self.ngrams: return 0.0
-    return self.ngrams[tuple(list(lessergram) + [state])] /  float(lessergrams[tuple(lessergram)])
+  def transition_probability(self, lessergram, state, verbose=False):
+    p = 1.0
+    #lessergrams = [[v[j] for v in lessergram] for j in len(state)] 
+    lg = []
+    for j in range(len(state)):
+      lg.append([v[j] for v in lessergram])
+    for i in range(len(state)):
+      p *= self.ngrams.get(tuple([i] + lg[i] + [state[i]]), 0) / float(self.lessergrams.get(tuple([i] + lg[i]), 1))
+      if verbose:
+        print "P({0}|{1}) = {2} ({3}, {4})".format([i] + lg[i] + [state[i]], [i] + lg[i], p, self.ngrams.get(tuple([i] + lg[i] + [state[i]]), 0), float(self.lessergrams.get(tuple([i] + lg[i]), 1))
+)
+    return p
 
