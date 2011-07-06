@@ -1,13 +1,8 @@
 import tools, structure, math
+import performancefeatures as pf
 
 
 # Take a score, split it in melody and harmony, do structure analysis and output features per note.
-
-def discretize(min, max, value, bins=10):
-  if value < min or value > max:
-    print "Discretize error: value outside range, returning 0"
-    return 0
-  return int((value - min) * (bins / float(max - min)))
 
 def pitch_interval(notes, i):
   if i == 0: return 0
@@ -27,14 +22,30 @@ def vanDerWeijFeatures(melodyscore, segments):
     length = len(segments[i]) 
     # Calculate averages:
     # What if the segment is len 1?
-    abs_interval = 1/float(length) * sum([structure.absolute_delta(segments[i], structure.pitch, x) for x in range(1, length)])
-    duration = 1/float(length) * sum([structure.duration(segments[i], x) for x in range(length)])
-    pitch = 1/float(length) * sum([structure.pitch(segments[i], x) for x in range(length)])
-    pitch_direction = (segments[i][length-1].pitch - segments[i][0].pitch ) / float(length)
+    pitch_int = structure.bare_deltalist(structure.pitch, segments[i])
+    abs_pitch_int = structure.absolute_deltalist(structure.pitch, segments[i])
+    dPitch = 1/float(length) * sum(pitch_int)
+    abs_dPitch = 1/float(length) * sum(abs_pitch_int)
+    dDuration = 1/float(length) * sum(structure.bare_deltalist(structure.duration, segments[i]))
+    abs_dDuration = 1/float(length) * sum(structure.absolute_deltalist(structure.duration, segments[i]))
+    silence = 1/float(length) * sum([structure.silence(segments[i], j+1) for j in range(len(segments[i])-1)])
+    ddPitch = 1/float(length) * sum(structure.second_order_deltalist(pitch_int))
+    abs_ddPitch = 1/float(length) * sum(structure.second_order_deltalist(abs_pitch_int))
+    
+    #print [structure.silence(segments[i], j) for j in range(len(segments[i]))]
+
+    onsets = structure.normalize([n.on for n in segments[i]])
+    pitches = structure.normalize([n.pitch for n in segments[i]])
+    if len(onsets) == 1:
+      pitch_direction = 0
+    else:
+      pitch_direction = pf.linear_fit(onsets, pitches)[1]
+
     # Average of deltafunctions?
     # Average of second order deltafunctions?
     # Average of log relatives?
-    features.append((pitch, duration, abs_interval, pitch_direction))
+    # Polyfonie
+    features.append((dPitch, abs_dPitch, dDuration, abs_dDuration, silence, ddPitch, abs_ddPitch, pitch_direction))
 
   return features
     

@@ -7,18 +7,31 @@ class Score:
     self.score = score
     # Assume each part has the same number of measures and every score has two parts
     parts = []
-    for part in self.score:
-      if isinstance(part,m21.stream.Part):
-        parts.append(part)
-    self.part1 = parts[0]
-    self.part2 = parts[1]
-
-  def notesOn(self,measure,beat):
-    m1 = self.part1[measure]
-    m2 = self.part2[measure]
   
   def getNoteList():
     return tools.parseScore(self.score)
+
+  def tieless(self):
+    # This doesn't actually remove ties, but it does fix the duration of tied notes
+    score = self.score.stripTies()
+    # Now remove every note that is not the start of a tie
+    for part in score:
+      if not isinstance(part, m21.stream.Part):
+        continue
+      for measure in part:
+        if not isinstance(measure, m21.stream.Measure):
+          continue
+        for voice in measure:
+          if not isinstance(voice, m21.stream.Voice):
+            continue
+          for note in voice:
+            if isinstance(note, m21.chord.Chord) or isinstance(note, m21.note.Note):
+              if hasattr(note,'tie') and note.tie is not None:
+                if not note.tie.type == 'start':
+                  voice.remove(note)
+                else:
+                  note.tie = None
+    return score
 
   #Highest note in part one at any moment
   def melody(self):
@@ -63,5 +76,5 @@ class Score:
                       n.duration = note.duration
                       n.id = note.id
                       voice.append(n)
-    return melody
+    return Score(melody).tieless()
 

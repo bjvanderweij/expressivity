@@ -81,6 +81,9 @@ def relative_deltalist(feature, notes):
 def absolute_deltalist(feature, notes):
     return [absolute_delta(notes, feature, i) for i in range(1, len(notes))]
 
+def bare_deltalist(feature, notes):
+    return [bare_delta(notes, feature, i) for i in range(1, len(notes))]
+
 def second_order_deltalist(deltas):
     result = []
     for i in range(1, len(deltas)):

@@ -21,6 +21,8 @@ class HMM:
     self.start_count = 0
     self.startstate = ('start',)
     self.endstate = ('end',)
+    # This doesn't really belong here, it is just used as convenient storage
+    self.normalizations = []
 
   def learn(self, observations, states):
     parameters = len(states[0])
@@ -83,6 +85,30 @@ class HMM:
             print "{0}".format("{0}".format(V[t][y])),
         print
 
+  def max_emission(self, obs):
+    states = []
+    p = 1.0
+    for o in obs:
+      probs = [self.emission_probability(state, o) for state in self.states]
+      m = max(probs)
+      if m == 0.0:
+        print o
+      p *= m
+      states.append(self.states[probs.index(m)])
+    return (p, states)
+
+  def sequence_probability(self, obs, states):
+    states = [self.startstate] + states + [self.endstate]
+    obs = obs + [self.endstate]
+    p = 1.0
+    for i in range(len(states)-2):
+      cp = self.emission_probability(states[i+1], obs[i]) * self.transition_probability([states[i]], states[i+1])
+      if cp == 0.0:
+        print '{0}. {1}, {2}'.format(states[i], states[i+1], self.emission_probability(states[i+1], obs[i]))
+      p *= cp
+    return p
+
+
   # Source: Wikipedia article on viterbi algorithm
   def viterbi(self, obs):
     obs = obs + [self.endstate]
@@ -103,8 +129,6 @@ class HMM:
         #print [self.transition_probability(y0, y) for y0 in self.states]
         (prob, state) = max([(V[t-1][y0] * self.transition_probability([y], y0) *\
           self.emission_probability(y, obs[t]), y0) for y0 in self.states])
-        #if prob > 0:
-          #print self.transition_probability([y], state, True)
         V[t][y] = prob
         newpath[y] = path[state] + [y]
 

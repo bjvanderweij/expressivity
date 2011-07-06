@@ -18,35 +18,12 @@ class Alignment:
       self.score = scorepath
     s = Score(self.score)
     m = s.melody()
-    self.m = self.removeTies(m)
-    self.score = self.removeTies(self.score)
+    self.score = Score(score.tieless())
     if not noAlign:
       self.alignment = None
       self.align()
 
     print "Done"
-
-  def removeTies(self, score):
-    # This doesn't actually remove ties, but it does fix the duration of tied notes
-    score.stripTies(inPlace=True)
-    # Now remove every note that is not the start of a tie
-    for part in score:
-      if not isinstance(part, m21.stream.Part):
-        continue
-      for measure in part:
-        if not isinstance(measure, m21.stream.Measure):
-          continue
-        for voice in measure:
-          if not isinstance(voice, m21.stream.Voice):
-            continue
-          for note in voice:
-            if isinstance(note, m21.chord.Chord) or isinstance(note, m21.note.Note):
-              if hasattr(note,'tie') and note.tie is not None:
-                if not note.tie.type == 'start':
-                  voice.remove(note)
-                else:
-                  note.tie = None
-    return score
 
 
   def storeAlignment(self):

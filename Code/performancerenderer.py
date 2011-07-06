@@ -10,20 +10,17 @@ import database as db
 import alignment, math
 import perform, util, structure
 
-def discretize_features(features, multiplication=10, division=5.0):
-  division = float(division)
+#(dPitch, abs_dPitch, dDuration, abs_dDuration, silence, ddPitch, abs_ddPitch, pitch_direction)
+def discretize_features(features, normalizations, discretization=10, subset=None):
+  f = []
+  r = range(len(features))
+  if subset:
+    r = subset
+  for i in r:
+    f.append(int((features[i] / float(normalizations[i])) * discretization))
+  return tuple(f)
   # Select subset
-  avg_dur = features[1]
-  avg_pitch = features[2]
-  pitch_direction = features[3]
   # Discretise
-# avg dur klopt niet
-  avg_dur = int(avg_dur / multiplication)
-  avg_pitch = int(avg_pitch / division)
-  if pitch_direction > 0: pitch_direction = 1
-  if pitch_direction < 0: pitch_direction = -1
-  else: pitch_direction = 0
-  return (avg_dur, avg_pitch, pitch_direction)
   
 
 def discretize_expression(parameters, multiplication=30):
@@ -38,7 +35,7 @@ def discretize_expression(parameters, multiplication=30):
   avg_tempo = int(math.log(avg_tempo) * multiplication)
   return (avg_rel_l, avg_artic, avg_tempo)
 
-def undiscretize(state, multiplication=30):
+def undiscretize(state, multiplication=30.0):
   multiplication = float(multiplication)
   # Select subset
   avg_rel_l = state[0]
@@ -52,7 +49,19 @@ def undiscretize(state, multiplication=30):
   return (avg_rel_l, avg_artic, avg_tempo)
 
 
-def trainHMM(hmm, features_set, expression_set, f_discretization=10, e_discretization=30):
+def trainHMM(hmm, features_set, expression_set, f_discretization=10, e_discretization=30, subset=None):
+  l = 0
+  for work in features_set.keys():
+    l = len(features_set[work][0])
+    break
+  normalizations = [0 for i in range(l)]
+  for work in features_set.keys():
+    m = []
+    for i in range(l):
+      m = max([f[i] for f in features_set[work]])
+      if m > normalizations[i]:
+        normalizations[i] = m
+  hmm.normalizations = normalizations
   for work in features_set.keys():
     features = features_set[work]
     expression = expression_set[work]
@@ -60,34 +69,44 @@ def trainHMM(hmm, features_set, expression_set, f_discretization=10, e_discretiz
     states = []
     # Select the subset of features that will be used and discretise
     for f in features:
-      obs.append(discretize_features(f, f_discretization))
+      obs.append(discretize_features(f, normalizations, f_discretization, subset=subset))
+    if work == ('Mozart', 'snt545-2', 'gould', 'GPO-Concert-Steinway-ver2.sf2'):
+      print obs
+
     lastexp = 'start'
     for p in expression:
       #  Multiplication for expression and features doesn't neccesarily need to be the same!
       exp = discretize_expression(p, e_discretization) 
       states.append(exp)
       lastexp = exp
+
+    if work == ('Mozart', 'snt545-2', 'gould', 'GPO-Concert-Steinway-ver2.sf2'):
+      print states
     hmm.learn(obs, states)
 
-def render(score, segmentation, hmm, f_discretization=10, e_discretization=30):
+def render(score, segmentation, hmm, f_discretization=10, e_discretization=30, subset=None):
   # Extract scorefeatures
   features = sf.vanDerWeijFeatures(score, segmentation) 
   # Discretize
   observations = []
   for f in features:
-    observations.append(discretize_features(f, f_discretization))
+    observations.append(discretize_features(f, hmm.normalizations, f_discretization, subset=subset))
   print 'Observations:\n{0}'.format(observations)
   # Find the best expressive explanation for these features
   print "Finding best fitting expression"
-  states = hmm.viterbi(observations)[1]
+  (p, states) = hmm.viterbi(observations)
+  (prob, simple) = hmm.max_emission(observations)
+  simple_p = hmm.sequence_probability(observations, simple)
+  hmm.sequence_probability(observations, states)
+  print "Simple rendering (emission: {2} sequence probability: {1}):\n{0}".format(simple, simple_p, prob)
   expression = []
   for state in states:
     expression.append(undiscretize(state, e_discretization))
   print 'Expression states:\n{0}'.format(states)
 
-  return expression
+  return (p, expression)
   
-def test(f_discretization=10, e_discretization=30, indep=False, selection=None):
+def test(f_discretization=10, e_discretization=30, indep=False, selection=None, subset=None):
   if not selection:
     selection = (db.select())
   else:
@@ -99,7 +118,7 @@ def test(f_discretization=10, e_discretization=30, indep=False, selection=None):
   else:
     hmm = HMM(2)
 
-  trainHMM(hmm, f, e, f_discretization, e_discretization)
+  trainHMM(hmm, f, e, f_discretization, e_discretization, subset=subset)
   hmm.storeInfo('hmm2.txt')
   print "Loading score"
   melodyscore = Score(score).melody()
@@ -113,9 +132,9 @@ def test(f_discretization=10, e_discretization=30, indep=False, selection=None):
   #  namelist.append([leaf.name() for leaf in group])
   #print namelist
 
-  expression = render(melodyscore, onset, hmm, f_discretization, e_discretization)
+  (p, expression) = render(melodyscore, onset, hmm, f_discretization, e_discretization, subset)
 
-  print "Done, resulting expression: {0}".format(expression)
+  print "Done, resulting expression(with a probability of {1}): {0}".format(expression, p)
   name = raw_input("Enter a name for saving this performance or press enter to skip this step.\n")
   if not name == '':
     tools.savePerformance(selection, expression, name)
@@ -146,6 +165,7 @@ if __name__ == '__main__':
   indep = False
   a = sys.argv
   selection = None
+  subset = None
   if len(a) > 1:
     if a[1] == 'load':
       loadperformance()
@@ -157,6 +177,18 @@ if __name__ == '__main__':
       if pianist == '': pianist = None
       set = train.trainset(composers, pianist)
       train.train(set)
+      exit(0)
+    elif a[1] == 'features':
+      s = db.select()
+      score = Score(db.getScore1(s))
+      melodyscore = score.melody()
+      melody = tools.parseScore(melodyscore)
+      segmentation = structure.reasonableSegmentation(melody)
+      f = sf.vanDerWeijFeatures(melodyscore, segmentation)
+      for x in f:
+        #(dPitch, abs_dPitch, dDuration, abs_dDuration, silence, ddPitch, abs_ddPitch, pitch_direction)
+        print 'dpitch: {0} abs_dPitch: {1} dDuration: {2} abs_dDuration: {3} silence: {4}'.format(x[0], x[1], x[2], x[3], x[4])
+        print 'ddPitch: {0} abs_ddPitch: {1} : pitch_direction: {2}'.format(x[5], x[6], x[7])
       exit(0)
     i = 1
     while i < len(a):
@@ -170,10 +202,17 @@ if __name__ == '__main__':
         except IndexError, ValueError:
           print 'Error parsing command line arguments'
           exit(0)
-      elif a[i] == '-s'
+      elif a[i] == '-s':
         try:
           selection = db.byIndexes(int(a[i+1]), int(a[i+2]))
           i += 2
+        except IndexError, ValueError:
+          print 'Error parsing command line arguments'
+          exit(0)
+      elif a[i] == '-subset':
+        try:
+          subset = [int(x) for x in a[i+1:]]
+          i += len(a[i+1:])
         except IndexError, ValueError:
           print 'Error parsing command line arguments'
           exit(0)
@@ -181,7 +220,7 @@ if __name__ == '__main__':
         print "I don't understand {0}".format(a[i])
       i += 1
 
-  test(multiplication, indep, selection=selection)
+  test(f_discretization, e_discretization, indep, selection=selection, subset=subset)
 
   
 
