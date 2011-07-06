@@ -19,27 +19,39 @@ class HMM:
     self.lessergram_count = 0
     self.starts = {}
     self.start_count = 0
+    self.startstate = ('start',)
+    self.endstate = ('end',)
 
   def learn(self, observations, states):
-    self.starts[states[0]] = self.starts.get(states[0], 0) + 1
-    self.start_count += 1
+    parameters = len(states[0])
+    observations = [self.startstate] + observations + [self.endstate]
+    states = [self.startstate] + states + [self.endstate]
     for observation, state in zip(observations, states):
-      self.coincedences[observation, state] = self.coincedences.get((observation, state), 0) + 1
-      self.coincedence_count += 1
-      self.observations[observation] = self.observations.get(observation, 0) + 1
-      if not state in self.states:
+      if state == self.startstate or state == self.endstate:
+        state = [state for i in range(parameters)]
+      for i in range(parameters):
+        self.coincedences[i, observation, state[i]] = self.coincedences.get((i, observation, state[i]), 0) + 1
+      self.observations[observation] = self.observations.get((i, observation), 0) + 1
+      if not state in self.states and not (state[0] == self.startstate or state[0] == self.endstate):
         self.states.append(state)
-    for i in range(len(states)-self.order):
+    for i in range(len(states)-self.order + 1):
       ngram = []
       lessergram = []
-      for j in range(self.order):
-        ngram.append(states[i+j])
-      for j in range(self.order-1):
-        lessergram.append(states[i+j])
-      self.ngram_count += 1
-      self.ngrams[tuple(ngram)] = self.ngrams.get(tuple(ngram), 0) + 1
-      self.lessergram_count += 1
-      self.lessergrams[tuple(lessergram)] = self.lessergrams.get(tuple(lessergram), 0) + 1
+      for offset in range(self.order):
+        if states[i+offset] == self.startstate or states[i+offset] == self.endstate:
+          ngram.append(states[i+offset])
+        else:
+          ngram.append(states[i+offset])
+      for offset in range(self.order-1):
+        if states[i+offset] == self.startstate or states[i+offset] == self.endstate:
+          lessergram.append(states[i+offset])
+        else:
+          lessergram.append(states[i+offset])
+        self.ngram_count += 1
+        # Add the index of this parameter to the ngram
+        self.ngrams[tuple(ngram)] = self.ngrams.get(tuple(ngram), 0) + 1
+        self.lessergram_count += 1
+        self.lessergrams[tuple(lessergram)] = self.lessergrams.get(tuple(lessergram), 0) + 1
 
   def joint_probability(self, observation, state):
     if not (observation, state) in self.coincedences: return 0.0
@@ -73,12 +85,13 @@ class HMM:
 
   # Source: Wikipedia article on viterbi algorithm
   def viterbi(self, obs):
+    obs = obs + [self.endstate]
     V = [{}]
     path = {}
 
     # Initialize base cases (t == 0)
     for y in self.states:
-      V[0][y] = self.start_probability(y) * self.emission_probability(y, obs[0])
+      V[0][y] = self.transition_probability([self.startstate], y) * self.emission_probability(y, obs[0])
       path[y] = [y]
 
     # Run Viterbi for t > 0
@@ -98,18 +111,18 @@ class HMM:
       # Don't need to remember the old paths
       path = newpath
 
-    self.print_dptable(V)
+    #self.print_dptable(V)
     (prob, state) = max([(V[len(obs) - 1][y], y) for y in self.states])
     return (prob, path[state])
 
   def storeInfo(self, f):
     out = open(f, 'w')
-    out.write('NGRAMS:')
-    for ngram in self.ngrams:
-      out.write(str(ngram)+'\n')
+    out.write('NGRAMS:\n')
+    for ngram, value in self.ngrams.iteritems():
+      out.write('{0}:\t{1}\n'.format(str(ngram), value))
     out.write('COINCEDENCES:\n')
-    for coincedence in self.coincedences:
-      out.write(str(coincedence)+'\n')
+    for coincedence, value in self.coincedences.iteritems():
+      out.write('{0}:\t{1}\n'.format(str(coincedence), value))
     out.close()
 
 
@@ -118,23 +131,31 @@ class HMM_indep(HMM):
 
   
   def learn(self, observations, states):
-    for param in states[0]:
-      self.starts[param] = self.starts.get(param, 0) + 1
-    self.start_count += 1 
+    parameters = len(states[0])
+    observations = [self.startstate] + observations + [self.endstate]
+    states = [self.startstate] + states + [self.endstate]
     for observation, state in zip(observations, states):
-      for i in range(len(state)):
+      if state == self.startstate or state == self.endstate:
+        state = [state for i in range(parameters)]
+      for i in range(parameters):
         self.coincedences[i, observation, state[i]] = self.coincedences.get((i, observation, state[i]), 0) + 1
       self.observations[observation] = self.observations.get((i, observation), 0) + 1
-      if not state in self.states:
+      if not state in self.states and not (state[0] == self.startstate or state[0] == self.endstate):
         self.states.append(state)
-    for i in range(len(states)-self.order):
-      for j in range(len(states[i])):
+    for i in range(len(states)-self.order + 1):
+      for j in range(parameters):
         ngram = []
         lessergram = []
         for offset in range(self.order):
-          ngram.append(states[i+offset][j])
+          if states[i+offset] == self.startstate or states[i+offset] == self.endstate:
+            ngram.append(states[i+offset])
+          else:
+            ngram.append(states[i+offset][j])
         for offset in range(self.order-1):
-          lessergram.append(states[i+offset][j])
+          if states[i+offset] == self.startstate or states[i+offset] == self.endstate:
+            lessergram.append(states[i+offset])
+          else:
+            lessergram.append(states[i+offset][j])
         self.ngram_count += 1
         # Add the index of this parameter to the ngram
         self.ngrams[tuple([j] + ngram)] = self.ngrams.get(tuple([j] + ngram), 0) + 1
@@ -148,14 +169,18 @@ class HMM_indep(HMM):
     if not (observation, state) in self.coincedences: return 0.0
     return self.coincedences[observation, state] / float(self.coincedence_count)
 
-  def start_probability(self, state):
-    p = 1.0
-    for param in state:
-      p *= self.starts.get(param, 0) / float(self.start_count)
-    return p
-
   def emission_probability(self, state, observation):
     p = 1.0
+    if state == self.startstate:
+      if observation == self.startstate:
+        return 1.0
+      else:
+        return 0.0
+    if state == self.endstate:
+      if observation == self.endstate:
+        return 1.0
+      else:
+        return 0.0
     for i in range(len(state)):
       p *= self.coincedences.get((i, observation, state[i]), 0.0) / float(self.observations.get(observation, 1))
     return p
@@ -163,10 +188,20 @@ class HMM_indep(HMM):
   def transition_probability(self, lessergram, state, verbose=False):
     p = 1.0
     #lessergrams = [[v[j] for v in lessergram] for j in len(state)] 
+    if state == self.endstate:
+      parameters = len(lessergram[len(lessergram)-1])
+      state = [self.endstate for i in range(parameters)]
+    else:
+      parameters = len(state)
+
     lg = []
-    for j in range(len(state)):
-      lg.append([v[j] for v in lessergram])
-    for i in range(len(state)):
+    for j in range(parameters):
+      if lessergram[0] == self.startstate:
+        lg.append([self.startstate] + [v[j] for v in lessergram[1:]])
+      else:
+        lg.append([v[j] for v in lessergram])
+
+    for i in range(parameters):
       p *= self.ngrams.get(tuple([i] + lg[i] + [state[i]]), 0) / float(self.lessergrams.get(tuple([i] + lg[i]), 1))
       if verbose:
         print "P({0}|{1}) = {2} ({3}, {4})".format([i] + lg[i] + [state[i]], [i] + lg[i], p, self.ngrams.get(tuple([i] + lg[i] + [state[i]]), 0), float(self.lessergrams.get(tuple([i] + lg[i]), 1))

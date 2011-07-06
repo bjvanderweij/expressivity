@@ -4,6 +4,8 @@ from alignment import *
 from analysescore import *
 import structure, math
 
+
+
 # Expression vector:
 #       0       1           2             3           4       5
 # E = (ioi_r, loudness_r, articulation, duration_r, ioi_ch, loundness_ch)
@@ -80,6 +82,12 @@ def vanDerWeijPerformSimple(score, melody, segments, expression_vectors, average
   return a.melodyPerformance()
 
 
+def perform(score, melodyscore, onset, expression, dynamics=None, tempo=None, converter=NoteList()):
+  if not dynamics:
+    dynamics = int(raw_input("Choose base dynamics (somewhere between 50 and 100?) "))
+  if not tempo:
+    tempo = int(raw_input("Choose base tempo (bpm) "))
+  return vanDerWeijPerformSimple(score, melodyscore, onset, expression, dynamics, bpm=tempo, converter=converter)
 
 def vanDerWeijPerform(score, segments, expression_vectors):
   deviations = Deviations()

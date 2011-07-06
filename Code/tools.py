@@ -15,6 +15,11 @@ def saveXML(score, name):
   ofile.write(score.musicxml)
   ofile.close()
 
+def savePerformance(selection, expression, f):
+  ofile = open('expressiveperformances/{0}'.format(f), 'wb')
+  pickle.dump((selection, expression), ofile)
+
+
 def saveFeatures(features, expression):
   while True:
     print "Enter a name for the directory"
@@ -62,6 +67,12 @@ def saveCSV(features, expression):
       out.write(line)
   out.close()
 
+def loadPerformance(name=None):
+  if not name:
+    choice = util.menu('Pick a performance', os.listdir('expressiveperformances'))
+    name = os.listdir('expressiveperformances')[choice]
+  f = open('expressiveperformances/{0}'.format(name), 'rb')
+  return pickle.load(f) 
 
 def loadFeatures(name):
   f = open('data/{0}/features'.format(name), 'rb')

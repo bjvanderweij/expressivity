@@ -193,6 +193,10 @@ def select():
   selected = getWorks(getComposers()[comp])[work]
   return getComposers()[comp], selected[0], selected[1], selected[2]
 
+def byIndexes(i, j):
+  selected = getWorks(getComposers()[i])[j]
+  return getComposers()[i], selected[0], selected[1], selected[2]
+
 if __name__ == "__main__":
   import sequencer
   seq = sequencer.Sequencer()
