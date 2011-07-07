@@ -16,9 +16,8 @@ class Alignment:
       self.score = m21.converter.parse(scorepath)
     else:
       self.score = scorepath
-    s = Score(self.score)
-    m = s.melody()
-    self.score = Score(score.tieless())
+    s = Score(Score(self.score).tieless())
+    self.m = s.melody()
     if not noAlign:
       self.alignment = None
       self.align()

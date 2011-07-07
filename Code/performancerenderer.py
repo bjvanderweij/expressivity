@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # these files extract needed features and structural information
 import scorefeatures as sf
 # *model contains statistical information
@@ -95,6 +96,7 @@ def render(score, segmentation, hmm, f_discretization=10, e_discretization=30, s
   # Find the best expressive explanation for these features
   print "Finding best fitting expression"
   (p, states) = hmm.viterbi(observations)
+  print states
   (prob, simple) = hmm.max_emission(observations)
   simple_p = hmm.sequence_probability(observations, simple)
   hmm.sequence_probability(observations, states)

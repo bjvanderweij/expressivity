@@ -8,9 +8,12 @@ class HMM:
   def __init__(self, order=2):
     self.order = order
 
+    self.startstate = ('start',)
+    self.endstate = ('end',)
+
     self.coincedences = {}
     self.observations = {}
-    self.states = []
+    self.states = [self.startstate, self.endstate]
 
     self.ngrams = {}
     self.coincedence_count = 0
@@ -19,8 +22,6 @@ class HMM:
     self.lessergram_count = 0
     self.starts = {}
     self.start_count = 0
-    self.startstate = ('start',)
-    self.endstate = ('end',)
     # This doesn't really belong here, it is just used as convenient storage
     self.normalizations = []
 
@@ -29,12 +30,9 @@ class HMM:
     observations = [self.startstate] + observations + [self.endstate]
     states = [self.startstate] + states + [self.endstate]
     for observation, state in zip(observations, states):
-      if state == self.startstate or state == self.endstate:
-        state = [state for i in range(parameters)]
-      for i in range(parameters):
-        self.coincedences[i, observation, state[i]] = self.coincedences.get((i, observation, state[i]), 0) + 1
-      self.observations[observation] = self.observations.get((i, observation), 0) + 1
-      if not state in self.states and not (state[0] == self.startstate or state[0] == self.endstate):
+      self.coincedences[observation, state] = self.coincedences.get((observation, state), 0) + 1
+      self.observations[observation] = self.observations.get((observation), 0) + 1
+      if not state in self.states and not (state == self.startstate or state == self.endstate):
         self.states.append(state)
     for i in range(len(states)-self.order + 1):
       ngram = []
@@ -68,11 +66,37 @@ class HMM:
     return self.coincedences[observation, state] / float(self.observations[observation])
 
   def transition_probability(self, lessergram, state, verbose=False):
-    if verbose:
-      print '{0}, {1}, {2}, {3}'.format(tuple(list(lessergram) + [state]), self.ngrams.get(tuple(list(lessergram) + [state]), 0), tuple(lessergram), self.lessergrams.get(tuple(lessergram), 0))
     if self.order == 1: return 1.0
     if not tuple(list(lessergram) + [state]) in self.ngrams: return 0.0
-    return self.ngrams[tuple(list(lessergram) + [state])] /  float(self.lessergrams[tuple(lessergram)])
+    p = self.ngrams[tuple(list(lessergram) + [state])] /  float(self.lessergrams[tuple(lessergram)])
+    if verbose:
+      print '{0}, {1}, {2}, {3} {4}'.format(tuple(list(lessergram) + [state]), self.ngrams.get(tuple(list(lessergram) + [state]), 0), tuple(lessergram), self.lessergrams.get(tuple(lessergram), 0), p)
+    return p
+
+  def max_emission(self, obs):
+    states = []
+    p = 1.0
+    for o in obs:
+      probs = [self.emission_probability(state, o) for state in self.states]
+      m = max(probs)
+      p *= m
+      states.append(self.states[probs.index(m)])
+    return (p, states)
+
+  def sequence_probability(self, obs, states):
+    print '----------------'
+    print len(states), len (obs)
+    states = [self.startstate] + states + [self.endstate]
+    obs = obs + [self.endstate]
+    print len(states), len (obs)
+    p = 1.0
+    for i in range(len(states)-1):
+      cp = self.emission_probability(states[i+1], obs[i]) * self.transition_probability([states[i]], states[i+1])
+      #if cp == 0.0:
+      #  print '{0}. {1}, {2}'.format(states[i], states[i+1], self.emission_probability(states[i+1], obs[i]))
+      p *= cp
+    return p
+
 
   def print_dptable(self, V):
     print "    ",
@@ -85,39 +109,17 @@ class HMM:
             print "{0}".format("{0}".format(V[t][y])),
         print
 
-  def max_emission(self, obs):
-    states = []
-    p = 1.0
-    for o in obs:
-      probs = [self.emission_probability(state, o) for state in self.states]
-      m = max(probs)
-      if m == 0.0:
-        print o
-      p *= m
-      states.append(self.states[probs.index(m)])
-    return (p, states)
-
-  def sequence_probability(self, obs, states):
-    states = [self.startstate] + states + [self.endstate]
-    obs = obs + [self.endstate]
-    p = 1.0
-    for i in range(len(states)-2):
-      cp = self.emission_probability(states[i+1], obs[i]) * self.transition_probability([states[i]], states[i+1])
-      if cp == 0.0:
-        print '{0}. {1}, {2}'.format(states[i], states[i+1], self.emission_probability(states[i+1], obs[i]))
-      p *= cp
-    return p
-
-
   # Source: Wikipedia article on viterbi algorithm
   def viterbi(self, obs):
     obs = obs + [self.endstate]
     V = [{}]
     path = {}
+    print self.states
 
     # Initialize base cases (t == 0)
     for y in self.states:
       V[0][y] = self.transition_probability([self.startstate], y) * self.emission_probability(y, obs[0])
+      if V[0][y] > 0: print '{0} {1}'.format(y, V[0][y])
       path[y] = [y]
 
     # Run Viterbi for t > 0
@@ -126,9 +128,12 @@ class HMM:
       newpath = {}
 
       for y in self.states:
-        #print [self.transition_probability(y0, y) for y0 in self.states]
-        (prob, state) = max([(V[t-1][y0] * self.transition_probability([y], y0) *\
+        (prob, state) = max([(V[t-1][y0] * self.transition_probability([y0], y) *\
           self.emission_probability(y, obs[t]), y0) for y0 in self.states])
+        # If everything is zero, we can only assume to keep playing like we were, can't we?
+        # This is ugly, better use the self loops Remco was talking about but I don't know how!
+        if prob == 0:
+          state = y
         V[t][y] = prob
         newpath[y] = path[state] + [y]
 
@@ -137,7 +142,8 @@ class HMM:
 
     #self.print_dptable(V)
     (prob, state) = max([(V[len(obs) - 1][y], y) for y in self.states])
-    return (prob, path[state])
+    # Exclude the last node from the path (this is the end state that slipped in)
+    return (prob, path[state][:-1])
 
   def storeInfo(self, f):
     out = open(f, 'w')
@@ -163,7 +169,7 @@ class HMM_indep(HMM):
         state = [state for i in range(parameters)]
       for i in range(parameters):
         self.coincedences[i, observation, state[i]] = self.coincedences.get((i, observation, state[i]), 0) + 1
-      self.observations[observation] = self.observations.get((i, observation), 0) + 1
+      self.observations[observation] = self.observations.get(observation, 0) + 1
       if not state in self.states and not (state[0] == self.startstate or state[0] == self.endstate):
         self.states.append(state)
     for i in range(len(states)-self.order + 1):
