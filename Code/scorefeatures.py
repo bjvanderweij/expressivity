@@ -4,7 +4,8 @@ import performancefeatures as pf
 
 featureset = ['avg_pitch', 'dPitch', 'abs_dPitch', 'ddPitch', 'abs_ddPitch',\
     'avg_duration', 'dDuration', 'abs_dDuration', 'ddDuration',\
-    'abs_ddDuration', 'silence', 'pitch_direction']
+    'abs_ddDuration', 'silence', 'pitch_direction', 'const_length']
+virtual_features = ['d_avg_pitch', 'd_avg_duration', 'abs_pitch_interval_ratio', 'd_abs_dDuration']
 version = '0.02'
 
 def pitch_interval(notes, i):

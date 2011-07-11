@@ -10,6 +10,7 @@ class HMM:
 
     self.startstate = ('start',)
     self.endstate = ('end',)
+    self.repeatstate = ('repeat',)
 
     self.coincedences = {}
     self.observations = {}
@@ -62,15 +63,20 @@ class HMM:
     return self.starts[state] / float(self.start_count)
 
   def emission_probability(self, state, observation):
-    if not (observation, state) in self.coincedences: return 0.0
+    if not (observation, state) in self.coincedences: 
+      return 0.0
     return self.coincedences[observation, state] / float(self.observations[observation])
 
   def transition_probability(self, lessergram, state, verbose=False):
     if self.order == 1: return 1.0
-    if not tuple(list(lessergram) + [state]) in self.ngrams: return 0.0
-    p = self.ngrams[tuple(list(lessergram) + [state])] /  float(self.lessergrams[tuple(lessergram)])
+    p = self.ngrams.get(tuple(list(lessergram) + [state]), 0) /  float(self.lessergrams[tuple(lessergram)])
     if verbose:
       print '{0}, {1}, {2}, {3} {4}'.format(tuple(list(lessergram) + [state]), self.ngrams.get(tuple(list(lessergram) + [state]), 0), tuple(lessergram), self.lessergrams.get(tuple(lessergram), 0), p)
+    # If this ngram was not found and the following state is the same as the last state (expression remains the same) do not return zero
+    # These are the self-loops
+    if p==0 and lessergram[len(lessergram)-1] == state:
+      minimum = 1 /  float(self.lessergrams[tuple(lessergram)])
+      return minimum
     return p
 
   def max_emission(self, obs):
@@ -108,6 +114,15 @@ class HMM:
 
   # Source: Wikipedia article on viterbi algorithm
   def viterbi(self, obs):
+    # If an observation is not in the corpus we would like either find the nearest observation, or keep using the same expression
+    # So what do we do? We could add a special entry for this observation that emission_probabilty propagates to transition_probability
+    # Who in turn propagates it to viterbi who uses the last state
+    # But this is ugly
+    # Better idea: add a specal repeat state and make this the maximum probability for the unfound states! 
+    for o in obs:
+      if not o in self.observations:
+        print self.emission_probability(self.repeatstate, o)
+        print "{0} this observation is not in the corpus :(".format(o)
     obs = obs + [self.endstate]
     V = [{}]
     path = {}
@@ -122,11 +137,18 @@ class HMM:
       V.append({})
       newpath = {}
 
-      for y in self.states + [self.endstate]:
-        (prob, state) = max([(V[t-1][y0] * self.transition_probability([y0], y) *\
-          self.emission_probability(y, obs[t]), y0) for y0 in self.states])
-        V[t][y] = prob
-        newpath[y] = path[state] + [y]
+      for y in self.states + [self.endstate] + [self.repeatstate]:
+        if y == self.repeatstate:
+          (prob, state) = max([(V[t-1][y0] * self.transition_probability([y0], y0) *\
+            self.emission_probability(y, obs[t]), y0) for y0 in self.states])
+          V[t][state] = prob
+          newpath[state] = path[state] + [state]
+        else:
+          (prob, state) = max([(V[t-1][y0] * self.transition_probability([y0], y) *\
+            self.emission_probability(y, obs[t]), y0) for y0 in self.states])
+          V[t][y] = prob
+          newpath[y] = path[state] + [y]
+          
 
       # Don't need to remember the old paths
       path = newpath
@@ -188,6 +210,9 @@ class HMM_indep(HMM):
 
   def emission_probability(self, state, observation):
     p = 1.0
+    # This must be the absolute minimum probability
+    if state == self.repeatstate:
+      return 1 / float(len(self.observations))
     if state == self.startstate:
       if observation == self.startstate:
         return 1.0
@@ -225,5 +250,12 @@ class HMM_indep(HMM):
       if verbose:
         print "P({0}|{1}) = {2} ({3}, {4})".format([i] + lg[i] + [state[i]], [i] + lg[i], p, self.ngrams.get(tuple([i] + lg[i] + [state[i]]), 0), float(self.lessergrams.get(tuple([i] + lg[i]), 1))
 )
+    # If this ngram was not found and the following state is the same as the last state (expression remains the same) do not return zero
+    # These are the self-loops
+    if p == 0.0 and lessergram[len(lessergram)-1] == state:
+      minimum = 1.0
+      for i in range(parameters):
+        minimum *= 1 / float(self.lessergrams.get(tuple([i] + lg[i]), 1))
+      return minimum
     return p
 

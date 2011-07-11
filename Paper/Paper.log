@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.5.30)  9 JUL 2011 19:20
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.5.30)  11 JUL 2011 14:19
 entering extended mode
  %&-line parsing enabled.
 **Paper.tex
@@ -295,40 +295,39 @@ LaTeX Font Info:    ... okay on input line 13.
 ) [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [1]
-LaTeX Font Info:    Try loading font information for U+msa on input line 129.
+LaTeX Font Info:    Try loading font information for U+msa on input line 133.
 
 (/usr/share/texmf-texlive/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 129.
+LaTeX Font Info:    Try loading font information for U+msb on input line 133.
 
 (/usr/share/texmf-texlive/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
-)
+) [2]
 
-LaTeX Warning: Reference `integration' on page 2 undefined on input line 135.
+LaTeX Warning: Reference `integration' on page 3 undefined on input line 139.
 
-[2]
 
-LaTeX Warning: Reference `markwin' on page 3 undefined on input line 143.
+LaTeX Warning: Reference `markwin' on page 3 undefined on input line 147.
 
 
 LaTeX Warning: Reference `lerdahl1996generative' on page 3 undefined on input l
-ine 143.
+ine 147.
 
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 156.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 160.
 
 (/usr/share/texmf-texlive/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 156.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 160.
  [3]
-Overfull \hbox (2.27466pt too wide) in paragraph at lines 185--185
+Overfull \hbox (2.27466pt too wide) in paragraph at lines 208--208
 []\OT1/cmr/bx/n/14.4 Integration with Note Level Per-for-mance Ren-
  []
 
-[4] (./Paper.bbl) [5] (./Paper.aux)
+[4] [5] (./Paper.bbl) [6] (./Paper.aux)
 
 LaTeX Warning: There were undefined references.
 
@@ -340,7 +339,7 @@ Here is how much of TeX's memory you used:
  5494 multiletter control sequences out of 15000+50000
  11209 words of font info for 43 fonts, out of 3000000 for 9000
  68 hyphenation exceptions out of 8191
- 27i,8n,24p,731b,156s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 27i,8n,24p,750b,177s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/sha
 re/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-te
 xlive/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texmf-texlive/fonts/
@@ -353,9 +352,9 @@ fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-texlive/fonts/type1/p
 ublic/amsfonts/cm/cmr9.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfont
 s/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti10
 .pfb>
-Output written on Paper.pdf (6 pages, 168858 bytes).
+Output written on Paper.pdf (7 pages, 172340 bytes).
 PDF statistics:
- 73 PDF objects out of 1000 (max. 8388607)
+ 78 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

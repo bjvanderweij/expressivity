@@ -216,36 +216,24 @@ if __name__ == "__main__":
   import sequencer
   seq = sequencer.Sequencer()
   while(True):
-    comp = util.menu('Choose a composer', getComposers())
-    work = util.menu('Choose a work and performer', getWorks(getComposers()[comp]), cancel=True)
-    if work == -1: continue
-    selected = getWorks(getComposers()[comp])[work]
+    selection = select()
     choice = 0
     while choice != 8:
-      choice = util.menu('What should I load?', ['Expressive performance', 'Score without expression'])
-      if choice == 0:
-        path = getPerformancePath(getComposers()[comp], selected[0], selected[1], selected[2])
-      else:
-        path = getScoreMidiPath(getComposers()[comp], selected[0], selected[1], selected[2])
-
-      selection = (getComposers()[comp], selected[0], selected[1], selected[2])
-      print path
 
       choice = util.menu('Choose action', \
           ['Play with internal sequencer', 'Play with audacious', 'View score', 'View midi info', 'View score info',\
           'Export deviation data to CSV', 'Performance', 'Extract melody','Cancel'])
       if choice == 0:
-        seq.play(NoteList(path))
+        seq.play(NoteList(getScoreMidiPath1(selection)))
       elif choice == 1:
-        os.system("audacious {0}".format(path))
+        os.system("audacious {0}".format(getScorePath1(selection)))
       elif choice == 2:
-        os.system("viewmxml {0}".format(getScorePath(getComposers()[comp], selected[0], selected[1], selected[2])))
-        pass
+        getScore1(selection).show()
       elif choice == 3:
-        nlist = NoteList(path)
+        nlist = NoteList(getScoreMidiPath1(selection))
         nlist.printinfo()
       elif choice == 4:
-        score = getScore(getComposers()[comp], selected[0], selected[1], selected[2])
+        score = getScore1(selection)
         parts = 0
         notes = 0
         for part in score:
@@ -261,13 +249,13 @@ if __name__ == "__main__":
           parts += 1
         print "{0} Parts in piece, total notes: {1}".format(parts, notes)
       elif choice == 5:
-        os.system("cmx dev2csv {0} > deviation.csv".format(getDeviationPath(getComposers()[comp], selected[0], selected[1], selected[2])))
+        os.system("cmx dev2csv {0} > deviation.csv".format(getDeviationPath1(selection)))
         os.system("vim deviation.csv")
       elif choice == 6:
         alignment = Alignment(getScorePath1(selection), getDeviation1(selection))
         seq.play(alignment.performance())
       elif choice == 7:
-        score = Score(getScore(getComposers()[comp], selected[0], selected[1], selected[2]))
+        score = Score(getScore1(selection))
         melody = score.melody()
         mxml = melody.musicxml
         f = open('output/melody.xml', 'w')

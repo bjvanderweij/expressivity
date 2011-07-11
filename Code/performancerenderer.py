@@ -11,69 +11,98 @@ import database as db
 import alignment, math
 import perform, util, structure
 
-#(dPitch, abs_dPitch, dDuration, abs_dDuration, silence, ddPitch, abs_ddPitch, pitch_direction)
-def discretize_features(features, discretization=10):
+def sigmoid(x, p=1.0):
+  return 1/(1+math.exp(-p*x))
+
+def inv_sigmoid(y, p=1.0):
+  return -math.log((1/float(y) - 1))/float(p)
+
+# Given normalized features use some function to discretize.
+# Possibilities: linear or sigmoid
+# Use a logistic function to get a larger resolution for small differences than for larger ones
+def discretize(features, discretization=10, function='sigmoid', logarithmic=False):
   f = []
-  r = range(len(features))
-  for i in range(len(features)):
-    f.append(int(features[i] * discretization))
-  return tuple(f)
-  # Select subset
-  # Discretise
+  # WORKAROUND
+  if logarithmic:
+    for i in range(len(features)):
+      if features[i] < 0: 
+        features[i] = -features[i]
+        print "Warning: invalid featurevalue found, {0} in {1}".format(features[i], features)
+    features = [math.log(x) for x in features]
+  if function == 'linear':
+    for i in range(len(features)):
+      f.append(int(round(features[i] * discretization)))
+  elif function == 'sigmoid':
+    for i in range(len(features)):
+      f.append(int(round(sigmoid(features[i], 5) * discretization)))
+  return f
+
+def undiscretize(features, discretization=10, function='sigmoid', logarithmic=False):
+  features = list(features)
+  discretization = float(discretization)
+  f = []
+  if function == 'linear':
+    for i in range(len(features)):
+      f.append(features[i] / discretization)
+  elif function == 'sigmoid':
+    for i in range(len(features)):
+      # Discretization may have made a features the minumum or max value, cap this to 1 and 9
+      if features[i] == 0:
+        features[i] = 1        
+      if features[i] == discretization:
+        features[i] = 9        
+      f.append(inv_sigmoid(features[i] / discretization, 5))
+  if logarithmic:
+    f = [math.exp(x) for x in f]
+  return f
+
+def discretize_expression(parameters, discretization=10, subset=[1,2,3]):
+  if subset != []:
+    parameters = [parameters[i] for i in subset]
+  return tuple(discretize(parameters, discretization, function='sigmoid', logarithmic=True))
+
+def undiscretize_expression(state, discretization=10):
+  return tuple(undiscretize(state, discretization, function='sigmoid', logarithmic=True))
 
 def preprocess(features, normalizations, discretization=10, subset=None):
   observations = []
   lastPitch = 0
   lastDuration = 0
+  last_dPitch = 0
+  last_dDuration = 0
   for f in features:
     # Normalize
     f = [f[i] / float(normalizations[i]) for i in range(len(f))]
     pitch = f[sf.featureset.index('avg_pitch')]
     duration = f[sf.featureset.index('avg_duration')]
+    dPitch = f[sf.featureset.index('abs_dPitch')]
+    dDuration = f[sf.featureset.index('abs_dDuration')]
     pitch_interval = 0
     duration_ratio = 0 
+    dPitch_interval = 0
+    dDuration_ratio = 0
     if lastPitch != 0:
       pitch_interval = pitch - lastPitch
       duration_ratio = math.log(duration/float(lastDuration))
+      dPitch_interval = dPitch - last_dPitch
+      #duration_ratio = math.log(dDuration/float(last_dDuration))
     f[sf.featureset.index('avg_pitch')] = pitch_interval
     f[sf.featureset.index('avg_duration')] = duration_ratio
     lastPitch = pitch
     lastDuration = duration
+    last_dPitch = dPitch
+    last_dDuration = dDuration
     obs = f
-    if subset:
+    if subset or subset == []:
       obs = [obs[i] for i in subset]
-    observations.append(discretize_features(obs, discretization))
+    observations.append(tuple(discretize(obs, discretization, function='linear')))
   return observations
     
   
 
-def discretize_expression(parameters, multiplication=30):
-  # Select subset
-  avg_rel_l = parameters[1]
-  avg_artic = parameters[2]
-  avg_tempo = parameters[3]
-  # Discretise
-  # Perhaps it is better to take this logarithm into performancefeatures
-  avg_rel_l = int(math.log(avg_rel_l) * multiplication)
-  avg_artic = int(avg_artic * multiplication)
-  avg_tempo = int(math.log(avg_tempo) * multiplication)
-  return (avg_rel_l, avg_artic, avg_tempo)
-
-def undiscretize(state, multiplication=30.0):
-  multiplication = float(multiplication)
-  # Select subset
-  avg_rel_l = state[0]
-  avg_artic = state[1]
-  avg_tempo = state[2]
-  # Discretise
-  # Perhaps it is better to take this logarithm into performancefeatures
-  avg_rel_l = math.exp(avg_rel_l / multiplication)
-  avg_artic = avg_artic / multiplication
-  avg_tempo = math.exp(avg_tempo / multiplication)
-  return (avg_rel_l, avg_artic, avg_tempo)
 
 
-def trainHMM(hmm, features_set, expression_set, f_discretization=10, e_discretization=30, subset=None):
+def trainHMM(hmm, features_set, expression_set, f_discretization=10, e_discretization=10, subset=None):
   l = 0
   for work in features_set.keys():
     l = len(features_set[work][0])
@@ -110,17 +139,30 @@ def render(score, segmentation, hmm, f_discretization=10, e_discretization=30, s
   (p, states) = hmm.viterbi(observations)
   expression = []
   for state in states:
-    expression.append(undiscretize(state, e_discretization))
+    expression.append(undiscretize_expression(state, e_discretization))
   print 'Expression states:\n{0}'.format(states)
 
   return (p, expression)
  
+def selectSubset(set):
+  choice = 1
+  subset = []
+  while True:
+    print 'Subset: [',
+    print ', '.join([set[i] for i in subset]),
+    print ']'
+    choice = util.menu('Select features', ['Done'] + set)
+    if choice == 0:
+      break
+    subset.append(choice-1)
+  return subset
+
 def analyseCorpus(discret):
   (f, e, m) = tools.chooseFeatures()
 
   for work in e:
     print '----------------------------------------'
-    expression = [undiscretize(discretize_expression(x, discret), discret) for x in e[work]]
+    expression = [undiscretize_expression(discretize_expression(x, discret), discret) for x in e[work]]
     print 'Loudness:\t',
     for p in expression:
       print '{0}\t'.format(p[0]),
@@ -131,7 +173,16 @@ def analyseCorpus(discret):
     for p in expression:
       print '{0}\t'.format(p[2]),
     print '\n'
-
+  subset = selectSubset(m['featureset'])
+  hmm = HMM(2)
+  trainHMM(hmm, f, e, discret, discret, subset=subset)
+  for work in e:
+    features = f[work]
+    processed = preprocess(f[work], hmm.normalizations, discret, subset=subset)
+    for s, p in zip(features, processed):
+      print '{0}-{1}: {2}'.format(work[1], work[2], [s[i] for i in subset])
+      print '{0}-{1}: {2}'.format(work[1], work[2], p)
+  
 
 def test(f_discretization=10, e_discretization=30, indep=False, selection=None, subset=None, corpus=None):
   if not selection:
@@ -146,23 +197,13 @@ def test(f_discretization=10, e_discretization=30, indep=False, selection=None, 
     exit(0)
   if not subset:
     # Select a subset by hand
-    choice = 1
-    subset = []
-    while True:
-      print 'Subset: [',
-      print ', '.join([m['featureset'][i] for i in subset]),
-      print ']'
-      choice = util.menu('Select features', ['Done'] + m['featureset'])
-      if choice == 0:
-        break
-      subset.append(choice-1)
-  print 'Performing {0}'.format(selection)
-  print 'Features version: {0}'.format(m['version'])
-  if subset:
-    print 'Featureset used: [',
-    print ', '.join([m['featureset'][i] for i in subset]),
-    print ']'
-  print 'Scorefeatures discretization: {0}\nExpression discretization: {1}'.format(f_discretization, e_discretization)
+    subset = selectSubset(m['featureset'])
+  print '\n\tPerforming {0}'.format(selection)
+  print '\tFeatures version: {0}'.format(m['version'])
+  print '\tFeatureset used: [',
+  print ', '.join([m['featureset'][i] for i in subset]),
+  print ']'
+  print '\tScorefeatures discretization: {0}\n\tExpression discretization: {1}\n'.format(f_discretization, e_discretization)
   if indep:
     hmm = HMM_indep(2)
   else:
@@ -274,6 +315,9 @@ if __name__ == '__main__':
       print 'Done, number of works in new dataset: {0}'.format(len(features)) 
       tools.saveFeatures(features, expression)
       exit(0)
+    elif a[1] == 'analyze':
+      analyseCorpus(int(a[2]))
+      exit(0)
     i = 1
     while i < len(a):
       if a[i] == '-indep':
@@ -288,14 +332,14 @@ if __name__ == '__main__':
           exit(0)
       elif a[i] == '-s':
         try:
-          selection = db.byIndexes(int(a[i+1]), int(a[i+2]))
+          selection = db.byIndexes(int(a[i+1])-1, int(a[i+2])-1)
           i += 2
         except IndexError, ValueError:
           print 'Error parsing command line arguments'
           exit(0)
       elif a[i] == '-subset':
         try:
-          subset = [int(x) for x in a[i+1:]]
+          subset = [int(x)-2 for x in a[i+1:]]
           i += len(a[i+1:])
         except IndexError, ValueError:
           print 'Error parsing command line arguments'
