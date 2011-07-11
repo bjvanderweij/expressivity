@@ -32,7 +32,10 @@ def getPerformancePath1(t):  return getPerformancePath(t[0], t[1], t[2], t[3])
 def getScorePath1(t):  return getScorePath(t[0], t[1], t[2], t[3])
 def getDeviationPath1(t):  return getDeviationPath(t[0], t[1], t[2], t[3])
 def getPerformance1(t):  return getPerformance(t[0], t[1], t[2], t[3])
-def getScore1(t):  return getScore(t[0], t[1], t[2], t[3])
+def getScore1(t):
+  if t == 'm21':
+    return selectM21Score()
+  return getScore(t[0], t[1], t[2], t[3])
 def getDeviation1(t):  return getDeviation(t[0], t[1], t[2], t[3])
 
 def getAllDirectories():
@@ -184,10 +187,22 @@ def sampleScore(): return m21.converter.parse("./samples/score.xml")
 def sampleDeviationPath(): return "./samples/deviation.xml"
 def sampleDeviation(): return Deviations("./samples/deviation.xml")
 
+def selectM21Score():
+  composers = ['bach', 'beethoven', 'ciconia', 'coltrane', 'handel', 'haydn', 'josquin',\
+      'luca', 'monteverdi', 'mozart', 'pachelbel', 'schoenberg', 'schubert', 'schumann']
+  path = -1
+  while(path == -1):
+    comp = util.menu('Choose a composer', composers)
+    path = util.menu('Choose a work', m21.corpus.getComposer(composers[comp]), cancel=True)
+  return m21.corpus.parse(m21.corpus.getComposer(composers[comp])[path])
+
 def select():
   work = -1
   while(work == -1):
-    comp = util.menu('Choose a composer', getComposers())
+    comp = util.menu('Choose a composer', getComposers() + ['MUSIC21 Corpus'])
+    print len(getComposers()), comp
+    if comp == len(getComposers()):
+      return 'm21'
     work = util.menu('Choose a work and performer', getWorks(getComposers()[comp]), cancel=True)
 
   selected = getWorks(getComposers()[comp])[work]

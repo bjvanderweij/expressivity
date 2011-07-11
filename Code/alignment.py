@@ -16,14 +16,16 @@ class Alignment:
       self.score = m21.converter.parse(scorepath)
     else:
       self.score = scorepath
-    s = Score(Score(self.score).tieless())
+    import score
+
+    s = score.Score(self.score)
     self.m = s.melody()
+    self.m = score.Score(self.m).tieless()
+    self.s = s.tieless()
     if not noAlign:
       self.alignment = None
       self.align()
-
     print "Done"
-
 
   def storeAlignment(self):
     location = 'alignments/{0}'.format(self.deviations.target.split('.')[0])
@@ -237,7 +239,7 @@ class Alignment:
               if query in deviations.note_deviations: break 
             # This situation is usually caused by fucking TIED NOTES, it can mess up indexing
             if not query in deviations.note_deviations:
-              print "Query: {0} not found in deviations".format(query)
+              print "WARNING: Query: {0} not found in deviations".format(query)
               n_dev = None
             else:
               n_dev = deviations.note_deviations[query]

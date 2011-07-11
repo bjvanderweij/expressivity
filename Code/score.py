@@ -13,9 +13,9 @@ class Score:
 
   def tieless(self):
     # This doesn't actually remove ties, but it does fix the duration of tied notes
-    score = self.score.stripTies()
+    self.score.stripTies(inPlace=True)
     # Now remove every note that is not the start of a tie
-    for part in score:
+    for part in self.score:
       if not isinstance(part, m21.stream.Part):
         continue
       for measure in part:
@@ -31,7 +31,7 @@ class Score:
                   voice.remove(note)
                 else:
                   note.tie = None
-    return score
+    return self.score
 
   #Highest note in part one at any moment
   def melody(self):

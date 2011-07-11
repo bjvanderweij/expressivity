@@ -39,9 +39,7 @@ def vanDerWeijExpression(alignment, segments):
   # The two above should be guaranteed to be of equal length.
   # However, better be safe than sorry
   if len(performance) != sum([len(x) for x in segments]):
-    print 'This shouldn\'t happen: melodyscore and performance lengths don\'t match: {0} and {1}'.format(len(sum([len(x) for x in segments])), len(performance))
-  else:
-    print "This is good, performance length and score length match"
+    print 'WARNING: Melodyscore and performance are different (should not happen): {0} and {1}'.format(len(sum([len(x) for x in segments])), len(performance))
   
   expression = []
   # Counter for position in notelists performance and scorenotes

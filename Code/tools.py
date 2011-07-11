@@ -1,5 +1,5 @@
 import music21 as m21
-import os, pickle, util
+import os, pickle, util, scorefeatures
 from representation import *
 
 def savePDF(score, name):
@@ -38,8 +38,12 @@ def saveFeatures(features, expression):
         break
   f = open('data/{0}/features'.format(name), 'wb')
   e = open('data/{0}/expression'.format(name), 'wb')
+  m = open('data/{0}/metadata'.format(name), 'wb')
+
+  metadata = {'version':scorefeatures.version, 'featureset':scorefeatures.featureset}
   pickle.dump(features, f)
   pickle.dump(expression, e)
+  pickle.dump(metadata, m)
 
 def saveCSV(features, expression):
   while True:
@@ -77,11 +81,16 @@ def loadPerformance(name=None):
 def loadFeatures(name):
   f = open('data/{0}/features'.format(name), 'rb')
   e = open('data/{0}/expression'.format(name), 'rb')
-  return (pickle.load(f), pickle.load(e))
+  m = open('data/{0}/metadata'.format(name), 'rb')
+
+  return (pickle.load(f), pickle.load(e), pickle.load(m))
   
 def chooseFeatures():
   choice = util.menu('Pick a dataset', os.listdir('data'))
   return loadFeatures(os.listdir('data')[choice])
+
+def datasets():
+  return os.listdir('data')
 
 # This doesn't handle polyfony very well but it is used for single voices only anyway
 def newParseScore(score):

@@ -13,7 +13,7 @@ class HMM:
 
     self.coincedences = {}
     self.observations = {}
-    self.states = [self.startstate, self.endstate]
+    self.states = []
 
     self.ngrams = {}
     self.coincedence_count = 0
@@ -84,11 +84,8 @@ class HMM:
     return (p, states)
 
   def sequence_probability(self, obs, states):
-    print '----------------'
-    print len(states), len (obs)
     states = [self.startstate] + states + [self.endstate]
     obs = obs + [self.endstate]
-    print len(states), len (obs)
     p = 1.0
     for i in range(len(states)-1):
       cp = self.emission_probability(states[i+1], obs[i]) * self.transition_probability([states[i]], states[i+1])
@@ -114,12 +111,10 @@ class HMM:
     obs = obs + [self.endstate]
     V = [{}]
     path = {}
-    print self.states
 
     # Initialize base cases (t == 0)
     for y in self.states:
       V[0][y] = self.transition_probability([self.startstate], y) * self.emission_probability(y, obs[0])
-      if V[0][y] > 0: print '{0} {1}'.format(y, V[0][y])
       path[y] = [y]
 
     # Run Viterbi for t > 0
@@ -127,13 +122,9 @@ class HMM:
       V.append({})
       newpath = {}
 
-      for y in self.states:
+      for y in self.states + [self.endstate]:
         (prob, state) = max([(V[t-1][y0] * self.transition_probability([y0], y) *\
           self.emission_probability(y, obs[t]), y0) for y0 in self.states])
-        # If everything is zero, we can only assume to keep playing like we were, can't we?
-        # This is ugly, better use the self loops Remco was talking about but I don't know how!
-        if prob == 0:
-          state = y
         V[t][y] = prob
         newpath[y] = path[state] + [y]
 
@@ -141,7 +132,7 @@ class HMM:
       path = newpath
 
     #self.print_dptable(V)
-    (prob, state) = max([(V[len(obs) - 1][y], y) for y in self.states])
+    (prob, state) = max([(V[len(obs) - 1][y], y) for y in self.states + [self.endstate]])
     # Exclude the last node from the path (this is the end state that slipped in)
     return (prob, path[state][:-1])
 
@@ -195,10 +186,6 @@ class HMM_indep(HMM):
   def __str__(self):
     return 'States:\n{0}\nNgrams:\n{1}\nLessergrams:\n{2}'.format(self.states, self.ngrams, self.lessergrams)
 
-  def joint_probability(self, observation, state):
-    if not (observation, state) in self.coincedences: return 0.0
-    return self.coincedences[observation, state] / float(self.coincedence_count)
-
   def emission_probability(self, state, observation):
     p = 1.0
     if state == self.startstate:
@@ -213,6 +200,7 @@ class HMM_indep(HMM):
         return 0.0
     for i in range(len(state)):
       p *= self.coincedences.get((i, observation, state[i]), 0.0) / float(self.observations.get(observation, 1))
+      if p == 0.0: break
     return p
 
   def transition_probability(self, lessergram, state, verbose=False):
@@ -233,6 +221,7 @@ class HMM_indep(HMM):
 
     for i in range(parameters):
       p *= self.ngrams.get(tuple([i] + lg[i] + [state[i]]), 0) / float(self.lessergrams.get(tuple([i] + lg[i]), 1))
+      if p == 0.0: break
       if verbose:
         print "P({0}|{1}) = {2} ({3}, {4})".format([i] + lg[i] + [state[i]], [i] + lg[i], p, self.ngrams.get(tuple([i] + lg[i] + [state[i]]), 0), float(self.lessergrams.get(tuple([i] + lg[i]), 1))
 )

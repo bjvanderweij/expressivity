@@ -12,16 +12,39 @@ import alignment, math
 import perform, util, structure
 
 #(dPitch, abs_dPitch, dDuration, abs_dDuration, silence, ddPitch, abs_ddPitch, pitch_direction)
-def discretize_features(features, normalizations, discretization=10, subset=None):
+def discretize_features(features, discretization=10):
   f = []
   r = range(len(features))
-  if subset:
-    r = subset
-  for i in r:
-    f.append(int((features[i] / float(normalizations[i])) * discretization))
+  for i in range(len(features)):
+    f.append(int(features[i] * discretization))
   return tuple(f)
   # Select subset
   # Discretise
+
+def preprocess(features, normalizations, discretization=10, subset=None):
+  observations = []
+  lastPitch = 0
+  lastDuration = 0
+  for f in features:
+    # Normalize
+    f = [f[i] / float(normalizations[i]) for i in range(len(f))]
+    pitch = f[sf.featureset.index('avg_pitch')]
+    duration = f[sf.featureset.index('avg_duration')]
+    pitch_interval = 0
+    duration_ratio = 0 
+    if lastPitch != 0:
+      pitch_interval = pitch - lastPitch
+      duration_ratio = math.log(duration/float(lastDuration))
+    f[sf.featureset.index('avg_pitch')] = pitch_interval
+    f[sf.featureset.index('avg_duration')] = duration_ratio
+    lastPitch = pitch
+    lastDuration = duration
+    obs = f
+    if subset:
+      obs = [obs[i] for i in subset]
+    observations.append(discretize_features(obs, discretization))
+  return observations
+    
   
 
 def discretize_expression(parameters, multiplication=30):
@@ -66,55 +89,80 @@ def trainHMM(hmm, features_set, expression_set, f_discretization=10, e_discretiz
   for work in features_set.keys():
     features = features_set[work]
     expression = expression_set[work]
-    obs = []
+    obs = preprocess(features, normalizations, f_discretization, subset)
     states = []
     # Select the subset of features that will be used and discretise
-    for f in features:
-      obs.append(discretize_features(f, normalizations, f_discretization, subset=subset))
-    if work == ('Mozart', 'snt545-2', 'gould', 'GPO-Concert-Steinway-ver2.sf2'):
-      print obs
-
-    lastexp = 'start'
-    for p in expression:
-      #  Multiplication for expression and features doesn't neccesarily need to be the same!
+    for f, p in zip(features, expression):
       exp = discretize_expression(p, e_discretization) 
+      #states.append(tuple(list(exp) + list(featureset)))
       states.append(exp)
-      lastexp = exp
 
-    if work == ('Mozart', 'snt545-2', 'gould', 'GPO-Concert-Steinway-ver2.sf2'):
-      print states
     hmm.learn(obs, states)
 
 def render(score, segmentation, hmm, f_discretization=10, e_discretization=30, subset=None):
   # Extract scorefeatures
   features = sf.vanDerWeijFeatures(score, segmentation) 
   # Discretize
-  observations = []
-  for f in features:
-    observations.append(discretize_features(f, hmm.normalizations, f_discretization, subset=subset))
+  observations = preprocess(features, hmm.normalizations, f_discretization, subset)
   print 'Observations:\n{0}'.format(observations)
   # Find the best expressive explanation for these features
   print "Finding best fitting expression"
   (p, states) = hmm.viterbi(observations)
-  print states
-  (prob, simple) = hmm.max_emission(observations)
-  simple_p = hmm.sequence_probability(observations, simple)
-  hmm.sequence_probability(observations, states)
-  print "Simple rendering (emission: {2} sequence probability: {1}):\n{0}".format(simple, simple_p, prob)
   expression = []
   for state in states:
     expression.append(undiscretize(state, e_discretization))
   print 'Expression states:\n{0}'.format(states)
 
   return (p, expression)
-  
-def test(f_discretization=10, e_discretization=30, indep=False, selection=None, subset=None):
+ 
+def analyseCorpus(discret):
+  (f, e, m) = tools.chooseFeatures()
+
+  for work in e:
+    print '----------------------------------------'
+    expression = [undiscretize(discretize_expression(x, discret), discret) for x in e[work]]
+    print 'Loudness:\t',
+    for p in expression:
+      print '{0}\t'.format(p[0]),
+    print '\nArticulation:\t',
+    for p in expression:
+      print '{0}\t'.format(p[1]),
+    print '\nTempo:\t\t',
+    for p in expression:
+      print '{0}\t'.format(p[2]),
+    print '\n'
+
+
+def test(f_discretization=10, e_discretization=30, indep=False, selection=None, subset=None, corpus=None):
   if not selection:
     selection = (db.select())
-  else:
-    print 'Performing {0}'.format(selection)
   score = db.getScore1(selection)
-  (f, e) = tools.chooseFeatures()
+  if not corpus:
+    (f, e, m) = tools.chooseFeatures()
+  else:
+    (f, e, m) = tools.loadFeatures(corpus)
+  if m['version'] != sf.version:
+    print "Scorefeatures versions don't match! Corpus version: {0} Scorefeatures version: {1}".format(m['version'], sf.version)
+    exit(0)
+  if not subset:
+    # Select a subset by hand
+    choice = 1
+    subset = []
+    while True:
+      print 'Subset: [',
+      print ', '.join([m['featureset'][i] for i in subset]),
+      print ']'
+      choice = util.menu('Select features', ['Done'] + m['featureset'])
+      if choice == 0:
+        break
+      subset.append(choice-1)
+  print 'Performing {0}'.format(selection)
+  print 'Features version: {0}'.format(m['version'])
+  if subset:
+    print 'Featureset used: [',
+    print ', '.join([m['featureset'][i] for i in subset]),
+    print ']'
+  print 'Scorefeatures discretization: {0}\nExpression discretization: {1}'.format(f_discretization, e_discretization)
   if indep:
     hmm = HMM_indep(2)
   else:
@@ -163,11 +211,13 @@ def loadperformance():
 
 if __name__ == '__main__':
   import sys
-  multiplication = 10
   indep = False
   a = sys.argv
   selection = None
   subset = None
+  f_discretization = 10
+  e_discretization = 10
+  corpus = None
   if len(a) > 1:
     if a[1] == 'load':
       loadperformance()
@@ -178,6 +228,11 @@ if __name__ == '__main__':
       pianist = raw_input("Enter pianist\n")
       if pianist == '': pianist = None
       set = train.trainset(composers, pianist)
+      train.train(set)
+      exit(0)
+    elif a[1] == 'align':
+      import train
+      set = [db.select()]
       train.train(set)
       exit(0)
     elif a[1] == 'features':
@@ -191,6 +246,33 @@ if __name__ == '__main__':
         #(dPitch, abs_dPitch, dDuration, abs_dDuration, silence, ddPitch, abs_ddPitch, pitch_direction)
         print 'dpitch: {0} abs_dPitch: {1} dDuration: {2} abs_dDuration: {3} silence: {4}'.format(x[0], x[1], x[2], x[3], x[4])
         print 'ddPitch: {0} abs_ddPitch: {1} : pitch_direction: {2}'.format(x[5], x[6], x[7])
+      exit(0)
+    elif a[1] == 'merge':
+      # Merge datasets
+      choice = -1
+      datasets = []
+      while True:
+        choice = util.menu('Choose datasets', ['Done'] + tools.datasets())
+        if choice == 0: break
+        datasets.append(tools.loadFeatures(tools.datasets()[choice-1]))
+      features = {}
+      expression = {}
+      metadata = {}
+      for (f, e, m) in datasets:
+        if not 'version' in metadata:
+          metadata['version'] = m['version']
+          metadata['featureset'] = m['featureset']
+        elif not metadata['version'] == m['version']:
+          print "Scorefeatures versions don't match! Can't merge."
+          exit(0)
+        for work in f:
+          if work in features:
+            print 'Skipping dupe {0}'.format(work)
+            continue
+          features[work] = f[work]
+          expression[work] = e[work]
+      print 'Done, number of works in new dataset: {0}'.format(len(features)) 
+      tools.saveFeatures(features, expression)
       exit(0)
     i = 1
     while i < len(a):
@@ -218,11 +300,19 @@ if __name__ == '__main__':
         except IndexError, ValueError:
           print 'Error parsing command line arguments'
           exit(0)
+      elif a[i] == '-corpus':
+        try:
+          corpus = a[i+1]
+          i += 1
+        except IndexError, ValueError:
+          print 'Error parsing command line arguments'
+          exit(0)
       else:
         print "I don't understand {0}".format(a[i])
       i += 1
 
-  test(f_discretization, e_discretization, indep, selection=selection, subset=subset)
+
+  test(f_discretization, e_discretization, indep, selection=selection, subset=subset, corpus=corpus)
 
   
 

@@ -2,7 +2,10 @@ import tools, structure, math
 import performancefeatures as pf
 
 
-# Take a score, split it in melody and harmony, do structure analysis and output features per note.
+featureset = ['avg_pitch', 'dPitch', 'abs_dPitch', 'ddPitch', 'abs_ddPitch',\
+    'avg_duration', 'dDuration', 'abs_dDuration', 'ddDuration',\
+    'abs_ddDuration', 'silence', 'pitch_direction']
+version = '0.02'
 
 def pitch_interval(notes, i):
   if i == 0: return 0
@@ -12,6 +15,9 @@ def duration_ratio(notes, i):
   if i == 0: return 1
   return math.log((notes[i].off - notes[i].on) / float(notes[i-1].off - notes[i-1].on))
 
+def getFeature(name, features):
+  return features[featureset.index(name)]
+
 def vanDerWeijFeatures(melodyscore, segments):
   # This is radically different, we only look at features at constituent level
   melody = tools.parseScore(melodyscore)
@@ -19,21 +25,30 @@ def vanDerWeijFeatures(melodyscore, segments):
   features = []
   index = 0
   for i in range(len(segments)):
+    #if i > 0:
+    #  segments[i] = [segments[i-1][len(segments[i-1])-1]] + segments[i]
     length = len(segments[i]) 
-    # Calculate averages:
-    # What if the segment is len 1?
+    # Calculate features:
+
     pitch_int = structure.bare_deltalist(structure.pitch, segments[i])
     abs_pitch_int = structure.absolute_deltalist(structure.pitch, segments[i])
+    pitches = [structure.pitch(segments[i], j) for j in range(len(segments[i]))]
+    durations = [structure.duration(segments[i], j) for j in range(len(segments[i]))]
+
+    avg_pitch = 1/float(length) * sum(pitches)
     dPitch = 1/float(length) * sum(pitch_int)
     abs_dPitch = 1/float(length) * sum(abs_pitch_int)
-    dDuration = 1/float(length) * sum(structure.bare_deltalist(structure.duration, segments[i]))
-    abs_dDuration = 1/float(length) * sum(structure.absolute_deltalist(structure.duration, segments[i]))
-    silence = 1/float(length) * sum([structure.silence(segments[i], j+1) for j in range(len(segments[i])-1)])
     ddPitch = 1/float(length) * sum(structure.second_order_deltalist(pitch_int))
     abs_ddPitch = 1/float(length) * sum(structure.second_order_deltalist(abs_pitch_int))
-    
-    #print [structure.silence(segments[i], j) for j in range(len(segments[i]))]
 
+    avg_duration = 1/float(length) * sum(durations)
+    dDuration = 1/float(length) * sum(structure.bare_deltalist(structure.duration, segments[i]))
+    abs_dDuration = 1/float(length) * sum(structure.absolute_deltalist(structure.duration, segments[i]))
+    ddDuration = 1/float(length) * sum(structure.second_order_deltalist(structure.bare_deltalist(structure.duration, segments[i])))
+    abs_ddDuration = 1/float(length) * sum(structure.second_order_deltalist(structure.absolute_deltalist(structure.duration, segments[i])))
+
+    silence = 1/float(length) * sum([structure.silence(segments[i], j+1) for j in range(len(segments[i])-1)])
+    
     onsets = structure.normalize([n.on for n in segments[i]])
     pitches = structure.normalize([n.pitch for n in segments[i]])
     if len(onsets) == 1:
@@ -41,12 +56,15 @@ def vanDerWeijFeatures(melodyscore, segments):
     else:
       pitch_direction = pf.linear_fit(onsets, pitches)[1]
 
-    # Average of deltafunctions?
-    # Average of second order deltafunctions?
-    # Average of log relatives?
-    # Polyfonie
-    features.append((dPitch, abs_dPitch, dDuration, abs_dDuration, silence, ddPitch, abs_ddPitch, pitch_direction))
+    # Polyfony?
+    # Score markings?
+    features.append((avg_pitch, dPitch, abs_dPitch, ddPitch, abs_ddPitch,\
+        avg_duration, dDuration, abs_dDuration, ddDuration, abs_ddDuration,\
+        silence, pitch_direction, length))
 
+#featureset = ['avg_pitch', 'dPitch', 'abs_dPitch', 'ddPitch', 'abs_ddPitch',\
+#    'avg_duration', 'dDuration', 'abs_dDuration', 'ddDuration',\
+#    'abs_ddDuration', 'silence', 'pitch_direction']
   return features
     
 
