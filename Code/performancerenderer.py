@@ -66,43 +66,49 @@ def undiscretize_expression(state, discretization=10):
 
 def preprocess(features, normalizations, discretization=10, subset=None):
   observations = []
-  lastPitch = 0
-  lastDuration = 0
-  last_dPitch = 0
-  last_dDuration = 0
-  for f in features:
+  for i in range(len(features)):
     # Normalize
-    f = [f[i] / float(normalizations[i]) for i in range(len(f))]
-    pitch = f[sf.featureset.index('avg_pitch')]
-    duration = f[sf.featureset.index('avg_duration')]
-    dPitch = f[sf.featureset.index('abs_dPitch')]
-    dDuration = f[sf.featureset.index('abs_dDuration')]
-    pitch_interval = 0
-    duration_ratio = 0 
-    dPitch_interval = 0
-    dDuration_ratio = 0
-    if lastPitch != 0:
-      pitch_interval = pitch - lastPitch
-      duration_ratio = math.log(duration/float(lastDuration))
-      dPitch_interval = dPitch - last_dPitch
-      #duration_ratio = math.log(dDuration/float(last_dDuration))
-    f[sf.featureset.index('avg_pitch')] = pitch_interval
-    f[sf.featureset.index('avg_duration')] = duration_ratio
-    lastPitch = pitch
-    lastDuration = duration
-    last_dPitch = dPitch
-    last_dDuration = dDuration
-    obs = f
+    features[i] = [features[i][j] / float(normalizations[j]) for j in range(len(features[i]))]
+  for f0, f1 in zip(features[:-1], features[1:]):
+    pitch0 = f0[sf.featureset.index('avg_pitch')]
+    duration0 = f0[sf.featureset.index('avg_duration')]
+    dPitch0 = f0[sf.featureset.index('abs_dPitch')]
+    dDuration0 = f0[sf.featureset.index('abs_dDuration')]
+    pitch1 = f1[sf.featureset.index('avg_pitch')]
+    duration1 = f1[sf.featureset.index('avg_duration')]
+    dPitch1 = f1[sf.featureset.index('abs_dPitch')]
+    dDuration1 = f1[sf.featureset.index('abs_dDuration')]
+    # Difference in average pitch
+    pitch_interval = (pitch0 - pitch1) * 10 # 10 is a rather arbitrary number to make this feature visible in discretization
+    # Relative difference in average note duration
+    duration_ratio = math.log(duration0/float(duration1))
+    # Do the next two features make any musical sense?
+    #dPitch_interval = dPitch0 - dPitch1 
+    #ldDuration_ratio = math.log(dDuration/float(last_dDuration)) # What if lastDDuration is zero?
+    f0 = list(f0)
+    f0[sf.featureset.index('avg_pitch')] = pitch_interval
+    f0[sf.featureset.index('avg_duration')] = duration_ratio
+    #f0[sf.featureset.index('abs_dPitch')] = dPitch_interval
+    #f[sf.featureset.index('abs_dDuration')] = dDuration_ratio
+    obs = f0
     if subset or subset == []:
       obs = [obs[i] for i in subset]
     observations.append(tuple(discretize(obs, discretization, function='linear')))
+  # The last constituent:
+  f = features[-1]
+  f[sf.featureset.index('avg_pitch')] = pitch_interval
+  f[sf.featureset.index('avg_duration')] = duration_ratio
+  obs = f
+  if subset or subset == []:
+    obs = [obs[i] for i in subset]
+  observations.append(tuple(discretize(obs, discretization, function='linear')))
   return observations
     
   
 
 
 
-def trainHMM(hmm, features_set, expression_set, f_discretization=10, e_discretization=10, subset=None):
+def trainHMM(hmm, features_set, expression_set, f_discretization=10, e_discretization=10, subset=None, ignore=None):
   l = 0
   for work in features_set.keys():
     l = len(features_set[work][0])
@@ -116,6 +122,8 @@ def trainHMM(hmm, features_set, expression_set, f_discretization=10, e_discretiz
         normalizations[i] = m
   hmm.normalizations = normalizations
   for work in features_set.keys():
+    if work == ignore:
+      continue
     features = features_set[work]
     expression = expression_set[work]
     obs = preprocess(features, normalizations, f_discretization, subset)
@@ -209,7 +217,7 @@ def test(f_discretization=10, e_discretization=30, indep=False, selection=None, 
   else:
     hmm = HMM(2)
 
-  trainHMM(hmm, f, e, f_discretization, e_discretization, subset=subset)
+  trainHMM(hmm, f, e, f_discretization, e_discretization, subset=subset, ignore=selection)
   hmm.storeInfo('hmm2.txt')
   print "Loading score"
   melodyscore = Score(score).melody()
@@ -248,7 +256,29 @@ def loadperformance():
   seq = Sequencer()
   seq.play(performance)
 
+def visualize(segmentation, expression, visualize=None):
+  notes = []
+  onsets = []
+  values = []
+  if not visualize:
+    visualize = selectSubset(['Dynamics', 'Articulation', 'Tempo'])
+  for segment, expr in zip(segmentation, expression):
+    for note in segment:
+      onsets.append(note.on)
+      values.append([expr[i] for i in visualize])
+  import matplotlib.pyplot as plt
+  plt.plot(onsets, values)
+  plt.ylabel('Deviation')
+  plt.xlabel('Score time')
+  #dplot = fig.add_subplot(111)
+  #sodplot = fig.add_subplot(111)
+  #dplot.plot([i for i in range(len(deltas[0]))], deltas[0])
+  #sodplot.plot([i for i in range(len(sodeltas[0]))], sodeltas[0])
+  plt.show()
 
+
+    
+    
 
 if __name__ == '__main__':
   import sys
@@ -275,6 +305,18 @@ if __name__ == '__main__':
       import train
       set = [db.select()]
       train.train(set)
+      exit(0)
+    elif a[1] == 'plot':
+      (selection, expression) = tools.loadPerformance()
+      score = db.getScore1(selection)
+      melodyscore = Score(score).melody()
+      melody = tools.parseScore(melodyscore)
+      segmentation = structure.reasonableSegmentation(melody)
+      visualize(segmentation, expression)
+      exit(0)
+    elif a[1] == 'corpora':
+      for x in tools.datasets():
+        print 'Name:\t[{0}]\tInfo:\t{1}'.format(x, tools.corpusInfo(x))
       exit(0)
     elif a[1] == 'features':
       s = db.select()

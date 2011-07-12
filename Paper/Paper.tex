@@ -114,14 +114,16 @@ Rencon
 
 The YQX system, as widmer admitted, tended to sometimes produce nervous sounding changes in expression. He presents two extensions that seek to generate smoother performances. The problem with these extensions is, as widmer admits himself, that the increased smoothness comes at the expense of expressitivity. To counter this, he adds three explicit rules that he uses to postprocess the performances. We think the reason that Widmer stumbled upon this tradeoff between expressiveness and nervousness because the nervousness is inherent to the way performances are generated at note-level. The system simply misses one component of expression, namely structure level expression. (that Widmer had to artificially introduce using rules. ) ?
 
+The system presented here will use structure exclusively to generate performances and will completely ignore note level expression. Section \ref{approach} will describe the system as a whole. What we mean by structure level expression is clarified in section \ref{structure}. The approach for extracting structure is described in section \ref{deltaframework}.  
 
-Structure seems to be directly related to expression and it seems logical that a performance rendering system should have some notion of usical structure. The system presented here will use structure exclusively to generate performances and will completely ignore note level expression. The expressiveness of the performances it generates is therefore limited. In section XX we will describe how this system could be integrated with a note level performance rendering system to hopefully produce some variant of YQX that doesn't need explicit rules to produce expressive performances.
+The expressiveness of the performances it generates is therefore limited. In section XX we will describe how this system could be integrated with a note level performance rendering system to hopefully produce some variant of YQX that doesn't need explicit rules to produce expressive performances.
 
 
 %This thesis introduces machine learning system that makes of local structure as well as higher level structure to generate expressive performances of polyphonic piano music. Section X will introduce Y, section P will elaborate on Q and finally section Z will discuss the results.
 
 
-\section{Approach}
+
+
 
 \subsection{Musical structure}
 When listening to music, the listener's musical intuition assigns a certain hierarchical structure to the music: Notes make up phrases, phrases make up themes and themes make up a piece. In a performance, this structure may be accentuated in different ways. Accentuation happens at different levels, at note level performers may slow down at the end a phrase or introduce small pauses in the performance at phrase transitions. At constituent level one phrase may be played very loud, fast or staccato, while the next may be played slow, soft and legato. 
@@ -130,50 +132,136 @@ To formally describe musical structure, we can look at music in a way similar to
 
 It must be noted that the resulting parse tree can be highly ambiguous and even experienced listeners may not agree on the correct parsetree of a piece. Quite often there may simply be more than one parse tree that makes musical sense. This should not be a problem for a performance rendering system: different expressive interpretations of one piece can be very diverse and still be accepted as sensible interpretations of the piece. As long as the parse tree does make at least some musical sense, a performance rendering system should be able to use it.
 
-Although the YQX does have some notion of structure\footnote{One of the note features is distance to nearest point of closure}, it still only looks at note level expression. The authors admit that the first simple version of the system ``tended to sometimes produce unstable, `nervous' sounding performances''. We see this as a symptom of a note level expression based system.
+Although the YQX does have some notion of structure\footnote{One of the note features is distance to nearest point of closure}, expression is still only predicted per note. The authors admit that the first simple version of the system ``tended to sometimes produce unstable, `nervous' sounding performances''. We see this as a symptom of a note level expression based system.
 
-In this thesis, we propose a structure based performance rendering (SBPR) system. The system presented here ignores note level expression. Instead we will only try to predict constituent level expression. The assumption is that this kind of expression really exists in performances and that is different and independend from note level structure. We think that a constituent level system also corresponds better to how actual human performers play music. A performance redering system that only predicts note level expression would have rather meaningless fluctuations in tempo and dynamics as it does not have a notion of constituent level expression.
+\section{Approach}
 
-The system will be similar to YQX in a number of ways, but instead of predicting expression per note, it will predict expression per constituent. Every constituent will be played with consistend expression. A number of score features defined per constituent will be used to predict epressive parameters of the constituent. 
 
-The simplification of ignoring note level expression is of course unjustified and severly limits the expressiveness of the performances that can be generated. However, if succesful, the resulting performances will clearly demonstrate the phenomenon of constituent level expression. It should be possible to extend the system to incorporate note level expression, section \ref{integration} will further explore this possibility.
+In this thesis, we propose a structure based performance rendering (SBPR) system. The system presented here ignores note level expression. Instead we will try to predict only constituent level expression. The assumption is that this kind of expression really exists in performances and that is different and independend from note level structure. We think that a constituent level system also corresponds better to how actual human performers play music. A performance redering system that only predicts note level expression would have rather meaningless fluctuations in tempo and dynamics as it does not have a notion of constituent level expression.
 
-The succes of a structure based performance rendering (SBPR) system depends largely on two factors. The ability to generate musically meaningful parse trees of a piece and the ability to accurately characterize the individual constituents and their relations with other constituents. The following two sections address these issues. 
+%\subsection{Structure Based Performance Rendering}
+
+The system will be similar to YQX in a number of ways, but instead of predicting expression per note, it will predict expression per constituent. Every constituent will be played with consistend expression, the articulation, dynamics and tempo change only at constituent breaks.
+
+We use a corpus that contains performances and corresponding scores of Western classical piano music. Every note in every performance has been associated with the corresponding score note so we can see exactly how every note in the score was played. The performances are of high quality and played by famous pianists. See section \ref{corpus} for more details on the corpus.
+
+A structural analysis is used to derrive hierarchical structure of every score in the corpus, however, to keep the system simple we will only use this structural analysis to create a segmentation of the score into constituents. After segmentation, four score features, two of which are direct generalizations of YQX's score features, are extracted for each constituent. 
+
+So far, we have only used the score. Since we have a segmentation and every score note is associated with a performance note\footnote{In reality, not every score note is associated with a performance note since the pianist may have missed some notes. These notes will be ignored} we can also define expression per constituent. Three parameters, analogous to YQX's targets, will be used to describe expression per constituent.
+
+The segmentation, score features and expression parameters are based only on the \textit{melody} of the piece. In this case, melody is defined to be the highest notes in the top staff.
+
+The resulting data is used to train a first order hidden Markov model. The system uses this model to generate performances given a score. To do this, the score is segmented into constituents, score features are extracted for each constituent. Finally viterbi decoding is used to find the sequence of expression parameters that best explains the observed score features.
+
+The simplification of ignoring note level expression is of course unjustified and severly limits the expressiveness of the performances that can be generated. However, if succesful, the resulting performances will clearly demonstrate the phenomenon of structure level expression. A succesful performance rendering system should incorporate both structure and note level expression, section \ref{integration} will explore two possibilities for an integration of SBPR and note level performance rendering.
+
+The succes of a SBPR system depends largely on two factors. The ability to generate musically meaningful parse trees of a piece and the ability to accurately characterize the individual constituents and their relations with other constituents in score features. The following section address these issues. 
+
+\begin{itemize}
+\item Mention GTTM
+\item Give short overview of the system?
+\end{itemize}
 
 %The following section will introduce an application of the delta framework \ref{markwin} that intends to segment a score into musically meaningfull constituents. Section \ref{scorefeatures} will deal with the characterization of individual constituents, section \ref{expressionfeatures} will explain how expressive parameters of a constituent are determined and translated into expressioin. Section \ref{performancerendering} will explain how performances are 
 
-\section{The Delta Framework}
+\section{Method}
 
-In his Phd thesis \ref{markwin}, Markwin van der Berg introduces a formal way of parsing music into parsetrees: the delta framework. He relates his work to the work of Lerdahl and Jackendoff \ref{lerdahl1996generative} but claims to have found a more general approach. 
+This section will describe individual components of the system sketched in section \ref{approach} in more detail. The structural analysis of is based on the delta framework, which will be described in section \ref{deltaframework}.  Section \ref{segmentation} will discuss how the delta framework is applied to get a segmentation. Sections \ref{features} and \ref{targets} will describe how the scorefeatures and expression parameters are calculated. Section \ref{model} will describe how a hidden Markov model is trained on our data.
+
+\subsection{The Delta Framework}
+
+In his Phd thesis \ref{markwin}, Markwin van der Berg introduces a formal way of parsing music into parsetrees: the delta framework. He relates his work to the work of Lerdahl and Jackendoff \ref{lerdahl1996generative} but claims to have found a more general approach. Below, I will shortly describe the deltaframework as proposed by Van der Berg.
 
 The delta framework is based on the intuition that differences between notes indicate splits between constituents. The higher the difference, the higher the level of split in the parse tree (where the root note is at the highest level). Van der Berg proposes a delta rule that converts a set of differences, or deltas, between notes into a parsetree following this intuition. 
 
 The differences between notes are defined as the difference in value of a certain note feature. More formally, we can look at a piece of music as a sequence of notes, ordered by onset time:
 
-\[M = n_i, n_{i+1}, \cdots, n_j\]
+\[M_{ij} = [n_i, n_{i+1}, \cdots, n_j]\]
 
-We can assign features to these notes. 
+A set of basic features, $\Phi$, is assigned to each note. These are: \textbf{onset}, \textbf{pitch}, \textbf{loudness} and \textbf{release} (called offset by Van den Berg). From these two other features can be derived: \textbf{duration} and \textbf{virtual duration}. Duration is defined as \textbf{release($n_i$)} - \textbf{onset($n_i$)} while virtual duration is defined as \textbf{onset($n_{i+1}$)} - \textbf{onset($n_i$)}. 
 
-\subsection{Extracting structure}
+The basic note features can be used to define delta functions, for example $\Delta\textbf{Pitch} = \textbf{Pitch}(n_i) - \textbf{Pitch}(n_{i-1})$. In general, a delta function $\delta(i)$ is defined as the difference of two notes in some feature $\phi$: $\delta(i) = \phi(n_i) - \phi(n_{i-1})$. We can apply a delta function to every pair of succeeding notes in a sequence to get a list of deltas: 
+\[\Delta M_{ij} = [\delta(n_{i+1}), \delta(n_{i+2}), \cdots, \delta(n_{j})]\]
+
+A recursive rule, called the delta rule can be used to translate a list of deltas into a grouping structure. The deltarule, DeltaRule($M_{ij}$), where $M_{ij}$ is the ordered list of notes that is to be analyzed, is defined as follows\footnote{The version here is a slightly reformulated version of Van den Berg's deltarule}:
+\begin{algorithm}
+\begin{algorithmic}
+\STATE{$D_{i+1,j} \leftarrow \Delta M_{ij}$}
+\STATE{$A \leftarrow []$}
+\STATE $m \leftarrow \textbf{ max}(D)$
+\FOR{$\delta \textbf{ in } D$}
+\IF{$\delta = m$}
+\STATE $p = \textbf{ index of }\delta \textbf{ in } D$
+\STATE $q = \textbf{ index of the next occurence of m in }D \textbf{ or } j$
+\STATE $\textbf{append DeltaRule(}M_{pq}\textbf{) to } A$
+\ENDIF
+\ENDFOR
+\RETURN{$A$}
+\end{algorithmic}
+\caption{The delta rule}
+\label{deltarule}
+\end{algorithm}
+
+It also possible to define higher order delta function (deltas of deltas). Second order deltafunction can be used to differentiate a group of ascending notes from a group of notes that have wildly varying pitches. Van den Berg notes that this generates ambigous grouping structures as for example a second order deltarule needs at least three notes to be specified. For three notes, three different grouping structures are possible: $[[n_1, n_2], n_3]$, $[n_1, n_2, n_3]]$ and $[n_1, [n_2, n_3]]$. Because we want to use a second order deltafunction for segmentation only, we choose to only use one interpretation: $[n_1, n_2], n_3]$. EXPLAIN WHY?
+\subsection{Segmentation}
+\label{segmentation}
+
+
 
 \begin{itemize}
 \item We only need a segmentation for now
 \item Using the deltaframework to define segmentation
 \end{itemize}
 
-\section{Constituent Features}
+\subsection{Constituent Features}
+\label{scorefeatures}
 
-We can now convert a piece of music into a serie of constituents. These constituents will be used to predict expression so we must be able to charaterize them in a way correlates with the way they are performed. Analogous to YQX we are looking for the \textit{context} of the constituent. 
+\begin{itemize}
+\item We are talking about SCOREFEATURES here, mention this
+\end{itemize}
 
+We can now convert a piece of music into a serie of constituents. These constituents will be used to predict expression so we must be able to charaterize them in a way correlates with the way they are performed. Analogous to YQX we are looking for the \textit{context} of the constituent as well as some description of the constituent itself.
+
+YQX uses a set of three score features: pitch interval, duration ratio and I-R arch. The pitch interval is simply the difference in pitch between the current note and the next note. The duration ratio is the logarithmic ratio of the duration of the current note and the duration of the next note.  The I-R arch is is the distance to the nearest point of closure, where closure is calculated from the Implication-Realization analysis. (Too literally?)
+
+We can generalize pitch interval and duration ratio per note to constituent features: \textit{average pitch interval} and \textit{average duration ratio}. Definitions can be found in table \ref{features}. Since I-R arch is related to note-level expression it does not generalize well to a constituent level feature. 
+
+The two features above provide information about the constituent context: if they are both zero the constituent is apparently similar in average pitch and average duration. At note level there is not much to say about the current note besides the pitch and duration. However at constituent we would also like to say something about the constituent itself. For this purpose \textit{average delta pitch} and \textit{average delta duration} are used. These features say something about the amount change in pitch and the amount of change in note duration.
+
+The complete set of score features consists of two \textit{context features} and two \textit{constituent features}.
+
+\begin{table}
+\begin{itemize}
+\item[\textbf{Average pitch interval}] 
+The difference between the average pitch of the current constituent and the average pitch of the next constituent, zero if the current is the last constituent
+\item[\textbf{Average duration ratio}]
+The logarithmic ratio between the average note duration of the current constituent and the average note duration of the next constituent
+\end{itemize}
+\caption{Context features}
+\label{features}
+\end{table}
+
+\begin{table}
+\begin{itemize}
+\item[\textbf{Average delta pitch}] The average of all absolute pitch intervals within one constituent. 
+\item[\textbf{Average delta duration}] The average of all absolute differences in duration of succeeding notes within one constituent
+\end{itemize}
+\caption{Constituent Features}
+\label{features}
+\end{table}
 
 (Clearly, expressive markings in the score play a role in how the constituent should be played. If the segmentation is specific enough  there will hopefully be at most expressive marking within each constituent. )?
 
-\section{Targets}
+\subsection{Expression Parameters}
+\label{targets}
 
 \begin{itemize}
 \item Use average expression parameters per constituent
 \end{itemize}
 
+\subsection{Model}
+
+\section{Implementation}
 \section{Performance Rendering}
 \begin{itemize}
 \item Extract melody
@@ -192,15 +280,6 @@ We can now convert a piece of music into a serie of constituents. These constitu
 
 Distinction of expressive tempo and attack and release.
 
-\subsubsection*{The delta framework}
-
-\subsection{Performance Model}
-
-\subsubsection{Expressive timing} Honing and Desain, Honing and timmers, Honing.
-\subsection{Learning}
-
-
-\section{Method}
 \section{Evaluation and Results}
 The proposed system actually requires more training data to do meaningful statistics. However, since expressive interpretation can be 
 \subsection{Subjective Listening}
@@ -215,17 +294,20 @@ An intergration of constituent level expression and note level expression can pr
 \cite{markwin}
 \section{Discussion}
 
-Unfortunately we do not have acces to the large dataset that YQX uses. The dataset we use is smaller. Since we do not learn per note but per group of notes, the impact of a smaller dataset is even larger. We have discretize into rather large bins for this reason, resulting in cartoonistisc performances. 
+Unfortunately we do not have acces to the large dataset that YQX uses. The dataset we use is smaller. Since we do not learn per note but per group of notes, the impact of a smaller dataset is even larger. We have discretize into rather large bins for this reason, resulting in cartoonistic performances. 
 
 We think we can afford to do this because:...
 
 \begin{itemize}
 \item Top notes is not always the melody, musical attention
 \item Bass and harmony shouldn't be played with the same expression as melodynotes
+\item Dataset size
+\item Targets for expression level expression
 \end{itemize}
 
 \section{Future Work}
 \begin{itemize}
+\item Combine deltatrees
 \item Use loudness and tempo direction instead of averages (requires more data)
 \item Generalize approach to incorporate hierarchical structure, let structure extend to note level, so note level expression and structurelevel expression become integrated
 \end{itemize}

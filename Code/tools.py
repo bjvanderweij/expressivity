@@ -86,11 +86,30 @@ def loadFeatures(name):
   return (pickle.load(f), pickle.load(e), pickle.load(m))
   
 def chooseFeatures():
-  choice = util.menu('Pick a dataset', os.listdir('data'))
+  choice = util.menu('Pick a dataset', ['Name:\t[{0}]\tInfo:\t{1}'.format(x, corpusInfo(x)) for x in os.listdir('data')])
   return loadFeatures(os.listdir('data')[choice])
 
 def datasets():
   return os.listdir('data')
+
+def corpusInfo(name):
+  (f, e, m) = loadFeatures(name)
+  avg_notes = 0
+  size = 0
+  version = m['version']
+  featureset = m['featureset']
+  for work in f:
+    size += len(f[work])
+    # This only works for corpora that have a const length feature
+    if 'const_length' in featureset:
+      index = featureset.index('const_length')
+      avg_notes += sum([x[index] for x in f[work]])
+    else:
+      # Some featureset strings miss the const_lenght index
+      # This code crashes if the featureset truly doesn't have this feature
+      avg_notes += sum([x[12] for x in f[work]])
+  avg_notes /= float(size)
+  return '[Works: {0}\tEntries: {1}\tFeatures version: {2}\tNotes per entry: {3}]'.format(len(f), size, version, avg_notes)
 
 # This doesn't handle polyfony very well but it is used for single voices only anyway
 def newParseScore(score):

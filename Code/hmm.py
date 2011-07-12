@@ -17,7 +17,7 @@ class HMM:
     self.states = []
 
     self.ngrams = {}
-    self.coincedence_count = 0
+    self.observation_count = 0
     self.ngram_count = 0
     self.lessergrams = {}
     self.lessergram_count = 0
@@ -33,6 +33,7 @@ class HMM:
     for observation, state in zip(observations, states):
       self.coincedences[observation, state] = self.coincedences.get((observation, state), 0) + 1
       self.observations[observation] = self.observations.get((observation), 0) + 1
+      self.observation_count += 1
       if not state in self.states and not (state == self.startstate or state == self.endstate):
         self.states.append(state)
     for i in range(len(states)-self.order + 1):
@@ -119,10 +120,11 @@ class HMM:
     # Who in turn propagates it to viterbi who uses the last state
     # But this is ugly
     # Better idea: add a specal repeat state and make this the maximum probability for the unfound states! 
+    unseen = 0
     for o in obs:
       if not o in self.observations:
-        print self.emission_probability(self.repeatstate, o)
-        print "{0} this observation is not in the corpus :(".format(o)
+        unseen += 1
+    print "{0} out of {1} observations do not occur in the corpus!".format(unseen, len(obs))
     obs = obs + [self.endstate]
     V = [{}]
     path = {}
@@ -183,6 +185,7 @@ class HMM_indep(HMM):
       for i in range(parameters):
         self.coincedences[i, observation, state[i]] = self.coincedences.get((i, observation, state[i]), 0) + 1
       self.observations[observation] = self.observations.get(observation, 0) + 1
+      self.observation_count += 1
       if not state in self.states and not (state[0] == self.startstate or state[0] == self.endstate):
         self.states.append(state)
     for i in range(len(states)-self.order + 1):
@@ -212,7 +215,7 @@ class HMM_indep(HMM):
     p = 1.0
     # This must be the absolute minimum probability
     if state == self.repeatstate:
-      return 1 / float(len(self.observations))
+      return 1 / float(self.observation_count)
     if state == self.startstate:
       if observation == self.startstate:
         return 1.0

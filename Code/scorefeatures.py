@@ -42,6 +42,7 @@ def vanDerWeijFeatures(melodyscore, segments):
     ddPitch = 1/float(length) * sum(structure.second_order_deltalist(pitch_int))
     abs_ddPitch = 1/float(length) * sum(structure.second_order_deltalist(abs_pitch_int))
 
+    avg_duration_ratio = 0
     avg_duration = 1/float(length) * sum(durations)
     dDuration = 1/float(length) * sum(structure.bare_deltalist(structure.duration, segments[i]))
     abs_dDuration = 1/float(length) * sum(structure.absolute_deltalist(structure.duration, segments[i]))
