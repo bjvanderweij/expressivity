@@ -224,9 +224,9 @@ if __name__ == "__main__":
           ['Play with internal sequencer', 'Play with audacious', 'View score', 'View midi info', 'View score info',\
           'Export deviation data to CSV', 'Performance', 'Extract melody','Cancel'])
       if choice == 0:
-        seq.play(NoteList(getScoreMidiPath1(selection)))
+        seq.play(NoteList(getPerformancePath1(selection)))
       elif choice == 1:
-        os.system("audacious {0}".format(getScorePath1(selection)))
+        os.system("audacious {0}".format(getPerformancePath1(selection)))
       elif choice == 2:
         getScore1(selection).show()
       elif choice == 3:

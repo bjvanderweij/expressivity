@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.5.30)  13 JUL 2011 12:42
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.5.30)  13 JUL 2011 18:50
 entering extended mode
  %&-line parsing enabled.
 **Paper.tex
@@ -132,6 +132,34 @@ Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
 \c@ALC@depth=\count104
 \ALC@tlm=\skip49
 \algorithmicindent=\skip50
+)
+(/usr/share/texmf-texlive/tex/latex/tools/array.sty
+Package: array 2008/09/09 v2.4c Tabular extension package (FMi)
+\col@sep=\dimen112
+\extrarowheight=\dimen113
+\NC@list=\toks29
+\extratabsurround=\skip51
+\backup@length=\skip52
+)
+(/usr/share/texmf-texlive/tex/latex/booktabs/booktabs.sty
+Package: booktabs 2005/04/14 v1.61803 publication quality tables
+\heavyrulewidth=\dimen114
+\lightrulewidth=\dimen115
+\cmidrulewidth=\dimen116
+\belowrulesep=\dimen117
+\belowbottomsep=\dimen118
+\aboverulesep=\dimen119
+\abovetopsep=\dimen120
+\cmidrulesep=\dimen121
+\cmidrulekern=\dimen122
+\defaultaddspace=\dimen123
+\@cmidla=\count105
+\@cmidlb=\count106
+\@aboverulesep=\dimen124
+\@belowrulesep=\dimen125
+\@thisruleclass=\count107
+\@lastruleclass=\count108
+\@thisrulewidth=\dimen126
 ) (./qtree.sty
 Package: 2008/12/12 v.3.1bQtree: tree-drawing for linguistics
 Package: qtree 2008/12/12 v.3.1bQtree: tree-drawing for linguistics
@@ -145,7 +173,7 @@ Package pict2e Info: Driver file: pdftex.def on input line 101.
 
 (/usr/share/texmf-texlive/tex/latex/pdftex-def/pdftex.def
 File: pdftex.def 2010/03/12 v0.04p Graphics/color for pdfTeX
-\Gread@gobject=\count105
+\Gread@gobject=\count109
 )
 Package pict2e Info: Driver file for pict2e: p2e-pdftex.def on input line 103.
 
@@ -155,13 +183,13 @@ File: p2e-pdftex.def 2009/08/05 v0.1s Driver-dependant file (RN,HjG,JT)
 (/usr/share/texmf-texlive/tex/latex/graphics/trig.sty
 Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
 )
-\pIIe@GRAPH=\toks29
-\@arclen=\dimen112
-\@arcrad=\dimen113
-\@tempdimd=\dimen114
+\pIIe@GRAPH=\toks30
+\@arclen=\dimen127
+\@arcrad=\dimen128
+\@tempdimd=\dimen129
 )
-\c@treecount=\count106
-\c@branchcount=\count107
+\c@treecount=\count110
+\c@branchcount=\count111
 \parentbox=\box30
 \treebox=\box31
 \treeboxone=\box32
@@ -184,193 +212,213 @@ Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
 \treeboxeighteen=\box49
 \treeboxnineteen=\box50
 \treeboxtwenty=\box51
-\treeoffsetone=\skip51
-\treeoffsettwo=\skip52
-\treeoffsetthree=\skip53
-\treeoffsetfour=\skip54
-\treeoffsetfive=\skip55
-\treeoffsetsix=\skip56
-\treeoffsetseven=\skip57
-\treeoffseteight=\skip58
-\treeoffsetnine=\skip59
-\treeoffsetten=\skip60
-\treeoffseteleven=\skip61
-\treeoffsettwelve=\skip62
-\treeoffsetthirteen=\skip63
-\treeoffsetfourteen=\skip64
-\treeoffsetfifteen=\skip65
-\treeoffsetsixteen=\skip66
-\treeoffsetseventeen=\skip67
-\treeoffseteighteen=\skip68
-\treeoffsetnineteen=\skip69
-\treeoffsettwenty=\skip70
-\treeshiftone=\skip71
-\treeshifttwo=\skip72
-\treeshiftthree=\skip73
-\treeshiftfour=\skip74
-\treeshiftfive=\skip75
-\treeshiftsix=\skip76
-\treeshiftseven=\skip77
-\treeshifteight=\skip78
-\treeshiftnine=\skip79
-\treeshiftten=\skip80
-\treeshifteleven=\skip81
-\treeshifttwelve=\skip82
-\treeshiftthirteen=\skip83
-\treeshiftfourteen=\skip84
-\treeshiftfifteen=\skip85
-\treeshiftsixteen=\skip86
-\treeshiftseventeen=\skip87
-\treeshifteighteen=\skip88
-\treeshiftnineteen=\skip89
-\treeshifttwenty=\skip90
-\treewidthone=\skip91
-\treewidthtwo=\skip92
-\treewidththree=\skip93
-\treewidthfour=\skip94
-\treewidthfive=\skip95
-\treewidthsix=\skip96
-\treewidthseven=\skip97
-\treewidtheight=\skip98
-\treewidthnine=\skip99
-\treewidthten=\skip100
-\treewidtheleven=\skip101
-\treewidthtwelve=\skip102
-\treewidththirteen=\skip103
-\treewidthfourteen=\skip104
-\treewidthfifteen=\skip105
-\treewidthsixteen=\skip106
-\treewidthseventeen=\skip107
-\treewidtheighteen=\skip108
-\treewidthnineteen=\skip109
-\treewidthtwenty=\skip110
-\daughteroffsetone=\skip111
-\daughteroffsettwo=\skip112
-\daughteroffsetthree=\skip113
-\daughteroffsetfour=\skip114
-\branchwidthone=\skip115
-\branchwidthtwo=\skip116
-\branchwidththree=\skip117
-\branchwidthfour=\skip118
-\parentoffset=\skip119
-\treeoffset=\skip120
-\daughteroffset=\skip121
-\branchwidth=\skip122
-\parentwidth=\skip123
-\treewidth=\skip124
-\qta=\toks30
-\qtb=\toks31
-\nbranches=\count108
-\qroofx=\count109
-\qroofy=\count110
+\treeoffsetone=\skip53
+\treeoffsettwo=\skip54
+\treeoffsetthree=\skip55
+\treeoffsetfour=\skip56
+\treeoffsetfive=\skip57
+\treeoffsetsix=\skip58
+\treeoffsetseven=\skip59
+\treeoffseteight=\skip60
+\treeoffsetnine=\skip61
+\treeoffsetten=\skip62
+\treeoffseteleven=\skip63
+\treeoffsettwelve=\skip64
+\treeoffsetthirteen=\skip65
+\treeoffsetfourteen=\skip66
+\treeoffsetfifteen=\skip67
+\treeoffsetsixteen=\skip68
+\treeoffsetseventeen=\skip69
+\treeoffseteighteen=\skip70
+\treeoffsetnineteen=\skip71
+\treeoffsettwenty=\skip72
+\treeshiftone=\skip73
+\treeshifttwo=\skip74
+\treeshiftthree=\skip75
+\treeshiftfour=\skip76
+\treeshiftfive=\skip77
+\treeshiftsix=\skip78
+\treeshiftseven=\skip79
+\treeshifteight=\skip80
+\treeshiftnine=\skip81
+\treeshiftten=\skip82
+\treeshifteleven=\skip83
+\treeshifttwelve=\skip84
+\treeshiftthirteen=\skip85
+\treeshiftfourteen=\skip86
+\treeshiftfifteen=\skip87
+\treeshiftsixteen=\skip88
+\treeshiftseventeen=\skip89
+\treeshifteighteen=\skip90
+\treeshiftnineteen=\skip91
+\treeshifttwenty=\skip92
+\treewidthone=\skip93
+\treewidthtwo=\skip94
+\treewidththree=\skip95
+\treewidthfour=\skip96
+\treewidthfive=\skip97
+\treewidthsix=\skip98
+\treewidthseven=\skip99
+\treewidtheight=\skip100
+\treewidthnine=\skip101
+\treewidthten=\skip102
+\treewidtheleven=\skip103
+\treewidthtwelve=\skip104
+\treewidththirteen=\skip105
+\treewidthfourteen=\skip106
+\treewidthfifteen=\skip107
+\treewidthsixteen=\skip108
+\treewidthseventeen=\skip109
+\treewidtheighteen=\skip110
+\treewidthnineteen=\skip111
+\treewidthtwenty=\skip112
+\daughteroffsetone=\skip113
+\daughteroffsettwo=\skip114
+\daughteroffsetthree=\skip115
+\daughteroffsetfour=\skip116
+\branchwidthone=\skip117
+\branchwidthtwo=\skip118
+\branchwidththree=\skip119
+\branchwidthfour=\skip120
+\parentoffset=\skip121
+\treeoffset=\skip122
+\daughteroffset=\skip123
+\branchwidth=\skip124
+\parentwidth=\skip125
+\treewidth=\skip126
+\qta=\toks31
+\qtb=\toks32
+\nbranches=\count112
+\qroofx=\count113
+\qroofy=\count114
 \@qrscratchbox=\box52
-) (./Paper.aux
-
-LaTeX Warning: Label `features' multiply defined.
-
-)
+) (./Paper.aux)
 \openout1 = `Paper.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
- (/usr/share/texmf-texlive/tex/context/base/supp-pdf.mkii
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+
+(/usr/share/texmf-texlive/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count111
-\scratchdimen=\dimen115
+\scratchcounter=\count115
+\scratchdimen=\dimen130
 \scratchbox=\box53
-\nofMPsegments=\count112
-\nofMParguments=\count113
-\everyMPshowfont=\toks32
-\MPscratchCnt=\count114
-\MPscratchDim=\dimen116
-\MPnumerator=\count115
-\everyMPtoPDFconversion=\toks33
+\nofMPsegments=\count116
+\nofMParguments=\count117
+\everyMPshowfont=\toks33
+\MPscratchCnt=\count118
+\MPscratchDim=\dimen131
+\MPnumerator=\count119
+\everyMPtoPDFconversion=\toks34
 ) [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
 
-LaTeX Warning: Reference `approach' on page 1 undefined on input line 119.
+LaTeX Warning: Reference `approach' on page 1 undefined on input line 125.
 
 
-LaTeX Warning: Reference `structure' on page 1 undefined on input line 119.
+LaTeX Warning: Reference `structure' on page 1 undefined on input line 125.
 
 
-LaTeX Warning: Reference `deltaframework' on page 1 undefined on input line 119
+LaTeX Warning: Reference `deltaframework' on page 1 undefined on input line 125
 .
 
 [1]
-LaTeX Font Info:    Try loading font information for U+msa on input line 137.
+LaTeX Font Info:    Try loading font information for U+msa on input line 143.
  (/usr/share/texmf-texlive/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 137.
+LaTeX Font Info:    Try loading font information for U+msb on input line 143.
 
 (/usr/share/texmf-texlive/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
-) [2]
+)
+Overfull \hbox (4.15845pt too wide) in paragraph at lines 145--146
+[]\OT1/cmr/m/n/10 NOTE(THE MO-TI-VA-TION SEC-TION SAYS MORE OR LESS THE SAME,
+ []
 
-LaTeX Warning: Reference `corpus' on page 3 undefined on input line 148.
+[2]
+
+LaTeX Warning: Reference `corpus' on page 3 undefined on input line 156.
 
 
-LaTeX Warning: Reference `integration' on page 3 undefined on input line 158.
+LaTeX Warning: Reference `integration' on page 3 undefined on input line 166.
 
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 163.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 172.
 
 (/usr/share/texmf-texlive/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 163.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 172.
+ [3]
+
+LaTeX Warning: Reference `approach' on page 4 undefined on input line 180.
 
 
-LaTeX Warning: Reference `approach' on page 3 undefined on input line 171.
-
-
-LaTeX Warning: Reference `deltaframework' on page 3 undefined on input line 171
+LaTeX Warning: Reference `deltaframework' on page 4 undefined on input line 180
 .
 
 
-LaTeX Warning: Reference `model' on page 3 undefined on input line 171.
+LaTeX Warning: Reference `features' on page 4 undefined on input line 180.
 
-[3]
 
-LaTeX Warning: Reference `markwin' on page 4 undefined on input line 175.
+LaTeX Warning: Reference `model' on page 4 undefined on input line 180.
+
+
+LaTeX Warning: Reference `markwin' on page 4 undefined on input line 184.
 
 
 LaTeX Warning: Reference `lerdahl1996generative' on page 4 undefined on input l
-ine 175.
+ine 184.
 
-[4] [5] [6]
-Overfull \hbox (2.27466pt too wide) in paragraph at lines 291--291
+[4] [5]
+
+LaTeX Warning: Reference `pitchonsettrees' on page 6 undefined on input line 23
+1.
+
+
+LaTeX Warning: Reference `pitchonsettrees' on page 6 undefined on input line 23
+5.
+
+[6]
+
+LaTeX Warning: Reference `features' on page 7 undefined on input line 254.
+
+
+Overfull \hbox (5.22234pt too wide) in paragraph at lines 275--277
+[]\OT1/cmr/m/n/10 Some con-cepts that we think fall un-der struc-ture level ex-
+pres-sion are \OT1/cmr/m/it/10 crescendo
+ []
+
+[7] [8]
+Overfull \hbox (2.27466pt too wide) in paragraph at lines 338--338
 []\OT1/cmr/bx/n/14.4 Integration with Note Level Per-for-mance Ren-
  []
 
-[7] (./Paper.bbl) [8] (./Paper.aux)
+[9] [10] (./Paper.bbl) [11] (./Paper.aux)
 
 LaTeX Warning: There were undefined references.
 
-
-LaTeX Warning: There were multiply-defined labels.
-
  ) 
 Here is how much of TeX's memory you used:
- 2379 strings out of 495006
- 27796 string characters out of 1181410
- 90213 words of memory out of 3000000
- 5540 multiletter control sequences out of 15000+50000
- 11828 words of font info for 45 fonts, out of 3000000 for 9000
+ 2484 strings out of 495006
+ 29123 string characters out of 1181410
+ 91599 words of memory out of 3000000
+ 5636 multiletter control sequences out of 15000+50000
+ 12332 words of font info for 48 fonts, out of 3000000 for 9000
  68 hyphenation exceptions out of 8191
- 27i,8n,24p,1194b,469s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 27i,8n,24p,1195b,469s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/sha
 re/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-te
 xlive/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texmf-texlive/fonts/
@@ -382,10 +430,11 @@ exmf-texlive/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-texlive/
 fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-texlive/fonts/type1/p
 ublic/amsfonts/cm/cmr9.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfont
 s/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy7.
-pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on Paper.pdf (9 pages, 196726 bytes).
+pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/s
+hare/texmf-texlive/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on Paper.pdf (12 pages, 221039 bytes).
 PDF statistics:
- 88 PDF objects out of 1000 (max. 8388607)
+ 101 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -7,6 +7,10 @@
 \usepackage{algorithm}
 \usepackage{algorithmic}
 
+% Multiline tables
+\usepackage{array}
+\usepackage{booktabs}
+
 % Trees
 \usepackage{qtree}
 
@@ -100,12 +104,13 @@ In Western art music tradition it is customary that composers write down their c
 
 Given a hypothetical perfect synthesizer, performing music with computers is a trivial task. However \textit{expressively} performing music is not and much research has focussed on this issue. Computers are widely used in music production. Since support for automatic expression is mostly absent or very poor in music editing software, some genres of music have evolved to sound acceptable even without expression. If automatic expression better in this software, computer music production could greatly widen its field of application.
 
+NOTE(
 Some music transcription
 Performance rendering
 
 YQX is state of the art
 
-Rencon
+Rencon)
 
 
 %Early performance rendering systems used rule-based approaches to recognise small local structures that are used as indications to add certain kind of expression. A prominent ongoing rule based system, \textit{Director Musices} uses 30 rules with weighting parameters that take music features as input and produce expressive actions as output. The rules where created with the help of musical experts. \textit{Pop-E} is a more recent rule based system that uses aspects of Lerdahl and Jackendoff's Generative Theory of Tonal Music(GTTM) [Introduce this]. Gerhard Widmer is doing research using a large dataset of performances aligned to scores.
@@ -114,7 +119,8 @@ Rencon
 
 \subsection{Motivation}
 
-The YQX system, as widmer admitted, tended to sometimes produce nervous sounding changes in expression. He presents two extensions that seek to generate smoother performances. The problem with these extensions is, as widmer admits himself, that the increased smoothness comes at the expense of expressitivity. To counter this, he adds three explicit rules that he uses to postprocess the performances. We think the reason that Widmer stumbled upon this tradeoff between expressiveness and nervousness because the nervousness is inherent to the way performances are generated at note-level. The system simply misses one component of expression, namely structure level expression. (that Widmer had to artificially introduce using rules. ) ?
+The YQX system, as widmer admitted, tended to sometimes produce nervous sounding changes in expression. He presents two extensions that seek to generate smoother performances. The problem with these extensions is, as widmer admits himself, that the increased smoothness comes at the expense of expressitivity. To counter this, he adds three explicit rules that he uses to postprocess the performances. We think the reason that Widmer stumbled upon this tradeoff between expressiveness and nervousness because the nervousness is inherent to the way performances are generated at note-level. The system simply misses one component of expression, namely structure level expression. 
+NOTE(that Widmer had to artificially introduce using rules. ) ?
 
 The system presented here will use structure exclusively to generate performances and will completely ignore note level expression. Section \ref{approach} will describe the system as a whole. What we mean by structure level expression is clarified in section \ref{structure}. The approach for extracting structure is described in section \ref{deltaframework}.  
 
@@ -134,7 +140,9 @@ To formally describe musical structure, we can look at music in a way similar to
 
 It must be noted that the resulting parse tree can be highly ambiguous and even experienced listeners may not agree on the correct parsetree of a piece. Quite often there may simply be more than one parse tree that makes musical sense. This should not be a problem for a performance rendering system: different expressive interpretations of one piece can be very diverse and still be accepted as sensible interpretations of the piece. As long as the parse tree does make at least some musical sense, a performance rendering system should be able to use it.
 
-Although the YQX does have some notion of structure\footnote{One of the note features is distance to nearest point of closure}, expression is still only predicted per note. The authors admit that the first simple version of the system ``tended to sometimes produce unstable, `nervous' sounding performances''. We see this as a symptom of a note level expression based system.
+Although the YQX does have some notion of structure\footnote{One of the note features is distance to nearest point of closure}, expression is still only predicted per note. The authors admit that the first simple version of the system ``tended to sometimes produce unstable, `nervous' sounding performances''. The only way to overcome this problem was to introduce methodologies that limited the expressiveness of performances. We see consider this trade-off to be inherent to note-level expression based systems. To solve it, some notion of structure level expression is required.
+
+NOTE(THE MOTIVATION SECTION SAYS MORE OR LESS THE SAME, MAKE IT COMPATIBLE)
 
 \section{Approach}
 
@@ -159,6 +167,7 @@ The simplification of ignoring note level expression is of course unjustified an
 
 The succes of a SBPR system depends largely on two factors. The ability to generate musically meaningful parse trees of a piece and the ability to accurately characterize the individual constituents and their relations with other constituents in score features. The following section address these issues. 
 
+NOTE
 \begin{itemize}
 \item Mention GTTM
 \item Give short overview of the system?
@@ -210,7 +219,7 @@ It also possible to define higher order delta function (deltas of deltas). Secon
 
 (The delta rule needs to be slightly modified to apply it to second order deltafunction, is this trivial?) ?
 
-Having defined first and second order deltafunctions and the deltarule, we can parse a piece of music into a delta tree or parse tree. Since we have a set of six basic note features we have a set of six interpretations(parse trees) available for a piece of music. Intuition tells us that if a particular group of notes is found in multiple parse trees, this group of notes may be eligible to be a constituent. Van den Berg captures this intuition in the form of a \textit{yield rule}. A node in the parse tree is said to `yield' a group of notes if the node recursively contains this group of notes. If two or more nodes in different trees yield the same group of notes they should be connected according to the yield rule.
+Having defined first and second order deltafunctions and the deltarule, we can parse a piece of music into a delta tree or parse tree. Since we have a set of six basic note features, we have a set of six interpretations(parse trees) available for a piece of music. Intuition tells us that if a particular group of notes is found in multiple parse trees, this group of notes may be eligible to be a constituent. Van den Berg captures this intuition in the form of a \textit{yield rule}. A node in the parse tree is said to `yield' a group of notes if the node recursively contains this group of notes. If two or more nodes in different trees yield the same group of notes they should be connected according to the yield rule.
 
 Unfortunately, the yield rule addresses the problem of how to interpret multiple parse trees quite poorly. We would like to have some way of combining parsetrees into one `consensus tree'. This is not what the yield rule does. The yield rule generates a set of trees in which some nodes may be interconnected but there does not seem to be a logical way to interpret this set of interpretations and connected nodes. Van den Berg does not further address this issue. In the next section we circumvent the problem completely by not using more than one interpretation at a time.
 
@@ -219,60 +228,89 @@ Unfortunately, the yield rule addresses the problem of how to interpret multiple
 
 A recursive structure like the parse trees generated by the delta framework is the kind of structure that we would ideally want to attribute to music. However, because of the problems with interpreting different parsetrees and because deltatrees do not necessarily represent the kind of structure that human musical intuition would attribute to music, we chose not to use a hierarchical structure and instead settle for a segmentation, derrived from deltatrees.
 
-The goal is to find a `safe' method to segment music, that is, a method that does not generate segmentations that clash too much with human musical intuition. For this purpose the delta trees of note onset and pitch seem most suited: sudden jumps in pitch or onset often correspond to phrase transitions. 
+The goal is to find a `safe' method to segment music, that is, a method that does not generate segmentations that clash too much with human musical intuition. For this purpose the parse trees of delta onset (inter-onset interval, or simply IOI) and delta pitch (pitch interval) seem most suited: sudden jumps in pitch or onset often correspond to phrase transitions. In figure \ref{pitchonsettrees} a pitch and onset parse tree of the first few bars of etude 23 of Chopin are displayed. 
 
-\begin{itemize}
-\item We only need a segmentation for now
-\item Using the deltaframework to define segmentation
-\end{itemize}
+NOTE(Show pitch and onset trees here) 
+
+To translate a delta tree into a segmentation we simply take all the nodes at a particular level and consider the notes it yields as one group. However, as can be seen in figure \ref{pitchonsettrees} the trees are quite deep and it is not clear what level we should choose. We can make the trees shallower by slightly modifying the delta rule. We introduce a small tolerance parameter $\epsilon$ and instead of looking for the maximum in of a list of deltas, we look for deltas within $m - \epsilon$ and $m + \epsilon$, where $m$ is the maximum delta within a list of deltas.
+
+Using this modification of the delta rule we can bring the delta onset tree back a shallow tree in which it is safe to choose groupings defined by the first level nodes. These groupings are safe, but also quite large. Some music, like Bach's inventionen uses almost no differentiation in IOI. Hence, a segmentation based solely on inter onset interval will not serve our purposes.
+
+To overcome this problem it we will use pitch. While Bach's inventionen use almost no differentiation in IOI they can be segmented nonetheless. We will not make any attempt to combine pitch interval trees and IOI trees. Instead we take the segmentation given by the IOI tree and try to subdivide every segment using a pitch interval tree. 
+
+The sort of changes in pitch that indicate constituent transitions or not characterized very well by a first order pitch interval tree. For example a melody that has four notes that are chromatically ascending followed by four notes that have octave intervals between them should be segmented into two constituents where one contains the four ascending notes and another one contains the notes with octave intervals. A first order pitch interval tree puts the four ascending notes in one segment but puts the four octave interval notes in four separate segments. For this reason we use a second order pitch interval tree that does not suffer from this. 
+
+NOTE (SECOND ORDER PITCH INTERVAL AND "SMOOTHED" IOI TREES FIGURES plus DISCUSSION)
+
+The pitch interval segmentations are less reliable than the IOI segmentations but since we use pitch only to subdivide IOI segments we can still be sure that some constituent transitions are based on the more reliable IOI segmentation.
 
 \subsection{Constituent Features}
 \label{scorefeatures}
 
-\begin{itemize}
-\item We are talking about SCOREfeatures here, mention this ( has now been mentioned in approach)
-\end{itemize}
-
 We can now convert a piece of music into a serie of constituents. These constituents will be used to predict expression so we must be able to charaterize them in a way correlates with the way they are performed. Analogous to YQX we are looking for the \textit{context} of the constituent as well as some description of the constituent itself.
 
-YQX uses a set of three score features: pitch interval, duration ratio and I-R arch. The pitch interval is simply the difference in pitch between the current note and the next note. The duration ratio is the logarithmic ratio of the duration of the current note and the duration of the next note.  The I-R arch is is the distance to the nearest point of closure, where closure is calculated from the Implication-Realization analysis. (Too literally?)
+YQX uses a set of three score features: pitch interval, duration ratio and I-R arch. The pitch interval is simply the difference in pitch between the current note and the next note. The duration ratio is the logarithmic ratio of the duration of the current note and the duration of the next note.  The I-R arch is is the distance to the nearest point of closure, where closure is calculated from the Implication-Realization analysis. NOTE(Too literally?)
 
-We can generalize pitch interval and duration ratio per note to constituent features: \textit{average pitch interval} and \textit{average duration ratio}. Definitions can be found in table \ref{features}. Since I-R arch is related to note-level expression it does not generalize well to a constituent level feature. 
+We can generalize pitch interval and duration ratio per note to constituent features: \textit{mean pitch interval} and \textit{mean duration ratio}. Definitions can be found in table \ref{features}. Since I-R arch is related to note-level expression it does not generalize well to a constituent level feature. 
 
-The two features above provide information about the constituent context: if they are both zero the constituent is apparently similar in average pitch and average duration. At note level there is not much to say about the current note besides the pitch and duration. However at constituent we would also like to say something about the constituent itself. For this purpose \textit{average delta pitch} and \textit{average delta duration} are used. These features say something about the amount change in pitch and the amount of change in note duration.
+The two features above provide information about the constituent context: if they are both zero the constituent is apparently similar in mean pitch and mean duration. At note level there is not much to say about the current note besides the pitch and duration. However at constituent we would also like to say something about the constituent itself. For this purpose \textit{mean delta pitch} and \textit{mean delta duration} are used. These features say something about the amount change in pitch and the amount of change in note duration.
 
-The complete set of score features consists of two \textit{context features} and two \textit{constituent features}.
+The complete set of score features consists of two \textit{context features} and two \textit{constituent features}:
+\begin{description}
+\item[\textbf{Mean pitch interval}] 
+The difference between the mean pitch of the current constituent and the mean pitch of the next constituent, zero if the current is the last constituent
+\item[\textbf{Mean duration ratio}]
+The logarithmic ratio between the mean note duration of the current constituent and the mean note duration of the next constituent
+\item[\textbf{Mean delta pitch}] The mean of all absolute pitch intervals within one constituent. 
+\item[\textbf{Mean delta duration}] The mean of all absolute differences in duration of succeeding notes within one constituent
+\end{description}
 
-\begin{table}
-\caption{Context features}
-\label{features}
-\begin{itemize}
-\item[\textbf{Average pitch interval}] 
-The difference between the average pitch of the current constituent and the average pitch of the next constituent, zero if the current is the last constituent
-\item[\textbf{Average duration ratio}]
-The logarithmic ratio between the average note duration of the current constituent and the average note duration of the next constituent
-\end{itemize}
-\end{table}
-
-\begin{table}
-\caption{Constituent Features}
-\label{features}
-\begin{itemize}
-\item[\textbf{Average delta pitch}] The average of all absolute pitch intervals within one constituent. 
-\item[\textbf{Average delta duration}] The average of all absolute differences in duration of succeeding notes within one constituent
-\end{itemize}
-\end{table}
-
-(Clearly, expressive markings in the score play a role in how the constituent should be played. If the segmentation is specific enough  there will hopefully be at most expressive marking within each constituent. )?
+NOTE(Clearly, expressive markings in the score play a role in how the constituent should be played. If the segmentation is specific enough  there will hopefully be at most expressive marking within each constituent. )?
 
 \subsection{Expression Parameters}
 \label{targets}
 
-\begin{itemize}
-\item Use average expression parameters per constituent
-\end{itemize}
+Every constituent will be assigned expression parameters that indicate how the constituent is played expressively in a performance. These parameters define what we mean by structure level expression and should therefore be chosen carefully. 
+
+Some concepts that we think fall under structure level expression are \textit{crescendo} or \textit{decrescendo}, \textit{ritardando} and \textit{piano} or \textit{forte} etc.
+Concepts like crescendo, decrescendo and ritardando arguably fall under note level expression and for simplicity we will not consider them structure level expression. In fact, we will only look at the mean tempo, the mean articulation and the mean loudness of a constituent.
+
+YQX defines expression per note in three parameters: \textit{IOI ratio}, \textit{articulation} and \textit{loudness}. These parameters are defined as the logarithmic ratio between the performance IOI and the IOI notated in the score (calculated using some base tempo), the silence after a score note divided by the silence after the performed note and the logarithmic ratio between the loudness of the performed note and the mean loudness of the performance. 
+
+We are going to define our own expression parameters in a similar way but let us first look at some issues with the definitions YQX uses. The definition of articulations seems to be awkward and inconsistend. Awkward because if a score note is not followed by a rest, the notated silence after it is zero, rendering articulation undefined. Inconsisted because all the other features use logarithmic ratios and we see no reason to not use a logarithmic ratio for articulation as well. 
+
+IOI ratio and loudness is defined relative to mean performance tempo and loudness. However, to capture micro expression in the form of small changes in onset relative to the beat, it seems more logical to define this feature relative to the local tempo, instead of relative to the global tempo. The same argument can be made for defining loudness relative to local loudness instead of global loudness. Structure level expression may help to define the concepts of local tempo and local loudness as we can simply take the mean tempo and loudness within one constituent and take this to be the local tempo and loudness.
+
+The expression parameters that we will use are:
+\begin{description}
+\item[Mean Tempo Ratio] The logarithmic ratio between the mean tempo within the constituent and the base tempo of the performance.
+\item[Mean Articulation] The logarithmic ratio between performance IOI and the score IOI if the next note is not a rest. If the next note is a rest we use the note duration calculated with the score duration of the note and the local expressive tempo instead of the performance IOI. IOI is the onset of the next note minus the onset of the current note.
+\item[Mean Loudness Ratio] The logarithmic ratio of the mean loudness within the constituent and the base loudness of the performance
+\end{description}
+
+Admittedly, we still use mean loudness and tempo to calculate tempo and loudness ratio. This is a symptom of using a segmentation instead of hierarchical structure. When using hierarchical structure, these parameters could be defined relative to the parent constituent.
 
 \subsection{Model}
+
+
+We can now reduce a piece of music, represented as a sequence of notes $N_ij$, of which we have a score and a performance, to a sequence of score feature vectors $F$ and expression parameter vectors $E$. First we segment the score into constituents:
+
+\[\texttt{segment}(N_{ij}) = \{c_1, c_2, \cdots, c_n\}\]
+We can then extract feature and parameter values from the score and the performance:
+\begin{align*}
+f_i &= (p_i, d_i, \Delta p_i, \Delta d_i)^T\\
+F &= \{f_1, f_2, \cdots, f_n\}
+\end{align*}
+where $f_i$ is a feature vector, $p_i$ is the the mean pitch interval, $d_i$ is the mean duration ratio, $\Delta p_i$ is the mean delta pitch and $\Delta d_i$ is the mean delta duration.
+And the expression parameters: 
+\begin{align*}
+e_i &= (t_i, a_i, l_i)^T\\
+E &= \{e_1, e_2, \cdots, e_n\}
+\end{align*}
+where $e_i$ is a parameter vector, $t_i$ is the mean tempo ratio, $a_i$ is the mean articulation and $l_i$ is the mean loudness ratio.
+
+We can now train a hidden Markov model on this data. The 
+
 
 \section{Implementation}
 \section{Performance Rendering}
@@ -299,12 +337,16 @@ The proposed system actually requires more training data to do meaningful statis
 \subsection{Correlation}
 \section{Integration with Note Level Performance Rendering}
 
-The YQX system defines expressive tempo implicitly by predicting the logarithmic ratio of the IOI in a performance and the IOI in a score. Timing alterations of notes are always defined relative to the base tempo. This does not correspond to the intuition that the \textit{the tempo itself} is altered during the performance and that rhythmic changes should be seen relative to the local tempo. The same applies to the way YQX looks at loudness. This is specified as the logarithmic ratio between the notes loudness and the average loudness of the performance. 
+The YQX system defines expressive tempo implicitly by predicting the logarithmic ratio of the IOI in a performance and the IOI in a score. Timing alterations of notes are always defined relative to the base tempo. This does not correspond to the intuition that the \textit{the tempo itself} is altered during the performance and that rhythmic changes should be seen relative to the local tempo. The same applies to the way YQX looks at loudness. This is specified as the logarithmic ratio between the notes loudness and the mean loudness of the performance. 
 
 An intergration of constituent level expression and note level expression can provide a solution to this problem. We can define expressive tempo relative and dynamics relative to the expression parameters of the constituent
 
 \section{Conclusion}
-\cite{markwin}
+We have introduced structure level expression and argued that a good performance rendering systems needs some notion of structure level expression. 
+
+We have shown that we can create sensible segmentations of music based on an application of the delta framework. \cite{markwin} 
+
+We have suggested a possible intergration of SBPR with note level performance rendering
 \section{Discussion}
 
 Unfortunately we do not have acces to the large dataset that YQX uses. The dataset we use is smaller. Since we do not learn per note but per group of notes, the impact of a smaller dataset is even larger. We have discretize into rather large bins for this reason, resulting in cartoonistic performances. 
@@ -321,7 +363,7 @@ We think we can afford to do this because:...
 \section{Future Work}
 \begin{itemize}
 \item Combine deltatrees
-\item Use loudness and tempo direction instead of averages (requires more data)
+\item Use loudness and tempo direction instead of means (requires more data)
 \item Generalize approach to incorporate hierarchical structure, let structure extend to note level, so note level expression and structurelevel expression become integrated
 \end{itemize}
 \subsection{Repetition}
