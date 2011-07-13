@@ -104,13 +104,11 @@ In Western art music tradition it is customary that composers write down their c
 
 Given a hypothetical perfect synthesizer, performing music with computers is a trivial task. However \textit{expressively} performing music is not and much research has focussed on this issue. Computers are widely used in music production. Since support for automatic expression is mostly absent or very poor in music editing software, some genres of music have evolved to sound acceptable even without expression. If automatic expression better in this software, computer music production could greatly widen its field of application.
 
-NOTE(
-Some music transcription
-Performance rendering
+\begin{itemize}
+\item Introduce performance rendering
+\item Introduce YQX (What is it and why is it good)
 
-YQX is state of the art
-
-Rencon)
+\end{itemize}
 
 
 %Early performance rendering systems used rule-based approaches to recognise small local structures that are used as indications to add certain kind of expression. A prominent ongoing rule based system, \textit{Director Musices} uses 30 rules with weighting parameters that take music features as input and produce expressive actions as output. The rules where created with the help of musical experts. \textit{Pop-E} is a more recent rule based system that uses aspects of Lerdahl and Jackendoff's Generative Theory of Tonal Music(GTTM) [Introduce this]. Gerhard Widmer is doing research using a large dataset of performances aligned to scores.
@@ -119,7 +117,9 @@ Rencon)
 
 \subsection{Motivation}
 
-The YQX system, as widmer admitted, tended to sometimes produce nervous sounding changes in expression. He presents two extensions that seek to generate smoother performances. The problem with these extensions is, as widmer admits himself, that the increased smoothness comes at the expense of expressitivity. To counter this, he adds three explicit rules that he uses to postprocess the performances. We think the reason that Widmer stumbled upon this tradeoff between expressiveness and nervousness because the nervousness is inherent to the way performances are generated at note-level. The system simply misses one component of expression, namely structure level expression. 
+NOTE(Widmer didn't write the YQX paper, find out how to address the authors)
+
+The YQX system, as Widmer admitted, tended to sometimes produce nervous sounding changes in expression. He presents two extensions that seek to generate smoother performances. The problem with these extensions is, as Widmer admits himself, that the increased smoothness comes at the expense of expressitivity. To counter this, he adds three explicit rules that he uses to postprocess the performances. We think the reason that Widmer stumbled upon this tradeoff between expressiveness and nervousness because the nervousness is inherent to the way performances are generated at note-level. The system simply misses one component of expression, namely structure level expression. 
 NOTE(that Widmer had to artificially introduce using rules. ) ?
 
 The system presented here will use structure exclusively to generate performances and will completely ignore note level expression. Section \ref{approach} will describe the system as a whole. What we mean by structure level expression is clarified in section \ref{structure}. The approach for extracting structure is described in section \ref{deltaframework}.  
@@ -217,7 +217,7 @@ The delta rule converts a sequence of notes into a nested list structure that ca
 
 It also possible to define higher order delta function (deltas of deltas). Second order deltafunction can be used to differentiate a group of ascending notes from a group of notes that have wildly varying pitches. Van den Berg notes that this generates ambigous grouping structures as for example a second order deltarule needs at least three notes to be specified. For three notes, three different grouping structures are possible: $[[n_1, n_2], n_3]$, $[n_1, n_2, n_3]]$ and $[n_1, [n_2, n_3]]$. Because we want to use a second order deltafunction for segmentation only, we choose to use only one interpretation: $[n_1, n_2], n_3]$. This choice is motivated by the intuition that if in a group of three notes the delta function in some feature between the first two notes is low and the delta function between the second and third note is high (thus resulting in a high second order deltafunction) we would want a constituent split to happen between the second and third note. Note again that segmentation, like structure, may often be ambigous and multiple interpretations may be right, for our purposes it is important that at least one of these right interpretations is chosen. 
 
-(The delta rule needs to be slightly modified to apply it to second order deltafunction, is this trivial?) ?
+NOTE(The delta rule needs to be slightly modified to apply it to second order deltafunction, is this trivial?) ?
 
 Having defined first and second order deltafunctions and the deltarule, we can parse a piece of music into a delta tree or parse tree. Since we have a set of six basic note features, we have a set of six interpretations(parse trees) available for a piece of music. Intuition tells us that if a particular group of notes is found in multiple parse trees, this group of notes may be eligible to be a constituent. Van den Berg captures this intuition in the form of a \textit{yield rule}. A node in the parse tree is said to `yield' a group of notes if the node recursively contains this group of notes. If two or more nodes in different trees yield the same group of notes they should be connected according to the yield rule.
 
@@ -327,9 +327,19 @@ We can now train a hidden Markov model on this data. The
 \item tempo curves
 \end{itemize}
 \subsection{Dealing with polyphony}
+\begin{itemize}
+\item Use only melody
+\end{itemize}
 \subsection{Discretization}
 
-Distinction of expressive tempo and attack and release.
+\begin{itemize}
+\item Normalize every feature
+\item Discretization: int($\phi * d$) where d is the discretization parameter (the higher, the smaller the bins)
+\end{itemize}
+
+Discretization of expression is a delicate subject, we want to capture small changes in dynamics and tempo precisely, but outliers may fall in large bins. A sigmoid function is very useful for this purpose. 
+
+All expression parameters are ratios: their values vary around 1.0. To get a linear scale we use the logarithmic ratio. The tempo ratio is defined as: $\log(\frac{\texttt{performancetempo}}{\texttt{scoretempo}})$. To get the desired properties of discretization we use a sigmoid function. $D(p) = d * \frac{1}{1+e^{-p}}$ where $D(p)$ is the discretization of $p$, $e$ is the expression parameter value and $p$ is the discretization parameter.
 
 \section{Evaluation and Results}
 The proposed system actually requires more training data to do meaningful statistics. However, since expressive interpretation can be 

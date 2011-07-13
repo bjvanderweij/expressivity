@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.5.30)  13 JUL 2011 18:50
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.5.30)  13 JUL 2011 22:30
 entering extended mode
  %&-line parsing enabled.
 **Paper.tex
@@ -323,6 +323,15 @@ LaTeX Font Info:    ... okay on input line 17.
 ) [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 108.
+
+
+(/usr/share/texmf-texlive/tex/latex/base/omscmr.fd
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 108.
+
 
 LaTeX Warning: Reference `approach' on page 1 undefined on input line 125.
 
@@ -354,14 +363,7 @@ LaTeX Warning: Reference `corpus' on page 3 undefined on input line 156.
 
 LaTeX Warning: Reference `integration' on page 3 undefined on input line 166.
 
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 172.
-
-(/usr/share/texmf-texlive/tex/latex/base/omscmr.fd
-File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 172.
- [3]
+[3]
 
 LaTeX Warning: Reference `approach' on page 4 undefined on input line 180.
 
@@ -401,12 +403,12 @@ Overfull \hbox (5.22234pt too wide) in paragraph at lines 275--277
 pres-sion are \OT1/cmr/m/it/10 crescendo
  []
 
-[7] [8]
-Overfull \hbox (2.27466pt too wide) in paragraph at lines 338--338
+[7] [8] [9]
+Overfull \hbox (2.27466pt too wide) in paragraph at lines 348--348
 []\OT1/cmr/bx/n/14.4 Integration with Note Level Per-for-mance Ren-
  []
 
-[9] [10] (./Paper.bbl) [11] (./Paper.aux)
+[10] (./Paper.bbl) [11] (./Paper.aux)
 
 LaTeX Warning: There were undefined references.
 
@@ -414,27 +416,30 @@ LaTeX Warning: There were undefined references.
 Here is how much of TeX's memory you used:
  2484 strings out of 495006
  29123 string characters out of 1181410
- 91599 words of memory out of 3000000
+ 89599 words of memory out of 3000000
  5636 multiletter control sequences out of 15000+50000
  12332 words of font info for 48 fonts, out of 3000000 for 9000
  68 hyphenation exceptions out of 8191
- 27i,8n,24p,1195b,469s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 27i,8n,24p,1209b,469s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/sha
 re/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-te
 xlive/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texmf-texlive/fonts/
 type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-texlive/fonts/type1/publi
-c/amsfonts/cm/cmmi7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/c
-m/cmr10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr17.pfb>
-</usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/t
-exmf-texlive/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-texlive/
-fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-texlive/fonts/type1/p
-ublic/amsfonts/cm/cmr9.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfont
-s/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy7.
-pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/s
-hare/texmf-texlive/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on Paper.pdf (12 pages, 221039 bytes).
+c/amsfonts/cm/cmmi5.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/c
+m/cmmi7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr10.pfb>
+</usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/
+texmf-texlive/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-texlive
+/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-texlive/fonts/type1/
+public/amsfonts/cm/cmr8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfon
+ts/cm/cmr9.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy10.
+pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/sh
+are/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texmf-te
+xlive/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texmf-texlive/fonts
+/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texmf-texlive/fonts/type1/publ
+ic/amsfonts/cm/cmtt8.pfb>
+Output written on Paper.pdf (12 pages, 242229 bytes).
 PDF statistics:
- 101 PDF objects out of 1000 (max. 8388607)
+ 113 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

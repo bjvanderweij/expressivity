@@ -122,7 +122,7 @@ def trainHMM(hmm, features_set, expression_set, f_discretization=10, e_discretiz
         normalizations[i] = m
   hmm.normalizations = normalizations
   for work in features_set.keys():
-    if work == ignore:
+    if work[0] == ignore[0] and work[1] == ignore[1]:
       continue
     features = features_set[work]
     expression = expression_set[work]
@@ -217,7 +217,8 @@ def test(f_discretization=10, e_discretization=30, indep=False, selection=None, 
   else:
     hmm = HMM(2)
 
-  trainHMM(hmm, f, e, f_discretization, e_discretization, subset=subset, ignore=selection)
+  #trainHMM(hmm, f, e, f_discretization, e_discretization, subset=subset, ignore=selection)
+  trainHMM(hmm, f, e, f_discretization, e_discretization, subset=subset)
   hmm.storeInfo('hmm2.txt')
   print "Loading score"
   melodyscore = Score(score).melody()
