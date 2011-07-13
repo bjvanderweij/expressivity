@@ -22,7 +22,7 @@
 % [CHANGE] The title of your thesis. If your thesis has a subtitle, then this
 % should appear right below the main title, in a smaller font.
 \begin{Huge}
-Expressive Performance of Polyphonic Piano Music using Hierarchical Structure
+Performance Rendering using Structure Level Expression
 \end{Huge}
 
 \vspace{1.5cm}
@@ -85,7 +85,9 @@ June 24th, 2010
 
 
 \begin{abstract}
-Both machine learning and rule based techniques have been extensively applied to performance rendering. However, relatively few systems make explicit use of musical structure, combined with machine learning. This paper introduces a performance rendering approach that tries to learn expression exclusively at a structural level. The approach attempts to to be complementary to approaches that learn expression at note level. Musical structure is extracted automatically. A dataset containing performances aligned to scores is then used to learn how structure relates to expression. Finally, the model can be applied to a a new score to produce an expressive performance of the score. 
+Both machine learning and rule based techniques have been extensively applied to performance rendering. However, relatively few systems make explicit use of machine learning combined with musical structure. Systems that use machine learning usually learn expression at note level. This paper introduces a performance rendering system that learns expression exclusively at a structural level. The system can be seen as complementary to systems that learn expression at note level. 
+
+Musical structure is extracted automatically. A dataset containing performances aligned to scores is then used to learn how structure relates to expression. A hidden markov model is used to model this relation. Finally, the system can be applied to a a new score to produce an expressive performance. 
 
 
 %This paper introduces a system for expressively performing transcribed music (scores) using statistical learning from a dataset. The dataset that is used contains performances aligned to the corresponding score. Expression is considered to be the way in which the performance deviates from the score. Expressive actions are predicted from links found between musical structure and expression. Previous expressive actions are also incorporated in the predictions. Musical structure will be automatically extracted from the scores using a set of formal rules that assign a hierarchical grouping structure to the music. To system will be able to deal with polyphonic music by splitting the scores into melody and harmony.
@@ -183,7 +185,7 @@ A set of basic features, $\Phi$, is assigned to each note. These are: \textbf{on
 The basic note features can be used to define delta functions, for example $\Delta\textbf{Pitch} = \textbf{Pitch}(n_i) - \textbf{Pitch}(n_{i-1})$. In general, a delta function $\delta(i)$ is defined as the difference of two notes in some feature $\phi$: $\delta(i) = \phi(n_i) - \phi(n_{i-1})$. We can apply a delta function to every pair of succeeding notes in a sequence to get a list of deltas: 
 \[\Delta M_{ij} = [\delta(n_{i+1}), \delta(n_{i+2}), \cdots, \delta(n_{j})]\]
 
-A recursive rule, called the delta rule can be used to translate a list of deltas into a grouping structure. The deltarule, DeltaRule($M_{ij}$), where $M_{ij}$ is the ordered list of notes that is to be analyzed, is defined as follows\footnote{The version here is a slightly reformulated version of Van den Berg's deltarule}:
+A recursive rule, called the delta rule can be used to translate a list of deltas into a grouping structure. The deltarule, DeltaRule($M_{ij}$), where $M_{ij}$ is the ordered list of notes that is to be analyzed and $A$ is the resulting analysis, is defined as \footnote{The version here is a slightly reformulated, although functionally the same, version of Van den Berg's deltarule. See \cite{markwin} for his original version.}:
 \begin{algorithm}
 \begin{algorithmic}
 \STATE{$D_{i+1,j} \leftarrow \Delta M_{ij}$}
@@ -202,11 +204,22 @@ A recursive rule, called the delta rule can be used to translate a list of delta
 \label{deltarule}
 \end{algorithm}
 
-It also possible to define higher order delta function (deltas of deltas). Second order deltafunction can be used to differentiate a group of ascending notes from a group of notes that have wildly varying pitches. Van den Berg notes that this generates ambigous grouping structures as for example a second order deltarule needs at least three notes to be specified. For three notes, three different grouping structures are possible: $[[n_1, n_2], n_3]$, $[n_1, n_2, n_3]]$ and $[n_1, [n_2, n_3]]$. Because we want to use a second order deltafunction for segmentation only, we choose to only use one interpretation: $[n_1, n_2], n_3]$. EXPLAIN WHY?
+The delta rule converts a sequence of notes into a nested list structure that can easily be interpreted as a tree. The deltarule can `parse' a piece of music into a \textit{parse tree}.
+
+It also possible to define higher order delta function (deltas of deltas). Second order deltafunction can be used to differentiate a group of ascending notes from a group of notes that have wildly varying pitches. Van den Berg notes that this generates ambigous grouping structures as for example a second order deltarule needs at least three notes to be specified. For three notes, three different grouping structures are possible: $[[n_1, n_2], n_3]$, $[n_1, n_2, n_3]]$ and $[n_1, [n_2, n_3]]$. Because we want to use a second order deltafunction for segmentation only, we choose to use only one interpretation: $[n_1, n_2], n_3]$. This choice is motivated by the intuition that if in a group of three notes the delta function in some feature between the first two notes is low and the delta function between the second and third note is high (thus resulting in a high second order deltafunction) we would want a constituent split to happen between the second and third note. Note again that segmentation, like structure, may often be ambigous and multiple interpretations may be right, for our purposes it is important that at least one of these right interpretations is chosen. 
+
+(The delta rule needs to be slightly modified to apply it to second order deltafunction, is this trivial?) ?
+
+Having defined first and second order deltafunctions and the deltarule, we can parse a piece of music into a delta tree or parse tree. Since we have a set of six basic note features we have a set of six interpretations(parse trees) available for a piece of music. Intuition tells us that if a particular group of notes is found in multiple parse trees, this group of notes may be eligible to be a constituent. Van den Berg captures this intuition in the form of a \textit{yield rule}. A node in the parse tree is said to `yield' a group of notes if the node recursively contains this group of notes. If two or more nodes in different trees yield the same group of notes they should be connected according to the yield rule.
+
+Unfortunately, the yield rule addresses the problem of how to interpret multiple parse trees quite poorly. We would like to have some way of combining parsetrees into one `consensus tree'. This is not what the yield rule does. The yield rule generates a set of trees in which some nodes may be interconnected but there does not seem to be a logical way to interpret this set of interpretations and connected nodes. Van den Berg does not further address this issue. In the next section we circumvent the problem completely by not using more than one interpretation at a time.
+
 \subsection{Segmentation}
 \label{segmentation}
 
+A recursive structure like the parse trees generated by the delta framework is the kind of structure that we would ideally want to attribute to music. However, because of the problems with interpreting different parsetrees and because deltatrees do not necessarily represent the kind of structure that human musical intuition would attribute to music, we chose not to use a hierarchical structure and instead settle for a segmentation, derrived from deltatrees.
 
+The goal is to find a `safe' method to segment music, that is, a method that does not generate segmentations that clash too much with human musical intuition. For this purpose the delta trees of note onset and pitch seem most suited: sudden jumps in pitch or onset often correspond to phrase transitions. 
 
 \begin{itemize}
 \item We only need a segmentation for now
@@ -217,7 +230,7 @@ It also possible to define higher order delta function (deltas of deltas). Secon
 \label{scorefeatures}
 
 \begin{itemize}
-\item We are talking about SCOREFEATURES here, mention this
+\item We are talking about SCOREfeatures here, mention this ( has now been mentioned in approach)
 \end{itemize}
 
 We can now convert a piece of music into a serie of constituents. These constituents will be used to predict expression so we must be able to charaterize them in a way correlates with the way they are performed. Analogous to YQX we are looking for the \textit{context} of the constituent as well as some description of the constituent itself.
@@ -231,23 +244,23 @@ The two features above provide information about the constituent context: if the
 The complete set of score features consists of two \textit{context features} and two \textit{constituent features}.
 
 \begin{table}
+\caption{Context features}
+\label{features}
 \begin{itemize}
 \item[\textbf{Average pitch interval}] 
 The difference between the average pitch of the current constituent and the average pitch of the next constituent, zero if the current is the last constituent
 \item[\textbf{Average duration ratio}]
 The logarithmic ratio between the average note duration of the current constituent and the average note duration of the next constituent
 \end{itemize}
-\caption{Context features}
-\label{features}
 \end{table}
 
 \begin{table}
+\caption{Constituent Features}
+\label{features}
 \begin{itemize}
 \item[\textbf{Average delta pitch}] The average of all absolute pitch intervals within one constituent. 
 \item[\textbf{Average delta duration}] The average of all absolute differences in duration of succeeding notes within one constituent
 \end{itemize}
-\caption{Constituent Features}
-\label{features}
 \end{table}
 
 (Clearly, expressive markings in the score play a role in how the constituent should be played. If the segmentation is specific enough  there will hopefully be at most expressive marking within each constituent. )?
