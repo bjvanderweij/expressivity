@@ -211,11 +211,11 @@ class HMM_indep(HMM):
   def __str__(self):
     return 'States:\n{0}\nNgrams:\n{1}\nLessergrams:\n{2}'.format(self.states, self.ngrams, self.lessergrams)
 
-  def emission_probability(self, state, observation):
+  def emission_probability(self, state, observation, smoothing=False):
     p = 1.0
     # This must be the absolute minimum probability
     if state == self.repeatstate:
-      return 1 / float(self.observation_count)
+      return 0.1 / float(self.observation_count)
     if state == self.startstate:
       if observation == self.startstate:
         return 1.0
@@ -227,11 +227,11 @@ class HMM_indep(HMM):
       else:
         return 0.0
     for i in range(len(state)):
-      p *= self.coincedences.get((i, observation, state[i]), 0.0) / float(self.observations.get(observation, 1))
+      p *= (self.coincedences.get((i, observation, state[i]), 0.0)) / float(self.observations.get(observation, 1))
       if p == 0.0: break
     return p
 
-  def transition_probability(self, lessergram, state, verbose=False):
+  def transition_probability(self, lessergram, state, smoothing=False, verbose=False):
     p = 1.0
     #lessergrams = [[v[j] for v in lessergram] for j in len(state)] 
     if state == self.endstate:
@@ -255,7 +255,7 @@ class HMM_indep(HMM):
 )
     # If this ngram was not found and the following state is the same as the last state (expression remains the same) do not return zero
     # These are the self-loops
-    if p == 0.0 and lessergram[len(lessergram)-1] == state:
+    if p == 0.0 and lessergram[len(lessergram)-1] == state and smoothing:
       minimum = 1.0
       for i in range(parameters):
         minimum *= 1 / float(self.lessergrams.get(tuple([i] + lg[i]), 1))

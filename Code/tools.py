@@ -98,8 +98,10 @@ def corpusInfo(name):
   size = 0
   version = m['version']
   featureset = m['featureset']
+  unique = {}
   for work in f:
     size += len(f[work])
+    unique[(work[0], work[1])] = 0
     # This only works for corpora that have a const length feature
     if 'const_length' in featureset:
       index = featureset.index('const_length')
@@ -109,7 +111,7 @@ def corpusInfo(name):
       # This code crashes if the featureset truly doesn't have this feature
       avg_notes += sum([x[12] for x in f[work]])
   avg_notes /= float(size)
-  return '[Works: {0}\tEntries: {1}\tFeatures version: {2}\tNotes per entry: {3}]'.format(len(f), size, version, avg_notes)
+  return '[Works: {4}\tPerformances: {0}\tEntries: {1}\tFeatures version: {2}\tNotes per entry: {3}]'.format(len(f), size, version, avg_notes, len(unique))
 
 # This doesn't handle polyfony very well but it is used for single voices only anyway
 def newParseScore(score):

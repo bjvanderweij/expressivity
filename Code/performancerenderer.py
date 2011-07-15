@@ -31,10 +31,10 @@ def discretize(features, discretization=10, function='sigmoid', logarithmic=Fals
     features = [math.log(x) for x in features]
   if function == 'linear':
     for i in range(len(features)):
-      f.append(int(round(features[i] * discretization)))
+      f.append(int(round(features[i] * float(discretization))))
   elif function == 'sigmoid':
     for i in range(len(features)):
-      f.append(int(round(sigmoid(features[i], 5) * discretization)))
+      f.append(int(round(sigmoid(features[i], 5) * float(discretization))))
   return f
 
 def undiscretize(features, discretization=10, function='sigmoid', logarithmic=False):
@@ -64,11 +64,15 @@ def discretize_expression(parameters, discretization=10, subset=[1,2,3]):
 def undiscretize_expression(state, discretization=10):
   return tuple(undiscretize(state, discretization, function='sigmoid', logarithmic=True))
 
-def preprocess(features, normalizations, discretization=10, subset=None):
-  observations = []
+def normalize(features, normalizations):
   for i in range(len(features)):
     # Normalize
     features[i] = [features[i][j] / float(normalizations[j]) for j in range(len(features[i]))]
+  return features
+
+# Make relative features and select subset
+def preprocess(features, subset=None):
+  preprocessed = []
   for f0, f1 in zip(features[:-1], features[1:]):
     pitch0 = f0[sf.featureset.index('avg_pitch')]
     duration0 = f0[sf.featureset.index('avg_duration')]
@@ -79,7 +83,7 @@ def preprocess(features, normalizations, discretization=10, subset=None):
     dPitch1 = f1[sf.featureset.index('abs_dPitch')]
     dDuration1 = f1[sf.featureset.index('abs_dDuration')]
     # Difference in average pitch
-    pitch_interval = (pitch0 - pitch1) * 10 # 10 is a rather arbitrary number to make this feature visible in discretization
+    pitch_interval = (pitch0 - pitch1)# * 10 # 10 is a rather arbitrary number to make this feature visible in discretization
     # Relative difference in average note duration
     duration_ratio = math.log(duration0/float(duration1))
     # Do the next two features make any musical sense?
@@ -90,43 +94,49 @@ def preprocess(features, normalizations, discretization=10, subset=None):
     f0[sf.featureset.index('avg_duration')] = duration_ratio
     #f0[sf.featureset.index('abs_dPitch')] = dPitch_interval
     #f[sf.featureset.index('abs_dDuration')] = dDuration_ratio
-    obs = f0
-    if subset or subset == []:
-      obs = [obs[i] for i in subset]
-    observations.append(tuple(discretize(obs, discretization, function='linear')))
+    if subset:
+      preprocessed.append([f0[i] for i in subset])
+    else:
+      preprocessed.append(f0)
   # The last constituent:
-  f = features[-1]
+  f = list(features[-1])
   f[sf.featureset.index('avg_pitch')] = pitch_interval
   f[sf.featureset.index('avg_duration')] = duration_ratio
-  obs = f
-  if subset or subset == []:
-    obs = [obs[i] for i in subset]
-  observations.append(tuple(discretize(obs, discretization, function='linear')))
-  return observations
+  if subset:
+    preprocessed.append([f[i] for i in subset])
+  else:
+    preprocessed.append(f)
+  return preprocessed
     
   
 
 
 
 def trainHMM(hmm, features_set, expression_set, f_discretization=10, e_discretization=10, subset=None, ignore=None):
+  preprocessed = {}
+  for work in features_set.keys():
+    preprocessed[work] = preprocess(features_set[work], subset)
+ 
+  # Ugly way to get the number of features
   l = 0
-  for work in features_set.keys():
-    l = len(features_set[work][0])
+  for work in preprocessed.keys():
+    l = len(preprocessed[work][0])
     break
+
   normalizations = [0 for i in range(l)]
-  for work in features_set.keys():
+  for work in preprocessed.keys():
     m = []
     for i in range(l):
-      m = max([f[i] for f in features_set[work]])
+      m = max([abs(f[i]) for f in preprocessed[work]])
       if m > normalizations[i]:
         normalizations[i] = m
   hmm.normalizations = normalizations
-  for work in features_set.keys():
+  for work in preprocessed.keys():
     if work[0] == ignore[0] and work[1] == ignore[1]:
       continue
-    features = features_set[work]
+    features = normalize(preprocessed[work], normalizations)
     expression = expression_set[work]
-    obs = preprocess(features, normalizations, f_discretization, subset)
+    obs = [tuple(discretize(f, f_discretization, 'linear')) for f in features]
     states = []
     # Select the subset of features that will be used and discretise
     for f, p in zip(features, expression):
@@ -140,7 +150,8 @@ def render(score, segmentation, hmm, f_discretization=10, e_discretization=30, s
   # Extract scorefeatures
   features = sf.vanDerWeijFeatures(score, segmentation) 
   # Discretize
-  observations = preprocess(features, hmm.normalizations, f_discretization, subset)
+  features = normalize(preprocess(sf.vanDerWeijFeatures(score, segmentation), subset), hmm.normalizations)
+  observations = [tuple(discretize(f, f_discretization, 'linear')) for f in features]
   print 'Observations:\n{0}'.format(observations)
   # Find the best expressive explanation for these features
   print "Finding best fitting expression"
@@ -217,8 +228,8 @@ def test(f_discretization=10, e_discretization=30, indep=False, selection=None, 
   else:
     hmm = HMM(2)
 
-  #trainHMM(hmm, f, e, f_discretization, e_discretization, subset=subset, ignore=selection)
-  trainHMM(hmm, f, e, f_discretization, e_discretization, subset=subset)
+  trainHMM(hmm, f, e, f_discretization, e_discretization, subset=subset, ignore=selection)
+  #trainHMM(hmm, f, e, f_discretization, e_discretization, subset=subset)
   hmm.storeInfo('hmm2.txt')
   print "Loading score"
   melodyscore = Score(score).melody()
