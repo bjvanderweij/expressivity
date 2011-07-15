@@ -1,12 +1,14 @@
 # P(Expression|Features)
 # P(Ei|Ei-i, ..., Ei-n)
 # P(E0, E1, ..., En)
-
+import math, tools
 
 class HMM:
 
-  def __init__(self, order=2):
+  # Smoothing options: good-turing
+  def __init__(self, order=2, smoothing=None):
     self.order = order
+    self.smoothing = smoothing
 
     self.startstate = ('start',)
     self.endstate = ('end',)
@@ -23,6 +25,8 @@ class HMM:
     self.lessergram_count = 0
     self.starts = {}
     self.start_count = 0
+    # Used for good-turing smoothing:
+    self.nr = {}
     # This doesn't really belong here, it is just used as convenient storage
     self.normalizations = []
 
@@ -54,6 +58,30 @@ class HMM:
         self.ngrams[tuple(ngram)] = self.ngrams.get(tuple(ngram), 0) + 1
         self.lessergram_count += 1
         self.lessergrams[tuple(lessergram)] = self.lessergrams.get(tuple(lessergram), 0) + 1
+    if self.smoothing=='good-turing':
+      for obs in self.observations:
+        nr = {}
+        for state in self.states:
+          if (obs, state) in self.coincedences:
+            nr[self.coincedences[obs, state]] = nr.get(self.coincedences[obs, state], 0) + 1
+        x,y = [], []
+        for n,count in nr.iteritems():
+          x.append(math.log(n))
+          y.append(count)
+        print nr
+        # Find a least squares fit to of the frequency counts to nr = a + b*log(x)
+        (a,b) = y[0], 0
+        if len(x) > 1:
+          (a,b) = tools.linear_fit(x,y)
+        self.nr[obs] = (a,b)
+
+
+
+
+        
+
+      # Print a table of how much each number of states occurs
+
 
   def joint_probability(self, observation, state):
     if not (observation, state) in self.coincedences: return 0.0
@@ -231,7 +259,7 @@ class HMM_indep(HMM):
       if p == 0.0: break
     return p
 
-  def transition_probability(self, lessergram, state, smoothing=False, verbose=False):
+  def transition_probability(self, lessergram, state, smoothing=None, verbose=False):
     p = 1.0
     #lessergrams = [[v[j] for v in lessergram] for j in len(state)] 
     if state == self.endstate:

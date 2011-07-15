@@ -235,3 +235,15 @@ def expressionOLD(alignment):
     lastdeviation = deviation
   return expression
 
+if __name__ == '__main__':
+  x = [math.log(1), math.log(3), math.log(4), math.log(5)]
+  y = [1, 2, 2.1, 2.2]
+  (a, b) = linear_fit(x, y)
+  xx = [i for i in range(1,10)]
+  fx = [a+b*math.log(i) for i in xx]
+
+  import matplotlib.pyplot as plt
+  plt.plot(xx, fx)
+  plt.show()
+
+

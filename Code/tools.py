@@ -160,3 +160,24 @@ def recursive_print(l):
     else:
       return l
 
+# Least squares fit
+def linear_fit(X, Y):
+  n = len(X)
+  if len(X) != len(Y):
+    print "linear fit: WARNING: lengths of data don't match: {0} and {1}".format(len(X), len(Y))
+  sum_x=0.0
+  sum_y=0.0
+  sum_xx=0.0
+  sum_xy=0.0
+  for x,y in zip(X,Y):
+    sum_x=sum_x+x
+    sum_y=sum_y+y
+    xx=pow(x,2)
+    sum_xx=sum_xx+xx
+    xy=x*y
+    sum_xy=sum_xy+xy
+
+  #Calculating the coefficients
+  a=(-sum_x*sum_xy+sum_xx*sum_y)/float(n*sum_xx-sum_x*sum_x)
+  b=(-sum_x*sum_y+n*sum_xy)/float(n*sum_xx-sum_x*sum_x)
+  return a, b

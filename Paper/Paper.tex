@@ -91,7 +91,7 @@ June 24th, 2010
 \begin{abstract}
 Both machine learning and rule based techniques have been extensively applied to performance rendering. However, relatively few systems make explicit use of machine learning combined with musical structure. Systems that use machine learning usually learn expression at note level. This paper introduces a performance rendering system that learns expression exclusively at a structural level. The system can be seen as complementary to systems that learn expression at note level. 
 
-Musical structure is extracted automatically. A dataset containing performances aligned to scores is then used to learn how structure relates to expression. A hidden markov model is used to model this relation. Finally, the system can be applied to a a new score to produce an expressive performance. 
+%Musical structure is extracted automatically. A dataset containing performances aligned to scores is then used to learn how structure relates to expression. A hidden markov model is used to model this relation. Finally, the system can be applied to a a new score to produce an expressive performance. 
 
 
 %This paper introduces a system for expressively performing transcribed music (scores) using statistical learning from a dataset. The dataset that is used contains performances aligned to the corresponding score. Expression is considered to be the way in which the performance deviates from the score. Expressive actions are predicted from links found between musical structure and expression. Previous expressive actions are also incorporated in the predictions. Musical structure will be automatically extracted from the scores using a set of formal rules that assign a hierarchical grouping structure to the music. To system will be able to deal with polyphonic music by splitting the scores into melody and harmony.
@@ -368,6 +368,8 @@ We think we can afford to do this because:...
 \item Bass and harmony shouldn't be played with the same expression as melodynotes
 \item Dataset size
 \item Targets for expression level expression
+\item Expressive markings
+\item Staccato/articulation statistics
 \end{itemize}
 
 \section{Future Work}

@@ -203,7 +203,7 @@ def analyseCorpus(discret):
       print '{0}-{1}: {2}'.format(work[1], work[2], p)
   
 
-def test(f_discretization=10, e_discretization=30, indep=False, selection=None, subset=None, corpus=None):
+def test(f_discretization=10, e_discretization=30, indep=False, selection=None, subset=None, corpus=None, smoothing=None):
   if not selection:
     selection = (db.select())
   score = db.getScore1(selection)
@@ -224,9 +224,9 @@ def test(f_discretization=10, e_discretization=30, indep=False, selection=None, 
   print ']'
   print '\tScorefeatures discretization: {0}\n\tExpression discretization: {1}\n'.format(f_discretization, e_discretization)
   if indep:
-    hmm = HMM_indep(2)
+    hmm = HMM_indep(2, smoothing)
   else:
-    hmm = HMM(2)
+    hmm = HMM(2, smoothing)
 
   trainHMM(hmm, f, e, f_discretization, e_discretization, subset=subset, ignore=selection)
   #trainHMM(hmm, f, e, f_discretization, e_discretization, subset=subset)
@@ -301,6 +301,7 @@ if __name__ == '__main__':
   f_discretization = 10
   e_discretization = 10
   corpus = None
+  smoothing = None
   if len(a) > 1:
     if a[1] == 'load':
       loadperformance()
@@ -398,6 +399,13 @@ if __name__ == '__main__':
         except IndexError, ValueError:
           print 'Error parsing command line arguments'
           exit(0)
+      elif a[i] == '-smoothing':
+        try:
+          smoothing = a[i+1]
+          i += 1
+        except IndexError, ValueError:
+          print 'Error parsing command line arguments'
+          exit(0)
       elif a[i] == '-corpus':
         try:
           corpus = a[i+1]
@@ -410,7 +418,7 @@ if __name__ == '__main__':
       i += 1
 
 
-  test(f_discretization, e_discretization, indep, selection=selection, subset=subset, corpus=corpus)
+  test(f_discretization, e_discretization, indep, selection=selection, subset=subset, corpus=corpus, smoothing=smoothing)
 
   
 
