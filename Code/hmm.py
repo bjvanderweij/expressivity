@@ -9,6 +9,7 @@ class HMM:
   def __init__(self, order=2, smoothing=None):
     self.order = order
     self.smoothing = smoothing
+    print self.smoothing
 
     self.startstate = ('start',)
     self.endstate = ('end',)
@@ -16,17 +17,18 @@ class HMM:
 
     self.coincedences = {}
     self.observations = {}
-    self.states = []
+    self.states = {}
 
     self.ngrams = {}
     self.observation_count = 0
+    self.state_count = 0
     self.ngram_count = 0
     self.lessergrams = {}
     self.lessergram_count = 0
     self.starts = {}
     self.start_count = 0
     # Used for good-turing smoothing:
-    self.nr = {}
+    self.nr = None
     # This doesn't really belong here, it is just used as convenient storage
     self.normalizations = []
 
@@ -38,8 +40,10 @@ class HMM:
       self.coincedences[observation, state] = self.coincedences.get((observation, state), 0) + 1
       self.observations[observation] = self.observations.get((observation), 0) + 1
       self.observation_count += 1
-      if not state in self.states and not (state == self.startstate or state == self.endstate):
-        self.states.append(state)
+      # We allow start and end state to be in the statecounts
+      if not state in self.states:
+        self.states[state] = self.states.get(state, 0) + 1
+        self.state_count += 1
     for i in range(len(states)-self.order + 1):
       ngram = []
       lessergram = []
@@ -58,30 +62,25 @@ class HMM:
         self.ngrams[tuple(ngram)] = self.ngrams.get(tuple(ngram), 0) + 1
         self.lessergram_count += 1
         self.lessergrams[tuple(lessergram)] = self.lessergrams.get(tuple(lessergram), 0) + 1
-    if self.smoothing=='good-turing':
+
+  # Initialize Good-Turing smoothing
+  def init_GT_smoothing(self):
+    self.nr = {}
+    for state in self.states:
+      nr = {}
       for obs in self.observations:
-        nr = {}
-        for state in self.states:
-          if (obs, state) in self.coincedences:
-            nr[self.coincedences[obs, state]] = nr.get(self.coincedences[obs, state], 0) + 1
-        x,y = [], []
-        for n,count in nr.iteritems():
-          x.append(math.log(n))
-          y.append(count)
-        print nr
-        # Find a least squares fit to of the frequency counts to nr = a + b*log(x)
-        (a,b) = y[0], 0
-        if len(x) > 1:
-          (a,b) = tools.linear_fit(x,y)
-        self.nr[obs] = (a,b)
-
-
-
-
-        
-
-      # Print a table of how much each number of states occurs
-
+        if (obs, state) in self.coincedences:
+          nr[self.coincedences[obs, state]] = nr.get(self.coincedences[obs, state], 0) + 1
+      x,y = [], []
+      for n,count in nr.iteritems():
+        x.append(math.log(n))
+        y.append(count)
+      #print nr
+      # Find a least squares fit to of the frequency counts to nr = a + b*log(x)
+      (a,b) = y[0], 0
+      if len(x) > 1:
+        (a,b) = tools.linear_fit(x,y)
+      self.nr[state] = (a,b)
 
   def joint_probability(self, observation, state):
     if not (observation, state) in self.coincedences: return 0.0
@@ -91,21 +90,35 @@ class HMM:
     if not state in self.starts: return 0.0
     return self.starts[state] / float(self.start_count)
 
+  def smoothed_frequency_count(self, state, r):
+    if not self.nr:
+      self.init_GT_smoothing()
+    (a,b) = self.nr[state]
+    return a + b*math.log(r)
+
+  def smoothed_coincedence_count(self, state, count):
+    r = self.states[state]
+    return (r+1)*(self.smoothed_frequency_count(state, (r+1)) / self.smoothed_frequency_count(state, r))
+
   def emission_probability(self, state, observation):
-    if not (observation, state) in self.coincedences: 
-      return 0.0
-    return self.coincedences[observation, state] / float(self.observations[observation])
+    if self.smoothing=='good-turing':
+      return self.smoothed_coincedence_count(state, self.coincedences.get((observation, state), 0)) / float(self.states[state])
+    return self.coincedences.get((observation, state), 0) / float(self.states[state])
+
 
   def transition_probability(self, lessergram, state, verbose=False):
     if self.order == 1: return 1.0
+    if lessergram[0] == self.endstate or lessergram[0] == self.repeatstate: return 0.0
+    if self.smoothing == 'good-turing':
+      pass
     p = self.ngrams.get(tuple(list(lessergram) + [state]), 0) /  float(self.lessergrams[tuple(lessergram)])
     if verbose:
       print '{0}, {1}, {2}, {3} {4}'.format(tuple(list(lessergram) + [state]), self.ngrams.get(tuple(list(lessergram) + [state]), 0), tuple(lessergram), self.lessergrams.get(tuple(lessergram), 0), p)
     # If this ngram was not found and the following state is the same as the last state (expression remains the same) do not return zero
     # These are the self-loops
-    if p==0 and lessergram[len(lessergram)-1] == state:
-      minimum = 1 /  float(self.lessergrams[tuple(lessergram)])
-      return minimum
+    #if p==0 and lessergram[len(lessergram)-1] == state:
+    #  minimum = 1 /  float(self.lessergrams[tuple(lessergram)])
+    #  return minimum
     return p
 
   def max_emission(self, obs):
@@ -167,7 +180,7 @@ class HMM:
       V.append({})
       newpath = {}
 
-      for y in self.states + [self.endstate] + [self.repeatstate]:
+      for y in self.states:
         if y == self.repeatstate:
           (prob, state) = max([(V[t-1][y0] * self.transition_probability([y0], y0) *\
             self.emission_probability(y, obs[t]), y0) for y0 in self.states])
@@ -184,7 +197,7 @@ class HMM:
       path = newpath
 
     #self.print_dptable(V)
-    (prob, state) = max([(V[len(obs) - 1][y], y) for y in self.states + [self.endstate]])
+    (prob, state) = max([(V[len(obs) - 1][y], y) for y in self.states])
     # Exclude the last node from the path (this is the end state that slipped in)
     return (prob, path[state][:-1])
 
@@ -214,7 +227,7 @@ class HMM_indep(HMM):
         self.coincedences[i, observation, state[i]] = self.coincedences.get((i, observation, state[i]), 0) + 1
       self.observations[observation] = self.observations.get(observation, 0) + 1
       self.observation_count += 1
-      if not state in self.states and not (state[0] == self.startstate or state[0] == self.endstate):
+      if not state in self.states:
         self.states.append(state)
     for i in range(len(states)-self.order + 1):
       for j in range(parameters):

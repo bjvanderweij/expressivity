@@ -20,7 +20,7 @@ def inv_sigmoid(y, p=1.0):
 # Given normalized features use some function to discretize.
 # Possibilities: linear or sigmoid
 # Use a logistic function to get a larger resolution for small differences than for larger ones
-def discretize(features, discretization=10, function='sigmoid', logarithmic=False):
+def discretize(features, discretization=10, function='sigmoid', logarithmic=False, sensitivity=5):
   f = []
   # WORKAROUND
   if logarithmic:
@@ -34,10 +34,10 @@ def discretize(features, discretization=10, function='sigmoid', logarithmic=Fals
       f.append(int(round(features[i] * float(discretization))))
   elif function == 'sigmoid':
     for i in range(len(features)):
-      f.append(int(round(sigmoid(features[i], 5) * float(discretization))))
+      f.append(int(round(sigmoid(features[i], sensitivity) * float(discretization))))
   return f
 
-def undiscretize(features, discretization=10, function='sigmoid', logarithmic=False):
+def undiscretize(features, discretization=10, function='sigmoid', logarithmic=False, sensitivity=5.0):
   features = list(features)
   discretization = float(discretization)
   f = []
@@ -51,18 +51,18 @@ def undiscretize(features, discretization=10, function='sigmoid', logarithmic=Fa
         features[i] = 1        
       if features[i] == discretization:
         features[i] = 9        
-      f.append(inv_sigmoid(features[i] / discretization, 5))
+      f.append(inv_sigmoid(features[i] / discretization, sensitivity))
   if logarithmic:
     f = [math.exp(x) for x in f]
   return f
 
-def discretize_expression(parameters, discretization=10, subset=[1,2,3]):
+def discretize_expression(parameters, discretization=10, subset=[1,2,3], sensitivity=5):
   if subset != []:
     parameters = [parameters[i] for i in subset]
-  return tuple(discretize(parameters, discretization, function='sigmoid', logarithmic=True))
+  return tuple(discretize(parameters, discretization, function='sigmoid', logarithmic=True, sensitivity=sensitivity))
 
-def undiscretize_expression(state, discretization=10):
-  return tuple(undiscretize(state, discretization, function='sigmoid', logarithmic=True))
+def undiscretize_expression(state, discretization=10, sensitivity=5):
+  return tuple(undiscretize(state, discretization, function='sigmoid', logarithmic=True, sensitivity=sensitivity))
 
 def normalize(features, normalizations):
   for i in range(len(features)):
@@ -112,7 +112,7 @@ def preprocess(features, subset=None):
 
 
 
-def trainHMM(hmm, features_set, expression_set, f_discretization=10, e_discretization=10, subset=None, ignore=None):
+def trainHMM(hmm, features_set, expression_set, f_discretization=10, e_discretization=10, subset=None, ignore=None, sensitivity=5):
   preprocessed = {}
   for work in features_set.keys():
     preprocessed[work] = preprocess(features_set[work], subset)
@@ -140,13 +140,13 @@ def trainHMM(hmm, features_set, expression_set, f_discretization=10, e_discretiz
     states = []
     # Select the subset of features that will be used and discretise
     for f, p in zip(features, expression):
-      exp = discretize_expression(p, e_discretization) 
+      exp = discretize_expression(p, e_discretization, sensitivity=sensitivity) 
       #states.append(tuple(list(exp) + list(featureset)))
       states.append(exp)
 
     hmm.learn(obs, states)
 
-def render(score, segmentation, hmm, f_discretization=10, e_discretization=30, subset=None):
+def render(score, segmentation, hmm, f_discretization=10, e_discretization=30, subset=None, sensitivity=5):
   # Extract scorefeatures
   features = sf.vanDerWeijFeatures(score, segmentation) 
   # Discretize
@@ -158,7 +158,7 @@ def render(score, segmentation, hmm, f_discretization=10, e_discretization=30, s
   (p, states) = hmm.viterbi(observations)
   expression = []
   for state in states:
-    expression.append(undiscretize_expression(state, e_discretization))
+    expression.append(undiscretize_expression(state, e_discretization, sensitivity=sensitivity))
   print 'Expression states:\n{0}'.format(states)
 
   return (p, expression)
@@ -201,9 +201,33 @@ def analyseCorpus(discret):
     for s, p in zip(features, processed):
       print '{0}-{1}: {2}'.format(work[1], work[2], [s[i] for i in subset])
       print '{0}-{1}: {2}'.format(work[1], work[2], p)
-  
 
-def test(f_discretization=10, e_discretization=30, indep=False, selection=None, subset=None, corpus=None, smoothing=None):
+def playPerformance(performance, expression, name='ExpressivePerformance'):
+  # Store?
+  # Play again?
+  # View first x notes?
+  while True:
+    choice = util.menu('What do you want to do?', ['Play performance', 'Store expression', 'Store midi', 'View first notes of performance', 'Quit'])
+    if choice == 0:
+      seq = Sequencer()
+      seq.play(performance)
+    elif choice == 1:
+      n = raw_input("Enter a name for saving this performance. [{0}]\n".format(name))
+      if not n == '': name = n
+      tools.savePerformance(selection, expression, name)
+    elif choice == 2:
+      n = raw_input("Enter a name for saving this performance. [{0}.mid]\n".format(name))
+      if not n == '': name = n
+      performance.exportMidi('output/{0}.mid'.format(name))
+    elif choice == 3:
+      for note in performance[:30]:
+        print note
+    elif choice == 4:
+      break
+
+      
+
+def test(f_discretization=10, e_discretization=30, indep=False, selection=None, subset=None, corpus=None, smoothing=None, sensitivity=5):
   if not selection:
     selection = (db.select())
   score = db.getScore1(selection)
@@ -228,7 +252,7 @@ def test(f_discretization=10, e_discretization=30, indep=False, selection=None, 
   else:
     hmm = HMM(2, smoothing)
 
-  trainHMM(hmm, f, e, f_discretization, e_discretization, subset=subset, ignore=selection)
+  trainHMM(hmm, f, e, f_discretization, e_discretization, subset=subset, ignore=selection, sensitivity=sensitivity)
   #trainHMM(hmm, f, e, f_discretization, e_discretization, subset=subset)
   hmm.storeInfo('hmm2.txt')
   print "Loading score"
@@ -243,20 +267,17 @@ def test(f_discretization=10, e_discretization=30, indep=False, selection=None, 
   #  namelist.append([leaf.name() for leaf in group])
   #print namelist
 
-  (p, expression) = render(melodyscore, onset, hmm, f_discretization, e_discretization, subset)
+  (p, expression) = render(melodyscore, onset, hmm, f_discretization, e_discretization, subset, sensitivity=sensitivity)
 
   print "Done, resulting expression(with a probability of {1}): {0}".format(expression, p)
-  name = raw_input("Enter a name for saving this performance or press enter to skip this step.\n")
-  if not name == '':
-    tools.savePerformance(selection, expression, name)
 
   performance = perform.perform(score, melodyscore, onset, expression, converter=melody)
+  playPerformance(performance, expression, '{0}_{1}_on_{2}_discret_{3}-{4}_smoothing_{5}'.format(\
+      selection[0], selection[1], corpus, f_discretization, e_discretization, smoothing))
 
 # Store performance?
 # Speed
 # Dynamics
-  seq = Sequencer()
-  seq.play(performance)
 
 def loadperformance():
   (selection, expression) = tools.loadPerformance()
@@ -302,6 +323,7 @@ if __name__ == '__main__':
   e_discretization = 10
   corpus = None
   smoothing = None
+  sensitivity = 5
   if len(a) > 1:
     if a[1] == 'load':
       loadperformance()
@@ -377,6 +399,13 @@ if __name__ == '__main__':
     while i < len(a):
       if a[i] == '-indep':
         indep = True
+      elif a[i] == '-sensitivity':
+        try:
+          sensitivity = float(a[i+1])
+          i += 1
+        except IndexError, ValueError:
+          print 'Error parsing command line arguments'
+          exit(0)
       elif a[i] == '-d':
         try:
           f_discretization = int(a[i+1])
@@ -418,7 +447,7 @@ if __name__ == '__main__':
       i += 1
 
 
-  test(f_discretization, e_discretization, indep, selection=selection, subset=subset, corpus=corpus, smoothing=smoothing)
+  test(f_discretization, e_discretization, indep, selection=selection, subset=subset, corpus=corpus, smoothing=smoothing, sensitivity=sensitivity)
 
   
 
