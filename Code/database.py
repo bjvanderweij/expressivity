@@ -35,6 +35,8 @@ def getPerformance1(t):  return getPerformance(t[0], t[1], t[2], t[3])
 def getScore1(t):
   if t == 'm21':
     return selectM21Score()
+  elif t == 'sd':
+    return selectScore()
   return getScore(t[0], t[1], t[2], t[3])
 def getDeviation1(t):  return getDeviation(t[0], t[1], t[2], t[3])
 
@@ -196,17 +198,44 @@ def selectM21Score():
     path = util.menu('Choose a work', m21.corpus.getComposer(composers[comp]), cancel=True)
   return m21.corpus.parse(m21.corpus.getComposer(composers[comp])[path])
 
+def selectScore():
+  scores = os.listdir('scores')
+  path = 'scores/{0}'.format(scores[util.menu('Select score', scores)])
+  return m21.converter.parse(path)
+
 def select():
   work = -1
   while(work == -1):
-    comp = util.menu('Choose a composer', getComposers() + ['MUSIC21 Corpus'])
+    comp = util.menu('Choose a composer', getComposers() + ['MUSIC21 Corpus'] + ['Score Directory'])
     print len(getComposers()), comp
     if comp == len(getComposers()):
       return 'm21'
+    elif comp == len(getComposers())+1:
+      return 'sd'
     work = util.menu('Choose a work and performer', getWorks(getComposers()[comp]), cancel=True)
 
   selected = getWorks(getComposers()[comp])[work]
   return getComposers()[comp], selected[0], selected[1], selected[2]
+
+def selectWork():
+  works = {}
+  allworks = []
+  for i in range(len(getComposers())):
+    allworks += [(getWorks(getComposers()[i])[j], i, j) for j in range(len(getWorks(getComposers()[i])))]
+  for work, i, j in allworks:
+    s = getWorks(getComposers()[i])[j]
+    works[getComposers()[i], s[0]] = (getComposers()[i], s[0], s[1], s[2])
+
+  sortedkeys = sorted(works.keys())
+
+  choice = util.menu('Choose a score', sortedkeys + ['Music21 Corpus'] + ['Score Directory'])
+  if choice == len(sortedkeys):
+    return 'm21'
+  elif choice == len(sortedkeys)+1:
+    return 'sd'
+  return works[sortedkeys[choice]]
+
+
 
 def byIndexes(i, j):
   selected = getWorks(getComposers()[i])[j]

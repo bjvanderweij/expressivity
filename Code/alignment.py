@@ -169,6 +169,9 @@ class Alignment:
 
               on = performance.microseconds_to_ticks(on_ms)
               off = performance.microseconds_to_ticks(off_ms)
+              if off < on:
+                print "WARNING: release before onset! Check your deviations or performancerenderer"
+                off = on
               
               pnote = Note(on, off, n.pitch.midi, int(onvel), int(offvel), 
                   annotation=(score.index(part), part.index(measure), measure.index(voice), voice.index(note), note.id))

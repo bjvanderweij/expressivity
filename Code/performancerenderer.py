@@ -34,7 +34,7 @@ def discretize(features, discretization=10, function='sigmoid', logarithmic=Fals
       f.append(int(round(features[i] * float(discretization))))
   elif function == 'sigmoid':
     for i in range(len(features)):
-      f.append(int(round(sigmoid(features[i], sensitivity) * float(discretization))))
+      f.append(int((sigmoid(features[i], sensitivity) * float(discretization))))
   return f
 
 def undiscretize(features, discretization=10, function='sigmoid', logarithmic=False, sensitivity=5.0):
@@ -156,6 +156,7 @@ def render(score, segmentation, hmm, f_discretization=10, e_discretization=30, s
   # Find the best expressive explanation for these features
   print "Finding best fitting expression"
   (p, states) = hmm.viterbi(observations)
+  print p, states
   expression = []
   for state in states:
     expression.append(undiscretize_expression(state, e_discretization, sensitivity=sensitivity))
@@ -202,12 +203,71 @@ def analyseCorpus(discret):
       print '{0}-{1}: {2}'.format(work[1], work[2], [s[i] for i in subset])
       print '{0}-{1}: {2}'.format(work[1], work[2], p)
 
-def playPerformance(performance, expression, name='ExpressivePerformance'):
+      
+
+def loadperformance():
+  (selection, expression) = tools.loadPerformance()
+  score = db.getScore1(selection)
+  melodyscore = Score(score).melody()
+  melody = tools.parseScore(melodyscore)
+  segmentation = structure.reasonableSegmentation(melody)
+  performance = perform.perform(score, Score(score).melody(), segmentation, expression, converter=melody)
+  seq = Sequencer()
+  seq.play(performance)
+
+def visualize(segmentation, expression, visualize=None, store=None, title=None):
+  notes = []
+  onsets = []
+  values = []
+  if not visualize:
+    visualize = selectSubset(['Dynamics', 'Articulation', 'Tempo'])
+  for segment, expr in zip(segmentation, expression):
+    for note in segment:
+      onsets.append(note.on)
+      values.append([expr[i] for i in visualize])
+  import matplotlib.pyplot as plt
+  fig = plt.figure()
+  plt.plot(onsets, values)
+  plt.ylabel('Deviation')
+  plt.xlabel('Score time')
+  if title:
+    plt.title(title)
+  #dplot = fig.add_subplot(111)
+  #sodplot = fig.add_subplot(111)
+  #dplot.plot([i for i in range(len(deltas[0]))], deltas[0])
+  #sodplot.plot([i for i in range(len(sodeltas[0]))], sodeltas[0])
+  if store:
+    fig.savefig('plots/{0}.png'.format(store))
+  else:
+    plt.show()
+
+def plotCorpus():
+  (f, e, m) = tools.chooseFeatures()
+  d = raw_input('Discretization? ')
+  if not d == '':
+    s = raw_input('Sensitivity? [5]')
+    if s == '':
+      s = 5.0
+    d = float(d)
+    s = float(s)
+  else: d = None
+
+  for work in f:
+    print 'Plotting and saving {0}'.format(work)
+    expression = e[work]
+    if d:
+      expression = [undiscretize_expression(discretize_expression(x, d, sensitivity=s), d, sensitivity=s) for x in expression]
+    score = db.getScore1(work)
+    segmentation = structure.reasonableSegmentation(tools.parseScore(Score(score).melody()))
+    visualize(segmentation, expression, [0, 1, 2], '{0}-{1}-{2}'.format(work[0], work[1], work[2]), '{0}-{1} by {2}'.format(work[0], work[1], work[2]))
+
+
+def playPerformance(selection, performance, expression, segmentation, name='ExpressivePerformance'):
   # Store?
   # Play again?
   # View first x notes?
   while True:
-    choice = util.menu('What do you want to do?', ['Play performance', 'Store expression', 'Store midi', 'View first notes of performance', 'Quit'])
+    choice = util.menu('What do you want to do?', ['Play performance', 'Store expression', 'Store midi', 'View first notes of performance', 'Plot performance', 'Save plot', 'View segmentation', 'Make segmentation audible', 'Quit'])
     if choice == 0:
       seq = Sequencer()
       seq.play(performance)
@@ -222,11 +282,19 @@ def playPerformance(performance, expression, name='ExpressivePerformance'):
     elif choice == 3:
       for note in performance[:30]:
         print note
-    elif choice == 4:
+    elif choice == 4: # Plot
+      visualize(segmentation, expression)
+    elif choice == 5: # Save plot
+      n = raw_input("Enter a name for saving this performance. [{0}.mid]\n".format(name))
+      if not n == '': name = n
+      visualize(segmentation, expression, store=name)
+    elif choice == 6: # View segments
+      pass
+    elif choice == 7: # Play segments
+      pass
+    elif choice == 8: # Quit
       break
-
-      
-
+    
 def test(f_discretization=10, e_discretization=30, indep=False, selection=None, subset=None, corpus=None, smoothing=None, sensitivity=5):
   if not selection:
     selection = (db.select())
@@ -246,7 +314,10 @@ def test(f_discretization=10, e_discretization=30, indep=False, selection=None, 
   print '\tFeatureset used: [',
   print ', '.join([m['featureset'][i] for i in subset]),
   print ']'
-  print '\tScorefeatures discretization: {0}\n\tExpression discretization: {1}\n'.format(f_discretization, e_discretization)
+  print '\tScorefeatures discretization: {0}\n\tExpression discretization: {1}'.format(f_discretization, e_discretization)
+  print '\tSensitivity: {0}'.format(sensitivity)
+  print '\tSmoothing: {0}'.format(smoothing)
+  print '\tCorpus: {0}\n'.format(corpus)
   if indep:
     hmm = HMM_indep(2, smoothing)
   else:
@@ -272,46 +343,12 @@ def test(f_discretization=10, e_discretization=30, indep=False, selection=None, 
   print "Done, resulting expression(with a probability of {1}): {0}".format(expression, p)
 
   performance = perform.perform(score, melodyscore, onset, expression, converter=melody)
-  playPerformance(performance, expression, '{0}_{1}_on_{2}_discret_{3}-{4}_smoothing_{5}'.format(\
+  playPerformance(selection, performance, expression, onset, '{0}_{1}_on_{2}_discret_{3}-{4}_smoothing_{5}'.format(\
       selection[0], selection[1], corpus, f_discretization, e_discretization, smoothing))
 
 # Store performance?
 # Speed
 # Dynamics
-
-def loadperformance():
-  (selection, expression) = tools.loadPerformance()
-  score = db.getScore1(selection)
-  melodyscore = Score(score).melody()
-  melody = tools.parseScore(melodyscore)
-  segmentation = structure.reasonableSegmentation(melody)
-  performance = perform.perform(score, Score(score).melody(), segmentation, expression, converter=melody)
-  seq = Sequencer()
-  seq.play(performance)
-
-def visualize(segmentation, expression, visualize=None):
-  notes = []
-  onsets = []
-  values = []
-  if not visualize:
-    visualize = selectSubset(['Dynamics', 'Articulation', 'Tempo'])
-  for segment, expr in zip(segmentation, expression):
-    for note in segment:
-      onsets.append(note.on)
-      values.append([expr[i] for i in visualize])
-  import matplotlib.pyplot as plt
-  plt.plot(onsets, values)
-  plt.ylabel('Deviation')
-  plt.xlabel('Score time')
-  #dplot = fig.add_subplot(111)
-  #sodplot = fig.add_subplot(111)
-  #dplot.plot([i for i in range(len(deltas[0]))], deltas[0])
-  #sodplot.plot([i for i in range(len(sodeltas[0]))], sodeltas[0])
-  plt.show()
-
-
-    
-    
 
 if __name__ == '__main__':
   import sys
@@ -341,8 +378,13 @@ if __name__ == '__main__':
       set = [db.select()]
       train.train(set)
       exit(0)
+    elif a[1] == 'plotcorpus':
+      plotCorpus()
+      exit(0)
     elif a[1] == 'plot':
       (selection, expression) = tools.loadPerformance()
+      if selection == None:
+        selection = db.select()
       score = db.getScore1(selection)
       melodyscore = Score(score).melody()
       melody = tools.parseScore(melodyscore)

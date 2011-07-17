@@ -293,7 +293,7 @@ Admittedly, we still use mean loudness and tempo to calculate tempo and loudness
 \subsection{Model}
 
 
-We can now reduce a piece of music, represented as a sequence of notes $N_ij$, of which we have a score and a performance, to a sequence of score feature vectors $F$ and expression parameter vectors $E$. First we segment the score into constituents:
+We can now reduce a piece of music, represented as a sequence of notes $N_{ij}$, of which we have a score and a performance, to a sequence of score feature vectors $F$ and expression parameter vectors $E$. First, we segment the score into constituents:
 
 \[\texttt{segment}(N_{ij}) = \{c_1, c_2, \cdots, c_n\}\]
 We can then extract feature and parameter values from the score and the performance:
@@ -309,11 +309,36 @@ E &= \{e_1, e_2, \cdots, e_n\}
 \end{align*}
 where $e_i$ is a parameter vector, $t_i$ is the mean tempo ratio, $a_i$ is the mean articulation and $l_i$ is the mean loudness ratio.
 
-We can now train a hidden Markov model on this data. The 
+If we parse a number of pieces is this manner we can use it to do some statistics. We can for example calculate the features likely-hood which is the conditional probability of a feature vector $f_i$ given an expression vector $e_i$.
 
+\begin{equation}
+\label{emission}
+P(f_i|e_i) = \frac{c(f_i, e_i)}{c(e_i)}
+\end{equation}
+
+Where $c(x)$ is the number of occurences of $x$ in the corpus.
+The expression transition probability is defined by
+\begin{equation}
+\label{transition}
+P(e_i|e_{i-1}) = \frac{c(e_{i-1}, e_i)}{c(e_{i-1})}
+\end{equation}
+where we make the simplification that expression in one constituent is only dependend on the expression in the previous constituent which is of course not true.
+
+The problem of creating a performance of a score is now reduced to finding a suitable sequence of expression vectors given a sequence of feature vectors. We can calculate the probability of one expression vector of a performance as the product the probabilities defined in equations \ref{emission} and \ref{transition}. The probability of the entire performance is approximated by the product of the individual expression vector probabilities.
+
+\begin{equation}
+P(E|F) = \displaystyle\prod_{i=1}^{n}P(f_i|e_i)P(e_i|e_{i-1})
+\end{equation}
+
+The resulting model is analogous to a stochastic part of speech tagger based on a hidden Markov model where we have substituted words for score feature vectors and parts of speech for expression parameter vectors. Rendering a performance is like finding the most likely part of speech tags for a sequence of words. In our case:
+
+\[E^* = \texttt{argmax}_E P(E|F)\]
+
+which can be found using Viterbi decoding.
 
 \section{Implementation}
-\section{Performance Rendering}
+
+
 \begin{itemize}
 \item Extract melody
 \item Extract scorefeatures from melody
@@ -321,11 +346,20 @@ We can now train a hidden Markov model on this data. The
 \item Extract expressive and non-expressive melody and extract expression features
 \item Perform notes other than melody notes the same as the nearest melody note
 \end{itemize}
-\subsection{Dataset and representation}
-\begin{itemize}
-\item attack release
-\item tempo curves
-\end{itemize}
+\subsection{Corpus and Representation}
+We were lucky to find and receive permission to use the CrestMusePEDB \ref{crestmuse} corpus, which is a corpus that contains expressive performances of Western classical music by famous pianists. The corpus contains about 
+
+Every performance is accompanied by an XML file containing information on how every note from the score is performed. This information consists of a loudness deviation, attack deviation and release deviation. The loudness is defined relative to a base loudness. The attack and release deviation are defined as the portion of a local beat duration that the attack and release deviates from the score. 
+
+Local tempo is defined for every beat in every measure as the ratio of the tempo in that beat and the base tempo. 
+
+To prepare a score and performance from the corpus for use in our system we use the score to extract melody notes. We do this simply by taking notes in the highest voice in the top staff. From now on when we talk about pieces and notes we mean melodies and melody notes.
+
+Attack and release are clearly note level parameters so we do not use them. We only need tempo deviations and loudness deviations. The average tempo of a constituent is determined by the average tempo deviation of all the beats that fall within the constituent. The average loudness is determined by the average loudness deviation of every note within the constituent.
+
+The deltafunctions that are used in the segmentation process use pitch intervals and duration ratios. The pitch intervals use MIDI note numbers which range from 21 to 108 and go up one semi-tone with each step. Durations are in milliseconds, calculated from the score and a standard tempo, set at 120 beats per minute.
+
+
 \subsection{Dealing with polyphony}
 \begin{itemize}
 \item Use only melody
@@ -340,6 +374,14 @@ We can now train a hidden Markov model on this data. The
 Discretization of expression is a delicate subject, we want to capture small changes in dynamics and tempo precisely, but outliers may fall in large bins. A sigmoid function is very useful for this purpose. 
 
 All expression parameters are ratios: their values vary around 1.0. To get a linear scale we use the logarithmic ratio. The tempo ratio is defined as: $\log(\frac{\texttt{performancetempo}}{\texttt{scoretempo}})$. To get the desired properties of discretization we use a sigmoid function. $D(p) = d * \frac{1}{1+e^{-p}}$ where $D(p)$ is the discretization of $p$, $e$ is the expression parameter value and $p$ is the discretization parameter.
+\subsection{Performance rendering}
+\begin{itemize}
+\item Extract melody
+\item Extract scorefeatures from melody
+\item lookup notes in deviation, ignore missing notes
+\item Extract expressive and non-expressive melody and extract expression features
+\item Perform notes other than melody notes the same as the nearest melody note
+\end{itemize}
 
 \section{Evaluation and Results}
 The proposed system actually requires more training data to do meaningful statistics. However, since expressive interpretation can be 
@@ -379,7 +421,9 @@ We think we can afford to do this because:...
 \item Generalize approach to incorporate hierarchical structure, let structure extend to note level, so note level expression and structurelevel expression become integrated
 \end{itemize}
 \subsection{Repetition}
-A notion of repetition and similarity would certainly improve the system. Repetition is a very good indicator of constituent breaks. Repetition and similarity could also be used to improve expressiveness of performances. It is probably telling when a phrase is repeated three times and then slightly altered the fourth time. Although finding similarity and musically significant repetition is a subject of its own the delta framework could help to define repetition arbitrarily of transposition or rhythm. A list of pitch deltas can for example be used to detect repetition independend of transposition and a list of duration deltas can be used to detect repetition of rhythm independend of the notes used. 
+The system would certainly benefit from a notion of repetition and similarity. Repetition is a very good indicator of constituent breaks. Repetition and similarity could also be used to improve expressiveness of performances. It is probably telling when a phrase is repeated three times and then slightly altered the fourth time. Although finding similarity and musically significant repetition is a subject of its own the delta framework could help to define repetition arbitrarily of transposition or rhythm. A list of pitch deltas can for example be used to detect repetition independend of transposition and a list of duration deltas can be used to detect repetition of rhythm independend of the notes used. 
+
+\section{Acknowledgements}
 
  \bibliographystyle{plain} % plain, nature, jbact
  \bibliography{myref} 
