@@ -31,7 +31,7 @@ class HMM:
     # Used for good-turing smoothing:
     self.nr = None
     self.unseen_bigrams = 0
-    self.unseen_observations = 0
+    self.unseen_coincedences = 0
     # This doesn't really belong here, it is just used as convenient storage
     self.normalizations = []
 
@@ -71,19 +71,22 @@ class HMM:
     self.nr = {}
     for state in self.states:
       nr = {}
-      unseen = 0
+      unseen = 0 #self.unseen_coincedences
+      sum = 0
       for obs in self.observations:
         if (obs, state) in self.coincedences:
           nr[self.coincedences[obs, state]] = nr.get(self.coincedences[obs, state], 0) + 1
-        else:
-          unseen += 1
+        else: unseen += 1
       # Things that never occur
+      # Variable should be set when decoding is called
       x,y = [1], [unseen]
+      #x, y = [], []
       for n,count in nr.iteritems():
         x.append(math.log(n+1))
         y.append(count)
-      x.append(math.log(100000))
-      y.append(0)
+      #x.append(math.log(max(nr.keys())+100))
+      #y.append(1)
+      #nr[0] = self.unseen_coincedences * len(self.states)
       nr[0] = unseen
       #print nr
       # Find a least squares fit to of the frequency counts to nr = a + b*log(x)
@@ -92,32 +95,77 @@ class HMM:
       (a,b) = tools.linear_fit(x,y)
       self.nr[state] = (a,b, nr)
 
-  def smoothed_frequency_count(self, state, r):
-    if not self.nr:
-      self.init_GT_smoothing()
+  def testModel(self):
+    print "Sum of smoothed probabilities of all coincedences starting with:"
+    for state in self.states:
+      p = sum([self.emission_probability(state, obs) for obs in self.observations])
+      #if p > 2 or p < 0:
+      print 'Emission\t{0}: {1}'.format(state, p)
+      #p = sum([self.transition_probability([state], state1) for state1 in self.states])
+      #print 'Transition\t{0}: {1}'.format(state, p)
+    system.exit(0)
+
+  # Turing estimate
+  def smoothed_frequency_count(self, state, c):
     (a,b,nr) = self.nr[state]
     # If we cannot find this frequency we back off to a logarithmic fit
     # But perhaps interpolation  is better?
-    if r in nr:
-      smoothed = nr[r]
+    if c in nr:
+      smoothed = nr[c]
     else:
-      smoothed = a + b*math.log(r+1)
+      # Linear interpolation:
+      counts = sorted(nr.keys())
+      if c > counts[-1]: return counts[-1]
+      for i in range(len(counts)):
+        if c > counts[i] and c < counts[i+1]:
+          smoothed =  nr[counts[i]] + ((c-counts[i])/float(counts[i+1]-counts[i])) * (nr[counts[i+1]] - nr[counts[i]]) 
+          if smoothed < 0:         
+            print counts, nr, c, nr[counts[i+1]] - nr[counts[i]], (c-counts[i]) / float(counts[i+1]-counts[i])
+            print nr[counts[i]] + ((c-counts[i])/float(counts[i+1]-counts[i])) * (nr[counts[i+1]] - nr[counts[i]]) 
+          return smoothed
+      #smoothed = a + b*math.log(c+1)
+      if smoothed < 1: smoothed = 1
+    if state == self.startstate:
+      #print smoothed, c, len(self.states)
+      pass
     return smoothed
   
-  def smoothed_coincedence_count(self, state, r):
-    return (r+1)*(self.smoothed_frequency_count(state, (r+1)) / float(self.smoothed_frequency_count(state, r)))
+  # See Jurafsky and Martin
+  def smoothed_count(self, state, c, k=5):
+    # This is apparently safe 
+    #if r == 1: r = 0
+    # We cannot do the code below because sometimes 1-(k+1)*Nk1/N1 is zero!
+    #if c > k: return c
+    Nc = float(self.smoothed_frequency_count(state, c))
+    Nc1 = float(self.smoothed_frequency_count(state, c+1)) 
+    #Nk1 = float(self.smoothed_frequency_count(state, k+1))
+    #N1 = float(self.smoothed_frequency_count(state, 1)) 
+    #if c == 0: return (c+1) * Nc1/Nc
+    #print (1 - (k+1) * Nk1/N1), Nk1, N1, c
+    #return ((c+1)*Nc1/Nc - c*(k+1)*Nk1/N1)/(1 - (k+1)*Nk1/N1)
+    return (c+1) * Nc1/Nc
+    
 
   def emission_probability(self, state, observation):
-    if self.smoothing=='good-turing':
-      return self.smoothed_coincedence_count(state, self.coincedences.get((observation, state), 0)) / float(self.states[state])
+    if self.smoothing=='good-turing' and self.unseen_coincedences > 0:
+      if not self.nr:
+        self.init_GT_smoothing()
+      (a,b,nr) = self.nr[state]
+      unseen = nr[0]
+      #if state == self.endstate or state == self.startstate or observation == self.endstate or observation == self.startstate:
+        #if observation == state:
+        #  return 1.0
+        #else:
+        #  return 0.0
+      #print (self.smoothed_frequency_count(state, 1)/float(self.states[state]))
+      return (self.smoothed_count(state, self.coincedences.get((observation, state), 0)) /\
+          float(self.states[state])) * (1 - self.smoothed_frequency_count(state, 1)/float(self.states[state]))
     return self.coincedences.get((observation, state), 0) / float(self.states[state])
 
 
   def transition_probability(self, unigram, state, verbose=False):
     if self.order == 1: return 1.0
     if unigram[0] == self.endstate or unigram[0] == self.repeatstate: return 0.0
-    if self.smoothing == 'good-turing':
-      pass
     p = self.bigrams.get(tuple(list(unigram) + [state]), 0) /  float(self.unigrams[tuple(unigram)])
     # If this bigram was not found and the following state is the same as the last state (expression remains the same) do not return zero
     # These are the self-loops
@@ -170,7 +218,8 @@ class HMM:
     for o in obs:
       if not o in self.observations:
         unseen += 1
-    self.unseen_observations = unseen
+    self.unseen_coincedences = unseen
+    self.testModel()
     if unseen > 0:
       print "{0} out of {1} observations do not occur in the corpus!".format(unseen, len(obs))
     obs = obs + [self.endstate]
@@ -187,24 +236,19 @@ class HMM:
       V.append({})
       newpath = {}
 
-      for y in self.states:
-        if y == self.repeatstate:
-          (prob, state) = max([(V[t-1][y0] * self.transition_probability([y0], y0) *\
-            self.emission_probability(y, obs[t]), y0) for y0 in self.states])
-          V[t][state] = prob
-          newpath[state] = path[state] + [state]
-        else:
-          (prob, state) = max([(V[t-1][y0] * self.transition_probability([y0], y) *\
-            self.emission_probability(y, obs[t]), y0) for y0 in self.states])
-          V[t][y] = prob
-          newpath[y] = path[state] + [y]
+      for y in self.states.keys() + [self.endstate]:
+        (prob, state) = max([(V[t-1][y0] * self.transition_probability([y0], y) *\
+          self.emission_probability(y, obs[t]), y0) for y0 in self.states])
+        V[t][y] = prob
+        newpath[y] = path[state] + [y]
           
 
       # Don't need to remember the old paths
       path = newpath
 
     #self.print_dptable(V)
-    (prob, state) = max([(V[len(obs) - 1][y], y) for y in self.states])
+    #(prob, state) = max([(V[len(obs) - 1][y], y) for y in self.states.keys() + [self.endstate]])
+    (prob, state) = V[len(obs)-1][self.endstate], self.endstate
     # Exclude the last node from the path (this is the end state that slipped in)
     return (prob, path[state][:-1])
 
@@ -259,7 +303,7 @@ class HMM_indep(HMM):
     states = [self.startstate] + states + [self.endstate]
     for observation, state in zip(observations, states):
       if state == self.startstate or state == self.endstate:
-        state = tuple([state for i in range(parameters)])
+        state = tuple([tuple(state) for i in range(parameters)])
       for i in range(parameters):
         self.coincedences[i, observation, state[i]] = self.coincedences.get((i, observation, state[i]), 0) + 1
         self.state_counts[i, state[i]] = self.state_counts.get((i, state[i]), 0) + 1
@@ -294,12 +338,9 @@ class HMM_indep(HMM):
       c_nr = {}
       # and bigram frequency counts
       bigram_nr = {}
-      unseen_coincedences = 0
       for obs in self.observations:
         if (i, obs, state) in self.coincedences:
           c_nr[self.coincedences[i, obs, state]] = c_nr.get(self.coincedences[i, obs, state], 0) + 1
-        else:
-          unseen_coincedences += 1
       unseen_bigrams = 0
       for j, state1 in self.state_counts:
         if j != i: continue
@@ -308,7 +349,7 @@ class HMM_indep(HMM):
         else:
           unseen_bigrams += 1
 
-      x,y = [1], [unseen_coincedences]
+      x,y = [1], [self.unseen_coincedences * len(self.states)]
       for n,count in c_nr.iteritems():
         x.append(math.log(n+1))
         y.append(count)
@@ -318,13 +359,9 @@ class HMM_indep(HMM):
       #(a,b) = y[0], 0
       x.append(math.log(100000))
       y.append(0)
-      c_nr[0] = unseen_coincedences
+      c_nr[0] = self.unseen_coincedences * len(self.states)
       (a,b) = tools.linear_fit(x,y)
       self.nr[(i, state), 'coincedence'] = (a,b, c_nr)
-
-      if state == self.endstate: 
-        self.nr[(i, state), 'bigram'] = (1,0)
-        continue
 
       p,q = [0], [unseen_bigrams]
       for n,count in bigram_nr.iteritems():
@@ -333,7 +370,7 @@ class HMM_indep(HMM):
       # Find a least squares fit to of the frequency counts to nr = a + b*log(x)
       # The fitted functions sometimes do dive under zero!
       #(a,b) = y[0], 0
-      p.append(math.log(100000))
+      p.append(math.log(100))
       q.append(0)
       bigram_nr[0] = unseen_bigrams
       #print '{0}: {1}'.format((i, state), bigram_nr)
@@ -343,28 +380,45 @@ class HMM_indep(HMM):
   def __str__(self):
     return 'States:\n{0}\nNgrams:\n{1}\nLessergrams:\n{2}'.format(self.states, self.bigrams, self.unigrams)
 
-  def smoothed_frequency_count(self, state, r, type='coincedence'):
+  def testModel(self):
+    print "Sum of smoothed probabilities of all coincedences starting with:"
+    for state in self.states:
+      p = sum([self.emission_probability(state, obs) for obs in self.observations])
+      print 'E{0}: {1}'.format(state, p)
+      p = sum([self.transition_probability([state], state1) for state1 in self.states])
+      print 'T{0}: {1}'.format(state, p)
+
+
+
+  def smoothed_frequency_count(self, state, c, type='coincedence'):
     if not self.nr:
       self.init_GT_smoothing()
     (a,b, nr) = self.nr[state, type]
     # If we cannot find this frequency we back off to a logarithmic fit
     # But perhaps interpolation  is better?
-    if r in nr:
-      smoothed = nr[r]
+    if c in nr:
+      smoothed = nr[c]
     else:
-      smoothed = a + b*math.log(r)
+      smoothed = a + b*math.log(c)
     return smoothed
 
-  def smoothed_count(self, state, r, type='coincedence'):
+  # See Jurafsky and Martin
+  def smoothed_count(self, state, c, type='coincedence', k=5):
     # This is apparently safe 
-    if r == 1: r = 0
-    return (r+1)*(self.smoothed_frequency_count(state, (r+1), type) / float(self.smoothed_frequency_count(state, r, type)))
+    #if r == 1: r = 0
+    if c > k: return c
+    Nc = float(self.smoothed_frequency_count(state, (c+1), type))
+    Nc1 = float(self.smoothed_frequency_count(state, c, type)) 
+    Nk1 = float(self.smoothed_frequency_count(state, (k+1), type))
+    N1 = float(self.smoothed_frequency_count(state, 1, type)) 
+    return ((c+1)*Nc1/Nc - c*(k+1)*Nk1/N1)/(1 - (k+1)*Nk1/N1)
 
   def emission_probability(self, state, observation):
     p = 1.0
-    if self.smoothing=='good-turing':
+    if self.smoothing=='good-turing' and self.unseen_coincedences > 0:
       for i in range(len(state)):
-        p *= self.smoothed_count((i, state[i]), self.coincedences.get((i, observation, state[i]), 0)) / float(self.state_counts[i, state[i]])
+        p *= self.smoothed_count((i, state[i]), self.coincedences.get((i, observation, state[i]), 0)) /\
+            float(self.state_counts[i, state[i]] + self.unseen_coincedences * len(self.state_counts))
       return p
     for i in range(len(state)):
       p *= (self.coincedences.get((i, observation, state[i]), 0.0)) / float(self.state_counts.get(state[i]))
@@ -383,8 +437,10 @@ class HMM_indep(HMM):
 
     for i in range(len(state)):
       if self.smoothing == 'good-turing':
+        (a,b,nr) = self.nr[(i, prevstate[i]), 'bigram']
+        unseen = nr[0]
         p *= self.smoothed_count((i, prevstate[i]), self.bigrams.get(tuple([i] + [prevstate[i]] + [state[i]]), 0), 'bigram') /\
-          float(self.state_counts.get(tuple([i] + [prevstate[i]])))
+          float(self.state_counts.get(tuple([i] + [prevstate[i]])) + unseen)
       else:
         p *= self.bigrams.get(tuple([i] + [lg[i]] + [state[i]]), 0) /\
           float(self.state_counts.get(tuple([i] + [prevstate[i]])))

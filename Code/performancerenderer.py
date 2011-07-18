@@ -156,7 +156,6 @@ def render(score, segmentation, hmm, f_discretization=10, e_discretization=30, s
   # Find the best expressive explanation for these features
   print "Finding best fitting expression"
   (p, states) = hmm.viterbi(observations)
-  print p, states
   expression = []
   for state in states:
     expression.append(undiscretize_expression(state, e_discretization, sensitivity=sensitivity))
