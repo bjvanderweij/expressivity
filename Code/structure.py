@@ -321,6 +321,7 @@ if __name__ == '__main__':
   level = int(raw_input(""))
   groups = segmentation(trees[tree], level)
   groups = subsegmentation(groups, second_order_tree, pitch, 1)
+  groups = reasonableSegmentation(melody)
   structured_notes = []
   loud = False
   for group in groups:

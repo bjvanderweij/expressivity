@@ -347,7 +347,7 @@ which can be found using Viterbi decoding.
 \item Perform notes other than melody notes the same as the nearest melody note
 \end{itemize}
 \subsection{Corpus and Representation}
-We were lucky to find and receive permission to use the CrestMusePEDB \ref{crestmuse} corpus, which is a corpus that contains expressive performances of Western classical music by famous pianists. The corpus contains about 
+We were lucky to find and receive permission to use the CrestMusePEDB \ref{crestmuse} corpus, which is a corpus that contains expressive performances of Western classical music by famous pianists. The music includes works by Bach, Beethoven and Chopin.
 
 Every performance is accompanied by an XML file containing information on how every note from the score is performed. This information consists of a loudness deviation, attack deviation and release deviation. The loudness is defined relative to a base loudness. The attack and release deviation are defined as the portion of a local beat duration that the attack and release deviates from the score. 
 
@@ -365,15 +365,31 @@ The deltafunctions that are used in the segmentation process use pitch intervals
 \item Use only melody
 \end{itemize}
 \subsection{Discretization}
+To calculate probabilities, we must discretize the feature and parameter vectors.
 
-\begin{itemize}
-\item Normalize every feature
-\item Discretization: int($\phi * d$) where d is the discretization parameter (the higher, the smaller the bins)
-\end{itemize}
+\paragraph*{Expression} Discretization of expression parameters is a delicate subject, we want to capture small changes in dynamics and tempo precisely, but outliers may fall in large bins. A sigmoid function is very useful for this purpose. The expression parameters are all logarithmic ratios so they theoretically vary from $-\infty$ to $\infty$. Therefore we first normalize the parameters by dividing through the mizimum absolute value found in the corpus. Discretization of a normalized expression parameter $p$ into $d$ bins is now done as follows:
 
-Discretization of expression is a delicate subject, we want to capture small changes in dynamics and tempo precisely, but outliers may fall in large bins. A sigmoid function is very useful for this purpose. 
+\begin{equation}
+D(p) = \texttt{floor}\left(\frac{d}{1+e^{-sp}}\right)
+\end{equation}
 
-All expression parameters are ratios: their values vary around 1.0. To get a linear scale we use the logarithmic ratio. The tempo ratio is defined as: $\log(\frac{\texttt{performancetempo}}{\texttt{scoretempo}})$. To get the desired properties of discretization we use a sigmoid function. $D(p) = d * \frac{1}{1+e^{-p}}$ where $D(p)$ is the discretization of $p$, $e$ is the expression parameter value and $p$ is the discretization parameter.
+Where $D(p)$ is the discretization of $p$, $s$ is a special sensitivity parameter indicating how small the changes in tempo that the discretization captures can be; a larger $s$ means a more sensitive discretization. Undiscretization is the reverse operation:
+
+\begin{equation}
+D^{-1}(p) = s^{-1} d^{-1}(-\log(p^{-1}) - 1)
+\end{equation}
+
+\paragraph*{Features}
+
+To discretize the features, we simply normalize every feature dividing through the maximum absolute value of that feature found in the corpus. After normalization we multiply the feature by a discretization parameter that determines the number of bins and take the floor.
+
+\begin{equation}
+D(f) = \texttt{floor}(f*d)
+\end{equation}
+
+Where $f$ is the normalized feature value.
+
+
 \subsection{Performance rendering}
 \begin{itemize}
 \item Extract melody

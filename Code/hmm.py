@@ -31,6 +31,7 @@ class HMM:
     # Used for good-turing smoothing:
     self.nr = None
     self.unseen_bigrams = 0
+    self.N = 0
     self.unseen_coincedences = 0
     # This doesn't really belong here, it is just used as convenient storage
     self.normalizations = []
@@ -67,12 +68,23 @@ class HMM:
         self.unigrams[tuple(unigram)] = self.unigrams.get(tuple(unigram), 0) + 1
 
   # Initialize Good-Turing smoothing
+  def new(self):
+    self.nr = {}
+    unseen = 0 #self.unseen_coincedences
+    for state in self.states:
+      for obs in self.observations:
+        if (obs, state) in self.coincedences:
+          self.nr[self.coincedences[obs, state]] = self.nr.get(self.coincedences[obs, state], 0) + 1
+        else: unseen += 1
+    self.nr[0] = unseen + len(self.states) * self.unseen_coincedences
+    self.N = sum([self.smoothed_frequency_count(None, i) for i in range(0, max(self.nr.keys())+1)])
+
+    
   def init_GT_smoothing(self):
     self.nr = {}
     for state in self.states:
       nr = {}
-      unseen = 0 #self.unseen_coincedences
-      sum = 0
+      unseen = self.unseen_coincedences
       for obs in self.observations:
         if (obs, state) in self.coincedences:
           nr[self.coincedences[obs, state]] = nr.get(self.coincedences[obs, state], 0) + 1
@@ -83,17 +95,16 @@ class HMM:
       #x, y = [], []
       for n,count in nr.iteritems():
         x.append(math.log(n+1))
-        y.append(count)
+        y.append(math.log(count))
       #x.append(math.log(max(nr.keys())+100))
       #y.append(1)
       #nr[0] = self.unseen_coincedences * len(self.states)
-      nr[0] = unseen
-      #print nr
+      print state, nr
       # Find a least squares fit to of the frequency counts to nr = a + b*log(x)
       #(a,b) = y[0], 0
       #if len(x) > 1:
       (a,b) = tools.linear_fit(x,y)
-      self.nr[state] = (a,b, nr)
+      self.nr[state] = (a,b,unseen)
 
   def testModel(self):
     print "Sum of smoothed probabilities of all coincedences starting with:"
@@ -103,55 +114,31 @@ class HMM:
       print 'Emission\t{0}: {1}'.format(state, p)
       #p = sum([self.transition_probability([state], state1) for state1 in self.states])
       #print 'Transition\t{0}: {1}'.format(state, p)
-    system.exit(0)
+    #system.exit(0)
 
   # Turing estimate
   def smoothed_frequency_count(self, state, c):
-    (a,b,nr) = self.nr[state]
-    # If we cannot find this frequency we back off to a logarithmic fit
-    # But perhaps interpolation  is better?
-    if c in nr:
-      smoothed = nr[c]
-    else:
-      # Linear interpolation:
-      counts = sorted(nr.keys())
-      if c > counts[-1]: return counts[-1]
-      for i in range(len(counts)):
-        if c > counts[i] and c < counts[i+1]:
-          smoothed =  nr[counts[i]] + ((c-counts[i])/float(counts[i+1]-counts[i])) * (nr[counts[i+1]] - nr[counts[i]]) 
-          if smoothed < 0:         
-            print counts, nr, c, nr[counts[i+1]] - nr[counts[i]], (c-counts[i]) / float(counts[i+1]-counts[i])
-            print nr[counts[i]] + ((c-counts[i])/float(counts[i+1]-counts[i])) * (nr[counts[i+1]] - nr[counts[i]]) 
-          return smoothed
-      #smoothed = a + b*math.log(c+1)
-      if smoothed < 1: smoothed = 1
-    if state == self.startstate:
-      #print smoothed, c, len(self.states)
-      pass
-    return smoothed
+    (a,b,unseen) = self.nr[state]
+    if c == 0: return unseen
+    return math.exp(a + b*math.log(c+1))
   
   # See Jurafsky and Martin
   def smoothed_count(self, state, c, k=5):
-    # This is apparently safe 
-    #if r == 1: r = 0
-    # We cannot do the code below because sometimes 1-(k+1)*Nk1/N1 is zero!
-    #if c > k: return c
+    if c == 0: return 1/self.smoothed_frequency_count(state, 0) * self.smoothed_frequency_count(state, 1)
+    if c > k: return c
     Nc = float(self.smoothed_frequency_count(state, c))
     Nc1 = float(self.smoothed_frequency_count(state, c+1)) 
-    #Nk1 = float(self.smoothed_frequency_count(state, k+1))
-    #N1 = float(self.smoothed_frequency_count(state, 1)) 
-    #if c == 0: return (c+1) * Nc1/Nc
+    Nk1 = float(self.smoothed_frequency_count(state, k+1))
+    N1 = float(self.smoothed_frequency_count(state, 1)) 
     #print (1 - (k+1) * Nk1/N1), Nk1, N1, c
-    #return ((c+1)*Nc1/Nc - c*(k+1)*Nk1/N1)/(1 - (k+1)*Nk1/N1)
-    return (c+1) * Nc1/Nc
+    return ((c+1)*Nc1/Nc - c*(k+1)*Nk1/N1)/(1 - (k+1)*Nk1/N1)
+    #return (c+1) * Nc1/Nc
     
 
   def emission_probability(self, state, observation):
     if self.smoothing=='good-turing' and self.unseen_coincedences > 0:
       if not self.nr:
         self.init_GT_smoothing()
-      (a,b,nr) = self.nr[state]
-      unseen = nr[0]
       #if state == self.endstate or state == self.startstate or observation == self.endstate or observation == self.startstate:
         #if observation == state:
         #  return 1.0
@@ -159,7 +146,7 @@ class HMM:
         #  return 0.0
       #print (self.smoothed_frequency_count(state, 1)/float(self.states[state]))
       return (self.smoothed_count(state, self.coincedences.get((observation, state), 0)) /\
-          float(self.states[state])) * (1 - self.smoothed_frequency_count(state, 1)/float(self.states[state]))
+          float(self.states[state]))
     return self.coincedences.get((observation, state), 0) / float(self.states[state])
 
 
