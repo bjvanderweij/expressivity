@@ -33,7 +33,7 @@ def train(trainset):
     deviations = db.getDeviation1(query)
     alignment = Alignment(score, deviations)
     melody = alignment.melody()
-    segments = structure.reasonableSegmentation(tools.parseScore(melody))
+    segments = structure.newSegmentation(tools.parseScore(melody))
     const += len(segments)
     lengths = sum([len(s) for s in segments])
     m = max([len(s) for s in segments])

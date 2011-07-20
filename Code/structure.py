@@ -282,6 +282,38 @@ def reasonableSegmentation(notes):
   # First get level one segments from a first order onset tree then subdivide the segments using a second order pitch tree on level 1
   return subsegmentation(segmentation(first_order_tree(onset, notes), 1), second_order_tree, pitch, 1)
 
+def adaptiveSubsegmentation(segments, treefunction, feature, tolerance=0, threshold=8):
+  newsegmentation = []
+  for segment in segments:
+    if len(segment) <= threshold:
+      newsegmentation.append(segment)
+      continue
+    newsegmentation += segmentation(treefunction(feature, segment, tolerance), 1)
+  return newsegmentation
+
+def adaptiveSegmentation(tree):
+  if isinstance(tree, Leaf):
+    return [[tree.contents]]
+  terminal = False
+  nodes = len(leaf_nodes(tree))
+  singletons = 0
+  for node in tree:
+    if isinstance(node, Leaf):
+      singletons += 1
+      if singletons > int(nodes) / 16:
+        terminal = True
+        break
+  if terminal:
+    return [[leaf.contents for leaf in leaf_nodes(tree)]]
+  result = []
+  for node in tree:
+    result += adaptiveSegmentation(node)
+  return result
+
+def newSegmentation(notes):
+  return adaptiveSegmentation(list_to_tree(first_order_tree(onset, notes)))
+
+
 if __name__ == '__main__':
   import sys
   if len(sys.argv) > 1:
@@ -296,7 +328,8 @@ if __name__ == '__main__':
   w = db.select()
   score = Score(db.getScore1(w))
   melodyscore = score.melody()
-  melody = tools.parseScore(melodyscore)
+  #melodyscore.show()
+  melody = tools.parseScore(melodyscore, range(1, 9))
   trees = [second_order_tree(onset, melody, 0.5), second_order_tree(pitch, melody, 0.0, ), first_order_tree(onset, melody, 0.0), first_order_tree(pitch, melody)]
 
   for tree in trees:
@@ -319,9 +352,11 @@ if __name__ == '__main__':
   tree = int(raw_input(''))
   print "Choose level"
   level = int(raw_input(""))
-  groups = segmentation(trees[tree], level)
-  groups = subsegmentation(groups, second_order_tree, pitch, 1)
-  groups = reasonableSegmentation(melody)
+#  groups = segmentation(trees[tree], level)
+#  groups = subsegmentation(groups, second_order_tree, pitch, 1)
+#  groups = adaptiveSegmentation(list_to_tree(trees[2]))
+#  groups = adaptiveSubsegmentation(groups, second_order_tree, pitch)
+  groups = newSegmentation(melody)
   structured_notes = []
   loud = False
   for group in groups:

@@ -25,6 +25,9 @@ def discretize(features, discretization=10, function='sigmoid', logarithmic=Fals
   # WORKAROUND
   if logarithmic:
     for i in range(len(features)):
+      if features[i] == 0:
+        print "WARNING zero expressionfeature"
+        features[i] = 1
       if features[i] < 0: 
         features[i] = -features[i]
         print "Warning: invalid featurevalue found, {0} in {1}".format(features[i], features)
@@ -73,6 +76,8 @@ def normalize(features, normalizations):
 # Make relative features and select subset
 def preprocess(features, subset=None):
   preprocessed = []
+  pitch_interval = 0
+  duration_ratio = 0
   for f0, f1 in zip(features[:-1], features[1:]):
     pitch0 = f0[sf.featureset.index('avg_pitch')]
     duration0 = f0[sf.featureset.index('avg_duration')]
@@ -100,8 +105,10 @@ def preprocess(features, subset=None):
       preprocessed.append(f0)
   # The last constituent:
   f = list(features[-1])
-  f[sf.featureset.index('avg_pitch')] = pitch_interval
-  f[sf.featureset.index('avg_duration')] = duration_ratio
+  if len(features) == 1:
+    print "Warning, nonsegmented work found"
+  f[sf.featureset.index('avg_pitch')] = 0
+  f[sf.featureset.index('avg_duration')] = 0
   if subset:
     preprocessed.append([f[i] for i in subset])
   else:
@@ -139,7 +146,7 @@ def trainHMM(hmm, features_set, expression_set, f_discretization=10, e_discretiz
     obs = [tuple(discretize(f, f_discretization, 'linear')) for f in features]
     states = []
     # Select the subset of features that will be used and discretise
-    for f, p in zip(features, expression):
+    for f, p in zip(features_set[work], expression):
       exp = discretize_expression(p, e_discretization, sensitivity=sensitivity) 
       #states.append(tuple(list(exp) + list(featureset)))
       states.append(exp)
@@ -156,6 +163,7 @@ def render(score, segmentation, hmm, f_discretization=10, e_discretization=30, s
   # Find the best expressive explanation for these features
   print "Finding best fitting expression"
   (p, states) = hmm.viterbi(observations)
+  print p, states
   expression = []
   for state in states:
     expression.append(undiscretize_expression(state, e_discretization, sensitivity=sensitivity))
@@ -218,17 +226,23 @@ def visualize(segmentation, expression, visualize=None, store=None, title=None):
   notes = []
   onsets = []
   values = []
+  param = ['Dynamics', 'Articulation', 'Tempo']
+  converter = NoteList()
+  converter.bpm = 100
   if not visualize:
-    visualize = selectSubset(['Dynamics', 'Articulation', 'Tempo'])
+    visualize = selectSubset(param)
   for segment, expr in zip(segmentation, expression):
     for note in segment:
-      onsets.append(note.on)
+      onsets.append(converter.ticks_to_milliseconds(note.on)/1000.0)
       values.append([expr[i] for i in visualize])
   import matplotlib.pyplot as plt
-  fig = plt.figure()
-  plt.plot(onsets, values)
+  fig = plt.figure(1)
+  for i in visualize:
+    plt.plot(onsets, [v[i] for v in values], label=param[i])
   plt.ylabel('Deviation')
-  plt.xlabel('Score time')
+  plt.xlabel('Score time (seconds)')
+  plt.legend(bbox_to_anchor=(0., 1), loc=2, borderaxespad=0.)
+
   if title:
     plt.title(title)
   #dplot = fig.add_subplot(111)
@@ -294,7 +308,7 @@ def playPerformance(selection, performance, expression, segmentation, name='Expr
     elif choice == 8: # Quit
       break
     
-def test(f_discretization=10, e_discretization=30, indep=False, selection=None, subset=None, corpus=None, smoothing=None, sensitivity=5):
+def test(f_discretization=10, e_discretization=30, indep=False, selection=None, subset=None, corpus=None, smoothing=None, sensitivity=5, segmentation='reasonable'):
   if not selection:
     selection = (db.select())
   score = db.getScore1(selection)
@@ -330,7 +344,13 @@ def test(f_discretization=10, e_discretization=30, indep=False, selection=None, 
   melody = tools.parseScore(melodyscore)
   # Segmentate the the score
   print "Analysing score"
-  onset = structure.reasonableSegmentation(melody)
+  if segmentation == 'reasonable':
+    print 'Using reasonable segmentation'
+    onset = structure.reasonableSegmentation(melody)
+  elif segmentation == 'new':
+    print 'Using new segmentation'
+    onset = structure.newSegmentation(melody)
+
   #onset = structure.groupings(structure.list_to_tree(structure.first_order_tree(structure.onset, melody, 0.1)), 1)
   #namelist = []
   #for group in onset:
@@ -360,6 +380,7 @@ if __name__ == '__main__':
   corpus = None
   smoothing = None
   sensitivity = 5
+  segmentation = 'reasonable'
   if len(a) > 1:
     if a[1] == 'load':
       loadperformance()
@@ -393,6 +414,11 @@ if __name__ == '__main__':
     elif a[1] == 'corpora':
       for x in tools.datasets():
         print 'Name:\t[{0}]\tInfo:\t{1}'.format(x, tools.corpusInfo(x))
+      exit(0)
+    elif a[1] == 'corpusinfo':
+      choice = util.menu("Select corpus", tools.datasets())
+      print tools.corpusInfo(tools.datasets()[choice])
+      tools.extendedCorpusInfo(tools.datasets()[choice])
       exit(0)
     elif a[1] == 'features':
       s = db.select()
@@ -462,6 +488,13 @@ if __name__ == '__main__':
         except IndexError, ValueError:
           print 'Error parsing command line arguments'
           exit(0)
+      elif a[i] == '-segmentation':
+        try:
+          segmentation = a[i+1]
+          i += 1
+        except IndexError, ValueError:
+          print 'Error parsing command line arguments'
+          exit(0)
       elif a[i] == '-subset':
         try:
           subset = [int(x)-2 for x in a[i+1:]]
@@ -488,7 +521,8 @@ if __name__ == '__main__':
       i += 1
 
 
-  test(f_discretization, e_discretization, indep, selection=selection, subset=subset, corpus=corpus, smoothing=smoothing, sensitivity=sensitivity)
+  test(f_discretization, e_discretization, indep, selection=selection, subset=subset, corpus=corpus,\
+      smoothing=smoothing, sensitivity=sensitivity, segmentation=segmentation)
 
   
 

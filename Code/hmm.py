@@ -82,6 +82,7 @@ class HMM:
     
   def init_GT_smoothing(self):
     self.nr = {}
+    undef = 0
     for state in self.states:
       nr = {}
       unseen = self.unseen_coincedences
@@ -89,43 +90,71 @@ class HMM:
         if (obs, state) in self.coincedences:
           nr[self.coincedences[obs, state]] = nr.get(self.coincedences[obs, state], 0) + 1
         else: unseen += 1
+
+      # We can't use these
+      if len(nr) == 1:
+        self.nr[state] = 'undefined'
+        undef += 1
+        continue
       # Things that never occur
       # Variable should be set when decoding is called
-      x,y = [1], [unseen]
-      #x, y = [], []
+      x, y = [], []
       for n,count in nr.iteritems():
-        x.append(math.log(n+1))
+        x.append(math.log(n))
         y.append(math.log(count))
+      if len(x) < 2:
+        x.append(math.log(n+1))
+        y.append(math.log(1))
       #x.append(math.log(max(nr.keys())+100))
       #y.append(1)
       #nr[0] = self.unseen_coincedences * len(self.states)
-      print state, nr
+      #print state, x, y, nr
       # Find a least squares fit to of the frequency counts to nr = a + b*log(x)
       #(a,b) = y[0], 0
       #if len(x) > 1:
       (a,b) = tools.linear_fit(x,y)
+      #if len(nr) == 1:
+    #    print '{0} unseen: {1} Nr: {2}'.format(state, unseen, nr)
+      if len(nr) > 5:
+        import matplotlib.pyplot as plt
+        print [nr[i] for i in nr.keys()]
+        print [math.exp(a+b*math.log(i+1)) for i in nr.keys()]
+        #plt.plot([1] + [i+1 for i in sorted(nr.keys())], [math.exp(i) for i in y])
+        #plt.show()
+        #raw_input("Press enter to continue...")
+        #plt.plot(range(1, 1000), [math.exp(a+b*math.log(i)) for i in range(1, 1000)])
+        #raw_input("Press enter to continue...")
       self.nr[state] = (a,b,unseen)
+    print "Smoothing disabled on {0} out of {1} states".format(undef, len(self.states))
 
   def testModel(self):
     print "Sum of smoothed probabilities of all coincedences starting with:"
+    #for state in self.states:
+    #  print self.transition_probability([self.startstate], state),
+    #  print self.emission_probability(state, self.observations.values()[2])
     for state in self.states:
       p = sum([self.emission_probability(state, obs) for obs in self.observations])
       #if p > 2 or p < 0:
-      print 'Emission\t{0}: {1}'.format(state, p)
-      #p = sum([self.transition_probability([state], state1) for state1 in self.states])
+      #print 'Emission\t{0}: {1}'.format(state, p)
+      N = self.smoothed_frequency_count(state, 0)
+      N1 = self.smoothed_frequency_count(state, 1)
+      #print 'Zero mass: {0}, Unseen: {1} N1: {2} Observations: {3}'.format(N1/N, N, N1, len(self.observations) + self.unseen_coincedences)
+      p = sum([self.transition_probability([state], state1) for state1 in self.states])
       #print 'Transition\t{0}: {1}'.format(state, p)
-    #system.exit(0)
+    #exit(0)
 
   # Turing estimate
   def smoothed_frequency_count(self, state, c):
+    if self.nr[state] == 'undefined':
+      return c
     (a,b,unseen) = self.nr[state]
     if c == 0: return unseen
     return math.exp(a + b*math.log(c+1))
   
   # See Jurafsky and Martin
   def smoothed_count(self, state, c, k=5):
-    if c == 0: return 1/self.smoothed_frequency_count(state, 0) * self.smoothed_frequency_count(state, 1)
     if c > k: return c
+    if self.nr[state] == 'undefined': return c
     Nc = float(self.smoothed_frequency_count(state, c))
     Nc1 = float(self.smoothed_frequency_count(state, c+1)) 
     Nk1 = float(self.smoothed_frequency_count(state, k+1))
@@ -136,18 +165,22 @@ class HMM:
     
 
   def emission_probability(self, state, observation):
+    N = float(self.states[state])
     if self.smoothing=='good-turing' and self.unseen_coincedences > 0:
       if not self.nr:
         self.init_GT_smoothing()
-      #if state == self.endstate or state == self.startstate or observation == self.endstate or observation == self.startstate:
-        #if observation == state:
-        #  return 1.0
-        #else:
-        #  return 0.0
-      #print (self.smoothed_frequency_count(state, 1)/float(self.states[state]))
-      return (self.smoothed_count(state, self.coincedences.get((observation, state), 0)) /\
-          float(self.states[state]))
-    return self.coincedences.get((observation, state), 0) / float(self.states[state])
+      c = self.coincedences.get((observation, state), 0)
+      if c == 0:
+        if self.nr[state] == 'undefined':
+          return 0
+        # 1/unseen * N_1/N
+        #print (1/float(self.smoothed_frequency_count(state, 0))) * (self.smoothed_frequency_count(state, 1)/N)
+        return (1/float(self.smoothed_frequency_count(state, 0))) * (self.smoothed_frequency_count(state, 1)/N)
+      else:
+        #print 'P({0}|{1}) = {2}, c={3} c*={4} '.format(observation, state, self.smoothed_count(state, c) / N, c, self.smoothed_count(state, c))
+        return self.smoothed_count(state, c) / N
+    else:
+      return self.coincedences.get((observation, state), 0) / N 
 
 
   def transition_probability(self, unigram, state, verbose=False):

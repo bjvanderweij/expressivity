@@ -92,6 +92,30 @@ def chooseFeatures():
 def datasets():
   return os.listdir('data')
 
+
+def extendedCorpusInfo(name):
+  (f, e, m) = loadFeatures(name)
+  version = m['version']
+  featureset = m['featureset']
+  unique = {}
+  print '============================================'
+  for work in f:
+    unique[(work[0], work[1])] = unique.get((work[0], work[1]), []) + [work[2]]
+  for work in unique:
+    print '{0}: {1}'.format(work, unique[work])
+  print '============================================'
+  for work in f:
+    features = f[work]
+    notes = 0
+    if 'const_length' in featureset:
+      index = featureset.index('const_length')
+      notes += sum([x[index] for x in features])
+    else:
+      # Some featureset strings miss the const_lenght index
+      # This code crashes if the featureset truly doesn't have this feature
+      notes += sum([x[12] for x in features])
+    print '{0}: notes: {1} const: {2}'.format(work, notes, len(features))
+
 def corpusInfo(name):
   (f, e, m) = loadFeatures(name)
   avg_notes = 0
@@ -121,7 +145,7 @@ def newParseScore(score):
   midifile.close()
   return NoteList('/tmp/tmp.mid')
   
-def parseScore(score):
+def parseScore(score, measures=None):
   output = NoteList() 
   defaultvelocity = 63
   for part in score.parts:
@@ -132,6 +156,9 @@ def parseScore(score):
       performancetime = measure.offset
       if not isinstance(measure, m21.stream.Measure):
         continue
+      if measures:
+        if not measure.number in measures:
+          continue
       for voice in measure.voices:
         for note in voice:
           notes = []
@@ -153,7 +180,7 @@ def parseScore(score):
 
 def recursive_print(l):
   if hasattr(l,'__iter__'):
-    return '({0})'.format(','.join([recursive_print(x) for x in l]))
+    return '[ {0}]'.format(' '.join([recursive_print(x) for x in l]))
   else:
     if hasattr(l,'name'):
       return l.name()
