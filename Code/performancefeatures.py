@@ -127,8 +127,8 @@ def vanDerWeijExpression(alignment, segments):
       (start_tempo, tempo_direction) = (tempos[0], 0)
     else:
       note_onsets = [n.on for n in segment]
-      (start_loudness, loudness_direction) = linear_fit(note_onsets, loudnesses)
-      (start_tempo, tempo_direction) = linear_fit(range(len(tempos)), tempos)
+      (start_loudness, loudness_direction) = (0, 0) #linear_fit(note_onsets, loudnesses)
+      (start_tempo, tempo_direction) = (0, 0) #linear_fit(range(len(tempos)), tempos)
 
     expression.append((average_ioi_ratio, average_relative_loudness, average_articulation, average_tempo, start_tempo, start_loudness, tempo_direction, loudness_direction))
 

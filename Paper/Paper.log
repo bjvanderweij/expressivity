@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.5.30)  20 JUL 2011 14:20
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.5.30)  20 JUL 2011 15:13
 entering extended mode
  %&-line parsing enabled.
 **Paper.tex
@@ -293,6 +293,26 @@ Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
 \qroofy=\count114
 \@qrscratchbox=\box52
 )
+(/usr/share/texmf-texlive/tex/latex/subfigure/subfigure.sty
+Package: subfigure 2002/03/15 v2.1.5 subfigure package
+\subfigtopskip=\skip127
+\subfigcapskip=\skip128
+\subfigcaptopadj=\dimen130
+\subfigbottomskip=\skip129
+\subfigcapmargin=\dimen131
+\subfiglabelskip=\skip130
+\c@subfigure=\count115
+\c@lofdepth=\count116
+\c@subtable=\count117
+\c@lotdepth=\count118
+
+****************************************
+* Local config file subfigure.cfg used *
+****************************************
+(/usr/share/texmf-texlive/tex/latex/subfigure/subfigure.cfg)
+\subfig@top=\skip131
+\subfig@bottom=\skip132
+)
 (/usr/share/texmf-texlive/tex/latex/graphics/graphicx.sty
 Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
 
@@ -304,151 +324,155 @@ File: graphics.cfg 2009/08/28 v1.8 graphics configuration of TeX Live
 )
 Package graphics Info: Driver file: pdftex.def on input line 91.
 )
-\Gin@req@height=\dimen130
-\Gin@req@width=\dimen131
+\Gin@req@height=\dimen132
+\Gin@req@width=\dimen133
 ) (./Paper.aux)
 \openout1 = `Paper.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
 
 (/usr/share/texmf-texlive/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count115
-\scratchdimen=\dimen132
+\scratchcounter=\count119
+\scratchdimen=\dimen134
 \scratchbox=\box53
-\nofMPsegments=\count116
-\nofMParguments=\count117
+\nofMPsegments=\count120
+\nofMParguments=\count121
 \everyMPshowfont=\toks33
-\MPscratchCnt=\count118
-\MPscratchDim=\dimen133
-\MPnumerator=\count119
+\MPscratchCnt=\count122
+\MPscratchDim=\dimen135
+\MPnumerator=\count123
 \everyMPtoPDFconversion=\toks34
 ) [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 112.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 116.
 
 
 (/usr/share/texmf-texlive/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 112.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 116.
 
 
-LaTeX Warning: Reference `approach' on page 1 undefined on input line 129.
+LaTeX Warning: Reference `approach' on page 1 undefined on input line 133.
 
 
-LaTeX Warning: Reference `structure' on page 1 undefined on input line 129.
+LaTeX Warning: Reference `structure' on page 1 undefined on input line 133.
 
 
-LaTeX Warning: Reference `deltaframework' on page 1 undefined on input line 129
+LaTeX Warning: Reference `deltaframework' on page 1 undefined on input line 133
 .
 
 [1]
-LaTeX Font Info:    Try loading font information for U+msa on input line 147.
+LaTeX Font Info:    Try loading font information for U+msa on input line 151.
  (/usr/share/texmf-texlive/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 147.
+LaTeX Font Info:    Try loading font information for U+msb on input line 151.
 
 (/usr/share/texmf-texlive/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 )
-Overfull \hbox (4.15845pt too wide) in paragraph at lines 149--150
+Overfull \hbox (4.15845pt too wide) in paragraph at lines 153--154
 []\OT1/cmr/m/n/10 NOTE(THE MO-TI-VA-TION SEC-TION SAYS MORE OR LESS THE SAME,
  []
 
 [2]
 
-LaTeX Warning: Reference `corpus' on page 3 undefined on input line 160.
+LaTeX Warning: Reference `corpus' on page 3 undefined on input line 164.
 
 
-LaTeX Warning: Reference `integration' on page 3 undefined on input line 170.
+LaTeX Warning: Reference `integration' on page 3 undefined on input line 174.
 
 
-LaTeX Warning: Reference `approach' on page 3 undefined on input line 184.
+LaTeX Warning: Reference `approach' on page 3 undefined on input line 188.
 
 
-LaTeX Warning: Reference `deltaframework' on page 3 undefined on input line 184
+LaTeX Warning: Reference `deltaframework' on page 3 undefined on input line 188
 .
 
 
-LaTeX Warning: Reference `features' on page 3 undefined on input line 184.
+LaTeX Warning: Reference `features' on page 3 undefined on input line 188.
 
 
-LaTeX Warning: Reference `model' on page 3 undefined on input line 184.
+LaTeX Warning: Reference `model' on page 3 undefined on input line 188.
 
 [3]
 
-LaTeX Warning: Reference `markwin' on page 4 undefined on input line 188.
+LaTeX Warning: Reference `markwin' on page 4 undefined on input line 192.
 
 
 LaTeX Warning: Reference `lerdahl1996generative' on page 4 undefined on input l
-ine 188.
+ine 192.
 
-[4] [5]
+[4] [5] <img/onset_sym.png, id=34, 882.29625pt x 224.84pt>
+File: img/onset_sym.png Graphic file (type png)
 
-LaTeX Warning: Reference `pitchonsettrees' on page 6 undefined on input line 23
-5.
+<use img/onset_sym.png>
+<img/second_order_pitch_sym.png, id=36, 972.63374pt x 411.5375pt>
+File: img/second_order_pitch_sym.png Graphic file (type png)
 
+<use img/second_order_pitch_sym.png>
+Overfull \hbox (14.5789pt too wide) in paragraph at lines 246--251
+ [][] 
+ []
 
-LaTeX Warning: Reference `pitchonsettrees' on page 6 undefined on input line 24
-0.
-
-<img/melodysegments.png, id=34, 118.40234pt x 34.9305pt>
+[6 <./img/onset_sym.png> <./img/second_order_pitch_sym.png>]
+<img/melodysegments.png, id=43, 118.40234pt x 34.9305pt>
 File: img/melodysegments.png Graphic file (type png)
 
 <use img/melodysegments.png>
-Overfull \hbox (10.20612pt too wide) in paragraph at lines 265--266
+Overfull \hbox (10.20612pt too wide) in paragraph at lines 281--282
 [][] 
  []
 
-[6]
-
-LaTeX Warning: Reference `features' on page 7 undefined on input line 280.
-
 [7 <./img/melodysegments.png>]
-Overfull \hbox (5.22234pt too wide) in paragraph at lines 301--303
+
+LaTeX Warning: Reference `features' on page 8 undefined on input line 295.
+
+
+Overfull \hbox (5.22234pt too wide) in paragraph at lines 316--318
 []\OT1/cmr/m/n/10 Some con-cepts that we think fall un-der struc-ture level ex-
 pres-sion are \OT1/cmr/m/it/10 crescendo
  []
 
-[8] [9]
+[8] [9] [10]
 
-LaTeX Warning: Reference `crestmuse' on page 10 undefined on input line 376.
+LaTeX Warning: Reference `crestmuse' on page 11 undefined on input line 391.
 
-[10] [11] [12]
+[11] [12] [13]
 
-LaTeX Warning: Reference `sec:features' on page 13 undefined on input line 465.
+LaTeX Warning: Reference `sec:features' on page 14 undefined on input line 480.
 
 
 
-Overfull \hbox (2.27466pt too wide) in paragraph at lines 472--472
+Overfull \hbox (2.27466pt too wide) in paragraph at lines 489--489
 []\OT1/cmr/bx/n/14.4 Integration with Note Level Per-for-mance Ren-
  []
 
-[13] [14] (./Paper.bbl) [15] [16] (./Paper.aux)
+[14] (./Paper.bbl) [15] [16] (./Paper.aux)
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 2635 strings out of 495006
- 31201 string characters out of 1181410
- 94768 words of memory out of 3000000
- 5775 multiletter control sequences out of 15000+50000
+ 2810 strings out of 495006
+ 33759 string characters out of 1181410
+ 97644 words of memory out of 3000000
+ 5942 multiletter control sequences out of 15000+50000
  12332 words of font info for 48 fonts, out of 3000000 for 9000
  68 hyphenation exceptions out of 8191
  27i,8n,24p,1195b,469s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -468,9 +492,9 @@ are/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texmf-te
 xlive/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texmf-texlive/fonts
 /type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texmf-texlive/fonts/type1/publ
 ic/amsfonts/cm/cmtt8.pfb>
-Output written on Paper.pdf (17 pages, 315698 bytes).
+Output written on Paper.pdf (17 pages, 363486 bytes).
 PDF statistics:
- 132 PDF objects out of 1000 (max. 8388607)
+ 136 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 16 words of extra memory for PDF output out of 10000 (max. 10000000)
 

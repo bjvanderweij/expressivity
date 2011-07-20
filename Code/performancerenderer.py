@@ -222,7 +222,7 @@ def loadperformance():
   seq = Sequencer()
   seq.play(performance)
 
-def visualize(segmentation, expression, visualize=None, store=None, title=None):
+def visualize(segmentation, expression, visualize=None, store=None, title=None, legend=False):
   notes = []
   onsets = []
   values = []
@@ -236,12 +236,13 @@ def visualize(segmentation, expression, visualize=None, store=None, title=None):
       onsets.append(converter.ticks_to_milliseconds(note.on)/1000.0)
       values.append([expr[i] for i in visualize])
   import matplotlib.pyplot as plt
-  fig = plt.figure(1)
+  fig = plt.figure(figsize=(12, 4))
   for i in visualize:
     plt.plot(onsets, [v[i] for v in values], label=param[i])
   plt.ylabel('Deviation')
   plt.xlabel('Score time (seconds)')
-  plt.legend(bbox_to_anchor=(0., 1), loc=2, borderaxespad=0.)
+  if legend:
+    plt.legend(bbox_to_anchor=(0., 1), loc=2, borderaxespad=0.)
 
   if title:
     plt.title(title)
