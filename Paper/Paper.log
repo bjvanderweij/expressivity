@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.5.30)  20 JUL 2011 15:13
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.5.30)  21 JUL 2011 16:16
 entering extended mode
  %&-line parsing enabled.
 **Paper.tex
@@ -326,7 +326,44 @@ Package graphics Info: Driver file: pdftex.def on input line 91.
 )
 \Gin@req@height=\dimen132
 \Gin@req@width=\dimen133
-) (./Paper.aux)
+) (./Paper.aux
+
+LaTeX Warning: Label `fig:donset' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:donset' multiply defined.
+
+
+LaTeX Warning: Label `fig:donset' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:donset' multiply defined.
+
+
+LaTeX Warning: Label `fig:donset' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:donset' multiply defined.
+
+
+LaTeX Warning: Label `fig:donset' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:donset' multiply defined.
+
+
+LaTeX Warning: Label `fig:donset' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:donset' multiply defined.
+
+
+LaTeX Warning: Label `fig:donset' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:donset' multiply defined.
+
+)
 \openout1 = `Paper.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 25.
@@ -341,8 +378,7 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 25.
 LaTeX Font Info:    ... okay on input line 25.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 25.
 LaTeX Font Info:    ... okay on input line 25.
-
-(/usr/share/texmf-texlive/tex/context/base/supp-pdf.mkii
+ (/usr/share/texmf-texlive/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count119
 \scratchdimen=\dimen134
@@ -356,123 +392,126 @@ LaTeX Font Info:    ... okay on input line 25.
 \everyMPtoPDFconversion=\toks34
 ) [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 116.
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [1] [2]
+LaTeX Font Info:    Try loading font information for U+msa on input line 150.
 
-
-(/usr/share/texmf-texlive/tex/latex/base/omscmr.fd
-File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 116.
-
-
-LaTeX Warning: Reference `approach' on page 1 undefined on input line 133.
-
-
-LaTeX Warning: Reference `structure' on page 1 undefined on input line 133.
-
-
-LaTeX Warning: Reference `deltaframework' on page 1 undefined on input line 133
-.
-
-[1]
-LaTeX Font Info:    Try loading font information for U+msa on input line 151.
- (/usr/share/texmf-texlive/tex/latex/amsfonts/umsa.fd
+(/usr/share/texmf-texlive/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 151.
+LaTeX Font Info:    Try loading font information for U+msb on input line 150.
 
 (/usr/share/texmf-texlive/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
-)
-Overfull \hbox (4.15845pt too wide) in paragraph at lines 153--154
-[]\OT1/cmr/m/n/10 NOTE(THE MO-TI-VA-TION SEC-TION SAYS MORE OR LESS THE SAME,
- []
-
-[2]
-
-LaTeX Warning: Reference `corpus' on page 3 undefined on input line 164.
-
-
-LaTeX Warning: Reference `integration' on page 3 undefined on input line 174.
-
-
-LaTeX Warning: Reference `approach' on page 3 undefined on input line 188.
-
-
-LaTeX Warning: Reference `deltaframework' on page 3 undefined on input line 188
-.
-
-
-LaTeX Warning: Reference `features' on page 3 undefined on input line 188.
-
-
-LaTeX Warning: Reference `model' on page 3 undefined on input line 188.
-
-[3]
-
-LaTeX Warning: Reference `markwin' on page 4 undefined on input line 192.
-
-
-LaTeX Warning: Reference `lerdahl1996generative' on page 4 undefined on input l
-ine 192.
-
-[4] [5] <img/onset_sym.png, id=34, 882.29625pt x 224.84pt>
+) [3] [4] [5]
+<img/onset_sym.png, id=34, 882.29625pt x 224.84pt>
 File: img/onset_sym.png Graphic file (type png)
-
-<use img/onset_sym.png>
+ <use img/onset_sym.png>
 <img/second_order_pitch_sym.png, id=36, 972.63374pt x 411.5375pt>
 File: img/second_order_pitch_sym.png Graphic file (type png)
 
 <use img/second_order_pitch_sym.png>
-Overfull \hbox (14.5789pt too wide) in paragraph at lines 246--251
+Overfull \hbox (14.5789pt too wide) in paragraph at lines 237--242
  [][] 
  []
 
-[6 <./img/onset_sym.png> <./img/second_order_pitch_sym.png>]
-<img/melodysegments.png, id=43, 118.40234pt x 34.9305pt>
+[6] <img/melodysegments.png, id=41, 118.40234pt x 34.9305pt>
 File: img/melodysegments.png Graphic file (type png)
 
 <use img/melodysegments.png>
-Overfull \hbox (10.20612pt too wide) in paragraph at lines 281--282
+Overfull \hbox (10.20612pt too wide) in paragraph at lines 272--273
 [][] 
  []
 
-[7 <./img/melodysegments.png>]
-
-LaTeX Warning: Reference `features' on page 8 undefined on input line 295.
-
-
-Overfull \hbox (5.22234pt too wide) in paragraph at lines 316--318
+[7 <./img/onset_sym.png> <./img/second_order_pitch_sym.png>] [8 <./img/melodyse
+gments.png>]
+Overfull \hbox (5.22234pt too wide) in paragraph at lines 313--315
 []\OT1/cmr/m/n/10 Some con-cepts that we think fall un-der struc-ture level ex-
 pres-sion are \OT1/cmr/m/it/10 crescendo
  []
 
-[8] [9] [10]
+[9] [10] [11] [12] [13]
 
-LaTeX Warning: Reference `crestmuse' on page 11 undefined on input line 391.
-
-[11] [12] [13]
-
-LaTeX Warning: Reference `sec:features' on page 14 undefined on input line 480.
+LaTeX Warning: Reference `sec:features' on page 14 undefined on input line 479.
 
 
 
-Overfull \hbox (2.27466pt too wide) in paragraph at lines 489--489
-[]\OT1/cmr/bx/n/14.4 Integration with Note Level Per-for-mance Ren-
+<img/Mozart-snt310-3_MozartNewSegmentation2_legend.png, id=71, 867.24pt x 289.0
+8pt>
+File: img/Mozart-snt310-3_MozartNewSegmentation2_legend.png Graphic file (type 
+png)
+ <use img/Mozart-snt310-3_MozartNewSegmentation2_legend.png>
+<img/Mozart-snt310-3_ChopinNewSegmentation.png, id=72, 867.24pt x 289.08pt>
+File: img/Mozart-snt310-3_ChopinNewSegmentation.png Graphic file (type png)
+
+<use img/Mozart-snt310-3_ChopinNewSegmentation.png>
+<img/Mozart-snt310-3_pires.png, id=73, 867.24pt x 289.08pt>
+File: img/Mozart-snt310-3_pires.png Graphic file (type png)
+
+<use img/Mozart-snt310-3_pires.png>
+Overfull \hbox (8.55652pt too wide) in paragraph at lines 498--507
+ [][] 
  []
 
-[14] (./Paper.bbl) [15] [16] (./Paper.aux)
+
+Overfull \hbox (8.55652pt too wide) in paragraph at lines 498--507
+ [] 
+ []
+
+
+Overfull \hbox (8.55652pt too wide) in paragraph at lines 498--507
+ [] 
+ []
+
+<img/Chopin-mzk019_MozartNewSegmentation2.png, id=74, 867.24pt x 289.08pt>
+File: img/Chopin-mzk019_MozartNewSegmentation2.png Graphic file (type png)
+
+<use img/Chopin-mzk019_MozartNewSegmentation2.png>
+<img/Chopin-mzk019_ChopinNewSegmentation.png, id=75, 867.24pt x 289.08pt>
+File: img/Chopin-mzk019_ChopinNewSegmentation.png Graphic file (type png)
+
+<use img/Chopin-mzk019_ChopinNewSegmentation.png>
+<img/Chopin-mzk019_franc.png, id=76, 867.24pt x 289.08pt>
+File: img/Chopin-mzk019_franc.png Graphic file (type png)
+
+<use img/Chopin-mzk019_franc.png>
+Overfull \hbox (8.55652pt too wide) in paragraph at lines 516--525
+ [][] 
+ []
+
+
+Overfull \hbox (8.55652pt too wide) in paragraph at lines 516--525
+ [] 
+ []
+
+
+Overfull \hbox (8.55652pt too wide) in paragraph at lines 516--525
+ [] 
+ []
+
+[14] [15 <./img/Mozart-snt310-3_MozartNewSegmentation2_legend.png> <./img/Mozar
+t-snt310-3_ChopinNewSegmentation.png> <./img/Mozart-snt310-3_pires.png>]
+[16 <./img/Chopin-mzk019_MozartNewSegmentation2.png> <./img/Chopin-mzk019_Chopi
+nNewSegmentation.png> <./img/Chopin-mzk019_franc.png>]
+
+LaTeX Warning: Reference `markwin' on page 17 undefined on input line 568.
+
+[17] [18] (./Paper.bbl
+Missing character: There is no â in font cmti10!
+Missing character: There is no € in font cmti10!
+Missing character: There is no ” in font cmti10!
+ [19]) [20] [21] (./Paper.aux)
 
 LaTeX Warning: There were undefined references.
 
+
+LaTeX Warning: There were multiply-defined labels.
+
  ) 
 Here is how much of TeX's memory you used:
- 2810 strings out of 495006
- 33759 string characters out of 1181410
- 97644 words of memory out of 3000000
- 5942 multiletter control sequences out of 15000+50000
+ 2836 strings out of 495006
+ 35034 string characters out of 1181410
+ 95844 words of memory out of 3000000
+ 5965 multiletter control sequences out of 15000+50000
  12332 words of font info for 48 fonts, out of 3000000 for 9000
  68 hyphenation exceptions out of 8191
  27i,8n,24p,1195b,469s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -492,9 +531,9 @@ are/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texmf-te
 xlive/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texmf-texlive/fonts
 /type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texmf-texlive/fonts/type1/publ
 ic/amsfonts/cm/cmtt8.pfb>
-Output written on Paper.pdf (17 pages, 363486 bytes).
+Output written on Paper.pdf (22 pages, 745991 bytes).
 PDF statistics:
- 136 PDF objects out of 1000 (max. 8388607)
+ 164 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 16 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 46 words of extra memory for PDF output out of 10000 (max. 10000000)
 

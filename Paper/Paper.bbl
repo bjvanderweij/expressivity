@@ -1,5 +1,41 @@
 \begin{thebibliography}{1}
 
+\bibitem{yqx}
+S.~Flossmann, M.~Grachten, and G.~Widmer.
+\newblock Expressive performance rendering: Introducing performance context.
+\newblock In {\em Proceedings of the SMC 2009—6th Sound and Music Computing
+  Conference}, pages 155--160, 2009.
+
+\bibitem{friberg2000generating}
+A.~Friberg, V.~Colombo, L.~Fryd{\'e}n, and J.~Sundberg.
+\newblock Generating musical performances with director musices.
+\newblock {\em Computer Music Journal}, 24(3):23--29, 2000.
+
+\bibitem{hashida2008new}
+M.~Hashida, T.~Matsui, and H.~Katayose.
+\newblock A new music database describing deviation information of performance
+  expressions.
+\newblock In {\em Proc. of the 9th International Conference on Music
+  Information Retrieval (ISMIR). Philadelphia}, 2008.
+
+\bibitem{hashida2006pop}
+M.~Hashida, N.~Nagata, and H.~Katayose.
+\newblock Pop-e: A performance rendering system for the ensemble music that
+  considered group expression.
+\newblock In {\em Proceedings of 9th International Conference on Music
+  Perception and Cognition}, pages 526--534, 2006.
+
+\bibitem{kim2010performance}
+T.H. Kim, S.~Fukayama, T.~Nishimoto, and S.~Sagayama.
+\newblock Performance rendering for polyphonic piano music with a combination
+  of probabilistic models for melody and harmony.
+\newblock 2010.
+
+\bibitem{lerdahl1996generative}
+F.~Lerdahl, R.~Jackendoff, and R.S. Jackendoff.
+\newblock {\em A generative theory of tonal music}.
+\newblock The MIT Press, 1996.
+
 \bibitem{markwin}
 M.J. van~den Berg.
 \newblock Aspects of a formal theory of music cognition.
