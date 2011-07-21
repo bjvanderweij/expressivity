@@ -110,17 +110,17 @@ Both machine learning and rule based techniques have been extensively applied to
 
 In the Western art music tradition it is customary that composers write down their compositions as scores. The task of a performer is to some extent to accurately reproduce the score; however, a perfect reproduction of a score generally sounds robotic and unpleasant. What makes a performance appealing is that the performer deviates from the score, altering timing, articulation and loudness, creating an expressive performance.
 
-Given a hypothetical perfect synthesizer, performing scores with computers is a trivial task. However \textit{expressively} performing music is not and much research has focussed on this issue. Such research is interesting from a scientific point of view as well as a practical point of view. Artificial intelligence, cognitive science and musicology may all benefit from a better understanding of expression in music. 
+Given a hypothetical perfect synthesizer, performing scores with computers is a trivial task. However \textit{expressively} performing music is not and much research has focussed on this issue. A wide selection of scientific fields may have interest in such research: Artificial intelligence, cognitive science and musicology all benefit from a better understanding of expression in music. 
 
 %Such systems Computers are widely used in music production. Since support for automatic expression is mostly absent or very poor in music editing software, some genres of music have evolved to sound acceptable even without expression. If good working automatic expression was available in software, computer music production could greatly widen its field of application.
 
-A rather practical approach to expressive music performance is to recreate it. A performance rendering system is a computer program that automatically creates an expressive, humanlike performance of a musical score. Performance rendering systems have always faced a problem of evaluation. It is debatable how much we should value correlation of generated performances with human performances of the same piece. A Chopin interpretation of Arthur Rubinstein can be radically different from a Chopin interpretation of Vladimir Horowitz, yet both can be seen valid interpretations. This problem has been one of the motivations for a yearly performance rendering event where performance rendering systems compete and are judged by an audience. 
+A rather practical approach to expressive music performance is to recreate it. A performance rendering system is a computer program that automatically creates an expressive, humanlike performance of a musical score. Performance rendering systems have always faced a problem of evaluation. It is debatable how much we should value correlation of generated performances with human performances of the same piece. A Chopin interpretation of Arthur Rubinstein can be radically different from a Chopin interpretation of Vladimir Horowitz, yet both are considered high quality interpretations. This problem has been one of the motivations for a yearly performance rendering event where performance rendering systems compete and are judged by an audience. 
 
 Over the years, many performance rendering systems have been proposed. Early attempts, like Director Musices \cite{friberg2000generating}, have applied sets of rules to the problem. As the availablity of corpora grew, machine learning systems have been proposed as well. Gerhard Widmer is working with a large dataset containing almost all works by Chopin, performed by one pianist. A performance rendering system using this dataset called YQX \cite{yqx} was proposed by Sebastian Flossman et al. in 2008. This system won in al three categories of Rencon2008. At Rencon2011 it was ranked best in a blind evaluation by experts and ranked second in the evaluation by an audience. It should be noted that despite its age, Director Musices ranked third in the blind evaluation, suggesting that although performance rendering systems have advanced, the field is still in its infancy.
 
 Many of the performance rendering systems that use machine learning, including YQX, predict expression at note level. Some do use structure. Pop-E\cite{hashida2006pop}, a rule based performance rendering system, uses a structure analysis based on Lerdahls and Jackendoff's grouping preference rules, but the structural analysis must be supplied to it by a human expert. In this thesis we will motivate the need for structure level expression and propose a system that purely uses structure level expression. The YQX system is very successful at the moment, therefore we will use this system as a reference for introducing our own system. In the following section we will provide a short analysis of some shortcomings of the YQX system and argue what we believe is the reason for these shortcomings.
 
-Section \ref{sec:approach} will describe the system as a whole. What we mean by structure level expression and why we think it is important is clarified in section \ref{sec:structure}. Section \ref{sec:method} will describe every component of the system in detail. 
+What we mean by structure level expression and why we think it is important is clarified in section \ref{sec:structure}. Section \ref{sec:approach} will describe the system as a whole. Section \ref{sec:method} will describe every component of the system in detail. Practical issues are discussed in section \ref{sec:implementation}. Results are presented in section \ref{sec:results} and discussed in section \ref{sec:discussion}. Suggestions for improving the system and future research can be found in section \ref{sec:futurework}.
 
 
 %Early performance rendering systems used rule-based approaches to recognise small local structures that are used as indications to add certain kind of expression. A prominent ongoing rule based system, \textit{Director Musices} uses 30 rules with weighting parameters that take music features as input and produce expressive actions as output. The rules where created with the help of musical experts. \textit{Pop-E} is a more recent rule based system that uses aspects of Lerdahl and Jackendoff's Generative Theory of Tonal Music(GTTM) [Introduce this]. Gerhard Widmer is doing research using a large dataset of performances aligned to scores.
@@ -131,7 +131,7 @@ Section \ref{sec:approach} will describe the system as a whole. What we mean by 
 \label{sec:structure}
 \subsection{Motivation}
 
-The YQX system, as the authors admit, tended to sometimes produce nervous sounding changes in expression. He presents two extensions that seek to generate smoother performances. The problem with these extensions is, as Widmer admits himself, that the increased smoothness comes at the expense of expressitivity. To counter this, he adds three explicit rules that he uses to postprocess the performances. We think the reason that Widmer stumbled upon this tradeoff between expressiveness and nervousness because the nervousness is inherent to the way performances are generated at note-level. The system simply misses one component of expression, namely structure level expression. 
+The YQX system, as Flossman et al. admit, tended to sometimes produce nervous sounding changes in expression. They present two extensions tailored towards generating smoother performances. The problem with these extensions is, as Flossman et al. also admit himself, is that the increased smoothness comes at the expense of expressitivity. To compensate for this, three explicit rules are added to postprocess the performances. We think the reason that Flossman et al. stumbled upon this tradeoff between expressiveness and nervousness is that the nervousness is inherent to note level performance rendering. Note level systems simply are not suited to capture one component of expression, namely structure level expression. 
 
 
 The system presented here will use structure exclusively to generate performances and will completely ignore note level expression. We hope that this system is able capture the sudden changes of expression that a note level system cannot easily learn. Sudden changes in expression occur frequently in expressive performances, a few notes may be played very loud, or very slow followed by soft notes played very fast. When done at the right moment, such sudden changes can greatly improve the humanlike feel of the performance, however when done at the wrong moment, they can ruin a performance. We think that at structure level it will be easier to capture the context in which sudden changes occur. 
@@ -153,11 +153,12 @@ Although the YQX does have some notion of structure\footnote{One of the note fea
 \section{Approach}
 \label{sec:approach}
 
-In this thesis, we propose a structure based performance rendering (SBPR) system. The system presented here ignores note level expression. Instead we will try to predict only constituent level expression. The assumption is that this kind of expression really exists in performances and that is different and independent from note level structure. We think that a constituent level system also corresponds better to how actual human performers play music. A performance redering system that only predicts note level expression would have rather meaningless fluctuations in tempo and dynamics as it does not have a notion of constituent level expression.
+In this thesis, we propose a structure based performance rendering (SBPR) system. The system presented here ignores note level expression. Instead we will try to predict only constituent (or structure) level expression. The assumption is that this kind of expression really exists in performances and that is different and independent from note level structure. We think that a constituent level system also corresponds better to how actual human performers play music. 
+%A performance redering system that only predicts note level expression would have rather meaningless fluctuations in tempo and dynamics as it does not have a notion of constituent level expression.
 
 %\subsection{Structure Based Performance Rendering}
 
-The system will be similar to YQX in a number of ways, but instead of predicting expression per note, it will predict expression per constituent. Every constituent will be played with consistend expression, the articulation, dynamics and tempo change only at constituent breaks.
+The system will be similar to YQX in a number of ways, but with the crucial difference that expression will not be predicted per note, but per constituent. Every constituent will be played with consistend expression, the articulation, dynamics and tempo change only at constituent breaks.
 
 We use a corpus that contains performances and corresponding scores of Western classical piano music. Every note in every performance has been associated with the corresponding score note so we can see exactly how every note in the score was played. The performances are of high quality and played by famous pianists. See section \ref{sec:corpus} for more details on the corpus.
 
@@ -184,18 +185,18 @@ This section will describe individual components of the system sketched in secti
 
 In his Phd thesis \cite{markwin}, Markwin van der Berg introduces a formal way of parsing music into parsetrees: the delta framework. He relates his work to the work of Lerdahl and Jackendoff \cite{lerdahl1996generative} but claims to have found a more general approach. Below, I will shortly describe the delta framework as proposed by Van der Berg.
 
-The delta framework is based on the intuition that differences between notes indicate splits between constituents. The higher the difference, the higher the level of split in the parse tree (where the root note is at the highest level). Van der Berg proposes a delta rule that converts a set of differences, or deltas, between notes into a parsetree following this intuition. 
+The delta framework is based on the intuition that differences between features of notes indicate splits between constituents. The higher the difference, the higher the level of split in the parse tree (where the root note is at the highest level). Van der Berg proposes a delta rule that converts a set of differences, or deltas, between notes into a parsetree following this intuition. 
 
 The differences between notes are defined as the difference in value of a certain note feature. More formally, we can look at a piece of music as a sequence of notes, ordered by onset time:
 
 \[M_{ij} = [n_i, n_{i+1}, \cdots, n_j]\]
 
-A set of basic features, $\Phi$, is assigned to each note. These are: \textbf{onset}, \textbf{pitch}, \textbf{loudness} and \textbf{release} (called offset by Van den Berg). From these two other features can be derived: \textbf{duration} and \textbf{virtual duration}. Duration is defined as \textbf{release($n_i$)} - \textbf{onset($n_i$)} while virtual duration is defined as \textbf{onset($n_{i+1}$)} - \textbf{onset($n_i$)}. 
+A set of basic features, $\Phi$, is assigned to each note. These are: \textbf{onset}, \textbf{pitch}, \textbf{loudness} and \textbf{release} (called offset by Van den Berg). From these, two other features can be derived: \textbf{duration} and \textbf{virtual duration}. Duration is defined as \textbf{release($n_i$)} - \textbf{onset($n_i$)} while virtual duration is defined as \textbf{onset($n_{i+1}$)} - \textbf{onset($n_i$)}. 
 
 The basic note features can be used to define delta functions, for example $\Delta\textbf{Pitch} = \textbf{Pitch}(n_i) - \textbf{Pitch}(n_{i-1})$. In general, a delta function $\delta(i)$ is defined as the difference of two notes in some feature $\phi$: $\delta(i) = \phi(n_i) - \phi(n_{i-1})$. We can apply a delta function to every pair of succeeding notes in a sequence to get a list of deltas: 
 \[\Delta M_{ij} = [\delta(n_{i+1}), \delta(n_{i+2}), \cdots, \delta(n_{j})]\]
 
-A recursive rule, called the delta rule can be used to translate a list of deltas into a grouping structure. The deltarule, DeltaRule($M_{ij}$), where $M_{ij}$ is the ordered list of notes that is to be analyzed and $A$ is the resulting analysis, is defined as \footnote{The version here is a slightly reformulated, although functionally eqivalent, version of Van den Berg's deltarule. See \cite{markwin} for his original version.}:
+A recursive rule, called the delta rule can be used to translate a list of deltas into a grouping structure. This ruled, called the delta rule is shown in algorithm \ref{alg:deltarule}, where DeltaRule($M_{ij}$) is a recursive call to the algorithm itself, $M_{ij}$ is the ordered list of notes to be analyzed and $A$ is the resulting analysis.\footnote{The version here is a slightly reformulated, although functionally equivalent, version of Van den Berg's deltarule. See \cite{markwin} for his original version.}:
 \begin{algorithm}
 \begin{algorithmic}
 \STATE{$D_{i+1,j} \leftarrow \Delta M_{ij}$}
@@ -211,24 +212,23 @@ A recursive rule, called the delta rule can be used to translate a list of delta
 \RETURN{$A$}
 \end{algorithmic}
 \caption{The delta rule}
-\label{deltarule}
+\label{alg:deltarule}
 \end{algorithm}
 
-The delta rule converts a sequence of notes into a nested list structure that can easily be interpreted as a tree. The deltarule can `parse' a piece of music into a \textit{parse tree}.
+The delta rule converts a sequence of notes into a nested list structure that can be interpreted as a tree. The deltarule can `parse' a piece of music into a \textit{parse tree}.
 
-It also possible to define higher order delta function (deltas of deltas). Second order deltafunction can be used to differentiate a group of ascending notes from a group of notes that have wildly varying pitches. Van den Berg notes that this generates ambigous grouping structures as for example a second order deltarule needs at least three notes to be specified. For three notes, three different grouping structures are possible: $[[n_1, n_2], n_3]$, $[n_1, n_2, n_3]]$ and $[n_1, [n_2, n_3]]$. Because we want to use a second order deltafunction for segmentation only, we choose to use only one interpretation: $[n_1, n_2], n_3]$. This choice is motivated by the intuition that if in a group of three notes the delta function in some feature between the first two notes is low and the delta function between the second and third note is high (thus resulting in a high second order deltafunction) we would want a constituent split to happen between the second and third note. Note again that segmentation, like structure, may often be ambigous and multiple interpretations may be right; for our purposes it is important that at least one of these right interpretations is chosen. 
+It is also possible to define higher order delta function (deltas of deltas). Second order deltafunction can be used to differentiate a group of ascending notes from a group of notes that have wildly varying pitches. Van den Berg notes that this generates ambigous grouping structures as for example a second order deltarule needs at least three notes to be specified. For three notes, three different grouping structures are possible: $[[n_1, n_2], n_3]$, $[n_1, n_2, n_3]]$ and $[n_1, [n_2, n_3]]$. Because we want to use a second order deltafunction for segmentation only, we choose to use only one interpretation: $[[n_1, n_2], n_3]$. This choice is motivated by the intuition that if in a group of three notes the delta function in some feature between the first two notes is low and the delta function between the second and third note is high (thus resulting in a high second order deltafunction) we would want a constituent split to happen between the second and third note. Note again that segmentation, like structure, may often be ambigous and multiple interpretations may be right; for our purposes it is important that at least one of these right interpretations is chosen. 
 
-Having defined first and second order deltafunctions and the deltarule, we can parse a piece of music into a delta tree or parse tree. Since we have a set of six basic note features, we have a set of six interpretations(parse trees) available for a piece of music. Intuition tells us that if a particular group of notes is found in multiple parse trees, this group of notes may be eligible to be a constituent. Van den Berg captures this intuition in the form of a \textit{yield rule}. A node in the parse tree is said to `yield' a group of notes if the node recursively contains this group of notes. If two or more nodes in different trees yield the same group of notes they should be connected according to the yield rule.
+Having defined first and second order deltafunctions and the deltarule, we can use first and second order deltafunctions to parse a piece of music into a parse tree. Since we have a set of six basic note features, we have a set of six interpretations(parse trees) available for a piece of music. Intuition tells us that if a particular group of notes is found in multiple parse trees, this group of notes may be eligible to be a constituent. Van den Berg captures this intuition in the form of a \textit{yield rule}. A node in the parse tree is said to `yield' a group of notes if the node recursively contains this group of notes. If two or more nodes in different trees yield the same group of notes they should be connected according to the yield rule.
 
 Unfortunately, the yield rule addresses the problem of how to interpret multiple parse trees quite poorly. We would like to have some way of combining parsetrees into one `consensus tree'. This is not what the yield rule does. The yield rule generates a set of trees in which some nodes may be interconnected but there does not seem to be a logical way to interpret this set of interpretations and connected nodes. Van den Berg does not further address this issue. In the next section we circumvent the problem completely by not using more than one interpretation at a time.
 
 \subsection{Segmentation}
 \label{sec:segmentation}
 
-A recursive structure like the parse trees generated by the delta framework is the kind of structure that we would ideally want to attribute to music. However, because of the problems with interpreting different parsetrees and because deltatrees do not necessarily represent the kind of structure that human musical intuition would attribute to music, we chose not to use a hierarchical structure and instead settle for a segmentation, derrived from deltatrees.
+A recursive structure like the parse trees generated by the delta framework is the kind of structure that we would ideally want to attribute to music. However, because of the problems with interpreting different parsetrees and because deltatrees do not necessarily represent the kind of structure that human musical intuition would attribute to music, we chose not to use a hierarchical structure and instead settle for a segmentation, which can be more reliably derrived from deltatrees.
 
-The goal is to find a `safe' method to segment music, that is, a method that does not generate segmentations that clash too much with human musical intuition. For this purpose the parse trees of delta onset (inter-onset interval, or simply IOI) and delta pitch (pitch interval) seem most suited: sudden jumps in pitch or onset often correspond to phrase transitions. These two trees are displayed in figure \ref{fig:pitchonsettrees}.
-
+The goal is to find a `safe' method to segment music, that is, a method that generates segmentations that do not clash with human musical intuition. For this purpose the parse trees of delta onset (inter-onset interval, or simply \textsc{IOI}) and delta pitch (pitch interval) seem most suited: sudden jumps in pitch or onset often correspond to phrase transitions. 
 \begin{figure}
 \centering
 \subfigure[Delta onset tree]{
@@ -243,30 +243,31 @@ The goal is to find a `safe' method to segment music, that is, a method that doe
 \label{fig:pitchonsettrees}
 \end{figure}
 
-In the trees in figure \ref{fig:pitchonsettrees} we can see that some nodes contain only subnodes, some nodes contain only notes and some nodes contain notes and subnodes. To translate the tree into a segmentation we use algorithm \ref{alg:segmentation} starting with the root node.
+A delta onset tree and a second order delta pitch tree of the first eight bars of Mozart's Turkish March can be found in figure \ref{fig:pitchonsettrees}. In his figure we can see that some nodes contain only subnodes, some nodes contain only notes and some nodes contain notes and subnodes. To translate the tree into a segmentation we use algorithm \ref{alg:segmentation} starting with the root node.
 \begin{algorithm}
 \caption{Segmentation}
 \label{alg:segmentation}
+For some node $n$, do:
 \begin{enumerate}
-\item If the node is a note, at it as a singleton constituent to the segmentation
-\item Expand the node.
-\item If the node contains only subnodes, or less than $x$ notes, start from step 1 for every subnode and -note.
-\item If the node contains at least $x$ notes, add the notes recursively contained by the current note to the segmentation.
+\item If $n$ is a note, add it as a singleton constituent to the segmentation
+\item Expand $n$.
+\item If $n$ contains only subnodes, or less than $x$ notes, start from step 1 for every subnode and -note.
+\item If $n$ contains at least $x$ notes, add the notes recursively contained by the current note to the segmentation.
 \end{enumerate}
 \end{algorithm}
 
-The value of $x$ represents the tolerance of singleton constituents. We need this parameter because sometimes very long notes cause top level splits in the onset tree. We have found that setting it to the number of notes recursively contained (yielded) by the current node divided by 16 works quite well for works by Mozart. Our segmentation of the first eight bars of Mozart's Turkish March using a delta onset tree can be found in figure \ref{fig:mozartsegments}.\footnote{Note that if you use the delta tree from figure  \ref{fig:donset} you will not get this segmentation. This segmentation was based on a onset delta tree over the entire piece instead of just the first eight bars}
+The value of $x$ represents the tolerance of singleton constituents. We need this parameter because sometimes very long notes cause top level splits in the onset tree. We have found that setting it to the number of notes recursively contained (yielded) by the current node divided by 16 works quite well for works by Mozart. Our segmentation of the first eight bars of Mozart's Turkish March using a delta onset tree can be found in figure \ref{fig:mozartsegments}.\footnote{Note that if the delta tree from figure  \ref{fig:donset} is used the segmentation will be different. This segmentation was based on a onset delta tree over the entire piece instead of just the first eight bars}
 
 %To translate a delta tree into a segmentation we simply take all the nodes at a particular level and consider the notes it yields as one group. However, as can be seen in figure \ref{pitchonsettrees} the trees are quite deep and it is not clear what level we should choose. We can make the trees shallower by slightly modifying the delta rule. We introduce a small tolerance parameter $\epsilon$ and instead of looking for the maximum in of a list of deltas, we look for deltas within $m - \epsilon$ and $m + \epsilon$, where $m$ is the maximum delta within a list of deltas.
 
-%Using this modification of the delta rule we can bring the delta onset tree back a shallow tree in which it is safe to choose groupings defined by the first level nodes. 
+%Using this modification of the delta rule we can bring the delta onset tree down to a shallow tree in which it is safe to choose groupings defined by the first level nodes. 
 
 
-For some music like Mozart, using only a delta onset tree works very well. However, some music, like Bach's inventionen uses almost no differentiation in IOI. Hence, a segmentation based solely on inter onset interval will not serve our purposes for this music.
+For some music like Mozart's, using only a delta onset tree works very well. However, some music, like Bach's Inventionen uses almost no differentiation in IOI. Hence, a segmentation based solely on inter onset interval will not work well for these pieces.
 
-To overcome this problem we will use pitch. While Bach's inventionen use almost no differentiation in IOI they can be segmented nonetheless. We will not make any attempt to combine pitch interval trees and IOI trees. Instead we take the segmentation given by the IOI tree and try to subdivide every segment using a pitch interval tree. 
+To overcome this problem we will use pitch. While Bach's Inventionen use almost no differentiation in IOI they can be segmented nonetheless. We will not make any attempt to combine pitch interval trees and IOI trees. Instead we take the segmentation given by the IOI tree and try to subdivide every segment using a pitch interval tree. 
 
-The sort of changes in pitch that indicate constituent transitions or not characterized very well by a first order pitch interval tree. For example a melody that has four notes that are chromatically ascending followed by four notes that have octave intervals between them should be segmented into two constituents where one contains the four ascending notes and another one contains the notes with octave intervals. A first order pitch interval tree puts the four ascending notes in one segment but puts the four octave interval notes in four separate segments. For this reason we use a second order pitch interval tree that does not suffer from this. 
+The sort of changes in pitch that indicate constituent transitions are not characterized very well by a first order pitch interval tree. For example a melody that has four notes that are chromatically ascending followed by four notes that have octave intervals between them should be segmented into two constituents where one contains the four ascending notes and another one contains the notes with octave intervals. A first order pitch interval tree puts the four ascending notes in one segment but puts the four octave interval notes in four separate segments. A second order pitch interval puts the split in this case exactly where we would want it.
 
 \begin{figure}
 \includegraphics[scale=3]{img/melodysegments}
@@ -279,9 +280,9 @@ The pitch interval segmentations are less reliable than the IOI segmentations bu
 \subsection{Constituent Features}
 \label{sec:scorefeatures}
 
-We can now convert a piece of music into a serie of constituents. These constituents will be used to predict expression so we must be able to charaterize them in a way correlates with the way they are performed. Analogous to YQX we are looking for the \textit{context} of the constituent as well as some description of the constituent itself.
+We can now convert a piece of music into a series of constituents. These constituents will be used to predict expression so we must be able to charaterize them in a way that correlates with the way they are performed. Analogous to YQX we are looking for the \textit{context} of the constituent as well as some description of the constituent itself.
 
-YQX uses a set of three score features: pitch interval, duration ratio and I-R arch. The pitch interval is simply the difference in pitch between the current note and the next note. The duration ratio is the logarithmic ratio of the duration of the current note and the duration of the next note.  The I-R arch is is the distance to the nearest point of closure, where closure is calculated from the Implication-Realization analysis. 
+YQX uses a set of three score features: pitch interval, duration ratio and I-R arch. The pitch interval is simply the difference in pitch between the current note and the next note. The duration ratio is the logarithmic ratio of the duration of the current note and the duration of the next note.  The I-R arch is is the distance to the nearest point of closure, where closure is calculated from the Implication-Realization analysis \cite{narmour1990analysis}. 
 
 We can generalize pitch interval and duration ratio per note to \textit{context features}: \textbf{mean pitch interval} and \textbf{mean duration ratio}. Definitions can be found below. 
 \begin{description}
@@ -293,7 +294,7 @@ The logarithmic ratio between the mean note duration of the current constituent 
 
 Since I-R arch is related to note-level expression it does not generalize well to a constituent level feature. 
 
-The two features above provide information about the constituent context: if they are both zero the constituent is apparently similar in mean pitch and mean duration. At note level there is not much to say about the current note besides the pitch and duration. However at constituent we would also like to say something about the constituent itself. For this purpose the \textit{constituent features} \textbf{mean delta pitch} and \textbf{mean delta duration} are used. These features say something about the amount change in pitch and the amount of change in note duration:
+The two features above provide information about the constituent context: if they are both zero the constituent is apparently similar in mean pitch and mean duration. At note level there is not much to say about the current note besides the pitch and duration. However at constituent level we would also like to say something about the constituent itself. For this purpose the \textit{constituent features} \textbf{mean delta pitch} and \textbf{mean delta duration} are used. These features say something about the amount change in pitch and the amount of change in note duration:
 \begin{description}
 \item[\textbf{Mean delta pitch}] The mean of all absolute pitch intervals within one constituent. 
 \item[\textbf{Mean delta duration}] The mean of all absolute differences in duration of succeeding notes within one constituent
@@ -301,7 +302,7 @@ The two features above provide information about the constituent context: if the
 
 Note the difference between these features and the context features. The context features use the mean pitch of one constituent and the the mean duration within constituent and compare these to the mean pitch and mean duration of the next constituent. The constituent features use the average of all pitch intervals within one constituent and the average of all differences in duration within one constituent, giving a measure of the spread of pitch and differentation of rhythm within the constituent.
 
-The complete set of score features consists of the two context features and the two constituent features:
+The complete set of score features consists of the two context features and the two constituent features. 
 
 
 
@@ -315,9 +316,9 @@ Concepts like crescendo, decrescendo and ritardando arguably fall under note lev
 
 YQX defines expression per note in three parameters: \textit{IOI ratio}, \textit{articulation} and \textit{loudness}. These parameters are defined as the logarithmic ratio between the performance IOI and the IOI notated in the score (calculated using some base tempo), the silence after a score note divided by the silence after the performed note and the logarithmic ratio between the loudness of the performed note and the mean loudness of the performance. 
 
-We are going to define our own expression parameters in a similar way but let us first look at some issues with the definitions YQX uses. The definition of articulations seems to be awkward and inconsistend. Awkward because if a score note is not followed by a rest, the notated silence after it is zero, rendering articulation undefined. Inconsisted because all the other features use logarithmic ratios and we see no reason to not use a logarithmic ratio for articulation as well. 
+We are going to define our own expression parameters in a similar way but let us first look at some issues with the definitions YQX uses. The definition of articulations seems to be awkward and inconsistend. Awkward because if a score note is not followed by a rest, the notated silence after it is zero, rendering articulation undefined. Inconsisted because all the other features use logarithmic ratios and we see no reason not to use a logarithmic ratio for articulation as well. 
 
-IOI ratio and loudness is defined relative to mean performance tempo and loudness. However, to capture micro expression in the form of small changes in onset relative to the beat, it seems more logical to define this feature relative to the local tempo, instead of relative to the global tempo. The same argument can be made for defining loudness relative to local loudness instead of global loudness. Structure level expression may help to define the concepts of local tempo and local loudness as we can simply take the mean tempo and loudness within one constituent and take this to be the local tempo and loudness.
+IOI ratio and loudness are defined relative to mean performance tempo and loudness. However, to capture micro expression in the form of small changes in onset relative to the beat, it seems more logical to define this feature relative to the local tempo, instead of relative to the global tempo. The same argument can be made for defining loudness relative to local loudness instead of global loudness. Structure level expression may help to define the concepts of local tempo and local loudness as we can simply take the mean tempo and loudness within one constituent and take this to be the local tempo and loudness.
 
 The expression parameters that we will use are:
 \begin{description}
@@ -332,7 +333,7 @@ Admittedly, we still use mean loudness and tempo to calculate tempo and loudness
 \label{sec:model}
 
 
-We can now reduce a piece of music, represented as a sequence of notes $N_{ij}$, of which we have a score and a performance, to a sequence of score feature vectors $F$ and expression parameter vectors $E$. First, we segment the score into constituents:
+We can now reduce a piece of music, represented as a sequence of notes $N_{ij}$, of which we have a score and a performance, to a sequence of \textit{score feature vectors} $F$ and \textit{expression parameter vectors} $E$. First, we segment the score into constituents:
 
 \[\texttt{segment}(N_{ij}) = \{c_1, c_2, \cdots, c_n\}\]
 We can then extract feature and parameter values from the score and the performance:
@@ -348,7 +349,7 @@ E &= \{e_1, e_2, \cdots, e_n\}
 \end{align*}
 where $e_i$ is a parameter vector, $t_i$ is the mean tempo ratio, $a_i$ is the mean articulation and $l_i$ is the mean loudness ratio.
 
-If we parse a number of pieces is this manner we can use it to do some statistics. We can for example calculate the features likely-hood which is the conditional probability of a feature vector $f_i$ given an expression vector $e_i$.
+We can construct a corpus by parsing a number of works in this manner. Given such a corpus, the rendering of a performance can be formulated as maximizing the probability: $P(E|F)$. We can estimate an approximation of this probability by calculating feature likelyhoods and transition probabilities. We approximate the features likely-hood, which is the conditional probability of a feature vector $f_i$ given an expression vector $e_i$, with the following probability:
 
 \begin{equation}
 \label{emission}
@@ -356,7 +357,7 @@ P(f_i|e_i) = \frac{c(f_i, e_i)}{c(e_i)}
 \end{equation}
 
 Where $c(x)$ is the number of occurences of $x$ in the corpus.
-The expression transition probability is defined by the unigram count of $e_i$ divided by the bigram count of $e_{i-1}, e_i$.
+The expression transition probability is approximated by the unigram count of $e_i$ divided by the bigram count of $e_{i-1}, e_i$.
 \begin{equation}
 \label{transition}
 P(e_i|e_{i-1}) = \frac{c(e_{i-1}, e_i)}{c(e_{i-1})}
@@ -475,8 +476,7 @@ We compiled two corpora from our the CrestMusePEDB. One contained 42 performance
 
 To test the system we trained it on one of the two corpora and let it perform a number of works. Here we show the results of four renderings of Chopin's Mazurka No. 19, Op. 30-2 and Mozart's Piano Sonata 310 III. To see what the effect was of each corpus on different styles of music we performed each work on both corpora. For reference, we also show a performance by one of the pianists in the corpus. Given the small dataset and the free nature of expression we did not expect the performances to correlate much with performances by human pianists. 
 
-For all four performances the system was trained with a discretization factor of five. In practice, this means that the constituent features (
-\ref{sec:features}) were discretized into five bins and the context features into a slightly larger number of bins since their values can be negative as well. The expression features where discretized into ten bins, with a sensitivity of five. The bins had to be this large to recognise most of the score features in the score that was to be performed. 
+For all four performances the system was trained with a discretization factor of five. In practice, this means that the constituent features (see section \ref{sec:scorefeatures}) were discretized into five bins and the context features into a slightly larger number of bins since their values can be negative as well. The expression features where discretized into ten bins, with a sensitivity of five. The bins had to be this large to recognise most of the score features in the score that was to be performed. 
 
 Segmentation was done using only delta onset trees. This proved to be most reliable for Mozart. 
 
@@ -565,7 +565,7 @@ In this thesis we have introduced a way of recognizing and using structure level
 
 Our goal was to create a system that was the complement of a note level performance rendering system. A system that dared to make sudden big changes in expression and clearly accentuates musical structure. Our results show that our system indeed is not shy this kind of big expressive changes. The performances of the system contain sometimes smooth, sometimes sudden changes of expression. It is up to the listener to judge whether these changes are actually an improvement over the smoother performances of note level performance rendering systems.
 
-The system that we proposed reduces the idea of structure to a segmentation of the score into constituents based on a structural analysis. For the structural analysis we used the delta framework\ref{markwin}, proposed by Markwin van den Berg. We noticed that a segmentation based on onset delta trees works well for some music but does not recognize all constituent transitions. To overcome this we suggested to use a second order pitch delta tree, but we ended up discarding this idea because it still produced awkward segmentations.  Our system would therefore not work very well on music that has a consistend rhythmic structure like some of Bach's music. In the end, an onset tree segmentation worked good enough to produce musically relevant segmentations given the the right genre of music.
+The system that we proposed reduces the idea of structure to a segmentation of the score into constituents based on a structural analysis. For the structural analysis we used the delta framework \cite{markwin}, proposed by Markwin van den Berg. We noticed that a segmentation based on onset delta trees works well for some music but does not recognize all constituent transitions. To overcome this we suggested to use a second order pitch delta tree, but we ended up discarding this idea because it still produced awkward segmentations.  Our system would therefore not work very well on music that has a consistend rhythmic structure like some of Bach's music. In the end, an onset tree segmentation worked good enough to produce musically relevant segmentations given the the right genre of music.
 
 To characterize constituents and their relations to other constituents we used constituent likely-hoods and bigram transition probabilities of expression. The resulting hidden Markov model could be used in combination with Viterbi decoding to generate performances. This approach is very similar to stochastic part of speech tagging using hidden Markov models.
 
