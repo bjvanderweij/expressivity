@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.5.30)  21 JUL 2011 17:31
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.5.30)  25 JUL 2011 02:44
 entering extended mode
  %&-line parsing enabled.
 **Paper.tex
@@ -357,12 +357,6 @@ LaTeX Warning: Label `fig:donset' multiply defined.
 
 LaTeX Warning: Label `sub@fig:donset' multiply defined.
 
-
-LaTeX Warning: Label `fig:donset' multiply defined.
-
-
-LaTeX Warning: Label `sub@fig:donset' multiply defined.
-
 )
 \openout1 = `Paper.aux'.
 
@@ -403,134 +397,125 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 150.
 (/usr/share/texmf-texlive/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 ) [3] [4] [5]
-<img/onset_sym.png, id=34, 882.29625pt x 224.84pt>
+<img/onset_sym.png, id=35, 882.29625pt x 224.84pt>
 File: img/onset_sym.png Graphic file (type png)
  <use img/onset_sym.png>
-<img/second_order_pitch_sym.png, id=36, 972.63374pt x 411.5375pt>
-File: img/second_order_pitch_sym.png Graphic file (type png)
-
-<use img/second_order_pitch_sym.png>
-Overfull \hbox (14.5789pt too wide) in paragraph at lines 237--242
+Overfull \hbox (14.5789pt too wide) in paragraph at lines 244--245
  [][] 
  []
 
-[6] <img/melodysegments.png, id=42, 118.40234pt x 34.9305pt>
+<img/second_order_pitch_sym.png, id=37, 972.63374pt x 411.5375pt>
+File: img/second_order_pitch_sym.png Graphic file (type png)
+
+<use img/second_order_pitch_sym.png> [6] [7 <./img/onset_sym.png> <./img/second
+_order_pitch_sym.png>]
+<img/melodysegments.png, id=48, 118.40234pt x 34.9305pt>
 File: img/melodysegments.png Graphic file (type png)
 
 <use img/melodysegments.png>
-Overfull \hbox (10.20612pt too wide) in paragraph at lines 273--274
+Overfull \hbox (10.20612pt too wide) in paragraph at lines 284--285
 [][] 
  []
 
-[7 <./img/onset_sym.png> <./img/second_order_pitch_sym.png>]
-
-LaTeX Warning: Citation `narmour1990analysis' on page 8 undefined on input line
- 285.
-
 [8 <./img/melodysegments.png>]
-Overfull \hbox (5.22234pt too wide) in paragraph at lines 314--316
+Overfull \hbox (5.22234pt too wide) in paragraph at lines 327--329
 []\OT1/cmr/m/n/10 Some con-cepts that we think fall un-der struc-ture level ex-
 pres-sion are \OT1/cmr/m/it/10 crescendo
  []
 
 [9] [10] [11] [12] [13] [14]
-<img/Mozart-snt310-3_MozartNewSegmentation2_legend.png, id=75, 867.24pt x 289.0
+<img/Mozart-snt310-3_MozartNewSegmentation2_legend.png, id=74, 867.24pt x 289.0
 8pt>
 File: img/Mozart-snt310-3_MozartNewSegmentation2_legend.png Graphic file (type 
 png)
  <use img/Mozart-snt310-3_MozartNewSegmentation2_legend.png>
-<img/Mozart-snt310-3_ChopinNewSegmentation.png, id=76, 867.24pt x 289.08pt>
+Overfull \hbox (8.55652pt too wide) in paragraph at lines 521--522
+ [][] 
+ []
+
+<img/Mozart-snt310-3_ChopinNewSegmentation.png, id=75, 867.24pt x 289.08pt>
 File: img/Mozart-snt310-3_ChopinNewSegmentation.png Graphic file (type png)
 
 <use img/Mozart-snt310-3_ChopinNewSegmentation.png>
-<img/Mozart-snt310-3_pires.png, id=77, 867.24pt x 289.08pt>
+Overfull \hbox (8.55652pt too wide) in paragraph at lines 526--527
+ [][] 
+ []
+
+<img/Mozart-snt310-3_pires.png, id=76, 867.24pt x 289.08pt>
 File: img/Mozart-snt310-3_pires.png Graphic file (type png)
 
 <use img/Mozart-snt310-3_pires.png>
-Overfull \hbox (8.55652pt too wide) in paragraph at lines 498--507
+Overfull \hbox (8.55652pt too wide) in paragraph at lines 531--532
  [][] 
  []
 
-
-Overfull \hbox (8.55652pt too wide) in paragraph at lines 498--507
- [] 
- []
-
-
-Overfull \hbox (8.55652pt too wide) in paragraph at lines 498--507
- [] 
- []
-
-<img/Chopin-mzk019_MozartNewSegmentation2.png, id=78, 867.24pt x 289.08pt>
+<img/Chopin-mzk019_MozartNewSegmentation2.png, id=77, 867.24pt x 289.08pt>
 File: img/Chopin-mzk019_MozartNewSegmentation2.png Graphic file (type png)
 
 <use img/Chopin-mzk019_MozartNewSegmentation2.png>
-<img/Chopin-mzk019_ChopinNewSegmentation.png, id=79, 867.24pt x 289.08pt>
+<img/Chopin-mzk019_ChopinNewSegmentation.png, id=78, 867.24pt x 289.08pt>
 File: img/Chopin-mzk019_ChopinNewSegmentation.png Graphic file (type png)
 
 <use img/Chopin-mzk019_ChopinNewSegmentation.png>
-<img/Chopin-mzk019_franc.png, id=80, 867.24pt x 289.08pt>
+<img/Chopin-mzk019_franc.png, id=79, 867.24pt x 289.08pt>
 File: img/Chopin-mzk019_franc.png Graphic file (type png)
 
 <use img/Chopin-mzk019_franc.png>
-Overfull \hbox (8.55652pt too wide) in paragraph at lines 516--525
+Overfull \hbox (8.55652pt too wide) in paragraph at lines 541--550
  [][] 
  []
 
 
-Overfull \hbox (8.55652pt too wide) in paragraph at lines 516--525
+Overfull \hbox (8.55652pt too wide) in paragraph at lines 541--550
  [] 
  []
 
 
-Overfull \hbox (8.55652pt too wide) in paragraph at lines 516--525
+Overfull \hbox (8.55652pt too wide) in paragraph at lines 541--550
  [] 
  []
 
 [15] [16 <./img/Mozart-snt310-3_MozartNewSegmentation2_legend.png> <./img/Mozar
 t-snt310-3_ChopinNewSegmentation.png> <./img/Mozart-snt310-3_pires.png>]
 [17 <./img/Chopin-mzk019_MozartNewSegmentation2.png> <./img/Chopin-mzk019_Chopi
-nNewSegmentation.png> <./img/Chopin-mzk019_franc.png>] [18] [19] (./Paper.bbl
+nNewSegmentation.png> <./img/Chopin-mzk019_franc.png>] [18] [19] [20] [21]
+(./Paper.bbl
 Missing character: There is no â in font cmti10!
 Missing character: There is no € in font cmti10!
 Missing character: There is no ” in font cmti10!
-)
-[20] [21] (./Paper.aux)
-
-LaTeX Warning: There were undefined references.
-
+) [22] (./Paper.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 2837 strings out of 495006
- 35058 string characters out of 1181410
- 95844 words of memory out of 3000000
- 5965 multiletter control sequences out of 15000+50000
- 12633 words of font info for 49 fonts, out of 3000000 for 9000
+ 2838 strings out of 495006
+ 35101 string characters out of 1181410
+ 94874 words of memory out of 3000000
+ 5967 multiletter control sequences out of 15000+50000
+ 12297 words of font info for 47 fonts, out of 3000000 for 9000
  68 hyphenation exceptions out of 8191
- 27i,8n,24p,1199b,469s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 27i,8n,24p,1057b,469s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/sha
 re/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-te
-xlive/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texmf-texlive/fonts/
-type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texmf-texlive/fonts/type1/publ
-ic/amsfonts/cm/cmex10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts
-/cm/cmmi10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi7.p
-fb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/sha
-re/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texmf-tex
-live/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texmf-texlive/fonts/ty
-pe1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-texlive/fonts/type1/public/am
-sfonts/cm/cmr7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr
-8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/s
-hare/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-
-texlive/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texmf-texlive/font
-s/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texmf-texlive/fonts/type1/pub
-lic/amsfonts/cm/cmtt10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfont
-s/cm/cmtt8.pfb>
-Output written on Paper.pdf (22 pages, 754668 bytes).
+xlive/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share/texmf-texlive/fonts/
+type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texmf-texlive/fonts/type1/public
+/amsfonts/cm/cmcsc10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/
+cm/cmex10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi10.p
+fb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/sha
+re/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-tex
+live/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texmf-texlive/fonts/t
+ype1/public/amsfonts/cm/cmr5.pfb></usr/share/texmf-texlive/fonts/type1/public/a
+msfonts/cm/cmr6.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cm
+r7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/
+share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texmf-t
+exlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/font
+s/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texmf-texlive/fonts/type1/publ
+ic/amsfonts/cm/cmti10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts
+/cm/cmtt8.pfb>
+Output written on Paper.pdf (23 pages, 762954 bytes).
 PDF statistics:
- 168 PDF objects out of 1000 (max. 8388607)
+ 171 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  46 words of extra memory for PDF output out of 10000 (max. 10000000)
 

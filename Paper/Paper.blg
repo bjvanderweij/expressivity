@@ -2,47 +2,46 @@ This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
 The top-level auxiliary file: Paper.aux
 The style file: plain.bst
 Database file #1: myref.bib
-Warning--empty journal in kim2010performance
-Warning--empty journal in markwin
-You've used 7 entries,
+Warning--empty journal in hiraga2002rencon
+You've used 12 entries,
             2118 wiz_defined-function locations,
-            535 strings with 5238 characters,
-and the built_in function-call counts, 2454 in all, are:
-= -- 229
-> -- 125
-< -- 2
-+ -- 51
-- -- 42
-* -- 157
-:= -- 403
-add.period$ -- 21
-call.type$ -- 7
-change.case$ -- 41
+            569 strings with 6085 characters,
+and the built_in function-call counts, 4072 in all, are:
+= -- 395
+> -- 182
+< -- 3
++ -- 76
+- -- 60
+* -- 267
+:= -- 668
+add.period$ -- 36
+call.type$ -- 12
+change.case$ -- 64
 chr.to.int$ -- 0
-cite$ -- 9
-duplicate$ -- 103
-empty$ -- 192
-format.name$ -- 42
-if$ -- 516
+cite$ -- 13
+duplicate$ -- 168
+empty$ -- 330
+format.name$ -- 60
+if$ -- 856
 int.to.chr$ -- 0
-int.to.str$ -- 7
-missing$ -- 8
-newline$ -- 38
-num.names$ -- 14
-pop$ -- 58
+int.to.str$ -- 12
+missing$ -- 13
+newline$ -- 63
+num.names$ -- 24
+pop$ -- 81
 preamble$ -- 1
-purify$ -- 35
+purify$ -- 54
 quote$ -- 0
-skip$ -- 74
+skip$ -- 116
 stack$ -- 0
-substring$ -- 120
-swap$ -- 26
-text.length$ -- 2
+substring$ -- 246
+swap$ -- 40
+text.length$ -- 3
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 26
-warning$ -- 2
-while$ -- 22
-width$ -- 8
-write$ -- 73
-(There were 2 warnings)
+type$ -- 44
+warning$ -- 1
+while$ -- 41
+width$ -- 14
+write$ -- 129
+(There was 1 warning)

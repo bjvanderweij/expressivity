@@ -313,6 +313,9 @@ def adaptiveSegmentation(tree):
 def newSegmentation(notes):
   return adaptiveSegmentation(list_to_tree(first_order_tree(onset, notes)))
 
+def noteLevel(notes):
+  return [[n] for n in notes]
+
 
 if __name__ == '__main__':
   import sys

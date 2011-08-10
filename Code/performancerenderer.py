@@ -351,6 +351,9 @@ def test(f_discretization=10, e_discretization=30, indep=False, selection=None, 
   elif segmentation == 'new':
     print 'Using new segmentation'
     onset = structure.newSegmentation(melody)
+  elif segmentation == 'notelevel':
+    print 'Using notelevel segmentation'
+    onset = structure.noteLevel(melody)
 
   #onset = structure.groupings(structure.list_to_tree(structure.first_order_tree(structure.onset, melody, 0.1)), 1)
   #namelist = []

@@ -51,10 +51,10 @@ class Alignment:
   def expressiveMelody(self):
     return self.performance(self.melody())
 
-  def melodyPerformance(self):
-    return self.performance(self.score, self.melody())
+  def melodyPerformance(self, articulations=None):
+    return self.performance(self.score, self.melody(), articulations)
 
-  def performance(self, score=None, melody=None):
+  def performance(self, score=None, melody=None, articulations=None):
     print "Creating performance"
     if not score:
       score = self.score
@@ -94,6 +94,7 @@ class Alignment:
               # If a melody is defined we need to know if the current note is a melody note
               # If it is not, we need to know if it is played at the same time as a melody note
               # If this isn't the case, use the tempo curve for expression and some measure of dynamics(nearest melody note?)
+              articulation = None
               if melody:
                 melodynote = None
                 # 
@@ -132,6 +133,8 @@ class Alignment:
                     print '{0} {1}'.format(measure.number, melodynote.offset)
                     deviation = None
                   deviation = self.alignment[melodynote.id, str(melodynote.pitch)]
+                  if articulations:
+                    articulation = articulations[melodynote.id, str(melodynote.pitch)]
                   if not deviation: continue
                   # Attack and release should be zero in this case
                   deviation = (0, 0, deviation[2], deviation[3])
@@ -139,6 +142,8 @@ class Alignment:
                   if not (melodynote.id, str(melodynote.pitch)) in self.alignment:
                     print '{0} {1}'.format(measure.number, melodynote.offset)
                   deviation = self.alignment[melodynote.id, str(melodynote.pitch)]
+                  if articulations:
+                    articulation = articulations[melodynote.id, str(melodynote.pitch)]
                 lastmelodynote = melodynote
               else:
                 if not (note.id, str(n.pitch)) in self.alignment:
@@ -159,12 +164,19 @@ class Alignment:
               onvel = deviation[2] * self.deviations.basedynamics
               offvel = 0
               on_ms = performancetime + self.deviations.getExpressiveTime(measure.number, note.offset)
-              off_ms = on_ms + self.deviations.getExpressiveDuration(measure.number, note.offset, n.duration.quarterLength)
+              if articulation:
+                duration = self.deviations.getExpressiveDuration(measure.number, note.offset, n.duration.quarterLength)
+                articulated_duration = articulation * float(duration)
+                print '{0} * {1} = {2}'.format(duration, articulation, articulated_duration)
+                off_ms = on_ms + articulated_duration
+              else:
+                off_ms = on_ms + self.deviations.getExpressiveDuration(measure.number, note.offset, n.duration.quarterLength)
               beatduration = self.deviations.getBeatDuration(measure.number, int(note.offset))
               if not beatduration:
                 beatduration = 1.0
               on_ms += deviation[0] * beatduration
-              off_ms += deviation[1] * beatduration
+              if not articulation:
+                off_ms += deviation[1] * beatduration
               #off_ms += deviation[1] * self.deviations.getBeatDuration(measure.number, int(note.offset + n.duration.quarterLenghth))
 
               on = performance.microseconds_to_ticks(on_ms)

@@ -28,6 +28,7 @@ def vanDerWeijPerformSimple(score, melody, segments, expression_vectors, average
   deviations.basedynamics = average_loudness
   tempo_deviations = {}
   alignment = {}
+  articulations = {}
 
  
   for segment, expression in zip(segments, expression_vectors):
@@ -74,12 +75,13 @@ def vanDerWeijPerformSimple(score, melody, segments, expression_vectors, average
       articulated_duration = articulation * float(duration)
       release = (articulated_duration - duration) / converter.microseconds_to_ticks(deviations.getBeatDuration(measure, int(scorenote.offset)))
       alignment[scorenote.id, str(scorenote.pitch)] = [0, release, average_relative_loudness, 0]
+      articulations[scorenote.id, str(scorenote.pitch)] = articulation
   
   a = Alignment(score, deviations, noAlign=True)
   a.alignment = alignment
   a.m = melody
 #  toFile(a.m, 'score.txt') 
-  return a.melodyPerformance()
+  return a.melodyPerformance(articulations=articulations)
 
 
 def perform(score, melodyscore, onset, expression, dynamics=None, tempo=None, converter=NoteList()):
