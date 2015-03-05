@@ -8,7 +8,7 @@ from score import *
 from alignment import *
 import os, re, util, analysescore, pickle
 
-DB_PATH = "../../Expressive-Performance_DATA/CrestMusePEDB/"
+DB_PATH = "/home/bastiaan/PhD/Data/CrestMusePEDB/"
 VERSIONS = ['PEDBv2.2', 'PEDBv2.3', 'PEDBv2.4.1', 'PEDBv2.5', 'PEDBv3.0']
 
 composers = {'Bach':'bac', 'Bartok':'bar', 'Grieg':'gri', 'Mozart':'moz', \
