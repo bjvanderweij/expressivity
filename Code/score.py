@@ -69,7 +69,7 @@ class Score:
                                         if not isinstance(note,m21.chord.Chord):
                                             voice.append(note)
                                         else:
-                                            pitches = note.sortDiatonicAscending().pitches
+                                            pitches = list(note.sortDiatonicAscending().pitches)
                                             pitches.reverse()
                                             n = m21.note.Note()
                                             n.pitch = pitches[0]

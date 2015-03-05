@@ -9,7 +9,7 @@ from alignment import *
 import os, re, util, analysescore, pickle
 
 DB_PATH = "/home/bastiaan/PhD/Data/CrestMusePEDB/"
-VERSIONS = ['PEDBv2.2', 'PEDBv2.3', 'PEDBv2.4.1', 'PEDBv2.5', 'PEDBv3.0']
+VERSIONS = ['PEDBv2.2', 'PEDBv2.3', 'PEDBv2.4.1', 'PEDBv2.5', 'PEDBv3.0', 'PEDBv3.1']
 
 composers = {'Bach':'bac', 'Bartok':'bar', 'Grieg':'gri', 'Mozart':'moz', \
     'Beethoven':'bee', 'Chopin':'cho', 'Schumann':'sch', 'Mussorgsky':'mus',\
@@ -17,14 +17,14 @@ composers = {'Bach':'bac', 'Bartok':'bar', 'Grieg':'gri', 'Mozart':'moz', \
 
 soundfonts = {'Bosendorfer PIANO / GIGA':'b', 'GPO-Concert-Steinway-ver2.sf2':'g', 'YAMAHA MOTIF-XF':'y'}
 
-#pianists = {'Andras Schiff':'schiff', 'Sviatoslav Richter':'Richter', 'Glenn Gould':'Gould',\
-#    'Friedrich Gulda':'Gulda', 'Hiroko Nakamura':'Nakamura', 'Norio Shimizu':'Shimizu',\
-#    'Vladimir Ashkenazy':'Ashkenazy', 'Alfred Brendel':'Brendel', 'Martha Argerich':'Argerich',\
-#    'Christoph Eschenbach':'Eschenbach', 'Ingrid Haebler':'Haebler', 'Lili Kraus':'Kraus', 'Maurizio Pollini':'Pollini',\
-#    'Vladimir S. Horowitz':'Horowitz', 'Maria J. Pires':'Pires', 'Tamas Vasary':'Vasary',\
-#    'Alfred D. Cortot':'Cortot', 'Alicia De Larrocha':'Larrocha', 'Ivo Pogorelich':'Pogorelich',\
-#    'Claudio Arrau':'Arrau', 'Rafal Brechacz':'Brechacz', 'Jorge Bolet':'Bolet', 'Stanislav Bunin':'Bunin',\
-#    'Halina Czerny-Stefanska':'Stefanska', 'Dang Thai Son':'Son', 'Samson Francois':'Francois', 'Eva Poblocka':'Poblocka'}
+pianists = {'Andras Schiff':'schiff', 'Sviatoslav Richter':'Richter', 'Glenn Gould':'Gould',\
+    'Friedrich Gulda':'Gulda', 'Hiroko Nakamura':'Nakamura', 'Norio Shimizu':'Shimizu',\
+    'Vladimir Ashkenazy':'Ashkenazy', 'Alfred Brendel':'Brendel', 'Martha Argerich':'Argerich',\
+    'Christoph Eschenbach':'Eschenbach', 'Ingrid Haebler':'Haebler', 'Lili Kraus':'Kraus', 'Maurizio Pollini':'Pollini',\
+    'Vladimir S. Horowitz':'Horowitz', 'Maria J. Pires':'Pires', 'Tamas Vasary':'Vasary',\
+    'Alfred D. Cortot':'Cortot', 'Alicia De Larrocha':'Larrocha', 'Ivo Pogorelich':'Pogorelich',\
+    'Claudio Arrau':'Arrau', 'Rafal Brechacz':'Brechacz', 'Jorge Bolet':'Bolet', 'Stanislav Bunin':'Bunin',\
+    'Halina Czerny-Stefanska':'Stefanska', 'Dang Thai Son':'Son', 'Samson Francois':'Francois', 'Eva Poblocka':'Poblocka'}
 
 # Wrappers
 def getScoreMidiPath1(t):  return getScoreMidiPath(t[0], t[1], t[2], t[3])

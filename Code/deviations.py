@@ -1,7 +1,7 @@
 from representation import *
 from music21 import *
 from bs4 import BeautifulSoup
-import os, pickle
+import os, pickle, re
 
 class Deviations:
 
@@ -56,7 +56,7 @@ class Deviations:
         print("Reading target score")
         f = open(targetpath)
         targetfile = f.read()
-        target = BeautifulStoneSoup(targetfile)
+        target = BeautifulSoup(targetfile, 'xml')
 
         # For speed: put all measure tags in a dictionary
         print("Constructing measures dictionary")
@@ -70,7 +70,7 @@ class Deviations:
         pointerexp = re.compile('@id=\'(.*)\'\]/measure\[\@number=\'(.*)\'\]/note\[(.*)\]')
 
         for tag in tags:
-            m = re.search(pointerexp, tag.attrs[0][1])
+            m = re.search(pointerexp, tag['xlink:href'])
             if not m:
                 print("xpointer reference didn't match, bug in code or bug in deviation file")
                 continue
