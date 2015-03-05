@@ -11,7 +11,7 @@ class HMM:
     # Now it's just bigrams
     self.order = order
     self.smoothing = smoothing
-    print self.smoothing
+    print(self.smoothing)
 
     self.startstate = ('start',)
     self.endstate = ('end',)
@@ -99,7 +99,7 @@ class HMM:
       # Things that never occur
       # Variable should be set when decoding is called
       x, y = [], []
-      for n,count in nr.iteritems():
+      for n,count in nr.items():
         x.append(math.log(n))
         y.append(math.log(count))
       if len(x) < 2:
@@ -117,18 +117,18 @@ class HMM:
     #    print '{0} unseen: {1} Nr: {2}'.format(state, unseen, nr)
       if len(nr) > 5:
         import matplotlib.pyplot as plt
-        print [nr[i] for i in nr.keys()]
-        print [math.exp(a+b*math.log(i+1)) for i in nr.keys()]
+        print([nr[i] for i in list(nr.keys())])
+        print([math.exp(a+b*math.log(i+1)) for i in list(nr.keys())])
         #plt.plot([1] + [i+1 for i in sorted(nr.keys())], [math.exp(i) for i in y])
         #plt.show()
         #raw_input("Press enter to continue...")
         #plt.plot(range(1, 1000), [math.exp(a+b*math.log(i)) for i in range(1, 1000)])
         #raw_input("Press enter to continue...")
       self.nr[state] = (a,b,unseen)
-    print "Smoothing disabled on {0} out of {1} states".format(undef, len(self.states))
+    print("Smoothing disabled on {0} out of {1} states".format(undef, len(self.states)))
 
   def testModel(self):
-    print "Sum of smoothed probabilities of all coincedences starting with:"
+    print("Sum of smoothed probabilities of all coincedences starting with:")
     #for state in self.states:
     #  print self.transition_probability([self.startstate], state),
     #  print self.emission_probability(state, self.observations.values()[2])
@@ -217,15 +217,15 @@ class HMM:
 
 
   def print_dptable(self, V):
-    print "    ",
-    for i in range(len(V)): print "{0}".format("{0}".format(i)),
-    print
+    print("    ", end=' ')
+    for i in range(len(V)): print("{0}".format("{0}".format(i)), end=' ')
+    print()
 
-    for y in V[0].keys():
-        print "{0}: ".format(y),
+    for y in list(V[0].keys()):
+        print("{0}: ".format(y), end=' ')
         for t in range(len(V)):
-            print "{0}".format("{0}".format(V[t][y])),
-        print
+            print("{0}".format("{0}".format(V[t][y])), end=' ')
+        print()
 
   # Source: Wikipedia article on viterbi algorithm
   def viterbi(self, obs):
@@ -241,7 +241,7 @@ class HMM:
     self.unseen_coincedences = unseen
     self.testModel()
     if unseen > 0:
-      print "{0} out of {1} observations do not occur in the corpus!".format(unseen, len(obs))
+      print("{0} out of {1} observations do not occur in the corpus!".format(unseen, len(obs)))
     obs = obs + [self.endstate]
     V = [{}]
     path = {}
@@ -256,7 +256,7 @@ class HMM:
       V.append({})
       newpath = {}
 
-      for y in self.states.keys() + [self.endstate]:
+      for y in list(self.states.keys()) + [self.endstate]:
         (prob, state) = max([(V[t-1][y0] * self.transition_probability([y0], y) *\
           self.emission_probability(y, obs[t]), y0) for y0 in self.states])
         V[t][y] = prob
@@ -275,10 +275,10 @@ class HMM:
   def storeInfo(self, f):
     out = open(f, 'w')
     out.write('NGRAMS:\n')
-    for bigram, value in self.bigrams.iteritems():
+    for bigram, value in self.bigrams.items():
       out.write('{0}:\t{1}\n'.format(str(bigram), value))
     out.write('COINCEDENCES:\n')
-    for coincedence, value in self.coincedences.iteritems():
+    for coincedence, value in self.coincedences.items():
       out.write('{0}:\t{1}\n'.format(str(coincedence), value))
     out.close()
 
@@ -370,7 +370,7 @@ class HMM_indep(HMM):
           unseen_bigrams += 1
 
       x,y = [1], [self.unseen_coincedences * len(self.states)]
-      for n,count in c_nr.iteritems():
+      for n,count in c_nr.items():
         x.append(math.log(n+1))
         y.append(count)
       # Find a least squares fit to of the frequency counts to nr = a + b*log(x)
@@ -384,7 +384,7 @@ class HMM_indep(HMM):
       self.nr[(i, state), 'coincedence'] = (a,b, c_nr)
 
       p,q = [0], [unseen_bigrams]
-      for n,count in bigram_nr.iteritems():
+      for n,count in bigram_nr.items():
         p.append(math.log(n))
         q.append(count+1)
       # Find a least squares fit to of the frequency counts to nr = a + b*log(x)
@@ -401,12 +401,12 @@ class HMM_indep(HMM):
     return 'States:\n{0}\nNgrams:\n{1}\nLessergrams:\n{2}'.format(self.states, self.bigrams, self.unigrams)
 
   def testModel(self):
-    print "Sum of smoothed probabilities of all coincedences starting with:"
+    print("Sum of smoothed probabilities of all coincedences starting with:")
     for state in self.states:
       p = sum([self.emission_probability(state, obs) for obs in self.observations])
-      print 'E{0}: {1}'.format(state, p)
+      print('E{0}: {1}'.format(state, p))
       p = sum([self.transition_probability([state], state1) for state1 in self.states])
-      print 'T{0}: {1}'.format(state, p)
+      print('T{0}: {1}'.format(state, p))
 
 
 

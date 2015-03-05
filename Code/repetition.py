@@ -9,7 +9,7 @@ def repetition(feature, notes, deltas=None):
   if not deltas:
     deltas = deltalist(feature, notes)
   else:
-    print deltas
+    print(deltas)
   repetition = [0 for i in range(len(deltas))]
   patterns = {}
   for i in range(len(deltas)):
@@ -20,7 +20,7 @@ def repetition(feature, notes, deltas=None):
     remove = []
     #print "================="
     #print patterns
-    for pattern, indices in patterns.iteritems():
+    for pattern, indices in patterns.items():
       if len(indices) < 2: continue
       added = []
       for index in indices[:]:
@@ -41,7 +41,7 @@ def repetition(feature, notes, deltas=None):
 
     patterns = newpatterns
 
-  for key, value in patterns.iteritems():
+  for key, value in patterns.items():
     if len(value) > 1:
       if value[0] - 1 > 0:
         p = ",".join([str(x) for x in deltas[value[0]-1:value[0] + len(key.split(","))]])
@@ -55,7 +55,7 @@ def repetition(feature, notes, deltas=None):
   #print "Postprocesed output: {0}".format(repetition)
   #repetition.pop(0)
   #repetition.append(0)
-  print repetition
+  print(repetition)
   return repetition
       
 def clean_deltalist(deltas):

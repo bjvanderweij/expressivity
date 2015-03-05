@@ -26,11 +26,11 @@ def discretize(features, discretization=10, function='sigmoid', logarithmic=Fals
   if logarithmic:
     for i in range(len(features)):
       if features[i] == 0:
-        print "WARNING zero expressionfeature"
+        print("WARNING zero expressionfeature")
         features[i] = 1
       if features[i] < 0: 
         features[i] = -features[i]
-        print "Warning: invalid featurevalue found, {0} in {1}".format(features[i], features)
+        print("Warning: invalid featurevalue found, {0} in {1}".format(features[i], features))
     features = [math.log(x) for x in features]
   if function == 'linear':
     for i in range(len(features)):
@@ -106,7 +106,7 @@ def preprocess(features, subset=None):
   # The last constituent:
   f = list(features[-1])
   if len(features) == 1:
-    print "Warning, nonsegmented work found"
+    print("Warning, nonsegmented work found")
   f[sf.featureset.index('avg_pitch')] = 0
   f[sf.featureset.index('avg_duration')] = 0
   if subset:
@@ -121,24 +121,24 @@ def preprocess(features, subset=None):
 
 def trainHMM(hmm, features_set, expression_set, f_discretization=10, e_discretization=10, subset=None, ignore=None, sensitivity=5):
   preprocessed = {}
-  for work in features_set.keys():
+  for work in list(features_set.keys()):
     preprocessed[work] = preprocess(features_set[work], subset)
  
   # Ugly way to get the number of features
   l = 0
-  for work in preprocessed.keys():
+  for work in list(preprocessed.keys()):
     l = len(preprocessed[work][0])
     break
 
   normalizations = [0 for i in range(l)]
-  for work in preprocessed.keys():
+  for work in list(preprocessed.keys()):
     m = []
     for i in range(l):
       m = max([abs(f[i]) for f in preprocessed[work]])
       if m > normalizations[i]:
         normalizations[i] = m
   hmm.normalizations = normalizations
-  for work in preprocessed.keys():
+  for work in list(preprocessed.keys()):
     if work[0] == ignore[0] and work[1] == ignore[1]:
       continue
     features = normalize(preprocessed[work], normalizations)
@@ -159,15 +159,15 @@ def render(score, segmentation, hmm, f_discretization=10, e_discretization=30, s
   # Discretize
   features = normalize(preprocess(sf.vanDerWeijFeatures(score, segmentation), subset), hmm.normalizations)
   observations = [tuple(discretize(f, f_discretization, 'linear')) for f in features]
-  print 'Observations:\n{0}'.format(observations)
+  print('Observations:\n{0}'.format(observations))
   # Find the best expressive explanation for these features
-  print "Finding best fitting expression"
+  print("Finding best fitting expression")
   (p, states) = hmm.viterbi(observations)
-  print p, states
+  print(p, states)
   expression = []
   for state in states:
     expression.append(undiscretize_expression(state, e_discretization, sensitivity=sensitivity))
-  print 'Expression states:\n{0}'.format(states)
+  print('Expression states:\n{0}'.format(states))
 
   return (p, expression)
  
@@ -175,9 +175,9 @@ def selectSubset(set):
   choice = 1
   subset = []
   while True:
-    print 'Subset: [',
-    print ', '.join([set[i] for i in subset]),
-    print ']'
+    print('Subset: [', end=' ')
+    print(', '.join([set[i] for i in subset]), end=' ')
+    print(']')
     choice = util.menu('Select features', ['Done'] + set)
     if choice == 0:
       break
@@ -188,18 +188,18 @@ def analyseCorpus(discret):
   (f, e, m) = tools.chooseFeatures()
 
   for work in e:
-    print '----------------------------------------'
+    print('----------------------------------------')
     expression = [undiscretize_expression(discretize_expression(x, discret), discret) for x in e[work]]
-    print 'Loudness:\t',
+    print('Loudness:\t', end=' ')
     for p in expression:
-      print '{0}\t'.format(p[0]),
-    print '\nArticulation:\t',
+      print('{0}\t'.format(p[0]), end=' ')
+    print('\nArticulation:\t', end=' ')
     for p in expression:
-      print '{0}\t'.format(p[1]),
-    print '\nTempo:\t\t',
+      print('{0}\t'.format(p[1]), end=' ')
+    print('\nTempo:\t\t', end=' ')
     for p in expression:
-      print '{0}\t'.format(p[2]),
-    print '\n'
+      print('{0}\t'.format(p[2]), end=' ')
+    print('\n')
   subset = selectSubset(m['featureset'])
   hmm = HMM(2)
   trainHMM(hmm, f, e, discret, discret, subset=subset)
@@ -207,8 +207,8 @@ def analyseCorpus(discret):
     features = f[work]
     processed = preprocess(f[work], hmm.normalizations, discret, subset=subset)
     for s, p in zip(features, processed):
-      print '{0}-{1}: {2}'.format(work[1], work[2], [s[i] for i in subset])
-      print '{0}-{1}: {2}'.format(work[1], work[2], p)
+      print('{0}-{1}: {2}'.format(work[1], work[2], [s[i] for i in subset]))
+      print('{0}-{1}: {2}'.format(work[1], work[2], p))
 
       
 
@@ -257,9 +257,9 @@ def visualize(segmentation, expression, visualize=None, store=None, title=None, 
 
 def plotCorpus():
   (f, e, m) = tools.chooseFeatures()
-  d = raw_input('Discretization? ')
+  d = input('Discretization? ')
   if not d == '':
-    s = raw_input('Sensitivity? [5]')
+    s = input('Sensitivity? [5]')
     if s == '':
       s = 5.0
     d = float(d)
@@ -267,7 +267,7 @@ def plotCorpus():
   else: d = None
 
   for work in f:
-    print 'Plotting and saving {0}'.format(work)
+    print('Plotting and saving {0}'.format(work))
     expression = e[work]
     if d:
       expression = [undiscretize_expression(discretize_expression(x, d, sensitivity=s), d, sensitivity=s) for x in expression]
@@ -286,20 +286,20 @@ def playPerformance(selection, performance, expression, segmentation, name='Expr
       seq = Sequencer()
       seq.play(performance)
     elif choice == 1:
-      n = raw_input("Enter a name for saving this performance. [{0}]\n".format(name))
+      n = input("Enter a name for saving this performance. [{0}]\n".format(name))
       if not n == '': name = n
       tools.savePerformance(selection, expression, name)
     elif choice == 2:
-      n = raw_input("Enter a name for saving this performance. [{0}.mid]\n".format(name))
+      n = input("Enter a name for saving this performance. [{0}.mid]\n".format(name))
       if not n == '': name = n
       performance.exportMidi('output/{0}.mid'.format(name))
     elif choice == 3:
       for note in performance[:30]:
-        print note
+        print(note)
     elif choice == 4: # Plot
       visualize(segmentation, expression)
     elif choice == 5: # Save plot
-      n = raw_input("Enter a name for saving this performance. [{0}.mid]\n".format(name))
+      n = input("Enter a name for saving this performance. [{0}.mid]\n".format(name))
       if not n == '': name = n
       visualize(segmentation, expression, store=name)
     elif choice == 6: # View segments
@@ -318,20 +318,20 @@ def test(f_discretization=10, e_discretization=30, indep=False, selection=None, 
   else:
     (f, e, m) = tools.loadFeatures(corpus)
   if m['version'] != sf.version:
-    print "Scorefeatures versions don't match! Corpus version: {0} Scorefeatures version: {1}".format(m['version'], sf.version)
+    print("Scorefeatures versions don't match! Corpus version: {0} Scorefeatures version: {1}".format(m['version'], sf.version))
     exit(0)
   if not subset:
     # Select a subset by hand
     subset = selectSubset(m['featureset'])
-  print '\n\tPerforming {0}'.format(selection)
-  print '\tFeatures version: {0}'.format(m['version'])
-  print '\tFeatureset used: [',
-  print ', '.join([m['featureset'][i] for i in subset]),
-  print ']'
-  print '\tScorefeatures discretization: {0}\n\tExpression discretization: {1}'.format(f_discretization, e_discretization)
-  print '\tSensitivity: {0}'.format(sensitivity)
-  print '\tSmoothing: {0}'.format(smoothing)
-  print '\tCorpus: {0}\n'.format(corpus)
+  print('\n\tPerforming {0}'.format(selection))
+  print('\tFeatures version: {0}'.format(m['version']))
+  print('\tFeatureset used: [', end=' ')
+  print(', '.join([m['featureset'][i] for i in subset]), end=' ')
+  print(']')
+  print('\tScorefeatures discretization: {0}\n\tExpression discretization: {1}'.format(f_discretization, e_discretization))
+  print('\tSensitivity: {0}'.format(sensitivity))
+  print('\tSmoothing: {0}'.format(smoothing))
+  print('\tCorpus: {0}\n'.format(corpus))
   if indep:
     hmm = HMM_indep(2, smoothing)
   else:
@@ -340,19 +340,19 @@ def test(f_discretization=10, e_discretization=30, indep=False, selection=None, 
   trainHMM(hmm, f, e, f_discretization, e_discretization, subset=subset, ignore=selection, sensitivity=sensitivity)
   #trainHMM(hmm, f, e, f_discretization, e_discretization, subset=subset)
   hmm.storeInfo('hmm2.txt')
-  print "Loading score"
+  print("Loading score")
   melodyscore = Score(score).melody()
   melody = tools.parseScore(melodyscore)
   # Segmentate the the score
-  print "Analysing score"
+  print("Analysing score")
   if segmentation == 'reasonable':
-    print 'Using reasonable segmentation'
+    print('Using reasonable segmentation')
     onset = structure.reasonableSegmentation(melody)
   elif segmentation == 'new':
-    print 'Using new segmentation'
+    print('Using new segmentation')
     onset = structure.newSegmentation(melody)
   elif segmentation == 'notelevel':
-    print 'Using notelevel segmentation'
+    print('Using notelevel segmentation')
     onset = structure.noteLevel(melody)
 
   #onset = structure.groupings(structure.list_to_tree(structure.first_order_tree(structure.onset, melody, 0.1)), 1)
@@ -363,7 +363,7 @@ def test(f_discretization=10, e_discretization=30, indep=False, selection=None, 
 
   (p, expression) = render(melodyscore, onset, hmm, f_discretization, e_discretization, subset, sensitivity=sensitivity)
 
-  print "Done, resulting expression(with a probability of {1}): {0}".format(expression, p)
+  print("Done, resulting expression(with a probability of {1}): {0}".format(expression, p))
 
   performance = perform.perform(score, melodyscore, onset, expression, converter=melody)
   playPerformance(selection, performance, expression, onset, '{0}_{1}_on_{2}_discret_{3}-{4}_smoothing_{5}'.format(\
@@ -391,8 +391,8 @@ if __name__ == '__main__':
       exit(0)
     elif a[1] == 'train':
       import train
-      composers = raw_input("Enter composers\n").split(" ")
-      pianist = raw_input("Enter pianist\n")
+      composers = input("Enter composers\n").split(" ")
+      pianist = input("Enter pianist\n")
       if pianist == '': pianist = None
       set = train.trainset(composers, pianist)
       train.train(set)
@@ -417,11 +417,11 @@ if __name__ == '__main__':
       exit(0)
     elif a[1] == 'corpora':
       for x in tools.datasets():
-        print 'Name:\t[{0}]\tInfo:\t{1}'.format(x, tools.corpusInfo(x))
+        print('Name:\t[{0}]\tInfo:\t{1}'.format(x, tools.corpusInfo(x)))
       exit(0)
     elif a[1] == 'corpusinfo':
       choice = util.menu("Select corpus", tools.datasets())
-      print tools.corpusInfo(tools.datasets()[choice])
+      print(tools.corpusInfo(tools.datasets()[choice]))
       tools.extendedCorpusInfo(tools.datasets()[choice])
       exit(0)
     elif a[1] == 'features':
@@ -433,8 +433,8 @@ if __name__ == '__main__':
       f = sf.vanDerWeijFeatures(melodyscore, segmentation)
       for x in f:
         #(dPitch, abs_dPitch, dDuration, abs_dDuration, silence, ddPitch, abs_ddPitch, pitch_direction)
-        print 'dpitch: {0} abs_dPitch: {1} dDuration: {2} abs_dDuration: {3} silence: {4}'.format(x[0], x[1], x[2], x[3], x[4])
-        print 'ddPitch: {0} abs_ddPitch: {1} : pitch_direction: {2}'.format(x[5], x[6], x[7])
+        print('dpitch: {0} abs_dPitch: {1} dDuration: {2} abs_dDuration: {3} silence: {4}'.format(x[0], x[1], x[2], x[3], x[4]))
+        print('ddPitch: {0} abs_ddPitch: {1} : pitch_direction: {2}'.format(x[5], x[6], x[7]))
       exit(0)
     elif a[1] == 'merge':
       # Merge datasets
@@ -452,15 +452,15 @@ if __name__ == '__main__':
           metadata['version'] = m['version']
           metadata['featureset'] = m['featureset']
         elif not metadata['version'] == m['version']:
-          print "Scorefeatures versions don't match! Can't merge."
+          print("Scorefeatures versions don't match! Can't merge.")
           exit(0)
         for work in f:
           if work in features:
-            print 'Skipping dupe {0}'.format(work)
+            print('Skipping dupe {0}'.format(work))
             continue
           features[work] = f[work]
           expression[work] = e[work]
-      print 'Done, number of works in new dataset: {0}'.format(len(features)) 
+      print('Done, number of works in new dataset: {0}'.format(len(features))) 
       tools.saveFeatures(features, expression)
       exit(0)
     elif a[1] == 'analyze':
@@ -474,54 +474,54 @@ if __name__ == '__main__':
         try:
           sensitivity = float(a[i+1])
           i += 1
-        except IndexError, ValueError:
-          print 'Error parsing command line arguments'
+        except IndexError as ValueError:
+          print('Error parsing command line arguments')
           exit(0)
       elif a[i] == '-d':
         try:
           f_discretization = int(a[i+1])
           e_discretization = int(a[i+2])
           i += 2
-        except IndexError, ValueError:
-          print 'Error parsing command line arguments'
+        except IndexError as ValueError:
+          print('Error parsing command line arguments')
           exit(0)
       elif a[i] == '-s':
         try:
           selection = db.byIndexes(int(a[i+1])-1, int(a[i+2])-1)
           i += 2
-        except IndexError, ValueError:
-          print 'Error parsing command line arguments'
+        except IndexError as ValueError:
+          print('Error parsing command line arguments')
           exit(0)
       elif a[i] == '-segmentation':
         try:
           segmentation = a[i+1]
           i += 1
-        except IndexError, ValueError:
-          print 'Error parsing command line arguments'
+        except IndexError as ValueError:
+          print('Error parsing command line arguments')
           exit(0)
       elif a[i] == '-subset':
         try:
           subset = [int(x)-2 for x in a[i+1:]]
           i += len(a[i+1:])
-        except IndexError, ValueError:
-          print 'Error parsing command line arguments'
+        except IndexError as ValueError:
+          print('Error parsing command line arguments')
           exit(0)
       elif a[i] == '-smoothing':
         try:
           smoothing = a[i+1]
           i += 1
-        except IndexError, ValueError:
-          print 'Error parsing command line arguments'
+        except IndexError as ValueError:
+          print('Error parsing command line arguments')
           exit(0)
       elif a[i] == '-corpus':
         try:
           corpus = a[i+1]
           i += 1
-        except IndexError, ValueError:
-          print 'Error parsing command line arguments'
+        except IndexError as ValueError:
+          print('Error parsing command line arguments')
           exit(0)
       else:
-        print "I don't understand {0}".format(a[i])
+        print("I don't understand {0}".format(a[i]))
       i += 1
 
 

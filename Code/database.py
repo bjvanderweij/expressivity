@@ -52,7 +52,7 @@ def getComposer(name):
   if not m:
     m = re.search(re.compile("([a-z]+)-[a-z|0-9]+-[a-z]+-[a-z]"), name)
   val = m.group(1)
-  for (key, value) in composers.viewitems():
+  for (key, value) in composers.items():
     if value == val: return key
 
 def getWork(name):
@@ -76,7 +76,7 @@ def getSoundfont(name):
   if not m:
     m = re.search(re.compile("[a-z]+-[a-z|0-9]+-[a-z]+-([a-z])"), name)
   val = m.group(1)
-  for (key, value) in soundfonts.viewitems():
+  for (key, value) in soundfonts.items():
     if value == val: return key
 
 
@@ -109,7 +109,7 @@ def getPaths(composer=None, work='[a-z|0-9]+', performer='[a-z]+', sf=None):
 
 
 def getComposers():
-  return composers.keys()
+  return list(composers.keys())
 
 def getWorks(composer):
   paths = getPaths(composer=composer)
@@ -207,7 +207,7 @@ def select():
   work = -1
   while(work == -1):
     comp = util.menu('Choose a composer', getComposers() + ['MUSIC21 Corpus'] + ['Score Directory'])
-    print len(getComposers()), comp
+    print(len(getComposers()), comp)
     if comp == len(getComposers()):
       return 'm21'
     elif comp == len(getComposers())+1:
@@ -274,9 +274,9 @@ if __name__ == "__main__":
               if not isinstance(note, m21.stream.Voice): continue
               notes += 1
             bars += 1
-          print "{0} Bars in part".format(bars)
+          print("{0} Bars in part".format(bars))
           parts += 1
-        print "{0} Parts in piece, total notes: {1}".format(parts, notes)
+        print("{0} Parts in piece, total notes: {1}".format(parts, notes))
       elif choice == 5:
         os.system("cmx dev2csv {0} > deviation.csv".format(getDeviationPath1(selection)))
         os.system("vim deviation.csv")

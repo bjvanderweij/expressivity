@@ -25,7 +25,7 @@ def recursive_score(obj, level, out=None):
   if out:
     out.write(line + '\n')
   else:
-    print line
+    print(line)
   if hasattr(obj,'__iter__'):
     for x in obj:
       recursive_score(x, level + 1, out)

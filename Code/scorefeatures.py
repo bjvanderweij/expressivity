@@ -106,7 +106,7 @@ def widmerFeatures(melodyscore):
   for i in range(len(melody)):
     features[i].append(pitch_interval(melody, i))
     features[i].append(duration_ratio(melody, i))
-  print features[10]
+  print(features[10])
   return features
 
 # [onset_pos, pitch_pos, pitch_interval, duration_ratio]

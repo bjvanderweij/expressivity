@@ -9,7 +9,7 @@ import util, tools, structure
 
 #while True:
 #  print db.select()
-print ">>>> Loading materials....."
+print(">>>> Loading materials.....")
 
 schumann = ('Schumann', 'kdz007', 'ashke', 'GPO-Concert-Steinway-ver2.sf2')
 mozart1 = ('Mozart', 'snt331-3', 'nakam', 'GPO-Concert-Steinway-ver2.sf2')

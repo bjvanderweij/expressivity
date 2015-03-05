@@ -1,13 +1,13 @@
 def menu(question, options, cancel=False):
   while True:
     c = 1
-    print question
+    print(question)
     if cancel:
-      print "\t0: Cancel"
+      print("\t0: Cancel")
     for option in options:
-      print "\t{0}: {1}".format(c,option)
+      print("\t{0}: {1}".format(c,option))
       c += 1
-    inp = raw_input("?: ")
+    inp = input("?: ")
     try:
       choice = int(inp)
     except:

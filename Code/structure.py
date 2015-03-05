@@ -159,7 +159,7 @@ def find_multinodes(trees):
 
 def combine(a, b):
   result = []
-  print a, b
+  print(a, b)
   if isinstance(a,Node):
     for x in a:
       for y in b:
@@ -321,9 +321,9 @@ if __name__ == '__main__':
   import sys
   if len(sys.argv) > 1:
     l = [int(x) for x in sys.argv[1:]]
-    print relative_deltalist(test, l)
-    print second_order_tree(test, l, 0.0, deltalist_function=relative_deltalist)
-    print second_order_tree(test, l, 0.0)
+    print(relative_deltalist(test, l))
+    print(second_order_tree(test, l, 0.0, deltalist_function=relative_deltalist))
+    print(second_order_tree(test, l, 0.0))
     sys.exit(0)
 
   import database as db
@@ -332,12 +332,12 @@ if __name__ == '__main__':
   score = Score(db.getScore1(w))
   melodyscore = score.melody()
   #melodyscore.show()
-  melody = tools.parseScore(melodyscore, range(1, 9))
+  melody = tools.parseScore(melodyscore, list(range(1, 9)))
   trees = [second_order_tree(onset, melody, 0.5), second_order_tree(pitch, melody, 0.0, ), first_order_tree(onset, melody, 0.0), first_order_tree(pitch, melody)]
 
   for tree in trees:
-    print "Tree"
-    print tools.recursive_print(tree)
+    print("Tree")
+    print(tools.recursive_print(tree))
     
   
   for i in range(5):
@@ -347,14 +347,14 @@ if __name__ == '__main__':
       for group in groups:
         avg_group += len(group)
       avg_group /= float(len(groups))
-      print "Tree: {0} Level {1} group size {2}".format(j, i, avg_group)
-    print '------------------'
+      print("Tree: {0} Level {1} group size {2}".format(j, i, avg_group))
+    print('------------------')
     if len(groups)/float(len(melody)) == 1: break
 
-  print "Choose tree"
-  tree = int(raw_input(''))
-  print "Choose level"
-  level = int(raw_input(""))
+  print("Choose tree")
+  tree = int(input(''))
+  print("Choose level")
+  level = int(input(""))
 #  groups = segmentation(trees[tree], level)
 #  groups = subsegmentation(groups, second_order_tree, pitch, 1)
 #  groups = adaptiveSegmentation(list_to_tree(trees[2]))
@@ -379,7 +379,7 @@ if __name__ == '__main__':
   namelist = []
   for group in groups:
     namelist.append([leaf.name() for leaf in group])
-  print namelist
+  print(namelist)
 
   melody.notes = structured_notes
   from sequencer import *

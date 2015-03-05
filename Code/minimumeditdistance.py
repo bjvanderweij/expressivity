@@ -95,24 +95,24 @@ def find_match(D, s, t):
         h_score[y] = h(y, goal)
         f_score[y] = g_score[y] + h_score[y]
 
-  print "Failure"
+  print("Failure")
 
 
 def print_nice(D, s, t):
   s = [" "] + [str(x) for x in s] 
   t = [" "] + [str(x) for x in t]
-  print '   ',
+  print('   ', end=' ')
   for column in range(len(D[0])):
-    print "{0}  ".format(t[column]),
-  print "\n\n",
+    print("{0}  ".format(t[column]), end=' ')
+  print("\n\n", end=' ')
   for row in range(len(D)):    
-    print "{0}  ".format(s[row]),
+    print("{0}  ".format(s[row]), end=' ')
     for column in range(len(D[row])):
       if(D[row,column] <= 0):
-        print "\b({0}) ".format(int(-D[row, column])),
+        print("\b({0}) ".format(int(-D[row, column])), end=' ')
       else:
-        print "{0}  ".format(int(D[row, column])),
-    print "\n\n",
+        print("{0}  ".format(int(D[row, column])), end=' ')
+    print("\n\n", end=' ')
 
       
 def match(a, b):
@@ -131,7 +131,7 @@ if __name__ == '__main__':
   t = sys.argv[2]
   D = distance_matrix(sys.argv[1], sys.argv[2])
   print_nice(D, s, t)
-  print "Finding path"
+  print("Finding path")
   p = find_match(D, sys.argv[1], sys.argv[2])
   D[len(D)-1,len(D[0])-1] = -D[len(D)-1,len(D[0])-1]
   for n in p:

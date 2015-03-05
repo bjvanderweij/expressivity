@@ -8,7 +8,7 @@ import pickle, copy
 class Alignment:
 
   def __init__(self, scorepath, deviations, noAlign=False):
-    print "Creating alignment"
+    print("Creating alignment")
     # Storing this object is not possible, score id's change and Scores are not pickleable :(
     self.deviations = deviations
     # Am I really writing ugly code like this? Apparently I am
@@ -25,17 +25,17 @@ class Alignment:
     if not noAlign:
       self.alignment = None
       self.align()
-    print "Done"
+    print("Done")
 
   def storeAlignment(self):
     location = 'alignments/{0}'.format(self.deviations.target.split('.')[0])
-    print "Storing alignment in: {0} for future reference".format(location)
+    print("Storing alignment in: {0} for future reference".format(location))
     f = open(location, 'wb')
     pickle.dump(self.alignment, f)
 
   def storeScore(self):
     location = 'scores/{0}'.format(self.deviations.target.split('.')[0])
-    print "Storing alignment in: {0} for future reference".format(location)
+    print("Storing alignment in: {0} for future reference".format(location))
     f = open(location, 'wb')
     pickle.dump(self.score, f)
 
@@ -55,7 +55,7 @@ class Alignment:
     return self.performance(self.score, self.melody(), articulations)
 
   def performance(self, score=None, melody=None, articulations=None):
-    print "Creating performance"
+    print("Creating performance")
     if not score:
       score = self.score
     # I am not sure about the units in which init silence is expressed
@@ -90,7 +90,7 @@ class Alignment:
                 queue[str(pitch)] = current
             else: continue
 
-            for n in queue.values():
+            for n in list(queue.values()):
               # If a melody is defined we need to know if the current note is a melody note
               # If it is not, we need to know if it is played at the same time as a melody note
               # If this isn't the case, use the tempo curve for expression and some measure of dynamics(nearest melody note?)
@@ -130,7 +130,7 @@ class Alignment:
                   #if measure.number < 4:
                   #  print "{0} {1} {2}".format(note, melodynote, note.offset)
                   if not (melodynote.id, str(melodynote.pitch)) in self.alignment:
-                    print '{0} {1}'.format(measure.number, melodynote.offset)
+                    print('{0} {1}'.format(measure.number, melodynote.offset))
                     deviation = None
                   deviation = self.alignment[melodynote.id, str(melodynote.pitch)]
                   if articulations:
@@ -140,7 +140,7 @@ class Alignment:
                   deviation = (0, 0, deviation[2], deviation[3])
                 else:
                   if not (melodynote.id, str(melodynote.pitch)) in self.alignment:
-                    print '{0} {1}'.format(measure.number, melodynote.offset)
+                    print('{0} {1}'.format(measure.number, melodynote.offset))
                   deviation = self.alignment[melodynote.id, str(melodynote.pitch)]
                   if articulations:
                     articulation = articulations[melodynote.id, str(melodynote.pitch)]
@@ -167,7 +167,7 @@ class Alignment:
               if articulation:
                 duration = self.deviations.getExpressiveDuration(measure.number, note.offset, n.duration.quarterLength)
                 articulated_duration = articulation * float(duration)
-                print '{0} * {1} = {2}'.format(duration, articulation, articulated_duration)
+                print('{0} * {1} = {2}'.format(duration, articulation, articulated_duration))
                 off_ms = on_ms + articulated_duration
               else:
                 off_ms = on_ms + self.deviations.getExpressiveDuration(measure.number, note.offset, n.duration.quarterLength)
@@ -182,7 +182,7 @@ class Alignment:
               on = performance.microseconds_to_ticks(on_ms)
               off = performance.microseconds_to_ticks(off_ms)
               if off < on:
-                print "WARNING: release before onset! Check your deviations or performancerenderer"
+                print("WARNING: release before onset! Check your deviations or performancerenderer")
                 off = on
               
               pnote = Note(on, off, n.pitch.midi, int(onvel), int(offvel), 
@@ -213,7 +213,7 @@ class Alignment:
     for p1measure,p2measure in zip(p1measures, p2measures):
       mergedvoices = []
       if p1measure.number != p2measure.number:
-        print "This shouldn't happen!"
+        print("This shouldn't happen!")
       voices = [v for v in p1measure.voices] + [v for v in p2measure.voices]
       for voice in voices:
         if voice.id in [v.id for v in mergedvoices]:
@@ -248,13 +248,13 @@ class Alignment:
               current.duration = note.duration
               queue[str(pitch)] = current
           else: continue
-          for n in queue.values():
+          for n in list(queue.values()):
             for i in range(len(queue)):
               query = "P1,{0},{1},{2},{3}".format(p1measure.number, str(voice.id), str(n.pitch), notes + i)
               if query in deviations.note_deviations: break 
             # This situation is usually caused by fucking TIED NOTES, it can mess up indexing
             if not query in deviations.note_deviations:
-              print "WARNING: Query: {0} not found in deviations".format(query)
+              print("WARNING: Query: {0} not found in deviations".format(query))
               n_dev = None
             else:
               n_dev = deviations.note_deviations[query]
@@ -262,20 +262,20 @@ class Alignment:
               n_dev = None
 
             alignment[(note.id, str(n.pitch))] = n_dev
-          notes += len(queue.keys())
+          notes += len(list(queue.keys()))
     self.alignment = alignment
 
 def run():
   import database as db
   selection = db.select()
-  print ">>> Extracting deviations"
+  print(">>> Extracting deviations")
   deviations = db.getDeviation1(selection)
-  print ">>> Loading score"
+  print(">>> Loading score")
   score = db.getScorePath1(selection)
-  print ">>> Loading alignment"
+  print(">>> Loading alignment")
   alignment = Alignment(score, deviations)
   alignment.store("alignments/a1")
-  print ">>> Generating performance"
+  print(">>> Generating performance")
   performance = alignment.performance()
   performance.exportMidi('output/generated.mid')
   #for n in performance[0:20]:

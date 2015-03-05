@@ -13,7 +13,7 @@ class MidiFile:
       parser = ParseMidi(self)
       stream =  MidiInFile.MidiInFile(parser, open(midifile))
       stream.read()
-      print("{0} midievents parsed".format(len(self.events)))
+      print(("{0} midievents parsed".format(len(self.events))))
 
 
   def export(self, midifile):
@@ -24,7 +24,7 @@ class MidiFile:
   
   def __str__(self):
     for e in self.events:
-      print e
+      print(e)
 
 
 

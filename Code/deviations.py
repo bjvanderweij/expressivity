@@ -18,7 +18,7 @@ class Deviations:
     name = target.split('/')[-1].split('.')[0]
     targetname = '{0}/{1}'.format(dir, name)
     if os.path.exists('deviations/{0}'.format(targetname)):
-      print "Stored deviations found, remove deviations/{0} to create new ones".format(targetname)
+      print("Stored deviations found, remove deviations/{0} to create new ones".format(targetname))
       f = open('deviations/{0}'.format(targetname), 'rb')
       self.data = pickle.load(f)
     else:
@@ -40,31 +40,31 @@ class Deviations:
     if not os.path.exists('deviations/{0}'.format(dir)):
       os.mkdir('deviations/{0}'.format(dir))
     location = 'deviations/{0}/{1}'.format(dir, name)
-    print "Storing deviations in: {0} for future reference".format(location)
+    print("Storing deviations in: {0} for future reference".format(location))
     f = open(location, 'wb')
     pickle.dump(self.data, f)
 
   # Parse a deviation file into a measurelength, tempo_deviations and note_deviations dict
   # It also reads the base tempo and should read the base dynamics
   def parse(self, deviation, targetpath):
-    print "Reading deviations file"
+    print("Reading deviations file")
     f = open(deviation)
     devfile = f.read()
     # We need to look up some information in the score file as this information is lost
     # in translation when the score is parsed with music21
     soup = BeautifulStoneSoup(devfile)
-    print "Reading target score"
+    print("Reading target score")
     f = open(targetpath)
     targetfile = f.read()
     target = BeautifulStoneSoup(targetfile)
 
     # For speed: put all measure tags in a dictionary
-    print "Constructing measures dictionary"
+    print("Constructing measures dictionary")
     measures = {}
     for measure in target.findAll('measure'):
       measures[str(measure['number'])] = measure
 
-    print "Parsing deviations"
+    print("Parsing deviations")
     tags = soup.find('notewise').findAll('note-deviation') + soup.find('notewise').findAll('miss-note')
     note_deviations = {}
     pointerexp = re.compile('@id=\'(.*)\'\]/measure\[\@number=\'(.*)\'\]/note\[(.*)\]')
@@ -72,7 +72,7 @@ class Deviations:
     for tag in tags:
       m = re.search(pointerexp, tag.attrs[0][1])
       if not m: 
-        print "xpointer reference didn't match, bug in code or bug in deviation file"
+        print("xpointer reference didn't match, bug in code or bug in deviation file")
         continue
       # Find the voice and notenumber in that voice
       measure = measures[m.group(2)]
@@ -115,7 +115,7 @@ class Deviations:
       note_deviations[key] = value
 
     tempo = soup.find('non-partwise').findAll('tempo')
-    if len(tempo) > 1: print "More than one tempo tag found. Fix your code."
+    if len(tempo) > 1: print("More than one tempo tag found. Fix your code.")
     tempo = float(tempo[0].contents[0])
     tags = soup.find('non-partwise').findAll('measure')
     tempo_deviations = {}
@@ -178,7 +178,7 @@ class Deviations:
       beat -= self.measure_lengths[incremental_measure]
       incremental_measure += 1
       if not incremental_measure in self.measure_lengths or beat < 0:
-        print "No tempo deviation found for measure {0}, beat {1}".format(measure, startbeat)
+        print("No tempo deviation found for measure {0}, beat {1}".format(measure, startbeat))
         return None
     return 60000000 / (self.bpm * self.tempo_deviations[(int(incremental_measure), int(beat))])
 
@@ -186,7 +186,7 @@ class Deviations:
   def getExpressiveTime(self, measure, beat):
     beat_lengths = []
     if beat > self.measure_lengths[measure]:
-      print "WARNING: beat {0} exceeds measure length {1}, assuming last tempo deviation".format(beat, self.measure_lengths[measure])
+      print("WARNING: beat {0} exceeds measure length {1}, assuming last tempo deviation".format(beat, self.measure_lengths[measure]))
     
     lastduration = self.getBeatDuration()
     for b in range(int(beat)+1):
@@ -199,7 +199,7 @@ class Deviations:
     multiplier = beat - int(beat)
     beat_lengths.append(0)
     if int(beat) >= len(beat_lengths):
-      print "measure: {0} beat:{1} bl:{2}".format(measure, beat, beat_lengths)
+      print("measure: {0} beat:{1} bl:{2}".format(measure, beat, beat_lengths))
     return sum([beat_lengths[i] for i in range(0, int(beat))]) + \
         multiplier * beat_lengths[int(beat)]
 

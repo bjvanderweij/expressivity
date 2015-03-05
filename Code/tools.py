@@ -3,14 +3,14 @@ import os, pickle, util, scorefeatures
 from representation import *
 
 def savePDF(score, name):
-  print "Saving to sheets/{0}.pdf".format(name)
+  print("Saving to sheets/{0}.pdf".format(name))
   ofile = open('sheets/score.xml', 'w')
   ofile.write(score.musicxml)
   ofile.close()
   os.system('musescore sheets/score.xml -o sheets/{0}.pdf'.format(name))
   
 def saveXML(score, name):
-  print "Saving to scores/{0}.xml".format(name)
+  print("Saving to scores/{0}.xml".format(name))
   ofile = open('scores/{0}.xml'.format(name), 'w')
   ofile.write(score.musicxml)
   ofile.close()
@@ -22,18 +22,18 @@ def savePerformance(selection, expression, f):
 
 def saveFeatures(features, expression):
   while True:
-    print "Enter a name for the directory"
-    name = raw_input('')
-    print "Confirm to save to: data/{0}/features and data/{0}/expression (Y/n)".format(name)
-    answer = raw_input('')
+    print("Enter a name for the directory")
+    name = input('')
+    print("Confirm to save to: data/{0}/features and data/{0}/expression (Y/n)".format(name))
+    answer = input('')
     if not answer == 'Y' and not answer == '':
       continue
     if not os.path.exists('data/{0}'.format(name)):
       os.mkdir('data/{0}'.format(name))
       break
     else:
-      print "Directory exists, overwrite? (y/N)"
-      answer = raw_input('')
+      print("Directory exists, overwrite? (y/N)")
+      answer = input('')
       if answer == 'y':
         break
   f = open('data/{0}/features'.format(name), 'wb')
@@ -47,21 +47,21 @@ def saveFeatures(features, expression):
 
 def saveCSV(features, expression):
   while True:
-    print "Enter a name for the file"
-    name = raw_input('')
-    print "Confirm to save to: data/{0}.csv (Y/n)".format(name)
-    answer = raw_input('')
+    print("Enter a name for the file")
+    name = input('')
+    print("Confirm to save to: data/{0}.csv (Y/n)".format(name))
+    answer = input('')
     if not answer == 'Y' and not answer == '':
       continue
     if not os.path.exists('data/{0}'.format(name)):
       break
     else:
-      print "File exists, overwrite? (y/N)"
-      answer = raw_input('')
+      print("File exists, overwrite? (y/N)")
+      answer = input('')
       if answer == 'y':
         break
   out = open('data/{0}.csv'.format(name), 'w')
-  for key in features.keys():
+  for key in list(features.keys()):
     f = features[key]
     e = expression[key]
     line = 'onset_arch, pitch_interval, duration_ratio, ioi_ratio, loudness_ratio, duration_ratio_exp\n'
@@ -98,12 +98,12 @@ def extendedCorpusInfo(name):
   version = m['version']
   featureset = m['featureset']
   unique = {}
-  print '============================================'
+  print('============================================')
   for work in f:
     unique[(work[0], work[1])] = unique.get((work[0], work[1]), []) + [work[2]]
   for work in unique:
-    print '{0}: {1}'.format(work, unique[work])
-  print '============================================'
+    print('{0}: {1}'.format(work, unique[work]))
+  print('============================================')
   for work in f:
     features = f[work]
     notes = 0
@@ -114,7 +114,7 @@ def extendedCorpusInfo(name):
       # Some featureset strings miss the const_lenght index
       # This code crashes if the featureset truly doesn't have this feature
       notes += sum([x[12] for x in features])
-    print '{0}: notes: {1} const: {2}'.format(work, notes, len(features))
+    print('{0}: notes: {1} const: {2}'.format(work, notes, len(features)))
 
 def corpusInfo(name):
   (f, e, m) = loadFeatures(name)
@@ -191,7 +191,7 @@ def recursive_print(l):
 def linear_fit(X, Y):
   n = len(X)
   if len(X) != len(Y):
-    print "linear fit: WARNING: lengths of data don't match: {0} and {1}".format(len(X), len(Y))
+    print("linear fit: WARNING: lengths of data don't match: {0} and {1}".format(len(X), len(Y)))
   sum_x=0.0
   sum_y=0.0
   sum_xx=0.0

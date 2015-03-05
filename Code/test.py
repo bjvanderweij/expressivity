@@ -14,8 +14,8 @@ onset = structure.groupings(structure.list_to_tree(structure.first_order_tree(st
 score = sf.vanDerWeijFeatures(melodyscore, onset) 
 performance = pf.vanDerWeijExpression(a, onset)
 
-print score
-print performance
+print(score)
+print(performance)
 
 seq = Sequencer()
 seq.play(perform.vanDerWeijPerformSimple(a.score, melodyscore, onset, performance, bpm=a.deviations.bpm, converter=melody))

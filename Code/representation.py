@@ -67,10 +67,10 @@ class NoteList:
     return [n.pitch for n in self]
 
   def printinfo(self):
-    print "Number of notes:{0}\nKey signature: {1}\nTime signature: {2}\nSmtp offset: {3}\
+    print("Number of notes:{0}\nKey signature: {1}\nTime signature: {2}\nSmtp offset: {3}\
         \nTempo (microseconds per quarter-note): {4}\nTime division: {5}".format(\
         len(self), self.key_signature, self.time_signature, self.smtp_offset, self.tempo,\
-        self.division)
+        self.division))
 
   # Making this iterable doesn't really add any value yet
   def __iter__(self):
@@ -128,10 +128,10 @@ class NoteList:
   def exportMidi(self, midifile):
     # Do some preprocessing on the notes, converting them to 
     # ordered note on and note off events:
-    print "Preprocessing {0} notes".format(len(self))
+    print("Preprocessing {0} notes".format(len(self)))
     events = self.toEvents()
 
-    print "Creating file"
+    print("Creating file")
     out = MidiOutFile(midifile)
     out.header(format=0, nTracks=1, division=self.division)
     out.start_of_track()

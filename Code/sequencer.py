@@ -20,10 +20,10 @@ class Sequencer:
     out = midi.Output(device)
 
     # Translate notes into midi events
-    print "Preprocessing"
+    print("Preprocessing")
     events = notes.toEvents()
 
-    print "Playing"
+    print("Playing")
     lastTime = 0
     on = 0
     off = 0

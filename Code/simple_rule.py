@@ -10,10 +10,10 @@ def averagePitch(roll):
   return sum(pitches)/len(pitches)
 
 def higherIsFaster(roll, scale):
-  print "Calculating average pitch"
+  print("Calculating average pitch")
   avg = averagePitch(roll)
-  print "Average pitch: {0}".format(avg)
-  print "Adding expression"
+  print("Average pitch: {0}".format(avg))
+  print("Adding expression")
   bassnote = False
   for note in roll:
     pitch = note.note
@@ -23,7 +23,7 @@ def higherIsFaster(roll, scale):
       bassnote = False
       speedup = lastspeedup
       note.offset -= diff
-    if note.next:
+    if note.__next__:
       if note.next.note_on() == note.note_on():
         bassnote = True
     diff = int(note.length * speedup) - note.length

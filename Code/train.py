@@ -26,9 +26,9 @@ def train(trainset):
   Max = 0
   Min = None
   count = 0
-  print ">>> Loading scores and deviations, this will take hours and may eat all you memory"
+  print(">>> Loading scores and deviations, this will take hours and may eat all you memory")
   for query in trainset:
-    print ">>> Loading: {0}".format(query)
+    print(">>> Loading: {0}".format(query))
     score = db.getScore1(query)
     deviations = db.getDeviation1(query)
     alignment = Alignment(score, deviations)
@@ -45,13 +45,13 @@ def train(trainset):
       Min = mi
     if mi < Min:
       Min = mi
-    print '>>> Extracting features'
+    print('>>> Extracting features')
     expression[query] = performancefeatures.vanDerWeijExpression(alignment, segments)
     features[query] = scorefeatures.vanDerWeijFeatures(melody, segments)
     count += 1
-    print '{0}/{1} done'.format(count, len(trainset))
+    print('{0}/{1} done'.format(count, len(trainset)))
 
-  print "Done, {0} segments found with an average length of: {1} (min: {2} max: {3})".format(const, lengths / float(const), Min, Max)
+  print("Done, {0} segments found with an average length of: {1} (min: {2} max: {3})".format(const, lengths / float(const), Min, Max))
   tools.saveFeatures(features, expression)
 #  tools.saveCSV(features, expression)
 

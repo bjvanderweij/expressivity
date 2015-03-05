@@ -13,7 +13,7 @@ if len(sys.argv) > 1:
   if sys.argv[1] == 'xml':
     store_xml = True
 
-print "Making selection"
+print("Making selection")
 
 for composer in db.composers:
   works = db.getWorks(composer)
@@ -23,7 +23,7 @@ for composer in db.composers:
     if len(works ) == 0: break
     selections.append((composer, work[0], work[1], work[2]))
 
-print "Storing melodies"
+print("Storing melodies")
 
 for selection in selections:
   score = Score(db.getScore1(selection))

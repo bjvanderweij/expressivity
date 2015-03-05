@@ -4,7 +4,7 @@ import tools, structure, math
 def linear_fit(X, Y):
   n = len(X)
   if len(X) != len(Y):
-    print "linear fit: WARNING: lengths of data don't match: {0} and {1}".format(len(X), len(Y))
+    print("linear fit: WARNING: lengths of data don't match: {0} and {1}".format(len(X), len(Y)))
   sum_x=0.0
   sum_y=0.0
   sum_xx=0.0
@@ -39,7 +39,7 @@ def vanDerWeijExpression(alignment, segments):
   # The two above should be guaranteed to be of equal length.
   # However, better be safe than sorry
   if len(performance) != sum([len(x) for x in segments]):
-    print 'WARNING: Melodyscore and performance are different (should not happen): {0} and {1}'.format(len(sum([len(x) for x in segments])), len(performance))
+    print('WARNING: Melodyscore and performance are different (should not happen): {0} and {1}'.format(len(sum([len(x) for x in segments])), len(performance)))
   
   expression = []
   # Counter for position in notelists performance and scorenotes
@@ -101,7 +101,7 @@ def vanDerWeijExpression(alignment, segments):
       i += 1
 
     tempos = []
-    r = range(segment[0].annotation[1], segment[int(length)-1].annotation[1]+1)
+    r = list(range(segment[0].annotation[1], segment[int(length)-1].annotation[1]+1))
     for m in r:
       pointer = note.annotation
       scoremeasure = alignment.melody()[pointer[0]][pointer[1]]
@@ -141,9 +141,9 @@ def expressionWidmer(alignment):
   # The two above should be guaranteed to be of equal length.
   # However, better be safe than sorry
   if len(performance) != len(score):
-    print 'This shouldn\'t happen: melodyscore and performance lengths don\'t match: {0} and {1}'.format(len(score), len(performance))
+    print('This shouldn\'t happen: melodyscore and performance lengths don\'t match: {0} and {1}'.format(len(score), len(performance)))
   else:
-    print "This is good, performance length and score length match"
+    print("This is good, performance length and score length match")
   
   # Mean loudness
   mean_l = 0.0
@@ -166,7 +166,7 @@ def expressionWidmer(alignment):
     articulation = 0
 
     if(structure.duration(performance, i) < 1):
-      print "Invalid performance note :( skipping"
+      print("Invalid performance note :( skipping")
       continue
     duration_ratio = math.log(structure.duration(performance, i) / float(structure.duration(score, i)))
 
@@ -223,7 +223,7 @@ def expressionOLD(alignment):
     if (measure, int(scorenote.offset)) in alignment.deviations.tempo_deviations:
       tempo = alignment.deviations.tempo_deviations[measure, int(scorenote.offset)] * alignment.deviations.bpm
     else:
-      print "{0} {1} not found in tempo deviations".format(measure, int(scorenote.offset))
+      print("{0} {1} not found in tempo deviations".format(measure, int(scorenote.offset)))
       tempo = lasttempo
     relative_tempo = tempo / lasttempo
     lasttempo = tempo

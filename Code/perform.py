@@ -86,9 +86,9 @@ def vanDerWeijPerformSimple(score, melody, segments, expression_vectors, average
 
 def perform(score, melodyscore, onset, expression, dynamics=None, tempo=None, converter=NoteList()):
   if not dynamics:
-    dynamics = int(raw_input("Choose base dynamics (somewhere between 50 and 100?) "))
+    dynamics = int(input("Choose base dynamics (somewhere between 50 and 100?) "))
   if not tempo:
-    tempo = int(raw_input("Choose base tempo (bpm) "))
+    tempo = int(input("Choose base tempo (bpm) "))
   return vanDerWeijPerformSimple(score, melodyscore, onset, expression, dynamics, bpm=tempo, converter=converter)
 
 def vanDerWeijPerform(score, segments, expression_vectors):
