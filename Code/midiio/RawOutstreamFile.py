@@ -7,7 +7,7 @@ from struct import unpack
 from cStringIO import StringIO
 
 # custom import
-from DataTypeConverters import writeBew, writeVar, fromBytes
+from midio.DataTypeConverters import writeBew, writeVar, fromBytes
 
 class RawOutstreamFile:
     

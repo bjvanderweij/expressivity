@@ -4,11 +4,11 @@
 from struct import unpack
 
 # custom
-from DataTypeConverters import readBew, readVar, varLen, toBytes
+from midiio.DataTypeConverters import readBew, readVar, varLen, toBytes
 
 # uhh I don't really like this, but there are so many constants to 
 # import otherwise
-from constants import *
+from midiio.constants import *
 
 
 class EventDispatcher:

@@ -1,5 +1,4 @@
-from midi import *
-from midi.MidiOutFile import MidiOutFile
+from midiio import *
 import copy, os, pygame
 
 base_a4 = 440

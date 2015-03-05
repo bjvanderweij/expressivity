@@ -5,7 +5,7 @@ from types import StringType
 from struct import unpack
 
 # custom import
-from DataTypeConverters import readBew, readVar, varLen
+from midio.DataTypeConverters import readBew, readVar, varLen
 
 
 class RawInstreamFile:

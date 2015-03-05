@@ -5,9 +5,9 @@ from struct import unpack
 
 # uhh I don't really like this, but there are so many constants to 
 # import otherwise
-from constants import *
+from midiio.constants import *
 
-from EventDispatcher import EventDispatcher
+from midiio.EventDispatcher import EventDispatcher
 
 class MidiFileParser:
 

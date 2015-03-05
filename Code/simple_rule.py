@@ -1,4 +1,4 @@
-from midi.MidiOutStream import MidiOutStream
+from midiio.MidiOutStream import MidiOutStream
 from representation import *
 import sys, math, random
 

@@ -1,4 +1,4 @@
-from midi import *
+from midiio import *
 import sys
 
 inp = sys.argv[1]

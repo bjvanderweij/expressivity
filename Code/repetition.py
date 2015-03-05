@@ -1,8 +1,4 @@
 from structure import *
-
-
-
-
     
 
 def repetition(feature, notes, deltas=None):
