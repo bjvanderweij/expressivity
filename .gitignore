@@ -61,3 +61,5 @@ docs/_templates
 
 *.mid
 *.midi
+
+*.bak

@@ -11,5 +11,3 @@ notes = tools.parseScore(score)
 seq = Sequencer()
 seq.play(notes)
 #s = Score(alignment.score, alignment)
-
-

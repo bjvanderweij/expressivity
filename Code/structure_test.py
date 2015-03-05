@@ -8,43 +8,43 @@ import matplotlib.pyplot as plt
 
 
 def avg_list(lists, weights=None):
-  sumlist = []
-  if not weights:
-    weights = [1 for i in range(len(lists))]
-  for l in range(len(lists)):
-    index = 0
-    for item in lists[l]:
-      if index + 1 > len(sumlist):
-        sumlist.append(item)
-      else:
-        sumlist[index] += weights[l] * item
-      index += 1
-  result = []
-  for item in sumlist:
-    result.append(item / float(len(lists)))
-  return result
+    sumlist = []
+    if not weights:
+        weights = [1 for i in range(len(lists))]
+    for l in range(len(lists)):
+        index = 0
+        for item in lists[l]:
+            if index + 1 > len(sumlist):
+                sumlist.append(item)
+            else:
+                sumlist[index] += weights[l] * item
+            index += 1
+    result = []
+    for item in sumlist:
+        result.append(item / float(len(lists)))
+    return result
 
 def normalize(l):
-  m = float(max(l))
-  result = []
-  if(m == 0): 
-    m = 1
-  for i in l:
-    result.append(i/m)
-  return result
+    m = float(max(l))
+    result = []
+    if(m == 0):
+        m = 1
+    for i in l:
+        result.append(i/m)
+    return result
 
 def square(l):
-  result = []
-  for i in l:
-    result.append(i*i)
-  return result
+    result = []
+    for i in l:
+        result.append(i*i)
+    return result
 
 if len(sys.argv) > 1:
-  notes = sys.argv[1]
-  deltas = [int(x) for x in sys.argv[2]]
-  s3 = structure.second_order_deltarule(notes, deltas, 0)
-  print(tools.recursive_print(s3))
-  sys.exit(0)
+    notes = sys.argv[1]
+    deltas = [int(x) for x in sys.argv[2]]
+    s3 = structure.second_order_deltarule(notes, deltas, 0)
+    print(tools.recursive_print(s3))
+    sys.exit(0)
 
 
 selection = db.select()
@@ -59,10 +59,10 @@ print("COMBINED DELTA TREES")
 #  deltas.append(normalize(structure.repetition(feature, notes)))
 
 for feature in [structure.onset, structure.duration, structure.pitch]:
-  print(">>>> {0} absolute:".format(feature))
-  print(structure.absolute_deltalist(feature, notes))
-  print(">>>> {0} relative:".format(feature))
-  print(structure.relative_deltalist(feature, notes))
+    print(">>>> {0} absolute:".format(feature))
+    print(structure.absolute_deltalist(feature, notes))
+    print(">>>> {0} relative:".format(feature))
+    print(structure.relative_deltalist(feature, notes))
 
 
 #deltas.append(normalize(square(structure.absolute_deltalist(structure.onset, notes))))
@@ -101,57 +101,55 @@ print(tools.recursive_print(s[2]))
 #print tools.recursive_print(rep)
 
 for i in range(5):
-  groups = structure.groupings(structure.list_to_tree(s[0]), i)
-  avg_group = 0
-  for group in groups:
-    avg_group += len(group)
-  avg_group /= float(len(groups))
-  print("ONSET: Level {0}, average group size: {1}".format(i, avg_group))
-  groups = structure.groupings(structure.list_to_tree(s[1]), i)
-  avg_group = 0
-  for group in groups:
-    avg_group += len(group)
-  avg_group /= float(len(groups))
-  print("PITCH: Level {0}, average group size: {1}".format(i, avg_group))
-  groups = structure.groupings(structure.list_to_tree(s[2]), i)
-  avg_group = 0
-  for group in groups:
-    avg_group += len(group)
-  avg_group /= float(len(groups))
-  print("COMBINED: Level {0}, average group size: {1}".format(i, avg_group))
-  if len(groups)/float(len(notes)) == 1: break
+    groups = structure.groupings(structure.list_to_tree(s[0]), i)
+    avg_group = 0
+    for group in groups:
+        avg_group += len(group)
+    avg_group /= float(len(groups))
+    print("ONSET: Level {0}, average group size: {1}".format(i, avg_group))
+    groups = structure.groupings(structure.list_to_tree(s[1]), i)
+    avg_group = 0
+    for group in groups:
+        avg_group += len(group)
+    avg_group /= float(len(groups))
+    print("PITCH: Level {0}, average group size: {1}".format(i, avg_group))
+    groups = structure.groupings(structure.list_to_tree(s[2]), i)
+    avg_group = 0
+    for group in groups:
+        avg_group += len(group)
+    avg_group /= float(len(groups))
+    print("COMBINED: Level {0}, average group size: {1}".format(i, avg_group))
+    if len(groups)/float(len(notes)) == 1: break
 
 print("Choose level")
 level = int(input(""))
 print("Choose tree")
 tree = int(input(''))
 groups = structure.groupings(structure.list_to_tree(s[tree]), level)
-  
+
 structured_notes = []
 loud = False
 for group in groups:
-  if loud:
-    loud = False
-  else:
-    loud = True
-  for leaf in group:
     if loud:
-      leaf.onvelocity = 80
+        loud = False
     else:
-      leaf.onvelocity = 50
-    structured_notes.append(leaf)
-  
+        loud = True
+    for leaf in group:
+        if loud:
+            leaf.onvelocity = 80
+        else:
+            leaf.onvelocity = 50
+        structured_notes.append(leaf)
+
 
 namelist = []
 for group in groups:
-  namelist.append([leaf.name() for leaf in group])
+    namelist.append([leaf.name() for leaf in group])
 print(namelist)
 
 notes.notes = structured_notes
-#print tools.recursive_print(struct) 
+#print tools.recursive_print(struct)
 #print ','.join([n.name() for n in notes])
 seq = Sequencer()
 seq.play(notes)
 #s = Score(alignment.score, alignment)
-
-

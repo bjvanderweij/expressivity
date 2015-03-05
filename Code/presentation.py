@@ -33,54 +33,52 @@ s1 = structure.second_order_deltarule(chopinnotes, sodelta1, 0.1)
 s2 = structure.second_order_deltarule(mozartnotes, sodelta2, 0.1)
 
 while True:
-  choice = util.menu("Select", ['Schumann exp', 'Schumann score', 'Schumann noexp', 'chopin struct', 'lastig struct bach', 'struct moz'])
-  if choice == 0:
-    path = db.getPerformancePath1(schumann)
-    os.system("audacious {0}".format(path))
-  if choice == 1:
-    os.system("viewmxml {0}".format(db.getScorePath1(schumann)))
-  if choice == 2:
-    path = db.getScoreMidiPath1(schumann)
-    os.system("audacious {0}".format(path))
-  if choice == 3:
-    groups = structure.groupings(structure.list_to_tree(s1), 1)
-    structured_notes = []
-    loud = False
-    for group in groups:
-      if loud:
+    choice = util.menu("Select", ['Schumann exp', 'Schumann score', 'Schumann noexp', 'chopin struct', 'lastig struct bach', 'struct moz'])
+    if choice == 0:
+        path = db.getPerformancePath1(schumann)
+        os.system("audacious {0}".format(path))
+    if choice == 1:
+        os.system("viewmxml {0}".format(db.getScorePath1(schumann)))
+    if choice == 2:
+        path = db.getScoreMidiPath1(schumann)
+        os.system("audacious {0}".format(path))
+    if choice == 3:
+        groups = structure.groupings(structure.list_to_tree(s1), 1)
+        structured_notes = []
         loud = False
-      else:
-        loud = True
-      for leaf in group:
-        if loud:
-          leaf.onvelocity = 80
-        else:
-          leaf.onvelocity = 50
-        structured_notes.append(leaf)
-        
-    chopinnotes.notes = structured_notes
-    chopinnotes.exportMidi('temp.mid')
-    os.system("audacious temp.mid")
-  if choice == 4:
-    path = db.getPerformancePath1(lastig)
-  if choice == 5:
-    groups = structure.groupings(structure.list_to_tree(s2), 3)
-    structured_notes = []
-    loud = False
-    for group in groups:
-      if loud:
+        for group in groups:
+            if loud:
+                loud = False
+            else:
+                loud = True
+            for leaf in group:
+                if loud:
+                    leaf.onvelocity = 80
+                else:
+                    leaf.onvelocity = 50
+                structured_notes.append(leaf)
+
+        chopinnotes.notes = structured_notes
+        chopinnotes.exportMidi('temp.mid')
+        os.system("audacious temp.mid")
+    if choice == 4:
+        path = db.getPerformancePath1(lastig)
+    if choice == 5:
+        groups = structure.groupings(structure.list_to_tree(s2), 3)
+        structured_notes = []
         loud = False
-      else:
-        loud = True
-      for leaf in group:
-        if loud:
-          leaf.onvelocity = 80
-        else:
-          leaf.onvelocity = 50
-        structured_notes.append(leaf)
-        
-    mozartnotes.notes = structured_notes
-    mozartnotes.exportMidi('temp.mid')
-    os.system("audacious temp.mid")
+        for group in groups:
+            if loud:
+                loud = False
+            else:
+                loud = True
+            for leaf in group:
+                if loud:
+                    leaf.onvelocity = 80
+                else:
+                    leaf.onvelocity = 50
+                structured_notes.append(leaf)
 
-
+        mozartnotes.notes = structured_notes
+        mozartnotes.exportMidi('temp.mid')
+        os.system("audacious temp.mid")
