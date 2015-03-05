@@ -113,7 +113,7 @@ class EventDispatcher:
             try:
               controller, value = data
             except ValueError:
-              print "Midiparser: Something seems off: {0} {1} {2}".format(hi_nible, channel, data)
+              print("Midiparser: Something seems off: {0} {1} {2}".format(hi_nible, channel, data))
               return
 
 
@@ -138,7 +138,7 @@ class EventDispatcher:
 
         else:
 
-            raise ValueError, 'Illegal channel message!'
+            raise ValueError('Illegal channel message!')
 
 
 
@@ -286,7 +286,7 @@ class EventDispatcher:
 if __name__ == '__main__':
 
 
-    from MidiToText import MidiToText
+    from .MidiToText import MidiToText
     
     outstream = MidiToText()
     dispatcher = EventDispatcher(outstream)

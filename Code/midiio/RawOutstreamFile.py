@@ -4,7 +4,7 @@
 import sys
 from types import StringType
 from struct import unpack
-from cStringIO import StringIO
+from io import StringIO
 
 # custom import
 from midio.DataTypeConverters import writeBew, writeVar, fromBytes
