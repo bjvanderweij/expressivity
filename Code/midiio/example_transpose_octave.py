@@ -1,5 +1,5 @@
-from .MidiOutFile import MidiOutFile
-from .MidiInFile import MidiInFile
+from midiio.MidiOutFile import MidiOutFile
+from midiio.MidiInFile import MidiInFile
 
 """
 This is an example of the smallest possible type 0 midi file, where 

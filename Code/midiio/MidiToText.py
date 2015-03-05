@@ -1,6 +1,7 @@
 # -*- coding: ISO-8859-1 -*-
 
 from midiio.MidiOutStream import MidiOutStream
+
 class MidiToText(MidiOutStream):
 
 

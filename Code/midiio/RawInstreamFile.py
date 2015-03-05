@@ -1,11 +1,10 @@
 # -*- coding: ISO-8859-1 -*-
 
 # standard library imports
-from types import StringType
 from struct import unpack
 
 # custom import
-from midio.DataTypeConverters import readBew, readVar, varLen
+from midiio.DataTypeConverters import readBew, readVar, varLen
 
 
 class RawInstreamFile:
@@ -28,7 +27,7 @@ class RawInstreamFile:
         copy them into memory.
         """
         if infile:
-            if isinstance(infile, StringType):
+            if isinstance(infile, str):
                 infile = open(infile, 'rb')
                 self.data = infile.read()
                 infile.close()

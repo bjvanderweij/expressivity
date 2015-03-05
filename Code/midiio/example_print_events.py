@@ -1,4 +1,4 @@
-from .MidiToText import MidiToText
+from midiio.MidiToText import MidiToText
 
 """
 This is an example that uses the MidiToText eventhandler. When an 

@@ -1,5 +1,5 @@
-from .MidiOutStream import MidiOutStream
-from .MidiInFile import MidiInFile
+from midiio.MidiOutStream import MidiOutStream
+from midiio.MidiInFile import MidiInFile
 
 """
 This prints all note on events on midi channel 0
