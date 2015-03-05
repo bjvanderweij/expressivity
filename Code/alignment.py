@@ -1,5 +1,4 @@
 from representation import *
-from BeautifulSoup import *
 from deviations import *
 from score import *
 import music21 as m21

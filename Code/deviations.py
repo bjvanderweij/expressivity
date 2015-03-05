@@ -1,6 +1,6 @@
 from representation import *
 from music21 import *
-from BeautifulSoup import *
+from bs4 import BeautifulSoup
 import os, pickle
 
 class Deviations:
@@ -52,7 +52,7 @@ class Deviations:
     devfile = f.read()
     # We need to look up some information in the score file as this information is lost
     # in translation when the score is parsed with music21
-    soup = BeautifulStoneSoup(devfile)
+    soup = BeautifulSoup(devfile, 'xml')
     print("Reading target score")
     f = open(targetpath)
     targetfile = f.read()
