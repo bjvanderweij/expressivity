@@ -86,8 +86,9 @@ def vanDerWeijExpression(alignment, segments):
                 ioi = structure.ioi(performance, i+1)
                 # Ugly hack to fix something
                 if ioi == 0:
-                    ioi = performance.microseconds_to_ticks(\
-                        alignment.deviations.getExpressiveDuration(scoremeasure.number, scorenote.offset, scorenote.duration.quarterLength))
+                    ioi = performance.microseconds_to_ticks(
+                        alignment.deviations.getExpressiveDuration(scoremeasure.number, scorenote.offset, scorenote.duration.quarterLength)
+                    )
 
             #print "Performance ioi: {0}, score + tempo ioi: {1}, performance duration: {2}, measure{3}, offset {4}".format(ioi,\
             #    performance.microseconds_to_ticks(alignment.deviations.getExpressiveDuration(scoremeasure.number, scorenote.offset,\

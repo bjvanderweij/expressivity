@@ -531,6 +531,7 @@ if __name__ == '__main__':
 
 
 def render1(score):
+
     melody = Score(score).melody()
     features = scoremodel.features(melody, None)
 

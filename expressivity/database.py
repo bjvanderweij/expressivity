@@ -13,7 +13,8 @@ VERSIONS = ['PEDBv2.2', 'PEDBv2.3', 'PEDBv2.4.1', 'PEDBv2.5', 'PEDBv3.0', 'PEDBv
 
 composers = {'Bach':'bac', 'Bartok':'bar', 'Grieg':'gri', 'Mozart':'moz', \
     'Beethoven':'bee', 'Chopin':'cho', 'Schumann':'sch', 'Mussorgsky':'mus',\
-    'Ravel':'rav', 'Prokofieff':'pro', 'Satie':'sat', 'Skrjabin':'scr'}
+    'Ravel':'rav', 'Prokofieff':'pro', 'Satie':'sat', 'Skrjabin':'scr',
+    'Rachmaninov':'rac'}
 
 soundfonts = {'Bosendorfer PIANO / GIGA':'b', 'GPO-Concert-Steinway-ver2.sf2':'g', 'YAMAHA MOTIF-XF':'y'}
 

@@ -3,8 +3,8 @@ from alignment import *
 from representation import *
 import structure, tools, scorefeatures, performancefeatures
 
-
 def trainset(composers=None, pianist=None):
+
     queries = []
     if not composers:
         composers = db.composers
@@ -20,6 +20,7 @@ def trainset(composers=None, pianist=None):
 
 
 def train(trainset):
+
     expression = {}
     features = {}
     const = 0
@@ -27,6 +28,7 @@ def train(trainset):
     Min = None
     count = 0
     print(">>> Loading scores and deviations, this will take hours and may eat all you memory")
+
     for query in trainset:
         print(">>> Loading: {0}".format(query))
         score = db.getScore1(query)
